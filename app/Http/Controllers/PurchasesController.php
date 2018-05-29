@@ -25,6 +25,11 @@ class PurchasesController extends Controller
         ],
     ];
 
+    public function __construct()
+    {
+        $this->middleware("auth");
+    }
+
     public function index()
     {
         $purchases = Purchase::latest()->when(request("status"), function($query){
@@ -46,9 +51,6 @@ class PurchasesController extends Controller
      * @param Request $request
      * @param Client $nexmo
      * @return \Illuminate\Http\RedirectResponse
-     * @throws Client\Exception\Exception
-     * @throws Client\Exception\Request
-     * @throws Client\Exception\Server
      */
     public function store(Request $request, Client $nexmo)
     {
@@ -91,11 +93,19 @@ class PurchasesController extends Controller
 
             $product = Product::findOrFail(request("product_id"));
 
-            $nexmo->message()->send([
-                'to' => "+255762764819",
-                'from' => '@leggetter',
-                'text' => "Hello {$farmer->full_name}, Tumepokea mzigo wako wa  {$product->name} wenye jumla ya kilo {$purchase->weight_before_processing} kabla ya kuchambua na kilo {$purchase->weight_after_processing} baada ya uchambuzi, ambao thamini yake ni Tsh. {$purchase->amount}"
-            ]);
+            try {
+                $nexmo->message()->send([
+                    'to' => "+255762764819",
+                    'from' => '@leggetter',
+                    'text' => "Hello {$farmer->full_name}, Tumepokea mzigo wako wa  {$product->name} wenye jumla ya kilo {$purchase->weight_before_processing} kabla ya kuchambua na kilo {$purchase->weight_after_processing} baada ya uchambuzi, ambao thamini yake ni Tsh. {$purchase->amount}"
+                ]);
+            } catch (Client\Exception\Request $e) {
+
+            } catch (Client\Exception\Server $e) {
+
+            } catch (Client\Exception\Exception $e) {
+
+            }
         }
 
         return redirect()

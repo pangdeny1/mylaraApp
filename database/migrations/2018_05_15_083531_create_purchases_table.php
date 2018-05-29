@@ -23,6 +23,7 @@ class CreatePurchasesTable extends Migration
             $table->enum('status', ["unprocessed", "processed", "rejected", "completed"])->default("unprocessed");
             $table->unsignedInteger('product_id')->nullable();
             $table->unsignedInteger('farmer_id')->nullable();
+            $table->timestamp("paid_at")->nullable();
             $table->timestamps();
         });
     }

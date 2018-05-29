@@ -4,64 +4,64 @@ use Illuminate\Database\Seeder;
 
 class ProductCategoryTableSeeder extends Seeder
 {
-    public function run()
+    public function run(\Faker\Generator $faker)
     {
         $categories = [
             [
                 "name" => "Cereals",
-                "description" => ""
+                "description" => $faker->sentence,
             ],
             [
                 "name" => "Pulses",
-                "description" => ""
+                "description" => $faker->sentence,
             ],
             [
                 "name" => "Vegetables",
-                "description" => ""
+                "description" => $faker->sentence,
             ],
             [
                 "name" => "Fruits",
-                "description" => ""
+                "description" => $faker->sentence,
             ],
             [
                 "name" => "Nuts",
-                "description" => ""
+                "description" => $faker->sentence,
             ],
             [
                 "name" => "Oilseeds",
-                "description" => ""
+                "description" => $faker->sentence,
             ],
             [
                 "name" => "Sugars and Starches",
-                "description" => ""
+                "description" => $faker->sentence,
             ],
             [
                 "name" => "Fibres",
-                "description" => ""
+                "description" => $faker->sentence,
             ],
             [
                 "name" => "Beverages",
-                "description" => ""
+                "description" => $faker->sentence,
             ],
             [
                 "name" => "Narcotics",
-                "description" => ""
+                "description" => $faker->sentence,
             ],
             [
                 "name" => "Spices",
-                "description" => ""
+                "description" => $faker->sentence,
             ],
             [
                 "name" => "Condiments",
-                "description" => ""
+                "description" => $faker->sentence,
             ],
             [
                 "name" => "Rubber Forages",
-                "description" => ""
+                "description" => $faker->sentence,
             ],
             [
                 "name" => "Green and Green leaf manure",
-                "description" => ""
+                "description" => $faker->sentence,
             ],
         ];
 

@@ -86,11 +86,11 @@
 
                         <div class="menu-header">Reports</div>
                         <div class="menu-item">
-                            <a href="#" class="menu-link mb-2">
+                            <a href="{{ route("purchases.reports", ["period" => "daily"]) }}" class="menu-link mb-2">
                                 <i class="fas fa-align-left"></i>
                                 <span class="menu-text">Purchase History</span>
                             </a>
-                            <a href="#" class="menu-link mb-2">
+                            <a href="{{ route("products.reports", ["period" => "daily"]) }}" class="menu-link mb-2">
                                 <i class="fas fa-align-left"></i>
                                 <span class="menu-text">Product Purchase</span>
                             </a>

@@ -1,88 +1,139 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}" dir="ltr">
+<!DOCTYPE html>
+<html lang="{{ app()->getLocale() }}">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta http-equiv="Content-Language" content="en" />
-  <meta name="msapplication-TileColor" content="#2d89ef">
-  <meta name="theme-color" content="#4188c9">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- CSRF Token -->
-  <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <link rel="icon" href="./favicon.ico" type="image/x-icon"/>
-  <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
+    <!-- End Required meta tags -->
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
-  <title>{{ config('app.name', 'Laravel') }}</title>
+    <!-- Favicons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/apple-touch-icon.png">
+    <link rel="shortcut icon" href="assets/favicon.ico">
+    <meta name="theme-color" content="#3063A0">
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
+    <!-- BEGIN BASE STYLES -->
+    <link rel="stylesheet" href="{{ asset("themes/looper/assets/vendor/bootstrap/css/bootstrap.min.css") }}">
+    <link rel="stylesheet" href="{{ asset("themes/looper/assets/vendor/font-awesome/css/fontawesome-all.min.css") }}">
 
-  <!-- Scripts -->
-  <script src="{{ asset('js/app.js') }}" defer></script>
-
-  <!-- Dashboard Core -->
-  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- BEGIN THEME STYLES -->
+    <link rel="stylesheet" href="{{ asset("themes/looper/assets/stylesheets/main.min.css") }}">
+    <link rel="stylesheet" href="{{ asset("themes/looper/assets/stylesheets/custom.css") }}">
 </head>
 <body>
-<div class="page">
-  <div class="page-single">
-    <div class="container">
-      <div class="row">
-        <div class="col col-login mx-auto">
-          <div class="text-center mb-6">
-            <img src="./demo/brand/tabler.svg" class="h-6" alt="">
-          </div>
-          <form class="card" method="POST" action="{{ route('login') }}">
-            @csrf
-            <div class="card-body p-6">
-              <div class="card-title">Login to your account</div>
-              <div class="form-group">
-                <label class="form-label">Email address</label>
-                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
-                @if ($errors->has('email'))
-                  <span class="invalid-feedback">
-                        <strong>{{ $errors->first('email') }}</strong>
-                    </span>
-                @endif
-              </div>
-              <div class="form-group">
-                <label class="form-label">
-                  Password
-                  <a href="{{ route('password.request') }}" class="float-right small">I forgot password</a>
-                </label>
-                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-                @if ($errors->has('password'))
-                  <span class="invalid-feedback">
-                        <strong>{{ $errors->first('password') }}</strong>
-                    </span>
-                @endif
-              </div>
-              <div class="form-group">
-                <label class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" name="remember" {{ old('remember') ? 'checked' : '' }}>
-                  <span class="custom-control-label">Remember me</span>
-                </label>
-              </div>
-              <div class="form-footer">
-                <button type="submit" class="btn btn-primary btn-block">Sign in</button>
-              </div>
+<!-- .auth -->
+<main class="auth auth-floated">
+    <!-- form -->
+    <form class="auth-form" method="POST" action="{{ route('login') }}">
+        @csrf
+        <div class="mb-4">
+            <div class="mb-3">
+                <img class="rounded" src="{{ asset("themes/looper/assets/apple-touch-icon.png") }}" alt="" height="72">
             </div>
-          </form>
-          <div class="text-center text-muted">
-            Don't have account yet? <a href="./register.html">Sign up</a>
-          </div>
+            <h1 class="h3"> Sign In </h1>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
+        <p class="text-left mb-4"> Don't have a account?
+            <a href="#">Create One</a>
+        </p>
+
+        <div class="form-group mb-4">
+            <label for="email" class="d-block text-left">Email address</label>
+            <input id="email"
+                   type="email"
+                   class="form-control form-control-lg {{ $errors->has('email') ? 'is-invalid' : '' }}"
+                   name="email"
+                   value="{{ old('email') }}"
+                   required
+                   autofocus
+            >
+            @if ($errors->has('email'))
+                <span class="invalid-feedback">
+                    <strong>{{ $errors->first('email') }}</strong>
+                </span>
+            @endif
+        </div>
+
+        <div class="form-group mb-4">
+            <label for="password" class="d-block text-left">
+                Password
+                <a href="{{ route('password.request') }}" class="float-right small">I forgot password</a>
+            </label>
+            <input type="password"
+                   name="password"
+                   id="password"
+                   class="form-control form-control-lg {{ $errors->has('password') ? 'is-invalid' : '' }}"
+                   required
+            >
+            @if ($errors->has('password'))
+                <span class="invalid-feedback">
+                    <strong>{{ $errors->first('password') }}</strong>
+                </span>
+            @endif
+        </div>
+
+        <div class="form-group mb-4">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
+        </div>
+
+        <div class="form-group text-left">
+            <div class="custom-control custom-control-inline custom-checkbox">
+                <input type="checkbox"
+                       class="custom-control-input"
+                       name="remember-me"
+                       id="remember-me"
+                      {{ old('remember') ? 'checked' : '' }}
+                >
+                <label class="custom-control-label" for="remember-me">Keep me sign in</label>
+            </div>
+        </div>
+
+        <!-- /recovery links -->
+        <p class="py-3">
+            <a href="#" class="link">Forgot Username?</a>
+            <span class="mx-2">·</span>
+            <a href="#" class="link">Forgot Password?</a>
+        </p>
+        
+        <!-- copyright -->
+        <p class="px-3 text-muted text-center">
+            &copy; 2018 All Rights Reserved. Loper is Responsive Admin Theme build on top of latest Bootstrap 4.
+            <a href="#">Privacy</a> and <a href="#">Terms</a>
+        </p>
+    </form>
+
+    <!-- .auth-announcement -->
+    <section id="announcement" class="auth-announcement" style="background-image: url({{ asset("themes/looper/assets/images/illustration/img-1.png") }});">
+        <div class="announcement-body">
+            <h2 class="announcement-title"> How to Prepare for an Automated Future </h2>
+            <a href="#" class="btn btn-warning">
+                <i class="fa fa-fw fa-angle-right"></i> Check Out Now
+            </a>
+        </div>
+    </section>
+</main>
+<!-- /.auth -->
+<!-- BEGIN PLUGINS JS -->
+<script src="{{ asset("themes/looper/assets/vendor/particles.js/particles.min.js") }}"></script>
+<script>
+    /* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
+    particlesJS.load('announcement', 'themes/looper/assets/javascript/particles.json');
+</script>
+<!-- END PLUGINS JS -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-116692175-1');
+</script>
 </body>
 </html>
 

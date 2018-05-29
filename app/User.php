@@ -9,11 +9,30 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    protected $fillable = [
-        'name', 'email', 'password',
+    protected $guarded  = [];
+
+    protected $hidden   = [
+        'password',
+        'remember_token',
     ];
 
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    public function address()
+    {
+        return $this->morphOne(Address::class, "addressable");
+    }
+
+    public function addresses()
+    {
+        return $this->morphMany(Address::class, "addressable");
+    }
+
+    public function getFullNameAttribute()
+    {
+        return $this->attributes["first_name"] ." ". $this->attributes["last_name"];
+    }
+
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes["password"] = bcrypt($password);
+    }
 }

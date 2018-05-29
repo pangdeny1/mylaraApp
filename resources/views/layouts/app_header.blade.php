@@ -140,14 +140,14 @@
                             <img src="{{ asset("themes/looper/assets/images/avatars/profile.jpg") }}" alt="">
                         </span>
                         <span class="account-summary pr-lg-4 d-none d-lg-block">
-                            <span class="account-name">Beni Arisandi</span>
+                            <span class="account-name">{{ auth()->user()->name }}</span>
                             <span class="account-description">Marketing Manager</span>
                         </span>
                     </button>
                     <div class="dropdown-arrow dropdown-arrow-left"></div>
                     <div class="dropdown-menu">
                         <h6 class="dropdown-header d-none d-md-block d-lg-none">
-                            Beni Arisandi
+                            {{ auth()->user()->name }}
                         </h6>
                         <a class="dropdown-item" href="user-profile.html">
                             <span class="dropdown-icon oi oi-person"></span> Profile</a>

@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class PurchasesWeightsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware("auth");
+    }
+
     public function update(Request $request, Purchase $purchase)
     {
         $this->validate($request, ["weight_after" => "required"]);

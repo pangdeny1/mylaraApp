@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class PurchaseRemarksController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware("auth");
+    }
+
     public function store(Request $request, Purchase $purchase)
     {
         $this->validate($request, ["remarks" => "required"]);

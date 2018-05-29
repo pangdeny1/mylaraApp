@@ -22,4 +22,9 @@ class Purchase extends Model
     {
         return $this->morphMany(Remark::class, "remarkable");
     }
+
+    public function present()
+    {
+        return new PurchasePresenter($this);
+    }
 }

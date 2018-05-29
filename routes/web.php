@@ -1,27 +1,25 @@
 <?php
 
+
+use Olifolkerd\Convertor\Convertor;
+use PragmaRX\Countries\Package\Countries;
+
 Route::view("/", "welcome");
 
 Route::view("template", "template");
 
-Route::get("test", function (\Nexmo\Client $nexmo){
-
-    // $message = $nexmo->message()->send([
-    //     'to' => "255762764819",
-    //     'from' => '@leggetter',
-    //     'text' => 'Sending SMS from Laravel. Woohoo!'
-    // ]);
-
-    // return "Sent";
+Route::get("test", function (){
+    //return $country   = Countries::where('name.common', "Tanzania")->first();
+    //return ;
+    //return $measurements = Converter::getMeasurements();
+    //return $simpleConvertor = (new Convertor(10, "g"))->to("kg");
 });
 
 Auth::routes();
-
-Route::get('/home', [
+Route::get('home', [
     "as" => "home",
-    "use" => "HomeController@index"
+    "uses" => "HomeController@index"
 ]);
-
 Route::patch("purchases/{purchase}/weights", [
     "as" => "purchases.weights.update",
     "uses" => "PurchasesWeightsController@update",
@@ -39,10 +37,20 @@ Route::post("purchases/{purchase}/remarks", [
     "uses" => "PurchaseRemarksController@store",
 ]);
 
+Route::prefix('reports')->group(function () {
+    Route::get("purchases", [
+        "as" => "purchases.reports",
+        "uses" => "PurchasesReportsController@index",
+    ]);
+    Route::get("products", [
+        "as" => "products.reports",
+        "uses" => "ProductsReportsController@index",
+    ]);
+});
+
+Route::resource("users", "UsersController");
 Route::resource("purchases", "PurchasesController");
 Route::resource("farmers", "FarmersController");
-
-
 Route::resource("products", "ProductsController");
 Route::resource("product_categories", "ProductCategoriesController");
 
