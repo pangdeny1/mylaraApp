@@ -40,7 +40,7 @@
                                 <div class="alert-icon">
                                     <i class="fas fa-info-circle"></i>
                                 </div>
-                                <strong>Well done!</strong> {{ session('statuses') }}
+                                <strong>Well done!</strong> {{ session('status') }}
                             </div>
                         @endif
 

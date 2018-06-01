@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "1ed26e81622f8173c42a9705b5fa59ee",
+    "content-hash": "605f3d245ab92c6bdc2f00e1b9f5f674",
     "packages": [
         {
             "name": "colinodell/json5",
@@ -1579,6 +1579,89 @@
             "time": "2018-04-02T16:26:04+00:00"
         },
         {
+            "name": "owen-it/laravel-auditing",
+            "version": "v7.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/owen-it/laravel-auditing.git",
+                "reference": "803b18a7ff3891bf4198279d52ffa65a34d666f0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/owen-it/laravel-auditing/zipball/803b18a7ff3891bf4198279d52ffa65a34d666f0",
+                "reference": "803b18a7ff3891bf4198279d52ffa65a34d666f0",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "5.2.* || 5.3.* || 5.4.* || 5.5.* || 5.6.*",
+                "illuminate/database": "5.2.* || 5.3.* || 5.4.* || 5.5.* || 5.6.*",
+                "illuminate/filesystem": "5.2.* || 5.3.* || 5.4.* || 5.5.* || 5.6.*",
+                "php": ">=7.0.13"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.0",
+                "orchestra/database": "^3.5",
+                "orchestra/testbench": "^3.5",
+                "phpunit/phpunit": "^6.0"
+            },
+            "suggest": {
+                "laravelista/lumen-vendor-publish": "Needed to publish the package configuration in Lumen"
+            },
+            "type": "package",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "6.0-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "OwenIt\\Auditing\\AuditingServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "OwenIt\\Auditing\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Quetzy Garcia",
+                    "email": "quetzyg@altek.org"
+                },
+                {
+                    "name": "Antério Vieira",
+                    "email": "anteriovieira@gmail.com"
+                },
+                {
+                    "name": "Raphael França",
+                    "email": "raphaelfrancabsb@gmail.com"
+                }
+            ],
+            "description": "Audit changes of your Eloquent models in Laravel/Lumen",
+            "homepage": "http://laravel-auditing.com",
+            "keywords": [
+                "Accountability",
+                "Audit",
+                "auditing",
+                "changes",
+                "eloquent",
+                "history",
+                "laravel",
+                "log",
+                "logging",
+                "lumen",
+                "observer",
+                "record",
+                "revision",
+                "tracking"
+            ],
+            "time": "2018-05-12T09:59:34+00:00"
+        },
+        {
             "name": "paragonie/random_compat",
             "version": "v2.0.12",
             "source": {
@@ -2465,6 +2548,77 @@
                 "uuid"
             ],
             "time": "2018-01-20T00:28:24+00:00"
+        },
+        {
+            "name": "silber/bouncer",
+            "version": "v1.0.0-rc.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JosephSilber/bouncer.git",
+                "reference": "658fca6169b3426ca5be6168b13fde7b3c0e9069"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JosephSilber/bouncer/zipball/658fca6169b3426ca5be6168b13fde7b3c0e9069",
+                "reference": "658fca6169b3426ca5be6168b13fde7b3c0e9069",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/auth": "5.1.20 - 5.6",
+                "illuminate/container": "5.1.20 - 5.6",
+                "illuminate/contracts": "5.1.20 - 5.6",
+                "illuminate/database": "5.1.20 - 5.6"
+            },
+            "require-dev": {
+                "illuminate/cache": "5.1.20 - 5.6",
+                "illuminate/console": "5.1.20 - 5.6",
+                "illuminate/events": "5.1.20 - 5.6",
+                "larapack/dd": "^1.1",
+                "mockery/mockery": "^0.9.5",
+                "phpunit/phpunit": "^4.8.35"
+            },
+            "suggest": {
+                "illuminate/cache": "Allows caching bouncer's database queries",
+                "illuminate/console": "Allows running registered bouncer seeders via artisan",
+                "illuminate/events": "Required for multi-tenancy support"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Silber\\Bouncer\\BouncerServiceProvider"
+                    ],
+                    "aliases": {
+                        "Bouncer": "Silber\\Bouncer\\BouncerFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Silber\\Bouncer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Joseph Silber",
+                    "email": "contact@josephsilber.com"
+                }
+            ],
+            "description": "Eloquent roles and abilities.",
+            "keywords": [
+                "abilities",
+                "acl",
+                "capabilities",
+                "eloquent",
+                "laravel",
+                "permissions",
+                "roles"
+            ],
+            "time": "2018-02-01T03:05:24+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

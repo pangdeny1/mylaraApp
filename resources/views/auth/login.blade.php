@@ -83,11 +83,13 @@
             <div class="custom-control custom-control-inline custom-checkbox">
                 <input type="checkbox"
                        class="custom-control-input"
-                       name="remember-me"
-                       id="remember-me"
+                       name="remember"
+                       id="remember"
                       {{ old('remember') ? 'checked' : '' }}
                 >
-                <label class="custom-control-label" for="remember-me">Keep me sign in</label>
+                <label class="custom-control-label" for="remember">
+                    Keep me sign in
+                </label>
             </div>
         </div>
 
@@ -95,7 +97,9 @@
         <p class="py-3">
             <a href="#" class="link">Forgot Username?</a>
             <span class="mx-2">·</span>
-            <a href="#" class="link">Forgot Password?</a>
+            <a href="{{ route('password.request') }}" class="link">
+                {{ __('Forgot Your Password?') }}
+            </a>
         </p>
         
         <!-- copyright -->

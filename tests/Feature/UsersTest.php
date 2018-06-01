@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use App\Events\UserRegistered;
-use App\Mail\UserActivation;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
@@ -123,6 +122,36 @@ class UsersTest extends TestCase
             "state" => $state,
             "postal_code" => $postalCode,
         ]);
+
+        $response->assertRedirect(route("users.index"));
+    }
+
+    public function test_authenticated_user_can_view_user_details()
+    {
+        $this->withoutExceptionHandling();
+
+        $this->actingAs(factory(\App\User::class)->create());
+
+        $user = factory(\App\User::class)->create();
+
+        $user->address()->create(factory(\App\Address::class)->raw());
+
+        $response = $this->get(route("users.show", $user));
+
+        $response->assertViewIs("users.show");
+    }
+
+    public function test_authenticated_user_can_an_existing_user()
+    {
+        $this->withoutExceptionHandling();
+
+        $this->actingAs(factory(\App\User::class)->create());
+
+        $user = factory(\App\User::class)->create();
+
+        $user->address()->create(factory(\App\Address::class)->raw());
+
+        $response = $this->delete(route("users.destroy", $user));
 
         $response->assertRedirect(route("users.index"));
     }

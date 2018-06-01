@@ -47,28 +47,15 @@
                         </header>
 
                         <div class="card-body">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <span class="oi oi-magnifying-glass"></span>
-                                </span>
-                                    </div>
-                                    <input type="text" class="form-control" placeholder="Search record">
-                                </div>
-                            </div>
-
-                            <!-- .table-responsive -->
-                            <div class="text-muted"> Showing 1 to 10 of 1,000 entries </div>
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
                                         <tr>
                                             <th>Full name</th>
-                                            <th>First name</th>
-                                            <th>Last name</th>
                                             <th>Phone</th>
                                             <th>Email</th>
+                                            <th>Roles</th>
+                                            <th>Permissions</th>
                                             <th>Created at</th>
                                             <th></th>
                                         </tr>
@@ -76,24 +63,41 @@
                                     <tbody>
                                     @foreach($users as $user)
                                         <tr>
-                                            <td>
+                                            <td class="align-middle">
                                                 <a href="{{ route("users.show", $user) }}">
                                                     {{ $user->full_name }}
                                                 </a>
                                             </td>
-                                            <td>{{ $user->first_name }}</td>
-                                            <td>{{ $user->last_name }}</td>
-                                            <td>{{ $user->phone }}</td>
-                                            <td>{{ $user->email }}</td>
-                                            <td>{{ $user->created_at }}</td>
+                                            <td class="align-middle">{{ $user->phone }}</td>
+                                            <td class="align-middle">{{ $user->email }}</td>
+                                            <td class="align-middle text-capitalize">
+                                                {{ $user->roles->count() }}
+                                                {{ str_plural("role", $user->roles->count()) }}
+                                            </td>
+                                            <td class="align-middle text-capitalize">
+                                                {{ $user->getAbilities()->count() }}
+                                                {{ str_plural("permission", $user->getAbilities()->count()) }}
+                                            </td>
+                                            <td class="align-middle">{{ $user->created_at }}</td>
                                             <td class="align-middle text-right">
                                                 <a href="{{ route("users.edit", $user) }}" class="btn btn-sm btn-secondary">
                                                     <i class="fa fa-pencil-alt"></i>
                                                     <span class="sr-only">Edit</span>
                                                 </a>
-                                                <a href="#" class="btn btn-sm btn-secondary">
+                                                <a href="javascript:void(0)"
+                                                   class="btn btn-sm btn-secondary"
+                                                   onclick="event.preventDefault(); document.getElementById('deletion-form-{{$user->id}}').submit();"
+                                                >
                                                     <i class="far fa-trash-alt"></i>
                                                     <span class="sr-only">Remove</span>
+                                                    <form id="deletion-form-{{$user->id}}"
+                                                          action="{{ route('users.destroy', $user) }}"
+                                                          method="POST"
+                                                          class="d-none"
+                                                    >
+                                                        @csrf
+                                                        @method("delete")
+                                                    </form>
                                                 </a>
                                             </td>
                                         </tr>

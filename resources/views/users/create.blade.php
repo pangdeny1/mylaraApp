@@ -144,7 +144,58 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <hr class="mb-4">
+                                <header class="card-header border-bottom-0">
+                                    Roles Information
+                                </header>
+                                <div class="card-body">
+                                    <role-assignment-form inline-template>
+                                        <div>
+                                            <div class="form-row mb-4">
+                                                <div class="form-group col-md-9">
+                                                    <label for="roles">Roles</label>
+                                                    <select id="roles"
+                                                            class="form-control {{ $errors->has('roles') ? 'is-invalid' : '' }}"
+                                                            v-model="newRole"
+                                                            @change.prevent="addRole"
+                                                    >
+                                                        <option value="">Choose...</option>
+                                                        <option v-for="role in roles"
+                                                                :value="role.id"
+                                                                v-text="role.title"
+                                                        >
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="list-group list-group-flush list-group-divider" v-if="selectedRoles.length">
+                                                <div class="list-group-item" v-for="selectedRole in selectedRoles">
+                                                    <div class="list-group-item-figure">
+                                                        <div class="tile tile-circle" :class="selectedRole.color">
+                                                            @{{ selectedRole.placeholder }}
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" name="roles[]" :value="selectedRole.name">
+                                                    <div class="list-group-item-body">
+                                                        <h4 class="list-group-item-title">
+                                                            <a href="#" v-text="selectedRole.title"></a>
+                                                        </h4>
+                                                        <p class="list-group-item-text" v-text="selectedRole.description"></p>
+                                                    </div>
+                                                    <div class="list-group-item-figure">
+                                                        <button @click.prevent="removeRole(selectedRole.id)" class="btn btn-sm btn-light">
+                                                            <i class="far fa-trash-alt"></i>
+                                                        </button>
+                                                    </div>
+                                                </div >
+                                            </div>
+                                        </div>
+                                    </role-assignment-form>
+                                </div>
+                                <hr class="mb-4">
+
                                 <header class="card-header border-bottom-0">
                                     Address information
                                 </header>

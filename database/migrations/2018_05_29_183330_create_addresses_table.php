@@ -19,8 +19,9 @@ class CreateAddressesTable extends Migration
             $table->text("address");
             $table->string("country");
             $table->string("state");
-            $table->string("postal_code");
+            $table->string("postal_code")->nullable();
             $table->nullableMorphs("addressable");
+            $table->unsignedInteger('creator_id')->nullable();
             $table->timestamps();
         });
     }

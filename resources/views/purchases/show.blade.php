@@ -86,7 +86,7 @@
                                     <span class="text-muted">Weight after</span>
                                     <strong>{{ $purchase->weight_after_processing }} kg</strong>
                                 </div>
-                                <div class="list-group-item justify-content-between bg-azure-dark">
+                                <div class="list-group-item justify-content-between bg-light border-top-0">
                                     <span class="text-muted">Weight difference</span>
                                     <strong>{{ $purchase->weight_before_processing - $purchase->weight_after_processing }} kg</strong>
                                 </div>
@@ -106,13 +106,13 @@
                                     <span class="text-muted">Quantity</span>
                                     <strong>{{ $purchase->weight_after_processing }} kg</strong>
                                 </div>
-                                <div class="list-group-item justify-content-between bg-azure-dark">
+                                <div class="list-group-item justify-content-between">
                                     <span class="text-muted">Calculate amount</span>
                                     <strong>
                                         Tsh. {{ number_format($purchase->amount, 2) }}
                                     </strong>
                                 </div>
-                                <div class="list-group-item justify-content-between bg-azure-dark">
+                                <div class="list-group-item justify-content-between bg-light border-top-0">
                                     <span class="text-muted">Actual amount</span>
                                     <strong>
                                         Tsh. {{ number_format($purchase->amount, 2) }}
@@ -139,7 +139,7 @@
                                         <div class="account-summary">
                                             <p class="account-name"> Beni arisandi </p>
                                             <p class="account-description">
-                                                {{ $purchase->remarks->first()->created_at }}
+                                                {{ $purchase->remark->created_at }}
                                             </p>
                                         </div>
                                     </a>
@@ -160,13 +160,13 @@
                                     <!-- /.dropdown -->
                                 </header>
                                 <div class="card-body">
-                                    <div class="mb-2">{{ $purchase->remarks->first()->body }}</div>
+                                    <div class="mb-2">{{ $purchase->remark->body }}</div>
                                 </div>
                             </section>
                             <section class="feed-comments card">
                                 <section role="log" class="conversations">
                                     <ul class="conversation-list">
-                                        @foreach($purchase->remarks()->skip(1) as $remark)
+                                        @foreach($purchase->remarks()->latest()->skip(1) as $remark)
                                         <li class="conversation-inbound">
                                             <div class="conversation-avatar">
                                                 <a href="#" class="user-avatar">
@@ -198,21 +198,26 @@
                                                 </figure>
                                                 <div class="media-body">
                                                     <div class="publisher publisher-alt">
-                                                        <div class="publisher-input">
-                                                            <textarea id="publisherInput1" class="form-control" placeholder="Write a comment"></textarea>
-                                                        </div>
-                                                        <div class="publisher-actions">
-                                                            <div class="publisher-tools mr-auto">
-                                                                <button type="button" class="btn btn-link fileinput-button">
-                                                                    <i class="fa fa-paperclip"></i>
-                                                                    <input type="file" id="message-attachment" name="attachment[]" multiple="">
-                                                                </button>
-                                                                <button type="button" class="btn btn-link">
-                                                                    <i class="far fa-smile"></i>
-                                                                </button>
+                                                        <form action="{{ route("remarks.replays.store", $purchase->remark) }}"
+                                                              method="post"
+                                                        >
+                                                            @csrf
+                                                            <div class="publisher-input">
+                                                                <textarea id="publisherInput1" class="form-control" placeholder="Write a comment..."></textarea>
                                                             </div>
-                                                            <button type="submit" class="btn btn-primary">Publish</button>
-                                                        </div>
+                                                            <div class="publisher-actions">
+                                                                <div class="publisher-tools mr-auto">
+                                                                    <button type="button" class="btn btn-link fileinput-button">
+                                                                        <i class="fa fa-paperclip"></i>
+                                                                        <input type="file" id="message-attachment" name="attachment[]" multiple="">
+                                                                    </button>
+                                                                    <button type="button" class="btn btn-link">
+                                                                        <i class="far fa-smile"></i>
+                                                                    </button>
+                                                                </div>
+                                                                <button type="submit" class="btn btn-primary">Publish</button>
+                                                            </div>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
@@ -284,6 +289,7 @@
                 <div class="text-muted mb-4"> Displays each of the user’s upcoming, current, and past activities/events. </div>
 
                 <ul class="timeline timeline-fluid mb-0">
+                    @foreach($purchase->audits()->latest()->get() as $activity)
                     <li class="timeline-item">
                         <!-- .timeline-figure -->
                         <div class="timeline-figure">
@@ -299,119 +305,16 @@
                                 <!-- .media-body -->
                                 <div class="media-body">
                                     <p class="mb-0">
-                                        <a href="#">Jeffrey Wells</a> created a
-                                        <a href="#">schedule</a>
+                                        <a href="{{ route("users.show", $activity->user) }}">{{ $activity->user->full_name }}</a> {{ $activity->event }} a <a href="{{ route("purchases.show", $activity->auditable_id) }}">{{ class_basename($activity->auditable_type) }}</a>
                                     </p>
-                                    <span class="timeline-date">About a minute ago</span>
+                                    <span class="timeline-date">
+                                        {{ $activity->created_at->toDayDateTimeString() }}
+                                    </span>
                                 </div>
                             </div>
                         </div>
                     </li>
-
-                    <li class="timeline-item">
-                        <!-- .timeline-figure -->
-                        <div class="timeline-figure">
-                      <span class="tile tile-circle tile-sm">
-                        <i class="oi oi-chat fa-lg"></i>
-                      </span>
-                        </div>
-                        <!-- /.timeline-figure -->
-                        <!-- .timeline-body -->
-                        <div class="timeline-body">
-                            <!-- .media -->
-                            <div class="media">
-                                <!-- .media-body -->
-                                <div class="media-body">
-                                    <p class="mb-0">
-                                        <a href="#">Anna Vargas</a> logged a
-                                        <a href="#">chat</a> with team </p>
-                                    <span class="timeline-date">3 hours ago</span>
-                                </div>
-                                <!-- /.media-body -->
-                            </div>
-                            <!-- /.media -->
-                        </div>
-                        <!-- /.timeline-body -->
-                    </li>
-
-                    <li class="timeline-item">
-                        <!-- .timeline-figure -->
-                        <div class="timeline-figure">
-                      <span class="tile tile-circle tile-sm">
-                        <i class="fa fa-tasks fa-lg"></i>
-                      </span>
-                        </div>
-                        <!-- /.timeline-figure -->
-                        <!-- .timeline-body -->
-                        <div class="timeline-body">
-                            <!-- .media -->
-                            <div class="media">
-                                <!-- .media-body -->
-                                <div class="media-body">
-                                    <p class="mb-0">
-                                        <a href="#">Arthur Carroll</a> created a
-                                        <a href="#">task</a>
-                                    </p>
-                                    <span class="timeline-date">8:14pm</span>
-                                </div>
-                                <!-- /.media-body -->
-                            </div>
-                            <!-- /.media -->
-                        </div>
-                        <!-- /.timeline-body -->
-                    </li>
-
-                    <li class="timeline-item">
-                        <!-- .timeline-figure -->
-                        <div class="timeline-figure">
-                      <span class="tile tile-circle tile-sm">
-                        <i class="fa fa-user-plus fa-lg"></i>
-                      </span>
-                        </div>
-                        <!-- /.timeline-figure -->
-                        <!-- .timeline-body -->
-                        <div class="timeline-body">
-                            <!-- .media -->
-                            <div class="media">
-                                <!-- .media-body -->
-                                <div class="media-body">
-                                    <p class="mb-0">
-                                        <a href="#">Sara Carr</a> invited to
-                                        <a href="#">Stilearn Admin</a> project </p>
-                                    <span class="timeline-date">7:21pm</span>
-                                </div>
-                                <!-- /.media-body -->
-                            </div>
-                            <!-- /.media -->
-                        </div>
-                        <!-- /.timeline-body -->
-                    </li>
-
-                    <li class="timeline-item">
-                        <!-- .timeline-figure -->
-                        <div class="timeline-figure">
-                      <span class="tile tile-circle tile-sm">
-                        <i class="fa fa-folder fa-lg"></i>
-                      </span>
-                        </div>
-                        <!-- /.timeline-figure -->
-                        <!-- .timeline-body -->
-                        <div class="timeline-body">
-                            <!-- .media -->
-                            <div class="media">
-                                <!-- .media-body -->
-                                <div class="media-body">
-                                    <p class="mb-0">
-                                        <a href="#">Angela Peterson</a> added
-                                        <a href="#">Looper Admin</a> to collection </p>
-                                    <span class="timeline-date">5:21pm</span>
-                                </div>
-                                <!-- /.media-body -->
-                            </div>
-                            <!-- /.media -->
-                        </div>
-                        <!-- /.timeline-body -->
-                    </li>
+                    @endforeach
                 </ul>
             </div>
         </div>

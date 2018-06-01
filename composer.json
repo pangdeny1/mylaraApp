@@ -12,7 +12,9 @@
         "laravel/tinker": "^1.0",
         "nexmo/laravel": "^1.1",
         "olifolkerd/convertor": "dev-master",
-        "pragmarx/countries": "^0.5.8"
+        "owen-it/laravel-auditing": "^7.0",
+        "pragmarx/countries": "^0.5.8",
+        "silber/bouncer": "v1.0.0-rc.1"
     },
     "require-dev": {
         "filp/whoops": "^2.0",

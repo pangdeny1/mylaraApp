@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -13,14 +14,18 @@ class UserActivation extends Mailable
 
     public $password;
 
+    public $user;
+
     /**
      * Create a new message instance.
      *
+     * @param User $user
      * @param $password
      */
-    public function __construct($password)
+    public function __construct(User $user, $password)
     {
         $this->password = $password;
+        $this->user     = $user;
     }
 
     /**
@@ -30,6 +35,7 @@ class UserActivation extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.users.activation');
+        return $this->subject("HomeVerge Account Activation")
+            ->markdown('emails.users.activation');
     }
 }

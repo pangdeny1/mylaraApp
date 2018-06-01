@@ -4,10 +4,16 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use OwenIt\Auditing\Contracts\Auditable;
+use Silber\Bouncer\Database\HasRolesAndAbilities;
 
-class User extends Authenticatable
+class User extends Authenticatable implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
+
     use Notifiable;
+
+    use HasRolesAndAbilities;
 
     protected $guarded  = [];
 
@@ -24,6 +30,15 @@ class User extends Authenticatable
     public function addresses()
     {
         return $this->morphMany(Address::class, "addressable");
+    }
+
+    public function role()
+    {
+        if (! $this->roles()->exists()) {
+            return "Staff";
+        }
+
+        return $this->roles()->first()->title;
     }
 
     public function getFullNameAttribute()

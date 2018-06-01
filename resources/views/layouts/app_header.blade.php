@@ -140,19 +140,34 @@
                             <img src="{{ asset("themes/looper/assets/images/avatars/profile.jpg") }}" alt="">
                         </span>
                         <span class="account-summary pr-lg-4 d-none d-lg-block">
-                            <span class="account-name">{{ auth()->user()->name }}</span>
-                            <span class="account-description">Marketing Manager</span>
+                            <span class="account-name">{{ auth()->user()->full_name }}</span>
+                            <span class="account-description">
+                                {{ auth()->user()->role() }}
+                            </span>
                         </span>
                     </button>
                     <div class="dropdown-arrow dropdown-arrow-left"></div>
                     <div class="dropdown-menu">
                         <h6 class="dropdown-header d-none d-md-block d-lg-none">
-                            {{ auth()->user()->name }}
+                            {{ auth()->user()->full_name }}
                         </h6>
-                        <a class="dropdown-item" href="user-profile.html">
-                            <span class="dropdown-icon oi oi-person"></span> Profile</a>
-                        <a class="dropdown-item" href="auth-signin-v1.html">
-                            <span class="dropdown-icon oi oi-account-logout"></span> Logout</a>
+                        <a class="dropdown-item" href="#">
+                            <span class="dropdown-icon oi oi-person"></span> Profile
+                        </a>
+                        <a class="dropdown-item"
+                           href="{{ route('logout') }}"
+                           onclick="event.preventDefault();document.getElementById('logout-form').submit();"
+                        >
+                            <span class="dropdown-icon oi oi-account-logout"></span>
+                            {{ __('Logout') }}
+                            <form id="logout-form"
+                                  action="{{ route('logout') }}"
+                                  method="POST"
+                                  class="d-none"
+                            >
+                                @csrf
+                            </form>
+                        </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Help Center</a>
                         <a class="dropdown-item" href="#">Ask Forum</a>

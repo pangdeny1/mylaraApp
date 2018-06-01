@@ -32,7 +32,7 @@
 </head>
 <body>
 <!-- .app -->
-<div class="app">
+<div id="app">
     <!-- .app-header -->
     @include('layouts.app_header')
 
@@ -45,7 +45,7 @@
     </main>
     
 </div>
-<!-- /.app -->
+
 <!-- BEGIN BASE JS -->
 <script src="{{ asset("themes/looper/assets/vendor/jquery/jquery.min.js") }}"></script>
 <script src="{{ asset("themes/looper/assets/vendor/bootstrap/js/popper.min.js") }}"></script>
@@ -54,9 +54,18 @@
 <!-- BEGIN PLUGINS JS -->
 <script src="{{ asset("themes/looper/assets/vendor/stacked-menu/stacked-menu.min.js") }}"></script>
 <script src="{{ asset("themes/looper/assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js") }}"></script>
+<script src="{{ asset("themes/looper/assets/vendor/flatpickr/flatpickr.min.js") }}"></script>
+<script src="{{ asset("themes/looper/assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js") }}"></script>
+<script src="{{ asset("themes/looper/assets/vendor/chart.js/Chart.min.js") }}"></script>
 
 <!-- BEGIN THEME JS -->
 <script src="{{ asset("themes/looper/assets/javascript/main.min.js") }}"></script>
 
+<!-- BEGIN PAGE LEVEL JS -->
+<script src="{{ asset("themes/looper/assets/javascript/pages/easypiechart-demo.js") }}"></script>
+<script src="{{ asset("themes/looper/assets/javascript/pages/dashboard-demo.js") }}"></script>
+
+<!-- VUE.JS -->
+<script src="{{ asset("js/app.js") }}"></script>
 </body>
 </html>

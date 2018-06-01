@@ -15,20 +15,11 @@ class ProductPrice extends Model
         "ton"   => 0.001,
     ];
 
-    /**
-     * @return float|int
-     */
     public function perKg()
     {
         return (float) $this->weightConventions[$this->unit] * $this->amount;
     }
 
-    /**
-     * @param $weight
-     * @param $unit
-     * @return float
-     * @throws Exception
-     */
     public function convertWeightToKg($weight, $unit)
     {
         if (array_key_exists($unit, $this->weightConventions)) {
@@ -38,12 +29,6 @@ class ProductPrice extends Model
         throw new Exception;
     }
 
-    /**
-     * @param $weight
-     * @param $unit
-     * @return float|int
-     * @throws Exception
-     */
     public function normalize($weight, $unit)
     {
         return $this->convertWeightToKg($weight, $unit) * $this->perKg();
