@@ -3,6 +3,7 @@
 
 use Olifolkerd\Convertor\Convertor;
 use PragmaRX\Countries\Package\Countries;
+Auth::routes();
 
 Route::view("/", "welcome");
 
@@ -15,11 +16,11 @@ Route::get("test", function (){
     //return $simpleConvertor = (new Convertor(10, "g"))->to("kg");
 });
 
-Auth::routes();
 Route::get('home', [
     "as" => "home",
     "uses" => "HomeController@index"
 ]);
+
 Route::get("accounts/{user}/activations", [
     "as" => "accounts.activate",
     "uses" => "AccountActivationsController@create",
@@ -57,12 +58,45 @@ Route::prefix('reports')->group(function () {
     ]);
 });
 
-Route::resource("purchases", "PurchasesController");
+
+Route::get("farmers/{farmer}/farms", [
+    "as" => "farmers.farms.index",
+    "uses" => "FarmerFarmsController@index",
+]);
+Route::get("farmers/{farmer}/farms/create", [
+    "as" => "farmers.farms.create",
+    "uses" => "FarmerFarmsController@create",
+]);
+
+Route::get("farmers/{farmer}/harvests", [
+    "as" => "farmers.harvests.index",
+    "uses" => "FarmerHarvestsController@index",
+]);
+Route::get("farmers/{farmer}/harvests/create", [
+    "as" => "farmers.harvests.create",
+    "uses" => "FarmerHarvestsController@create",
+]);
+
+Route::get("farmers/{farmer}/sales", [
+    "as" => "farmers.sales.index",
+    "uses" => "FarmerSalesController@index",
+]);
+Route::get("farmers/{farmer}/batches", [
+    "as" => "farmers.batches.index",
+    "uses" => "FarmerBatchesController@index",
+]);
+Route::get("farmers/{farmer}/settings", [
+    "as" => "farmers.settings.index",
+    "uses" => "FarmerSettingsController@index",
+]);
 Route::resource("farmers", "FarmersController");
 
+Route::resource("purchases", "PurchasesController");
 Route::resource("users", "UsersController");
 Route::resource("roles", "RolesController");
 Route::resource("products", "ProductsController");
+Route::resource("blocks", "BlocksController");
+Route::resource("batches", "BatchesController");
 Route::resource("product_categories", "ProductCategoriesController");
 
 
