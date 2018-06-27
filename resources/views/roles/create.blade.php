@@ -179,12 +179,69 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Reports</td>
-                                                <td class="text-right"><input type="checkbox"></td>
-                                                <td class="text-right"><input type="checkbox"></td>
-                                                <td class="text-right"><input type="checkbox"></td>
-                                                <td class="text-right"><input type="checkbox"></td>
+                                                <td>Blocks</td>
+                                                <td class="text-right">
+                                                    <input type="checkbox" name="permissions[blocks][view]" value="purchase-view">
+                                                </td>
+                                                <td class="text-right">
+                                                    <input type="checkbox" name="permissions[blocks][create]" value="purchase-create">
+                                                </td>
+                                                <td class="text-right">
+                                                    <input type="checkbox" name="permissions[blocks][edit]" value="purchase-edit">
+                                                </td>
+                                                <td class="text-right">
+                                                    <input type="checkbox" name="permissions[blocks][delete]" value="purchase-delete">
+                                                </td>
                                             </tr>
+                                            <tr>
+                                                <td>Batches</td>
+                                                <td class="text-right">
+                                                    <input type="checkbox" name="permissions[batches][view]" value="purchase-view">
+                                                </td>
+                                                <td class="text-right">
+                                                    <input type="checkbox" name="permissions[batches][create]" value="purchase-create">
+                                                </td>
+                                                <td class="text-right">
+                                                    <input type="checkbox" name="permissions[batches][edit]" value="purchase-edit">
+                                                </td>
+                                                <td class="text-right">
+                                                    <input type="checkbox" name="permissions[batches][delete]" value="purchase-delete">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Farms</td>
+                                                <td class="text-right">
+                                                    <input type="checkbox" name="permissions[farms][view]" value="purchase-view">
+                                                </td>
+                                                <td class="text-right">
+                                                    <input type="checkbox" name="permissions[farms][create]" value="purchase-create">
+                                                </td>
+                                                <td class="text-right">
+                                                    <input type="checkbox" name="permissions[farms][edit]" value="purchase-edit">
+                                                </td>
+                                                <td class="text-right">
+                                                    <input type="checkbox" name="permissions[farms][delete]" value="purchase-delete">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Reports</td>
+                                                <td class="text-right">
+                                                    <input type="checkbox" name="permissions[reports][view]" value="purchase-view">
+                                                </td>
+                                                <td class="text-right"></td>
+                                                <td class="text-right"></td>
+                                                <td class="text-right"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Dashboard</td>
+                                                <td class="text-right">
+                                                    <input type="checkbox" name="permissions[dashbord][view]" value="purchase-view">
+                                                </td>
+                                                <td class="text-right"></td>
+                                                <td class="text-right"></td>
+                                                <td class="text-right"></td>
+                                            </tr>
+
                                         </tbody>
                                     </table>
                                     <hr>

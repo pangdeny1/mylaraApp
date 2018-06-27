@@ -27,10 +27,12 @@
                                     <i class="oi oi-data-transfer-upload"></i>
                                     <span class="ml-1">Import</span>
                                 </button>
+                                @can("create", \App\Farmer::class)
                                 <a href="{{ route("farmers.create") }}" class="btn btn-primary">
                                     <span class="fas fa-plus mr-1"></span>
                                     Add a new farmer
                                 </a>
+                                @endcan
                             </div>
                         </div>
                     </header>
@@ -67,8 +69,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Farmer</th>
-                                                <th>First name</th>
-                                                <th>Last name</th>
+                                                <th>Gender</th>
                                                 <th>Phone</th>
                                                 <th>Created at</th>
                                                 <th></th>
@@ -78,23 +79,32 @@
                                             @foreach($farmers as $farmer)
                                             <tr>
                                                 <td>
+                                                    <a href="{{ route("farmers.show", $farmer) }}" class="tile tile-img mr-1">
+                                                        <img class="img-fluid"
+                                                             src="{{ Avatar::create($farmer->full_name)->toBase64() }}"
+                                                             alt="{{ $farmer->full_name }}">
+                                                    </a>
                                                     <a href="{{ route("farmers.show", $farmer) }}">
                                                         {{ $farmer->full_name }}
                                                     </a>
                                                 </td>
-                                                <td>{{ $farmer->first_name }}</td>
-                                                <td>{{ $farmer->last_name }}</td>
+                                                <td>{{ $farmer->gender }}</td>
                                                 <td>{{ $farmer->phone }}</td>
                                                 <td>{{ $farmer->created_at }}</td>
                                                 <td class="align-middle text-right">
-                                                    <a href="#" class="btn btn-sm btn-secondary">
+                                                    @can("edit", \App\Farmer::class)
+                                                    <a href="{{ route("farmers.edit", $farmer) }}" class="btn btn-sm btn-secondary">
                                                         <i class="fa fa-pencil-alt"></i>
                                                         <span class="sr-only">Edit</span>
                                                     </a>
+                                                    @endcan
+
+                                                    @can("edit", \App\Farmer::class)
                                                     <a href="#" class="btn btn-sm btn-secondary">
                                                         <i class="far fa-trash-alt"></i>
                                                         <span class="sr-only">Remove</span>
                                                     </a>
+                                                    @endcan
                                                 </td>
                                             </tr>
                                             @endforeach
@@ -127,9 +137,11 @@
                     <p class="state-description lead text-muted">
                         Use the button below to add your awesomething, aperiam ex veniam suscipit porro ab saepe nobis odio.
                     </p>
+                    @can("create", \App\Farmer::class)
                     <div class="state-action">
                         <a href="{{ route("farmers.create") }}" class="btn btn-primary">Register new</a>
                     </div>
+                    @endcan
                 </div>
                 <!-- /.empty-state-container -->
             </section>

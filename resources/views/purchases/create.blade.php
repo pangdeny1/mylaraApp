@@ -89,15 +89,30 @@
                                                     class="form-control {{ $errors->has("weight_unit") ? "is-invalid" : "" }}"
                                             >
                                                 <option value="">--Select unit --</option>
-                                                <option value="ton">Tonne</option>
-                                                <option value="kg">Kilogram</option>
-                                                <option value="gm">Gram</option>
+                                                <option value="kg" selected>Kilogram</option>
+                                                <option value="g">Gram</option>
+                                                <option value="mg">Miligram</option>
+                                                <option value="lb">Pound</option>
+                                                <option value="oz">Ounce</option>
+                                                <option value="t">Metric Tonne</option>
+                                                <option value="ukt">UK Long Ton</option>
+                                                <option value="ust">US short Ton</option>
+                                                <option value="st">Stone</option>
                                             </select>
                                             @if($errors->has("weight_unit"))
                                                 <span class="invalid-feedback">
-                                                {{ $errors->first("weight_unit") }}
-                                            </span>
+                                                    {{ $errors->first("weight_unit") }}
+                                                </span>
                                             @endif
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label for="field_weight">Field</label>
+                                            <input type="text"
+                                                   name="field_weight"
+                                                   id="field_weight"
+                                                   class="form-control {{ $errors->has("field_weight") ? "is-invalid" : "" }}"
+                                                   value="{{ old("field_weight") }}"
+                                            >
                                         </div>
                                         <div class="form-group col-md-2">
                                             <label for="weight_before">Before</label>
@@ -105,6 +120,7 @@
                                                    name="weight_before"
                                                    id="weight_before"
                                                    class="form-control {{ $errors->has("weight_before") ? "is-invalid" : "" }}"
+                                                   value="{{ old("weight_before") }}"
                                             >
                                         </div>
                                         <div class="form-group col-md-2">
@@ -113,9 +129,20 @@
                                                    name="weight_after"
                                                    id="weight_after"
                                                    class="form-control {{ $errors->has("weight_after") ? "is-invalid" : "" }}"
+                                                   value="{{ old("weight_after") }}"
                                             >
                                         </div>
                                     </div>
+
+
+                                    @if($errors->has("field_weight") || $errors->has("weight_after") || $errors->has("weight_before"))
+                                        <div class="alert alert-danger">
+                                            <p>{{ $errors->first("field_weight") }}</p>
+                                            <p>{{ $errors->first("weight_after") }}</p>
+                                            <p>{{ $errors->first("weight_before") }}</p>
+                                        </div>
+                                    @endif
+
                                 </div>
                                 <hr>
                                 <header class="card-header border-bottom-0">

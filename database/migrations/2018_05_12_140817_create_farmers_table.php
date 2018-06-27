@@ -18,6 +18,8 @@ class CreateFarmersTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('phone');
+            $table->string('email')->nullable();
+            $table->enum('gender', ["male", "female"]);
             $table->unsignedInteger('creator_id')->nullable();
             $table->timestamps();
         });

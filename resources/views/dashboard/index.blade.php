@@ -46,7 +46,7 @@
                                                     <i class="oi oi-fork"></i>
                                                 </sub>
                                                 <span class="value">
-                                                    {{ number_format(\App\Purchase::sum("weight_before_processing"), 2) }} kg
+                                                    {{ number_format(\App\Purchase::sum("weight_before"), 2) }} kg
                                                 </span>
                                             </p>
                                         </a>
@@ -62,7 +62,7 @@
                                                     <i class="fa fa-tasks"></i>
                                                 </sub>
                                                 <span class="value">
-                                                    {{ number_format(\App\Purchase::sum("weight_after_processing"), 2) }} kg
+                                                    {{ number_format(\App\Purchase::sum("weight_after"), 2) }} kg
                                                 </span>
                                             </p>
                                         </a>
@@ -151,120 +151,52 @@
 
                                 <!-- .list-group -->
                                 <div class="list-group list-group-flush">
+                                    @foreach(\App\Product::latest()->take(5)->get() as $product)
                                     <div class="list-group-item">
                                         <div class="list-group-item-figure">
-                                            <a href="user-profile.html" class="user-avatar" data-toggle="tooltip" title="" data-original-title="Martha Myers">
-                                                <img src="themes/looper/assets/images/avatars/uifaces15.jpg" alt="">
+                                            <a href="user-profile.html"
+                                               class="user-avatar"
+                                               data-toggle="tooltip"
+                                               title=""
+                                               data-original-title="Martha Myers"
+                                        >
+                                                <img src="{{ Avatar::create($product->name)->toBase64() }}" alt="">
                                             </a>
                                         </div>
                                         <div class="list-group-item-body">
                                             <!-- .progress -->
-                                            <div class="progress bg-white rounded-0" data-toggle="tooltip" data-html="true" title="" data-original-title="<div class=&quot;text-left small&quot;><i class=&quot;fa fa-fw fa-circle text-purple&quot;></i> 2065<br><i class=&quot;fa fa-fw fa-circle text-teal&quot;></i> 231<br><i class=&quot;fa fa-fw fa-circle text-red&quot;></i> 54</div>">
-                                                <div class="progress-bar bg-purple" role="progressbar" aria-valuenow="73.46140163642832" aria-valuemin="0" aria-valuemax="100" style="width: 73.46140163642832%">
-                                                    <span class="sr-only">73.46140163642832% Complete</span>
+                                            <div class="progress bg-white rounded-0" data-toggle="tooltip" data-html="true" title="" data-original-title="">
+                                                <div class="progress-bar bg-purple"
+                                                     role="progressbar"
+                                                     aria-valuenow="73"
+                                                     aria-valuemin="0"
+                                                     aria-valuemax="100"
+                                                     style="width: 73%"
+                                                >
+                                                    <span class="sr-only">73% Complete</span>
                                                 </div>
-                                                <div class="progress-bar bg-teal" role="progressbar" aria-valuenow="8.217716115261473" aria-valuemin="0" aria-valuemax="100" style="width: 8.217716115261473%">
-                                                    <span class="sr-only">8.217716115261473% Complete</span>
+                                                <div class="progress-bar bg-teal"
+                                                     role="progressbar"
+                                                     aria-valuenow="8"
+                                                     aria-valuemin="0"
+                                                     aria-valuemax="100"
+                                                     style="width: 18%"
+                                                >
+                                                    <span class="sr-only">8% Complete</span>
                                                 </div>
-                                                <div class="progress-bar bg-red" role="progressbar" aria-valuenow="1.92102454642476" aria-valuemin="0" aria-valuemax="100" style="width: 1.92102454642476%">
-                                                    <span class="sr-only">1.92102454642476% Complete</span>
+                                                <div class="progress-bar bg-red"
+                                                     role="progressbar"
+                                                     aria-valuenow="3"
+                                                     aria-valuemin="0"
+                                                     aria-valuemax="100"
+                                                     style="width: 3%">
+                                                    <span class="sr-only">3% Complete</span>
                                                 </div>
                                             </div>
                                             <!-- /.progress -->
                                         </div>
                                     </div>
-
-                                    <div class="list-group-item">
-                                        <div class="list-group-item-figure">
-                                            <a href="user-profile.html" class="user-avatar" data-toggle="tooltip" title="" data-original-title="Tammy Beck">
-                                                <img src="themes/looper/assets/images/avatars/uifaces16.jpg" alt="">
-                                            </a>
-                                        </div>
-
-                                        <div class="list-group-item-body">
-                                            <!-- .progress -->
-                                            <div class="progress bg-white rounded-0" data-toggle="tooltip" data-html="true" title="" data-original-title="<div class=&quot;text-left small&quot;><i class=&quot;fa fa-fw fa-circle text-purple&quot;></i> 1432<br><i class=&quot;fa fa-fw fa-circle text-teal&quot;></i> 406<br><i class=&quot;fa fa-fw fa-circle text-red&quot;></i> 49</div>">
-                                                <div class="progress-bar bg-purple" role="progressbar" aria-valuenow="54.180855088914115" aria-valuemin="0" aria-valuemax="100" style="width: 54.180855088914115%">
-                                                    <span class="sr-only">54.180855088914115% Complete</span>
-                                                </div>
-                                                <div class="progress-bar bg-teal" role="progressbar" aria-valuenow="15.361331819901627" aria-valuemin="0" aria-valuemax="100" style="width: 15.361331819901627%">
-                                                    <span class="sr-only">15.361331819901627% Complete</span>
-                                                </div>
-                                                <div class="progress-bar bg-red" role="progressbar" aria-valuenow="1.853953840332955" aria-valuemin="0" aria-valuemax="100" style="width: 1.853953840332955%">
-                                                    <span class="sr-only">1.853953840332955% Complete</span>
-                                                </div>
-                                            </div>
-                                            <!-- /.progress -->
-                                        </div>
-                                    </div>
-
-                                    <div class="list-group-item">
-                                        <div class="list-group-item-figure">
-                                            <a href="user-profile.html" class="user-avatar" data-toggle="tooltip" title="" data-original-title="Susan Kelley">
-                                                <img src="themes/looper/assets/images/avatars/uifaces17.jpg" alt="">
-                                            </a>
-                                        </div>
-
-                                        <div class="list-group-item-body">
-                                            <!-- .progress -->
-                                            <div class="progress bg-white rounded-0" data-toggle="tooltip" data-html="true" title="" data-original-title="<div class=&quot;text-left small&quot;><i class=&quot;fa fa-fw fa-circle text-purple&quot;></i> 1271<br><i class=&quot;fa fa-fw fa-circle text-teal&quot;></i> 87<br><i class=&quot;fa fa-fw fa-circle text-red&quot;></i> 82</div>">
-                                                <div class="progress-bar bg-purple" role="progressbar" aria-valuenow="52.13289581624282" aria-valuemin="0" aria-valuemax="100" style="width: 52.13289581624282%">
-                                                    <span class="sr-only">52.13289581624282% Complete</span>
-                                                </div>
-                                                <div class="progress-bar bg-teal" role="progressbar" aria-valuenow="3.568498769483183" aria-valuemin="0" aria-valuemax="100" style="width: 3.568498769483183%">
-                                                    <span class="sr-only">3.568498769483183% Complete</span>
-                                                </div>
-                                                <div class="progress-bar bg-red" role="progressbar" aria-valuenow="3.3634126333059884" aria-valuemin="0" aria-valuemax="100" style="width: 3.3634126333059884%">
-                                                    <span class="sr-only">3.3634126333059884% Complete</span>
-                                                </div>
-                                            </div>
-                                            <!-- /.progress -->
-                                        </div>
-                                    </div>
-
-                                    <div class="list-group-item">
-                                        <div class="list-group-item-figure">
-                                            <a href="user-profile.html" class="user-avatar" data-toggle="tooltip" title="" data-original-title="Albert Newman">
-                                                <img src="themes/looper/assets/images/avatars/uifaces18.jpg" alt="">
-                                            </a>
-                                        </div>
-
-                                        <div class="list-group-item-body">
-                                            <div class="progress bg-white rounded-0" data-toggle="tooltip" data-html="true" title="" data-original-title="<div class=&quot;text-left small&quot;><i class=&quot;fa fa-fw fa-circle text-purple&quot;></i> 1527<br><i class=&quot;fa fa-fw fa-circle text-teal&quot;></i> 205<br><i class=&quot;fa fa-fw fa-circle text-red&quot;></i> 151</div>">
-                                                <div class="progress-bar bg-purple" role="progressbar" aria-valuenow="75.18463810930577" aria-valuemin="0" aria-valuemax="100" style="width: 75.18463810930577%">
-                                                    <span class="sr-only">75.18463810930577% Complete</span>
-                                                </div>
-                                                <div class="progress-bar bg-teal" role="progressbar" aria-valuenow="10.093549975381585" aria-valuemin="0" aria-valuemax="100" style="width: 10.093549975381585%">
-                                                    <span class="sr-only">10.093549975381585% Complete</span>
-                                                </div>
-                                                <div class="progress-bar bg-red" role="progressbar" aria-valuenow="7.434761201378631" aria-valuemin="0" aria-valuemax="100" style="width: 7.434761201378631%">
-                                                    <span class="sr-only">7.434761201378631% Complete</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="list-group-item">
-                                        <div class="list-group-item-figure">
-                                            <a href="user-profile.html" class="user-avatar" data-toggle="tooltip" title="" data-original-title="Kyle Grant">
-                                                <img src="themes/looper/assets/images/avatars/uifaces19.jpg" alt="">
-                                            </a>
-                                        </div>
-
-                                        <div class="list-group-item-body">
-                                            <div class="progress bg-white rounded-0" data-toggle="tooltip" data-html="true" title="" data-original-title="<div class=&quot;text-left small&quot;><i class=&quot;fa fa-fw fa-circle text-purple&quot;></i> 643<br><i class=&quot;fa fa-fw fa-circle text-teal&quot;></i> 265<br><i class=&quot;fa fa-fw fa-circle text-red&quot;></i> 127</div>">
-                                                <div class="progress-bar bg-purple" role="progressbar" aria-valuenow="36.89041881812966" aria-valuemin="0" aria-valuemax="100" style="width: 36.89041881812966%">
-                                                    <span class="sr-only">36.89041881812966% Complete</span>
-                                                </div>
-                                                <div class="progress-bar bg-teal" role="progressbar" aria-valuenow="15.203671830177854" aria-valuemin="0" aria-valuemax="100" style="width: 15.203671830177854%">
-                                                    <span class="sr-only">15.203671830177854% Complete</span>
-                                                </div>
-                                                <div class="progress-bar bg-red" role="progressbar" aria-valuenow="7.286288009179575" aria-valuemin="0" aria-valuemax="100" style="width: 7.286288009179575%">
-                                                    <span class="sr-only">7.286288009179575% Complete</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </section>
                         </div>
@@ -278,25 +210,31 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>Farmer</th>
-                                                <th>Product</th>
-                                                <th class="text-right">Weight before</th>
-                                                <th class="text-right">Weight after</th>
-                                                <th class="text-right">Amount</th>
-                                                <th>Status</th>
+                                                <th class="text-left"  nowrap=>Farmer</th>
+                                                <th class="text-left"  nowrap>Product</th>
+                                                <th class="text-right" nowrap>Weight before</th>
+                                                <th class="text-right" nowrap>Weight after</th>
+                                                <th class="text-right" nowrap>Amount</th>
+                                                <th class="text-left"  nowrap>Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                         @foreach(\App\Purchase::take(5)->get() as $purchase)
                                             <tr>
-                                                <td>{{ $purchase->farmer->full_name }}</td>
+                                                <td>
+                                                    <a href="{{ route("farmers.show", $purchase->farmer) }}" class="user-avatar mr-1">
+                                                        <img src="{{ Avatar::create($purchase->farmer->full_name)->toBase64() }}" alt="User Avatar">
+                                                    </a>
+                                                    <a href="{{ route("farmers.show", $purchase->farmer) }}">
+                                                        {{ $purchase->farmer->full_name }}
+                                                    </a>
+                                                </td>
                                                 <td>{{ $purchase->product->name }}</td>
                                                 <td class="text-right">
-                                                    {{ $purchase->weight_before_processing }}
-                                                    {{ $purchase->weight_unit }}
+                                                    {{ $purchase->weight()->before_in_kg }}
                                                 </td>
                                                 <td class="text-right">
-                                                    {{ $purchase->weight_after_processing }}
+                                                    {{ $purchase->weight()->after_in_kg }}
                                                     {{ $purchase->weight_unit }}
                                                 </td>
                                                 <td class="text-right">
@@ -335,9 +273,9 @@
                                     @foreach(\App\Farmer::latest()->take(5)->get() as $farmer)
                                     <div class="list-group-item">
                                         <div class="list-group-item-figure">
-                                            <div class="tile tile-circle bg-{{ $farmer->color }}">
-                                                {{ $farmer->placeholder }}
-                                            </div>
+                                            <a href="{{ route("farmers.show", $farmer) }}" class="user-avatar mr-1">
+                                                <img src="{{ Avatar::create($farmer->full_name)->toBase64() }}" alt="User Avatar">
+                                            </a>
                                         </div>
                                         <div class="list-group-item-body">
                                             <h4 class="list-group-item-title">

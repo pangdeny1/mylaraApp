@@ -18,7 +18,12 @@ class Product extends Model implements Auditable
 
     public function categories()
     {
-        return $this->belongsToMany(ProductCategory::class, "product_category", "category_id", "product_id");
+        return $this->belongsToMany(
+            ProductCategory::class,
+            "product_category",
+            "category_id",
+            "product_id"
+        )->withTimestamps();
     }
 
     public function price()

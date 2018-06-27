@@ -14,7 +14,9 @@ class PurchasesWeightsController extends Controller
 
     public function update(Request $request, Purchase $purchase)
     {
-        $this->validate($request, ["weight_after" => "required"]);
+        $this->validate($request, [
+            "weight_after" => "required|"
+        ]);
 
         if($request->weight_after && $purchase->weight_unit) {
             $amount = $purchase->product->calculatePrice(
@@ -26,7 +28,7 @@ class PurchasesWeightsController extends Controller
         $purchase->update([
             "amount" => isset($amount) ? $amount : null,
             "currency" => "TZS",
-            "weight_after_processing" => request("weight_after"),
+            "weight_after" => request("weight_after"),
         ]);
 
         if ($request->has("remarks") && $request->remarks) {

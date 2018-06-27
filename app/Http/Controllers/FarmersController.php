@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Farm;
+use App\Http\Requests\FarmerCreateRequest;
+use App\State;
 use App\Farmer;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\View\View;
 
 class FarmersController extends Controller
 {
@@ -13,44 +19,101 @@ class FarmersController extends Controller
         $this->middleware("auth");
     }
 
+    /**
+     * @return View
+     * @throws AuthorizationException
+     */
     public function index()
     {
+        $this->authorize("view", Farmer::class);
+
         $farmers = Farmer::latest()->paginate();
 
         return view("farmers.index", compact("farmers"));
     }
 
+    /**
+     * @return View
+     * @throws AuthorizationException
+     */
     public function create()
     {
-        return view("farmers.create");
+        $this->authorize("create", Farmer::class);
+
+        return view("farmers.create", [
+            "states" => State::getCountryName("Tanzania"),
+        ]);
     }
 
-    public function store(Request $request)
+    /**
+     * @param FarmerCreateRequest $request
+     * @return RedirectResponse
+     * @throws AuthorizationException
+     */
+    public function store(FarmerCreateRequest $request)
     {
-        $this->validate($request, [
-            "first_name"    => "required",
-            "last_name"     => "required",
-            "phone"         => "required",
-        ]);
+        $this->authorize("create", Farmer::class);
 
-        Farmer::create([
+        $farmer = Farmer::create([
             "first_name" => request("first_name"),
             "last_name" => request("last_name"),
             "phone" => request("phone"),
+            "email" => request("email"),
+            "gender" => request("gender"),
+            "creator_id" => auth()->id(),
+        ]);
+
+        $farm = Farm::create([
+            "size" => request("size"),
+            "size_unit" => request("size_unit"),
+            "block_id" => request("block_id"),
+            "farmer_id" => $farmer->id,
+            "description" => request("description", ""),
+        ]);
+
+        $farm->crops()->attach(request("crops"));
+
+        $farmer->address()->create([
+            "street" => request("street"),
+            "address" => request("address", ""),
+            "state" => request("state"),
+            "country" => request("country"),
+            "postal_code" => request("postal_code"),
         ]);
 
         return redirect()->route("farmers.index");
     }
 
+    /**
+     * @param Farmer $farmer
+     * @return RedirectResponse
+     * @throws AuthorizationException
+     */
     public function update(Farmer $farmer)
     {
+        $this->authorize("edit", $farmer);
+
         $farmer->update([
-            "first_name" => \request("first_name", $farmer->first_name),
-            "last_name" => \request("last_name", $farmer->last_name),
-            "phone" => \request("phone", $farmer->phone),
+            "first_name" => request("first_name", $farmer->first_name),
+            "last_name" => request("last_name", $farmer->last_name),
+            "phone" => request("phone", $farmer->phone),
+            "email" => request("email", $farmer->email),
+            "gender" => request("gender", $farmer->gender),
         ]);
 
         return redirect()->back();
+    }
+
+    /**
+     * @param Farmer $farmer
+     * @return View
+     * @throws AuthorizationException
+     */
+    public function show(Farmer $farmer)
+    {
+        $this->authorize("view", $farmer);
+
+        return view("farmers.show", compact("farmer"));
     }
 
     /**

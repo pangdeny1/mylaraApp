@@ -109,23 +109,45 @@
                         </a>
                         <div class="dropdown-arrow"></div>
                         <div class="dropdown-menu">
-                            <h6 class="dropdown-header">Products</h6>
+                            @can("view", \App\Product::class)
                             <a href="{{ route("products.index") }}" class="dropdown-item ">
-                                Products list
+                                <i class="fas fa-tree"></i> Products
                             </a>
-                            <a href="{{ route("products.create") }}" class="dropdown-item ">
-                                <i class="fas fa-plus-circle"></i>
-                                Add a new
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <h6 class="dropdown-header">Product categories</h6>
+                            @endcan
+
+                            @can("view", \App\ProductCategory::class)
                             <a href="{{ route("product_categories.index") }}" class="dropdown-item ">
-                                Categories list
+                                <i class="far fa-folder-open"></i> Categories
                             </a>
-                            <a href="{{ route("product_categories.create") }}" class="dropdown-item ">
-                                <i class="fas fa-plus-circle"></i>
-                                Add a new
+                            @endcan
+
+                            <div class="dropdown-divider"></div>
+
+                            @can("view", \App\Block::class)
+                            <a href="{{ route("blocks.index") }}" class="dropdown-item ">
+                                <i class="fas fa-th-large"></i> Blocks
                             </a>
+                            @endcan
+
+                            @can("view", \App\Block::class)
+                            <a href="{{ route("batches.index") }}" class="dropdown-item ">
+                                <i class="fas fa-database"></i> Batches
+                            </a>
+                            @endcan
+
+                            <div class="dropdown-divider"></div>
+
+                            @can("view", \App\User::class)
+                            <a href="{{ route("users.index") }}" class="dropdown-item ">
+                                <i class="fas fa-users"></i> Users
+                            </a>
+                            @endcan
+
+                            @can("view", \App\Role::class)
+                            <a href="{{ route("roles.index") }}" class="dropdown-item ">
+                                <i class="fas fa-user-secret"></i> Roles
+                            </a>
+                            @endcan
                         </div>
                     </li>
                 </ul>
@@ -137,7 +159,7 @@
                             aria-expanded="false"
                     >
                         <span class="user-avatar">
-                            <img src="{{ asset("themes/looper/assets/images/avatars/profile.jpg") }}" alt="">
+                            <img src="{{ Avatar::create(auth()->user()->full_name)->toBase64() }}" />
                         </span>
                         <span class="account-summary pr-lg-4 d-none d-lg-block">
                             <span class="account-name">{{ auth()->user()->full_name }}</span>

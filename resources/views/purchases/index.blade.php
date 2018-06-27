@@ -26,10 +26,12 @@
                                     <i class="oi oi-data-transfer-upload"></i>
                                     <span class="ml-1">Import</span>
                                 </button>
+                                @can("create", \App\Purchase::class)
                                 <a href="{{ route("purchases.create") }}" class="btn btn-primary">
                                     <span class="fas fa-plus mr-1"></span>
                                     Record a new purchase
                                 </a>
+                                @endcan
                             </div>
                         </div>
                     </header>
@@ -101,31 +103,54 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>Farmer</th>
-                                                <th>Product</th>
-                                                <th class="text-right">Weight before</th>
-                                                <th class="text-right">Weight after</th>
-                                                <th class="text-right">Amount</th>
-                                                <th>Status</th>
-                                                <th style="width:100px; min-width:100px;"> &nbsp; </th>
+                                                <th class="text-left"  nowrap>Farmer</th>
+                                                <th class="text-left"  nowrap>Product</th>
+                                                <th class="text-left"  nowrap>Batch number</th>
+                                                <th class="text-left"  nowrap>Block ID</th>
+                                                <th class="text-left"  nowrap>Harvest date</th>
+                                                <th class="text-right" nowrap>Farm weight</th>
+                                                <th class="text-right" nowrap>Pack house weight</th>
+                                                <th class="text-right" nowrap>Graded weight</th>
+                                                <th class="text-right" nowrap>Reject weight</th>
+                                                <th class="text-right" nowrap>Amount</th>
+                                                <th class="text-left"  nowrap>Status</th>
+                                                <th class="text-left"  nowrap style="width:100px; min-width:100px;">&nbsp;</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach($purchases as $purchase)
                                                 <tr>
-                                                    <td>{{ $purchase->farmer->full_name }}</td>
+                                                    <td nowrap>
+                                                        <a href="{{ route("farmers.show", $purchase->farmer) }}" class="user-avatar mr-1">
+                                                            <img class="img-fluid"
+                                                                 src="{{ Avatar::create($purchase->farmer->full_name)->toBase64() }}"
+                                                                 alt="{{ $purchase->farmer->full_name }}"
+                                                            >
+                                                        </a>
+                                                        <a href="{{ route("farmers.show", $purchase->farmer) }}">
+                                                            {{ $purchase->farmer->full_name }}
+                                                        </a>
+                                                    </td>
                                                     <td>{{ $purchase->product->name }}</td>
+                                                    <td>{{ $purchase->batch->number }}</td>
+                                                    <td></td>
+                                                    <td></td>
                                                     <td class="text-right">
-                                                        {{ $purchase->weight_before_processing }}
-                                                        {{ $purchase->weight_unit }}
+                                                        {{ $purchase->weight()->field_in_kg }}
+                                                    </td>
+                                                    <td class="text-right">
+                                                        {{ $purchase->weight()->before_in_kg }}
                                                     </td>
                                                     <td class="text-right">
                                                         @include("purchases.partials.weight_modal")
                                                     </td>
                                                     <td class="text-right">
-                                                        {{ number_format($purchase->amount, 2) }}
+                                                        {{ $purchase->weight()->loss_in_kg }}
                                                     </td>
-                                                    <td class="text-capitalize">
+                                                    <td class="text-right" nowrap>
+                                                        {{ $purchase->price()->amount }}
+                                                    </td>
+                                                    <td class="text-capitalize" nowrap>
                                                         @include("purchases.partials.statuses.$purchase->status")
                                                     </td>
                                                     <td>

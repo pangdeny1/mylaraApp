@@ -26,10 +26,12 @@
                             <i class="oi oi-data-transfer-upload"></i>
                             <span class="ml-1">Import</span>
                         </button>
+                        @can("create", \App\Product::class)
                         <a href="{{ route("products.create") }}" class="btn btn-primary">
                             <span class="fas fa-plus mr-1"></span>
                             Add a new product
                         </a>
+                        @endcan
                     </div>
                 </div>
             </header>
@@ -63,10 +65,10 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Category</th>
-                                        <th class="text-right">Price</th>
-                                        <th class="text-right">Actions</th>
+                                        <th class="text-left" nowrap>Name</th>
+                                        <th class="text-left" nowrap>Category</th>
+                                        <th class="text-right" nowrap="">Price</th>
+                                        <th class="text-right" nowrap=""></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -85,14 +87,19 @@
                                             Tsh {{ number_format($product->price->amount, 2) }}/{{ $product->price->unit }}
                                         </td>
                                         <td class="align-middle text-right">
-                                            <a href="#" class="btn btn-sm btn-secondary">
+                                            @can("edit", $product)
+                                            <a href="{{ route("products.edit", $product) }}" class="btn btn-sm btn-secondary">
                                                 <i class="fa fa-pencil-alt"></i>
                                                 <span class="sr-only">Edit</span>
                                             </a>
+                                            @endcan
+
+                                            @can("delete", $product)
                                             <a href="#" class="btn btn-sm btn-secondary">
                                                 <i class="far fa-trash-alt"></i>
                                                 <span class="sr-only">Remove</span>
                                             </a>
+                                            @endcan
                                         </td>
                                     </tr>
                                     @endforeach

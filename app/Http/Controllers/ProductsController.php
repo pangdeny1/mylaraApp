@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductCreateRequest;
 use App\Product;
 use App\ProductCategory;
 use App\ProductPrice;
-use Illuminate\Http\Request;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class ProductsController extends Controller
 {
@@ -14,36 +17,42 @@ class ProductsController extends Controller
         $this->middleware("auth");
     }
 
+    /**
+     * @return View
+     * @throws AuthorizationException
+     */
     public function index()
     {
+        $this->authorize("view", Product::class);
+
         $products = Product::latest()->paginate();
 
         return view("products.index", compact("products"));
     }
 
+    /**
+     * @return View
+     * @throws AuthorizationException
+     */
     public function create()
     {
+        $this->authorize("create", Product::class);
+
         $productCategories = ProductCategory::all();
 
         return view("products.create", compact("productCategories"));
     }
 
-    public function store(Request $request)
+    /**
+     * @param ProductCreateRequest $request
+     * @return RedirectResponse
+     * @throws AuthorizationException
+     */
+    public function store(ProductCreateRequest $request)
     {
-        $this->validate($request, [
-            "name" => "required",
-            "description" => "required",
-            "category_id" => "required|exists:product_categories,id",
-            "amount" => "required|numeric",
-            "currency" => "required|in:TZS",
-            "unit" => "required|in:kg,gm",
-            "unit_value" => "required|numeric",
-        ]);
+        $this->authorize("create", Product::class);
 
-        $product = Product::create([
-            "name" => request("name"),
-            "description" => request("description"),
-        ]);
+        $product = Product::create($request->only(["name", "description"]));
 
         ProductPrice::create([
             "amount" => request("amount"),

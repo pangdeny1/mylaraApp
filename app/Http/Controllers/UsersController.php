@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Events\UserRegistered;
+use App\Http\Requests\UserCreateRequest;
 use App\Role;
 use App\State;
 use App\User;
 use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\View\View;
 
 class UsersController extends Controller
 {
@@ -17,35 +21,41 @@ class UsersController extends Controller
         $this->middleware("auth");
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|View
+     * @throws AuthorizationException
+     */
     public function index()
     {
+        $this->authorize("view", User::class);
+
         $users = User::latest()->paginate();
 
         return view("users.index", compact("users"));
     }
 
+    /**
+     * @return View
+     * @throws AuthorizationException
+     */
     public function create()
     {
-        $states = State::getCountryName("Tanzania");
+        $this->authorize("create", User::class);
 
-        $roles  = Role::get();
-
-        return view("users.create", compact("states", "roles"));
+        return view("users.create", [
+            "states" => State::getCountryName("Tanzania"),
+            "roles"  => Role::get(),
+        ]);
     }
 
-    public function store(Request $request)
+    /**
+     * @param UserCreateRequest $request
+     * @return RedirectResponse
+     * @throws AuthorizationException
+     */
+    public function store(UserCreateRequest $request)
     {
-        $this->validate($request, [
-            "first_name" => "required",
-            "last_name" => "required",
-            "email" => "required|email|unique:users",
-            "phone" => "required",
-            "country" => "required",
-            "gender" => ["required", Rule::in(["male","female"])],
-            "birthday" => "required",
-            "roles" => "required|array",
-            "roles.*" => "required|exists:roles,name",
-        ]);
+        $this->authorize("create", User::class);
 
         $user = User::create([
             "first_name" => request("first_name"),
@@ -56,6 +66,7 @@ class UsersController extends Controller
             "gender" => request("gender"),
             "birthday" => request("birthday"),
             "password" => $password = str_random(6),
+            "creator_id" => auth()->id(),
         ]);
 
         $user->address()->create([
@@ -133,7 +144,7 @@ class UsersController extends Controller
 
     /**
      * @param User $user
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      * @throws Exception
      */
     public function destroy(User $user)

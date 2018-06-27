@@ -18,6 +18,15 @@
             <div class="page-section">
                 <div class="row">
                     <div class="col-md-12">
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <form action="{{ route("farmers.store") }}"
                               method="post"
                               class="card border-0"
@@ -37,6 +46,11 @@
                                                value="{{ old("first_name") }}"
                                                placeholder="First name..."
                                         >
+                                        @if ($errors->has('first_name'))
+                                            <span class="invalid-feedback">
+                                                    <strong>{{ $errors->first('first_name') }}</strong>
+                                                </span>
+                                        @endif
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="last_name">Last name</label>
@@ -47,6 +61,11 @@
                                                value="{{ old("last_name") }}"
                                                placeholder="Last name..."
                                         >
+                                        @if ($errors->has('last_name'))
+                                            <span class="invalid-feedback">
+                                                    <strong>{{ $errors->first('last_name') }}</strong>
+                                                </span>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -59,9 +78,14 @@
                                                value="{{ old("phone") }}"
                                                placeholder="Phone number..."
                                         >
-                                  </div>
+                                        @if ($errors->has('phone'))
+                                            <span class="invalid-feedback">
+                                                    <strong>{{ $errors->first('phone') }}</strong>
+                                                </span>
+                                        @endif
+                                    </div>
+                                </div>
 
-                              </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label for="email">
@@ -70,31 +94,41 @@
                                                 <em>Optional</em>
                                             </span>
                                         </label>
-                                        <input type="email" class="form-control" id="email" placeholder="you@example.com">
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="birthday">Birthday</label>
-                                        <input type="date"
-                                               name="birthday"
-                                               id="birthday"
+                                        <input type="email"
+                                               name="email"
                                                class="form-control"
-                                               value="{{ old("birthday") }}"
-                                               placeholder="Phone number..."
+                                               id="email"
+                                               placeholder="you@example.com"
                                         >
+                                        @if ($errors->has('email'))
+                                            <span class="invalid-feedback">
+                                                <strong>{{ $errors->first('email') }}</strong>
+                                            </span>
+                                        @endif
                                     </div>
-
                                 </div>
+
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label class="d-block">Gender identity</label>
                                         <div class="custom-control custom-control-inline custom-radio">
-                                            <input type="radio" class="custom-control-input" name="gender" id="female">
+                                            <input type="radio"
+                                                   class="custom-control-input"
+                                                   name="gender"
+                                                   id="female"
+                                                   value="female"
+                                                   {{ old("gender") == "female" ? "checked" : "" }}
+                                            >
                                             <label class="custom-control-label" for="female">Female</label>
                                         </div>
                                         <div class="custom-control custom-control-inline custom-radio">
-                                            <input type="radio" class="custom-control-input" name="gender" id="male">
+                                            <input type="radio"
+                                                   class="custom-control-input"
+                                                   name="gender"
+                                                   id="male"
+                                                   value="male"
+                                                    {{ old("gender") == "male" ? "checked" : "" }}
+                                            >
                                             <label class="custom-control-label" for="male">Male</label>
                                         </div>
                                     </div>
@@ -107,42 +141,220 @@
                             <div class="card-body">
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
-                                        <label for="address">Address</label>
-                                        <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="">
-                                        <div class="invalid-feedback"> Please enter your shipping address. </div>
+                                        <label for="street">Street address</label>
+                                        <input type="text"
+                                               name="street"
+                                               class="form-control {{ $errors->has('street') ? 'is-invalid' : '' }}"
+                                               id="street"
+                                               value="{{ old("street") }}"
+                                               placeholder="1234 Main St"
+                                        >
+                                        @if ($errors->has('street'))
+                                            <span class="invalid-feedback">
+                                                    <strong>{{ $errors->first('street') }}</strong>
+                                                </span>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
-                                        <label for="address2">Address 2
+                                        <label for="address">
+                                            Address 2
                                             <span class="badge badge-secondary">
-                                            <em>Optional</em>
-                                        </span>
+                                                    <em>Optional</em>
+                                                </span>
                                         </label>
-                                        <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+                                        <input type="text"
+                                               name="address"
+                                               class="form-control {{ $errors->has('address') ? 'is-invalid' : '' }}"
+                                               id="address"
+                                               placeholder="Apartment or suite"
+                                        >
+                                        @if ($errors->has('address'))
+                                            <span class="invalid-feedback">
+                                                <strong>{{ $errors->first('address') }}</strong>
+                                            </span>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col-md-5 mb-3">
                                         <label for="country">Country</label>
-                                        <select class="custom-select d-block w-100" id="country" required="">
-                                            <option value=""> Choose... </option>
-                                            <option> United States </option>
+                                        <select name="country"
+                                                class="custom-select d-block w-100"
+                                                id="country"
+                                        >
+                                            <option value="Tanzania">Tanzania</option>
                                         </select>
                                         <div class="invalid-feedback"> Please select a valid country. </div>
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="state">State</label>
-                                        <select class="custom-select d-block w-100" id="state" required="">
+                                        <select name="state"
+                                                class="custom-select d-block w-100"
+                                                id="state"
+                                                required=""
+                                        >
                                             <option value=""> Choose... </option>
-                                            <option> California </option>
+                                            @foreach($states as $key => $state)
+                                                <option name="{{ $state["name"] }}" {{ old("state") === $state["name"] ? "selected" : "" }}>
+                                                    {{ $state["name"] }}
+                                                </option>
+                                            @endforeach
                                         </select>
                                         <div class="invalid-feedback"> Please provide a valid state. </div>
                                     </div>
                                     <div class="col-md-3 mb-3">
-                                        <label for="zip">Zip</label>
-                                        <input type="text" class="form-control" id="zip" required="">
-                                        <div class="invalid-feedback"> Zip code required. </div>
+                                        <label for="postal_code">Zip</label>
+                                        <input type="text"
+                                               name="postal_code"
+                                               class="form-control {{ $errors->has('postal_code') ? 'is-invalid' : '' }}"
+                                               id="postal_code"
+                                               value="{{ old("postal_code") }}"
+                                        >
+                                        @if ($errors->has('postal_code'))
+                                            <span class="invalid-feedback">
+                                                    <strong>{{ $errors->first('postal_code') }}</strong>
+                                                </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="mb-4">
+                            <header class="card-header border-bottom-0">
+                                Farm information
+                            </header>
+                            <div class="card-body">
+                                <div class="form-row">
+                                    <div class="col-md-2 mb-3">
+                                        <label for="size">Size</label>
+                                        <input type="number"
+                                               name="size"
+                                               class="form-control"
+                                               id="size"
+                                               value="{{ old("size") }}"
+                                        >
+                                        @if ($errors->has('size'))
+                                            <span class="invalid-feedback">
+                                                <strong>{{ $errors->first('size') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="size_unit">Unit</label>
+                                        <select name="size_unit" class="custom-select d-block w-100" id="size_unit">
+                                            <option value="acre">Acre</option>
+                                        </select>
+                                        @if ($errors->has('size_unit'))
+                                            <span class="invalid-feedback">
+                                                <strong>{{ $errors->first('size_unit') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="block">Block</label>
+                                        <select name="block_id" class="form-control" id="block">
+                                            <option value=""> Choose... </option>
+                                            @foreach(\App\Block::all() as $block)
+                                                <option value="{{ $block->id }}" {{ old("block_id") == $block->id ? "selected" : "" }}>
+                                                    {{ $block->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @if ($errors->has('block_id'))
+                                            <span class="invalid-feedback">
+                                                <strong>{{ $errors->first('block_id') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <crops-picker inline-template>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label for="roles">Crops</label>
+                                            <select id="roles"
+                                                    class="form-control {{ $errors->has('roles') ? 'is-invalid' : '' }}"
+                                                    v-model="newCrop"
+                                                    @change.prevent="addCrop"
+                                            >
+                                                <option value="">Choose...</option>
+                                                <option v-for="crop in crops"
+                                                        :value="crop.id"
+                                                        v-text="crop.name"
+                                                >
+                                                </option>
+                                            </select>
+                                        </div>
+
+                                        <div class="list-group list-group-flush list-group-divider mb-4" v-if="selectedCrops.length">
+                                            <div class="list-group-item" v-for="selectedCrop in selectedCrops">
+                                                <div class="list-group-item-figure">
+                                                    <div class="tile tile-circle" :class="selectedCrop.color">
+                                                        @{{ selectedCrop.placeholder }}
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" name="crops[]" :value="selectedCrop.id">
+                                                <div class="list-group-item-body">
+                                                    <h4 class="list-group-item-title">
+                                                        <a href="#" v-text="selectedCrop.name"></a>
+                                                    </h4>
+                                                    <p class="list-group-item-text" v-text="selectedCrop.description"></p>
+                                                </div>
+                                                <div class="list-group-item-figure">
+                                                    <button @click.prevent="removeRole(selectedCrop.id)" class="btn btn-sm btn-light">
+                                                        <i class="far fa-trash-alt"></i>
+                                                    </button>
+                                                </div>
+                                            </div >
+                                        </div>
+                                    </div>
+                                </crops-picker>
+
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label for="description">Description</label>
+                                        <textarea class="form-control"
+                                                  name="description"
+                                                  id="description"
+                                                  placeholder="Type something...."
+                                                  rows="5"
+                                        >{{ old("description") }}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="mb-4">
+                            <header class="card-header border-bottom-0">
+                                Harvest information
+                            </header>
+                            <div class="card-body">
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="volume">Expected volume</label>
+                                        <input type="number"
+                                               name="volume"
+                                               class="form-control"
+                                               id="volume"
+                                        >
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="volume_unit">Unit</label>
+                                        <select name="volume_unit" class="custom-select d-block w-100" id="block">
+                                            <option value="acre">Acre</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label for="harvest_description">Description</label>
+                                        <textarea class="form-control"
+                                                  name="harvest_description"
+                                                  id="harvest_description"
+                                                  placeholder="Type something...."
+                                                  rows="5"
+                                        ></textarea>
                                     </div>
                                 </div>
                                 <hr class="mb-4">

@@ -11,18 +11,42 @@ class Farmer extends Model implements Auditable
 
     protected $guarded = [];
 
+    protected $appends = [
+        "full_name"
+    ];
+
+    public function farms()
+    {
+        return $this->hasMany(Farm::class);
+    }
+
+    public function harvests()
+    {
+        return $this->hasManyThrough(Harvest::class, Farm::class);
+    }
+
+    public function sales()
+    {
+        return $this->hasMany(Purchase::class, "farmer_id");
+    }
+
+    public function address()
+    {
+        return $this->morphOne(Address::class, "addressable");
+    }
+
+    public function addresses()
+    {
+        return $this->morphMany(Address::class, "addressable");
+    }
+
+    public function batches()
+    {
+        return $this->belongsToMany(Batch::class, "farmer_batch");
+    }
+
     public function getFullNameAttribute()
     {
         return $this->attributes["first_name"] ." ". $this->attributes["last_name"];
-    }
-
-    public function getPlaceholderAttribute()
-    {
-        return $this->attributes["first_name"][0] ."". $this->attributes["last_name"][0];
-    }
-
-    public function getColorAttribute()
-    {
-        return array_random(["primary", "yellow", "purple", "red", "success", "danger"]);
     }
 }

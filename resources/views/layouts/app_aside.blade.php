@@ -53,6 +53,7 @@
 
                     <div class="menu-header">Purchases</div>
                     <div class="menu-item">
+                        @can("view", \App\Purchase::class)
                         <a href="{{ route("purchases.index") }}" class="menu-link">
                             <span class="fas fa-align-left text-muted mr-1"></span>
                             All purchases
@@ -73,11 +74,14 @@
                             <span class="fas fa-check-circle text-success mr-1"></span>
                             Completed
                         </a>
+                        @endcan
 
+                        @can("create", \App\Purchase::class)
                         <a href="{{ route("purchases.create") }}" class="menu-link">
                             <i class="fas fa-plus-circle"></i>
                             Record a new
                         </a>
+                        @endcan
                     </div>
 
                     <hr>
@@ -87,10 +91,13 @@
                         <i class="fas fa-user-friends"></i>
                         <span class="menu-text">Browser a list</span>
                     </a>
+
+                    @can("create", \App\Farmer::class)
                     <a href="{{ route("farmers.create")}}" class="menu-link mb-2">
                         <i class="fas fa-plus-circle"></i>
                         <span class="menu-text">Register new</span>
                     </a>
+                    @endcan
 
                     <hr>
 

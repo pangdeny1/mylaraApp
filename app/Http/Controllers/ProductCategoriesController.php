@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductCategoryCreateRequest;
 use App\ProductCategory;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ProductCategoriesController extends Controller
 {
@@ -12,30 +16,41 @@ class ProductCategoriesController extends Controller
         $this->middleware("auth");
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws AuthorizationException
+     */
     public function index()
     {
+        $this->authorize("view", ProductCategory::class);
+
         $productCategories = ProductCategory::paginate(10);
 
         return view("products.categories.index", compact("productCategories"));
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws AuthorizationException
+     */
     public function create()
     {
+        $this->authorize("create", ProductCategory::class);
+
         return view("products.categories.create");
     }
 
 
-    public function store(Request $request)
+    /**
+     * @param ProductCategoryCreateRequest $request
+     * @return RedirectResponse
+     * @throws AuthorizationException
+     */
+    public function store(ProductCategoryCreateRequest $request)
     {
-        $this->validate($request, [
-            "name" => "required",
-            "description" => "required",
-        ]);
+        $this->authorize("create", ProductCategory::class);
 
-        ProductCategory::create([
-            "name" => request("name"),
-            "description" => request("description"),
-        ]);
+        ProductCategory::create($request->only(["name", "description",]));
 
         return redirect()->route("product_categories.index");
     }
@@ -43,8 +58,8 @@ class ProductCategoriesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\ProductCategory  $productCategory
-     * @return \Illuminate\Http\Response
+     * @param  ProductCategory  $productCategory
+     * @return Response
      */
     public function show(ProductCategory $productCategory)
     {
@@ -54,8 +69,8 @@ class ProductCategoriesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ProductCategory  $productCategory
-     * @return \Illuminate\Http\Response
+     * @param  ProductCategory  $productCategory
+     * @return Response
      */
     public function edit(ProductCategory $productCategory)
     {
@@ -65,9 +80,9 @@ class ProductCategoriesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ProductCategory  $productCategory
-     * @return \Illuminate\Http\Response
+     * @param  Request  $request
+     * @param  ProductCategory  $productCategory
+     * @return Response
      */
     public function update(Request $request, ProductCategory $productCategory)
     {
@@ -77,8 +92,8 @@ class ProductCategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ProductCategory  $productCategory
-     * @return \Illuminate\Http\Response
+     * @param  ProductCategory  $productCategory
+     * @return Response
      */
     public function destroy(ProductCategory $productCategory)
     {

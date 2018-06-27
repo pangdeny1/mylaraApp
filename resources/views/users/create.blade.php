@@ -150,7 +150,7 @@
                                     Roles Information
                                 </header>
                                 <div class="card-body">
-                                    <role-assignment-form inline-template>
+                                    <roles-picker inline-template>
                                         <div>
                                             <div class="form-row mb-4">
                                                 <div class="form-group col-md-9">
@@ -192,7 +192,7 @@
                                                 </div >
                                             </div>
                                         </div>
-                                    </role-assignment-form>
+                                    </roles-picker>
                                 </div>
                                 <hr class="mb-4">
 

@@ -1,11 +1,13 @@
 import vue from "vue";
 import "./bootstrap";
-import RoleAssignmentForm from "./components/RoleAssignmentForm";
+import RolesPicker from "./components/RolesPicker";
+import CropsPicker from "./components/CropsPicker";
+import FarmersPicker from "./components/FarmersPicker";
 
 window.Vue = vue;
 
-Vue.component('role-assignment-form', RoleAssignmentForm);
+Vue.component('roles-picker', RolesPicker);
+Vue.component('crops-picker', CropsPicker);
+Vue.component('farmers-picker', FarmersPicker);
 
-const app = new Vue({
-    el: '#app'
-});
+const app = new Vue({ el: '#app' });

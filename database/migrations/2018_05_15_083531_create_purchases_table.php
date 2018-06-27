@@ -15,20 +15,22 @@ class CreatePurchasesTable extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->increments('id');
+            $table->double('field_weight');
+            $table->double('weight_before')->nullable();
+            $table->double('weight_after')->nullable();
             $table->string('weight_unit')->nullable();
-            $table->double('weight_before_processing');
-            $table->double('weight_after_processing')->nullable();
             $table->double('amount')->nullable();
             $table->string('currency');
             $table->enum('status', [
                 "received",
                 "processed",
-                "unprocessed",
+                "pending",
                 "rejected",
                 "completed",
                 "paid",
             ])->default("received");
             $table->unsignedInteger('product_id')->nullable();
+            $table->unsignedInteger('batch_id')->nullable();
             $table->unsignedInteger('farmer_id')->nullable();
             $table->timestamp("paid_at")->nullable();
             $table->unsignedInteger('creator_id')->nullable();

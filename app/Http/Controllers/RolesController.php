@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RoleCreateRequest;
 use App\Role;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class RolesController extends Controller
 {
@@ -14,38 +18,52 @@ class RolesController extends Controller
 
     public function index()
     {
+        $this->authorize("view", Role::class);
+
         $roles = Role::paginate();
 
         return view("roles.index", compact("roles"));
     }
 
+    /**
+     * @return View
+     * @throws AuthorizationException
+     */
     public function create()
     {
+        $this->authorize("create", Role::class);
+
         return view("roles.create");
     }
 
-    public function store(Request $request)
+    /**
+     * @param RoleCreateRequest $request
+     * @return RedirectResponse
+     * @throws AuthorizationException
+     */
+    public function store(RoleCreateRequest $request)
     {
-        $this->validate($request, [
-            "name" => "required|unique:roles,name",
-            "title" => "required",
-            "description" => "required",
-            "permissions" => "required|array"
-        ]);
+        $this->authorize("create", Role::class);
 
         $entities = [
             "users" => \App\User::class,
+            "roles" => \App\User::class,
             "farmers" => \App\Farmer::class,
             "products" => \App\Product::class,
             "product-categories" => \App\ProductCategory::class,
-            "purchases" => \App\User::class,
+            "purchases" => \App\Purchase::class,
+            "blocks" => \App\Block::class,
+            "batches" => \App\Batch::class,
+            "farms" => \App\Farm::class,
         ];
 
         $role = Role::forceCreate($request->only(["name", "title", "description"]));
 
         foreach (request("permissions") as $key => $permissions) {
             foreach ($permissions as $name => $permission) {
-                \Bouncer::allow($role->name)->to($name, $entities[$key]);
+                if (key_exists($key, $entities)) {
+                    \Bouncer::allow($role->name)->to($name, $entities[$key]);
+                }
             }
         }
 

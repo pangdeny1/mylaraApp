@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Farmer;
+use App\Http\Requests\PurchaseCreateRequest;
 use App\Product;
 use App\Purchase;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use Nexmo\Client;
 
 class PurchasesController extends Controller
@@ -30,8 +34,14 @@ class PurchasesController extends Controller
         $this->middleware("auth");
     }
 
+    /**
+     * @return View
+     * @throws AuthorizationException
+     */
     public function index()
     {
+        $this->authorize("view", Purchase::class);
+
         $purchases = Purchase::latest()->when(request("status"), function($query){
             return $query->where("status", request("status"));
         })->paginate(10);
@@ -39,8 +49,14 @@ class PurchasesController extends Controller
         return view("purchases.index", compact("purchases"));
     }
 
+    /**
+     * @return View
+     * @throws AuthorizationException
+     */
     public function create()
     {
+        $this->authorize("view", Purchase::class);
+
         return view("purchases.create", [
             "farmers"   => Farmer::all(),
             "products"  => Product::all(),
@@ -48,25 +64,20 @@ class PurchasesController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param PurchaseCreateRequest $request
      * @param Client $nexmo
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
-    public function store(Request $request, Client $nexmo)
+    public function store(PurchaseCreateRequest $request, Client $nexmo)
     {
-        $this->validate($request, [
-            "weight_unit" => "required|in:kg,gm,ton",
-            "product_id" => "required|exists:products,id",
-            "farmer_id" => "required|exists:farmers,id",
-            "amount" => "nullable|numeric",
-            "weight_before" => "required|numeric",
-            "weight_after" => "nullable|numeric",
-            "remarks" => "nullable",
-        ]);
+        $this->authorize("create", Purchase::class);
+
+        $this->validate($request, ["field_weight" => "gte:weight_before"]);
 
         if($request->weight_after && $request->weight_unit) {
-            $amount = Product::findOrfail(request("product_id"))
-                ->calculatePrice(request("weight_after"),
+            $amount = Product::findOrfail(request("product_id"))->calculatePrice(
+                    request("weight_after"),
                     request("weight_unit")
                 );
         }
@@ -77,8 +88,9 @@ class PurchasesController extends Controller
             "amount" => request("amount", isset($amount) ? $amount : null),
             "currency" => request("currency", "TZS"),
             "weight_unit" => request("weight_unit"),
-            "weight_before_processing" => request("weight_before"),
-            "weight_after_processing" => request("weight_after"),
+            "field_weight" => request("field_weight"),
+            "weight_before" => request("weight_before"),
+            "weight_after" => request("weight_after"),
         ]);
 
         if ($request->has("remarks") && $request->remarks) {
@@ -170,7 +182,7 @@ class PurchasesController extends Controller
 
     /**
      * @param Purchase $purchase
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      * @throws \Exception
      */
     public function destroy(Purchase $purchase)

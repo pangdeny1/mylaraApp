@@ -1,6 +1,5 @@
-@if($purchase->weight_after_processing)
-    {{ $purchase->weight_after_processing }}
-    {{ $purchase->weight_unit }}
+@if($purchase->weight_after)
+    {{ $purchase->weight()->after_in_kg }}
 @else
     <!-- Button trigger modal -->
     <button type="button"
@@ -37,7 +36,7 @@
                 </header>
                 <div class="modal-body">
                     <div class="form-row">
-                        <div class="form-group col-md-4 text-left">
+                        <div class="form-group col-md-2 text-left">
                             <label for="weight_after">
                                 Unit
                             </label>
@@ -48,7 +47,18 @@
                                    value="{{ $purchase->weight_unit }}"
                             >
                         </div>
-                        <div class="form-group col-md-4 text-left">
+                        <div class="form-group col-md-3 text-left">
+                            <label for="weight_after">
+                                Field
+                            </label>
+                            <input type="text"
+                                   name="weight_after"
+                                   id="weight_after"
+                                   class="form-control"
+                                   value="{{ $purchase->field_weight }}"
+                            >
+                        </div>
+                        <div class="form-group col-md-3 text-left">
                             <label for="weight_after">
                                 Before
                             </label>
@@ -56,12 +66,12 @@
                                    name="weight_after"
                                    id="weight_after"
                                    class="form-control"
-                                   value="{{ $purchase->weight_before_processing }}"
+                                   value="{{ $purchase->weight_before }}"
                             >
                         </div>
-                        <div class="form-group col-md-4 text-left">
+                        <div class="form-group col-md-3 text-left">
                             <label for="weight_after">
-                                After processing
+                                After
                             </label>
                             <input type="text"
                                    name="weight_after"
@@ -81,8 +91,8 @@
                             >{{ old("remarks") }}</textarea>
                             @if ($errors->has('remarks'))
                                 <span class="invalid-feedback">
-                                                                                    <strong>{{ $errors->first('remarks') }}</strong>
-                                                                                </span>
+                                    <strong>{{ $errors->first('remarks') }}</strong>
+                                </span>
                             @endif
                         </div>
                     </div>

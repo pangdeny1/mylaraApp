@@ -26,10 +26,12 @@
                                 <i class="oi oi-data-transfer-upload"></i>
                                 <span class="ml-1">Import</span>
                             </button>
+                            @can("create", \App\User::class)
                             <a href="{{ route("users.create") }}" class="btn btn-primary">
                                 <span class="fas fa-plus mr-1"></span>
                                 Register a new user
                             </a>
+                            @endcan
                         </div>
                     </div>
                 </header>
@@ -51,39 +53,41 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>Full name</th>
-                                            <th>Phone</th>
-                                            <th>Email</th>
-                                            <th>Roles</th>
-                                            <th>Permissions</th>
-                                            <th>Created at</th>
-                                            <th></th>
+                                            <th nowrap>Full name</th>
+                                            <th nowrap>Phone</th>
+                                            <th nowrap>Email</th>
+                                            <th nowrap>Roles</th>
+                                            <th nowrap>Permissions</th>
+                                            <th nowrap></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($users as $user)
                                         <tr>
-                                            <td class="align-middle">
+                                            <td class="align-middle" nowrap>
                                                 <a href="{{ route("users.show", $user) }}">
                                                     {{ $user->full_name }}
                                                 </a>
                                             </td>
-                                            <td class="align-middle">{{ $user->phone }}</td>
-                                            <td class="align-middle">{{ $user->email }}</td>
-                                            <td class="align-middle text-capitalize">
+                                            <td class="align-middle" nowrap>{{ $user->phone }}</td>
+                                            <td class="align-middle" nowrap>{{ $user->email }}</td>
+                                            <td class="align-middle text-capitalize" nowrap>
                                                 {{ $user->roles->count() }}
                                                 {{ str_plural("role", $user->roles->count()) }}
                                             </td>
-                                            <td class="align-middle text-capitalize">
+                                            <td class="align-middle text-capitalize" nowrap>
                                                 {{ $user->getAbilities()->count() }}
                                                 {{ str_plural("permission", $user->getAbilities()->count()) }}
                                             </td>
-                                            <td class="align-middle">{{ $user->created_at }}</td>
-                                            <td class="align-middle text-right">
+                                            <td class="align-middle text-right" nowrap>
+                                                @can("edit", $user)
                                                 <a href="{{ route("users.edit", $user) }}" class="btn btn-sm btn-secondary">
                                                     <i class="fa fa-pencil-alt"></i>
                                                     <span class="sr-only">Edit</span>
                                                 </a>
+                                                @endcan
+
+                                                @can("delete", $user)
                                                 <a href="javascript:void(0)"
                                                    class="btn btn-sm btn-secondary"
                                                    onclick="event.preventDefault(); document.getElementById('deletion-form-{{$user->id}}').submit();"
@@ -99,6 +103,7 @@
                                                         @method("delete")
                                                     </form>
                                                 </a>
+                                                @endcan
                                             </td>
                                         </tr>
                                     @endforeach

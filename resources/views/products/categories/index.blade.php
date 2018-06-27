@@ -28,10 +28,12 @@
                                 <i class="oi oi-data-transfer-upload"></i>
                                 <span class="ml-1">Import</span>
                             </button>
+                            @can("create", \App\ProductCategory::class)
                             <a href="{{ route("product_categories.create") }}" class="btn btn-primary">
                                 <span class="fas fa-plus mr-1"></span>
                                 Add a new category
                             </a>
+                            @endcan
                         </div>
                     </div>
                 </header>
@@ -80,14 +82,19 @@
                                                 </div>
                                             </td>
                                             <td class="align-middle text-right">
-                                                <a href="#" class="btn btn-sm btn-secondary">
+                                                @can("edit", $productCategory)
+                                                <a href="{{ route("product_categories.edit", $productCategory) }}" class="btn btn-sm btn-secondary">
                                                     <i class="fa fa-pencil-alt"></i>
                                                     <span class="sr-only">Edit</span>
                                                 </a>
+                                                @endcan
+
+                                                @can("delete", $productCategory)
                                                 <a href="#" class="btn btn-sm btn-secondary">
                                                     <i class="far fa-trash-alt"></i>
                                                     <span class="sr-only">Remove</span>
                                                 </a>
+                                                @endcan
                                             </td>
                                         </tr>
                                     @endforeach
