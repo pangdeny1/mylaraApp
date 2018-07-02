@@ -9,7 +9,16 @@ Route::view("/", "welcome");
 
 Route::view("template", "template");
 
-Route::get("test", function (){
+Route::get("test", function (\App\SmsNotification $notification){
+
+
+    return response(
+        $notification->send(
+            "+255762764819",
+            "Hello David Pella, This is the test message from homeverge"
+        ), 200
+    )->header('Content-Type', 'text/xml');
+
     //return $country   = Countries::where('name.common', "Tanzania")->first();
     //return ;
     //return $measurements = Converter::getMeasurements();
