@@ -18,15 +18,7 @@
             <div class="page-section">
                 <div class="row">
                     <div class="col-md-12">
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
+                        
                         <form action="{{ route("farmers.store") }}"
                               method="post"
                               class="card border-0"
