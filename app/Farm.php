@@ -12,7 +12,7 @@ class Farm extends Model
 
     public function crops()
     {
-        return $this->belongsToMany(Crop::class, "farm_crop");
+        return $this->belongsToMany(Product::class, "farm_crop");
     }
 
     public function getNameAttribute()
