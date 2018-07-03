@@ -16,6 +16,10 @@ class RolesController extends Controller
         $this->middleware("auth");
     }
 
+    /**
+     * @return View
+     * @throws AuthorizationException
+     */
     public function index()
     {
         $this->authorize("view", Role::class);
