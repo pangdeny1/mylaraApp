@@ -15,6 +15,7 @@
         "olifolkerd/convertor": "dev-master",
         "owen-it/laravel-auditing": "^7.0",
         "pragmarx/countries": "^0.5.8",
+        "propaganistas/laravel-phone": "^4.0",
         "silber/bouncer": "v1.0.0-rc.1"
     },
     "require-dev": {
