@@ -30,9 +30,16 @@ class FarmerCreateRequest extends FormRequest
             "phone" => "required",
             "email" => "nullable|email",
             "gender" => ["required", Rule::in(["male","female"])],
-            "country" => "required",
+
             "size" => "required|numeric",
             "size_unit" => "required",
+            
+            "street" => "required",
+            "country" => "required",
+
+            "crops" => "required|array",
+            "crops.*" => "required|exists:crops,id",
+            "block_id" => "required|exists:blocks,id",
         ];
     }
 }

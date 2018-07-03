@@ -42,14 +42,14 @@
                                         <input type="text"
                                                name="first_name"
                                                id="first_name"
-                                               class="form-control"
+                                               class="form-control {{ $errors->has('first_name') ? 'is-invalid' : '' }}"
                                                value="{{ old("first_name") }}"
                                                placeholder="First name..."
                                         >
                                         @if ($errors->has('first_name'))
                                             <span class="invalid-feedback">
-                                                    <strong>{{ $errors->first('first_name') }}</strong>
-                                                </span>
+                                                <strong>{{ $errors->first('first_name') }}</strong>
+                                            </span>
                                         @endif
                                     </div>
                                     <div class="form-group col-md-6">
@@ -57,7 +57,7 @@
                                         <input type="text"
                                                name="last_name"
                                                id="last_name"
-                                               class="form-control"
+                                               class="form-control {{ $errors->has('last_name') ? 'is-invalid' : '' }}"
                                                value="{{ old("last_name") }}"
                                                placeholder="Last name..."
                                         >
@@ -74,7 +74,7 @@
                                         <input type="text"
                                                name="phone"
                                                id="phone"
-                                               class="form-control"
+                                               class="form-control {{ $errors->has('phone') ? 'is-invalid' : '' }}"
                                                value="{{ old("phone") }}"
                                                placeholder="Phone number..."
                                         >
@@ -96,9 +96,10 @@
                                         </label>
                                         <input type="email"
                                                name="email"
-                                               class="form-control"
+                                               class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
                                                id="email"
                                                placeholder="you@example.com"
+                                               value="{{ old("email") }}"
                                         >
                                         @if ($errors->has('email'))
                                             <span class="invalid-feedback">
@@ -151,8 +152,8 @@
                                         >
                                         @if ($errors->has('street'))
                                             <span class="invalid-feedback">
-                                                    <strong>{{ $errors->first('street') }}</strong>
-                                                </span>
+                                                <strong>{{ $errors->first('street') }}</strong>
+                                            </span>
                                         @endif
                                     </div>
                                 </div>
@@ -191,7 +192,7 @@
                                     <div class="col-md-4 mb-3">
                                         <label for="state">State</label>
                                         <select name="state"
-                                                class="custom-select d-block w-100"
+                                                class="form-control d-block w-100 {{ $errors->has('state') ? 'is-invalid' : '' }}"
                                                 id="state"
                                                 required=""
                                         >
@@ -214,8 +215,8 @@
                                         >
                                         @if ($errors->has('postal_code'))
                                             <span class="invalid-feedback">
-                                                    <strong>{{ $errors->first('postal_code') }}</strong>
-                                                </span>
+                                                <strong>{{ $errors->first('postal_code') }}</strong>
+                                            </span>
                                         @endif
                                     </div>
                                 </div>
@@ -230,19 +231,17 @@
                                         <label for="size">Size</label>
                                         <input type="number"
                                                name="size"
-                                               class="form-control"
+                                               class="form-control {{ $errors->has('size') ? 'is-invalid' : '' }}"
                                                id="size"
                                                value="{{ old("size") }}"
                                         >
-                                        @if ($errors->has('size'))
-                                            <span class="invalid-feedback">
-                                                <strong>{{ $errors->first('size') }}</strong>
-                                            </span>
-                                        @endif
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="size_unit">Unit</label>
-                                        <select name="size_unit" class="custom-select d-block w-100" id="size_unit">
+                                        <select name="size_unit"
+                                                class="custom-select d-block w-100 {{ $errors->has('size_unit') ? 'is-invalid' : '' }}"
+                                                id="size_unit"
+                                        >
                                             <option value="acre">Acre</option>
                                         </select>
                                         @if ($errors->has('size_unit'))
@@ -255,7 +254,10 @@
                                 <div class="form-row">
                                     <div class="col-md-6 mb-3">
                                         <label for="block">Block</label>
-                                        <select name="block_id" class="form-control" id="block">
+                                        <select name="block_id"
+                                                class="form-control {{ $errors->has('block_id') ? 'is-invalid' : '' }}"
+                                                id="block"
+                                        >
                                             <option value=""> Choose... </option>
                                             @foreach(\App\Block::all() as $block)
                                                 <option value="{{ $block->id }}" {{ old("block_id") == $block->id ? "selected" : "" }}>
@@ -274,9 +276,9 @@
                                 <crops-picker inline-template>
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
-                                            <label for="roles">Crops</label>
-                                            <select id="roles"
-                                                    class="form-control {{ $errors->has('roles') ? 'is-invalid' : '' }}"
+                                            <label for="crops">Crops</label>
+                                            <select id="crops"
+                                                    class="form-control {{ $errors->has('crops') ? 'is-invalid' : '' }}"
                                                     v-model="newCrop"
                                                     @change.prevent="addCrop"
                                             >
@@ -287,6 +289,11 @@
                                                 >
                                                 </option>
                                             </select>
+                                            @if ($errors->has('crops'))
+                                                <span class="invalid-feedback">
+                                                    <strong>{{ $errors->first('crops') }}</strong>
+                                                </span>
+                                            @endif
                                         </div>
 
                                         <div class="list-group list-group-flush list-group-divider mb-4" v-if="selectedCrops.length">
@@ -316,7 +323,7 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label for="description">Description</label>
-                                        <textarea class="form-control"
+                                        <textarea class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}"
                                                   name="description"
                                                   id="description"
                                                   placeholder="Type something...."
@@ -332,24 +339,28 @@
                             <div class="card-body">
                                 <div class="form-row">
                                     <div class="col-md-4 mb-3">
-                                        <label for="volume">Expected volume</label>
+                                        <label for="volume">Expected harvest</label>
                                         <input type="number"
                                                name="volume"
-                                               class="form-control"
+                                               class="form-control {{ $errors->has('volume') ? 'is-invalid' : '' }}"
                                                id="volume"
                                         >
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="volume_unit">Unit</label>
-                                        <select name="volume_unit" class="custom-select d-block w-100" id="block">
-                                            <option value="acre">Acre</option>
+                                        <select name="volume_unit"
+                                                class="custom-select d-block w-100 {{ $errors->has('volume_unit') ? 'is-invalid' : '' }}"
+                                                id="block"
+                                        >
+                                            <option value="t">Tonn</option>
+                                            <option value="kg" selected>Kg</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label for="harvest_description">Description</label>
-                                        <textarea class="form-control"
+                                        <textarea class="form-control {{ $errors->has('harvest_description') ? 'is-invalid' : '' }}"
                                                   name="harvest_description"
                                                   id="harvest_description"
                                                   placeholder="Type something...."
