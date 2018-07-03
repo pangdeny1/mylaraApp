@@ -31,6 +31,7 @@
                 <!-- .page-section -->
                 <div class="page-section">
 
+                    @if($farmer->sales->count())
                     <section class="card card-fluid">
                         <header class="card-header">
                             <ul class="nav nav-tabs card-header-tabs">
@@ -135,6 +136,17 @@
                             {{--{{ $purchases->links() }}--}}
                         </div>
                     </section>
+                    @else
+                        <div class="alert alert-info has-icon alert-dismissible fade show">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <div class="alert-icon">
+                                <span class="oi oi-flag"></span>
+                            </div>
+                            <h4 class="alert-heading"> No sales related to {{ $farmer->full_name }}! </h4>
+                            <p class="mb-0"> Best check yo self, you're not looking too good. Nulla vitae elit libero, a pharetra augue. Praesent commodo cursus magna,
+                                <a href="#" class="alert-link">vel scelerisque nisl consectetur et</a>. </p>
+                        </div>
+                    @endif
 
                 </div>
             </div>

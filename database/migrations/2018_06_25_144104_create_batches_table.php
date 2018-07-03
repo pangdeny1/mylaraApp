@@ -16,10 +16,10 @@ class CreateBatchesTable extends Migration
         Schema::create('batches', function (Blueprint $table) {
             $table->increments('id');
             $table->string('number');
-            $table->integer('max_count');
-            $table->timestamp('valid_from')->nullable();
-            $table->timestamp('valid_till')->nullable();
-            $table->enum("status", ["open", "pending", "closed"])->default("open");
+//            $table->integer('max_count');
+//            $table->timestamp('valid_from')->nullable();
+//            $table->timestamp('valid_till')->nullable();
+//            $table->enum("status", ["open", "pending", "closed"])->default("open");
             $table->text("description");
             $table->timestamps();
         });

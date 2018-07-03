@@ -70,16 +70,8 @@ class FarmersController extends Controller
             "country",
             "postal_code",
         ]));
-
-        Farm::create([
-            "size" => request("size"),
-            "size_unit" => request("size_unit"),
-            "block_id" => request("block_id"),
-            "farmer_id" => $farmer->id,
-            "description" => request("description", ""),
-        ]);
-
-        return redirect()->route("farmers.index");
+        
+        return redirect()->route("farmers.show", $farmer);
     }
 
     /**

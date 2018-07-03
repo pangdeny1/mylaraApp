@@ -4,9 +4,12 @@ namespace App;
 
 use Exception;
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class ProductPrice extends Model
+class ProductPrice extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
+
     protected $guarded = [];
 
     protected $weightConventions = [

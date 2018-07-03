@@ -11,18 +11,12 @@ Route::view("template", "template");
 
 Route::get("test", function (\App\SmsNotification $notification){
 
-
     return response(
         $notification->send(
             "+255762764819",
             "Hello David Pella, This is the test message from homeverge"
         ), 200
     )->header('Content-Type', 'text/xml');
-
-    //return $country   = Countries::where('name.common', "Tanzania")->first();
-    //return ;
-    //return $measurements = Converter::getMeasurements();
-    //return $simpleConvertor = (new Convertor(10, "g"))->to("kg");
 });
 
 Route::get('home', [
@@ -76,6 +70,10 @@ Route::get("farmers/{farmer}/farms/create", [
     "as" => "farmers.farms.create",
     "uses" => "FarmerFarmsController@create",
 ]);
+Route::post("farmers/{farmer}/farms", [
+    "as" => "farmers.farms.store",
+    "uses" => "FarmerFarmsController@store",
+]);
 
 Route::get("farmers/{farmer}/harvests", [
     "as" => "farmers.harvests.index",
@@ -84,6 +82,10 @@ Route::get("farmers/{farmer}/harvests", [
 Route::get("farmers/{farmer}/harvests/create", [
     "as" => "farmers.harvests.create",
     "uses" => "FarmerHarvestsController@create",
+]);
+Route::post("farmers/{farmer}/harvests", [
+    "as" => "farmers.harvests.store",
+    "uses" => "FarmerHarvestsController@store",
 ]);
 
 Route::get("farmers/{farmer}/sales", [
@@ -98,6 +100,7 @@ Route::get("farmers/{farmer}/settings", [
     "as" => "farmers.settings.index",
     "uses" => "FarmerSettingsController@index",
 ]);
+
 Route::resource("farmers", "FarmersController");
 
 Route::resource("purchases", "PurchasesController");

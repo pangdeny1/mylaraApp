@@ -15,11 +15,13 @@ class CreateHarvestsTable extends Migration
     {
         Schema::create('harvests', function (Blueprint $table) {
             $table->increments('id');
-            $table->double('expected_volume');
+            $table->double('expected_amount');
+            $table->string('amount_unit');
             $table->timestamp('expected_date');
-            $table->string('volume_unit');
+            $table->unsignedInteger('block_id')->nullable();
             $table->unsignedInteger('farm_id')->nullable();
             $table->unsignedInteger('product_id')->nullable();
+            $table->unsignedInteger('batch_id')->nullable();
             $table->text("description");
             $table->timestamps();
         });

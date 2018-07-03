@@ -18,7 +18,7 @@
             <div class="page-section">
                 <div class="row">
                     <div class="col-md-12">
-                        
+
                         <form action="{{ route("farmers.store") }}"
                               method="post"
                               class="card border-0"

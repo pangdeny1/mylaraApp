@@ -15,7 +15,8 @@ class CreateBlocksTable extends Migration
     {
         Schema::create('blocks', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('number')->nullable();
+            $table->unsignedInteger('farm_id')->nullable();
             $table->text('description');
             $table->timestamps();
         });

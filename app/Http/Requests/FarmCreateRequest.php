@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class FarmerCreateRequest extends FormRequest
+class FarmCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,17 +25,14 @@ class FarmerCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            "first_name" => "required",
-            "last_name" => "required",
-            "phone" => "required",
-            "email" => "nullable|email",
-            "gender" => ["required", Rule::in(["male","female"])],
-
-            "street" => "required",
+            "size" => "required|numeric",
+            "size_unit" => ["required", Rule::in(["acre"])],
+            "description" => "required",
+            "crops" => "required|array",
+            "block_number" => "required",
+            "block_description" => "required",
             "country" => "required",
-
-//            "size" => "required|numeric",
-//            "size_unit" => "required",
+            "state" => "required",
         ];
     }
 }

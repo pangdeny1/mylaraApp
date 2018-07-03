@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Avatar;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class Crops extends JsonResource
@@ -18,8 +19,7 @@ class Crops extends JsonResource
             "id" => $this->id,
             "name" => $this->name,
             "description" => str_limit($this->description, 60),
-            "placeholder" => $this->placeholder,
-            "color" => "bg-{$this->color}",
+            "avatar" => Avatar::create($this->name)->toBase64(),
         ];
     }
 }
