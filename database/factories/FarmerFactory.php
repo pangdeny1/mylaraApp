@@ -7,5 +7,7 @@ $factory->define(App\Farmer::class, function (Faker $faker) {
         "first_name" => $faker->firstName,
         "last_name" => $faker->lastName,
         "phone" => $faker->phoneNumber,
+        "email" => $faker->safeEmail,
+        "gender" => array_random(["male", "female"]),
     ];
 });

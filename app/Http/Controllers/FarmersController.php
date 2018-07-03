@@ -63,22 +63,20 @@ class FarmersController extends Controller
             "creator_id" => auth()->id(),
         ]);
 
-        $farm = Farm::create([
+        $farmer->address()->create($request->only([
+            "street",
+            "address",
+            "state",
+            "country",
+            "postal_code",
+        ]));
+
+        Farm::create([
             "size" => request("size"),
             "size_unit" => request("size_unit"),
             "block_id" => request("block_id"),
             "farmer_id" => $farmer->id,
             "description" => request("description", ""),
-        ]);
-
-        $farm->crops()->attach(request("crops"));
-
-        $farmer->address()->create([
-            "street" => request("street"),
-            "address" => request("address", ""),
-            "state" => request("state"),
-            "country" => request("country"),
-            "postal_code" => request("postal_code"),
         ]);
 
         return redirect()->route("farmers.index");

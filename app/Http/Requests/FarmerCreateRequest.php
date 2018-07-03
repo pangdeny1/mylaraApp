@@ -33,13 +33,9 @@ class FarmerCreateRequest extends FormRequest
 
             "size" => "required|numeric",
             "size_unit" => "required",
-            
+
             "street" => "required",
             "country" => "required",
-
-            "crops" => "required|array",
-            "crops.*" => "required|exists:crops,id",
-            "block_id" => "required|exists:blocks,id",
         ];
     }
 }

@@ -13,10 +13,10 @@ class CreateFarmCropTable extends Migration
      */
     public function up()
     {
-        Schema::create('farm_crop', function (Blueprint $table) {
+        Schema::create('farm_product', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('farm_id')->nullable();
-            $table->unsignedInteger('crop_id')->nullable();
+            $table->unsignedInteger('product_id')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateFarmCropTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('farm_crop');
+        Schema::dropIfExists('farm_product');
     }
 }

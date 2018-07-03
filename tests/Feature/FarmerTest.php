@@ -2,6 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Block;
+use App\Farmer;
+use App\Product;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -14,10 +17,28 @@ class FarmerTest extends TestCase
 
     public function test_register_a_new_farmer()
     {
+        $this->withoutExceptionHandling();
+
+        $this->actingAs($user = factory(\App\User::class)->create());
+
+        \Bouncer::allow($user)->to("create", Farmer::class);
+
         $response = $this->post(route("farmers.store"), [
             "first_name" => $firstName = $this->faker->firstName,
             "last_name" => $lastName = $this->faker->lastName,
             "phone" => $phone = $this->faker->phoneNumber,
+            "gender" => array_random(["male", "female"]),
+
+            "street" => $street = $this->faker->streetAddress,
+            "country" => $country = "Tanzania",
+            "state" => $state = "Morogoro",
+
+            "size" => $size = rand(3.5, 10),
+            "size_unit" => array_random(["kg","t","g"]),
+
+            "crops" => factory(Product::class, 3)->create()->pluck("id"),
+
+            "block_id" => factory(Block::class)->create()->id,
         ]);
 
         $this->assertDatabaseHas("farmers", [
@@ -26,12 +47,24 @@ class FarmerTest extends TestCase
             "phone" => $phone,
         ]);
 
+        $this->assertDatabaseHas("farms", ["size" => $size,]);
+
+        $this->assertDatabaseHas("addresses", [
+            "street" => $street,
+            "country" => $country,
+            "state" => $state,
+        ]);
+
         $response->assertRedirect(route("farmers.index"));
     }
 
     public function test_upon_register_a_new_farmer_create_view_must_be_exist()
     {
         $this->withoutExceptionHandling();
+
+        $this->actingAs($user = factory(\App\User::class)->create());
+
+        \Bouncer::allow($user)->to("create", Farmer::class);
 
         $response = $this->get(route("farmers.create"));
 
@@ -44,6 +77,10 @@ class FarmerTest extends TestCase
 
     public function test_first_name_is_mandatory_for_a_new_farmer()
     {
+        $this->actingAs($user = factory(\App\User::class)->create());
+
+        \Bouncer::allow($user)->to("create", Farmer::class);
+
         $response = $this->post(route("farmers.store"), [
             "last_name" => $lastName = $this->faker->lastName,
             "phone" => $phone = $this->faker->phoneNumber,
@@ -54,6 +91,10 @@ class FarmerTest extends TestCase
 
     public function test_last_name_is_mandatory_for_a_new_farmer()
     {
+        $this->actingAs($user = factory(\App\User::class)->create());
+
+        \Bouncer::allow($user)->to("create", Farmer::class);
+
         $response = $this->post(route("farmers.store"), [
             "first_name" => $lastName = $this->faker->firstName,
             "phone" => $phone = $this->faker->phoneNumber,
@@ -64,6 +105,10 @@ class FarmerTest extends TestCase
 
     public function test_phone_number_is_mandatory_for_a_new_farmer()
     {
+        $this->actingAs($user = factory(\App\User::class)->create());
+
+        \Bouncer::allow($user)->to("create", Farmer::class);
+
         $response = $this->post(route("farmers.store"), [
             "first_name" => $firstName = $this->faker->firstName,
             "last_name" => $lastName = $this->faker->phoneNumber,
@@ -76,9 +121,13 @@ class FarmerTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
+        $this->actingAs($user = factory(\App\User::class)->create());
+
         $farmer = factory(\App\Farmer::class)->create();
 
-        $response = $this->put(route("farmers.update", $farmer), [
+        \Bouncer::allow($user)->to("edit", $farmer);
+
+        $this->put(route("farmers.update", $farmer), [
             "first_name" => $firstName = $this->faker->firstName,
         ]);
 
@@ -98,7 +147,11 @@ class FarmerTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
+        $this->actingAs($user = factory(\App\User::class)->create());
+
         $farmer = factory(\App\Farmer::class)->create();
+
+        \Bouncer::allow($user)->to("delete", $farmer);
 
         $response = $this->delete(route("farmers.destroy", $farmer), []);
 
