@@ -9,66 +9,99 @@ class ProductCategoryTableSeeder extends Seeder
         $categories = [
             [
                 "name" => "Cereals",
-                "description" => $faker->sentence,
+                "products" => [
+                    ["name" => "Maize"],
+                    ["name" => "Rice"],
+                    ["name" => "Wheat"],
+                    ["name" => "Sorghum"],
+                    ["name" => "Barley"],
+                ]
             ],
             [
                 "name" => "Pulses",
-                "description" => $faker->sentence,
+                "products" => [
+                    ["name" => "Kidney bean"],
+                    ["name" => "Lima bean"],
+                    ["name" => "Horse bean"],
+                    ["name" => "Garden pea"],
+                ]
             ],
             [
                 "name" => "Vegetables",
-                "description" => $faker->sentence,
+                "products" => [
+                    ["name" => "Mchicha"],
+                    ["name" => "Tembele"],
+                    ["name" => "Kabichi"],
+                    ["name" => "Kisanvu"],
+                ]
             ],
             [
                 "name" => "Fruits",
-                "description" => $faker->sentence,
+                "products" => [
+                    ["name" => "Chungwa"],
+                    ["name" => "Embe"],
+                    ["name" => "Ndizi"],
+                    ["name" => "Tango"],
+                    ["name" => "Tikiti"],
+                    ["name" => "Zabibu"],
+                ]
             ],
             [
                 "name" => "Nuts",
-                "description" => $faker->sentence,
+                "products" => [
+                    ["name" => "Karanga"],
+                    ["name" => "Korosho"],
+                ]
             ],
             [
                 "name" => "Oilseeds",
-                "description" => $faker->sentence,
+                "products" => []
             ],
             [
                 "name" => "Sugars and Starches",
-                "description" => $faker->sentence,
+                "products" => []
             ],
             [
                 "name" => "Fibres",
-                "description" => $faker->sentence,
+                "products" => []
             ],
             [
                 "name" => "Beverages",
-                "description" => $faker->sentence,
+                "products" => []
             ],
             [
                 "name" => "Narcotics",
-                "description" => $faker->sentence,
+                "products" => []
             ],
             [
                 "name" => "Spices",
-                "description" => $faker->sentence,
+                "products" => []
             ],
             [
                 "name" => "Condiments",
-                "description" => $faker->sentence,
+                "products" => []
             ],
             [
                 "name" => "Rubber Forages",
-                "description" => $faker->sentence,
+                "products" => []
             ],
             [
                 "name" => "Green and Green leaf manure",
-                "description" => $faker->sentence,
+                "products" => []
             ],
         ];
 
-        foreach ($categories as $category) {
-            factory(\App\ProductCategory::class)->create([
-                "name" => $category["name"]
-            ]);
+        foreach ($categories as $data) {
+            $category = factory(\App\ProductCategory::class)->create(["name" => $data["name"]]);
+
+            foreach ($data["products"] as $key => $product) {
+
+                $product = factory(\App\Product::class)->create(["name" => $product["name"]]);
+
+                $product->categories()->attach($category);
+
+                factory(\App\ProductPrice::class)->create(["product_id" => $product->id]);
+            }
         }
     }
 }
