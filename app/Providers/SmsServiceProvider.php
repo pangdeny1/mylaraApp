@@ -24,7 +24,7 @@ class SmsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(SmsNotification::class, function ($app) {
+        $this->app->singleton("sms-notification", function ($app) {
             return new SmsNotification(config('sms'));
         });
     }

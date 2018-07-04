@@ -9,14 +9,19 @@ Route::view("/", "welcome");
 
 Route::view("template", "template");
 
-Route::get("test", function (\App\SmsNotification $notification){
+Route::get("test", function (){
 
-    return response(
-        $notification->send(
-            "+255762764819",
-            "Hello David Pella, This is the test message from homeverge"
-        ), 200
-    )->header('Content-Type', 'text/xml');
+    return Sms::send(
+        "+255762764819",
+        "Hello David Pella, This is the test message from homeverge"
+    );
+
+//    return response(
+//        $notification->send(
+//            "+255762764819",
+//            "Hello David Pella, This is the test message from homeverge"
+//        ), 200
+//    )->header('Content-Type', 'text/xml');
 });
 
 Route::get('home', [
