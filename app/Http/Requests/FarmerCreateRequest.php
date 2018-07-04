@@ -27,7 +27,7 @@ class FarmerCreateRequest extends FormRequest
         return [
             "first_name" => "required",
             "last_name" => "required",
-            "phone" => "required",
+            "phone" => "required|phone:TZ",
             "email" => "nullable|email",
             "gender" => ["required", Rule::in(["male","female"])],
 

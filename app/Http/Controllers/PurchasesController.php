@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Batch;
 use App\Farmer;
 use App\Http\Requests\PurchaseCreateRequest;
 use App\Product;
@@ -65,25 +66,31 @@ class PurchasesController extends Controller
 
     /**
      * @param PurchaseCreateRequest $request
-     * @param Client $nexmo
      * @return RedirectResponse
      * @throws AuthorizationException
      */
-    public function store(PurchaseCreateRequest $request, Client $nexmo)
+    public function store(PurchaseCreateRequest $request)
     {
         $this->authorize("create", Purchase::class);
 
         $this->validate($request, ["field_weight" => "gte:weight_before"]);
 
+        $farmer     = Farmer::findOrFail(request("farmer_id"));
+
+        $batch      = $farmer->batches()->findOrFail(request("batch_id"));
+
+        $harvest    = $batch->harvest()->first();
+
+        $product    = $harvest->product;
+
         if($request->weight_after && $request->weight_unit) {
-            $amount = Product::findOrfail(request("product_id"))->calculatePrice(
-                    request("weight_after"),
-                    request("weight_unit")
-                );
+
+            $amount  = $product->calculatePrice(request("weight_after"), request("weight_unit"));
         }
 
         $purchase = Purchase::create([
-            "product_id" => request("product_id"),
+            "batch_id" => $batch->id,
+            "product_id" => $product->id,
             "farmer_id" => request("farmer_id"),
             "amount" => request("amount", isset($amount) ? $amount : null),
             "currency" => request("currency", "TZS"),
@@ -91,40 +98,23 @@ class PurchasesController extends Controller
             "field_weight" => request("field_weight"),
             "weight_before" => request("weight_before"),
             "weight_after" => request("weight_after"),
+            "creator_id" => auth()->id(),
         ]);
 
         if ($request->has("remarks") && $request->remarks) {
             $purchase->remarks()->create(["body" => request("remarks")]);
         }
 
-        if ($purchase->amount && $purchase->weight_after_processing) {
+        if ($purchase->amount && $purchase->weight_after) {
 
             $purchase->update(["status" => "processed"]);
 
-            $farmer = Farmer::findOrFail(request("farmer_id"));
-
-            $product = Product::findOrFail(request("product_id"));
-
-            try {
-                $nexmo->message()->send([
-                    'to' => "+255762764819",
-                    'from' => '@leggetter',
-                    'text' => "Hello {$farmer->full_name}, Tumepokea mzigo wako wa  {$product->name} wenye jumla ya kilo {$purchase->weight_before_processing} kabla ya kuchambua na kilo {$purchase->weight_after_processing} baada ya uchambuzi, ambao thamini yake ni Tsh. {$purchase->amount}"
-                ]);
-            } catch (Client\Exception\Request $e) {
-
-            } catch (Client\Exception\Server $e) {
-
-            } catch (Client\Exception\Exception $e) {
-
-            }
+            \Sms::send(phone($farmer->phone, "tz")->formatE164(), $this->messageBody($farmer, $product, $purchase));
         }
 
         return redirect()
             ->route("purchases.index")
-            ->with(
-                'status', 'Purchase was recorded successfully!'
-            );
+            ->with('status', 'Purchase was recorded successfully!');
     }
 
     public function edit(Purchase $purchase)
@@ -189,8 +179,19 @@ class PurchasesController extends Controller
     {
         $purchase->delete();
 
-        return redirect()->back()->with(
-                "status", "Entity is deleted successfully"
-            );
+        return redirect()->back()->with("status", "Entity is deleted successfully");
+    }
+
+    public function messageBody($farmer, $product, $purchase)
+    {
+        $format = "Hello %s, Tumepokea mzigo wako wa %s wenye jumla ya kilo %s kabla ya kuchambua na kilo %s baada ya uchambuzi, ambao thamini yake ni %s";
+
+        return sprintf($format,
+            $farmer->full_name,
+            $product->name,
+            $purchase->weight_before,
+            $purchase->weight_after,
+            $purchase->amount
+        );
     }
 }

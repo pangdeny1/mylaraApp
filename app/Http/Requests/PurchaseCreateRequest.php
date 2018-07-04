@@ -25,7 +25,7 @@ class PurchaseCreateRequest extends FormRequest
     {
         return [
             "weight_unit" => "required|in:kg,g,t",
-            "product_id" => "required|exists:products,id",
+            "batch_id" => "required|exists:batches,id",
             "farmer_id" => "required|exists:farmers,id",
             "amount" => "nullable|numeric",
             "field_weight" => "numeric|required",

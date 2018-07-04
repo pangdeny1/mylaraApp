@@ -131,20 +131,20 @@
                                                             {{ $purchase->farmer->full_name }}
                                                         </a>
                                                     </td>
-                                                    <td>{{ $purchase->product->name }}</td>
-                                                    <td>{{ $purchase->batch->number }}</td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td class="text-right">
+                                                    <td nowrap>{{ $purchase->product->name }}</td>
+                                                    <td nowrap>{{ $purchase->batch->number }}</td>
+                                                    <td nowrap>{{ $purchase->batch->harvest[0]->block->number }}</td>
+                                                    <td nowrap>{{ $purchase->batch->harvest[0]->expected_date->toFormattedDateString() }}</td>
+                                                    <td class="text-right" nowrap>
                                                         {{ $purchase->weight()->field_in_kg }}
                                                     </td>
-                                                    <td class="text-right">
+                                                    <td class="text-right" nowrap>
                                                         {{ $purchase->weight()->before_in_kg }}
                                                     </td>
-                                                    <td class="text-right">
+                                                    <td class="text-right" nowrap>
                                                         @include("purchases.partials.weight_modal")
                                                     </td>
-                                                    <td class="text-right">
+                                                    <td class="text-right" nowrap>
                                                         {{ $purchase->weight()->loss_in_kg }}
                                                     </td>
                                                     <td class="text-right" nowrap>

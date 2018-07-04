@@ -31,9 +31,28 @@ class Farm extends Model implements Auditable
     public function getNameAttribute()
     {
         return sprintf(
-            "%s %s Farm",
+            "%s %s, %s Farm",
+            $this->attributes["size"],
+            str_plural(title_case($this->attributes["size_unit"]), $this->attributes["size"]),
+            optional($this->address)->state
+        );
+    }
+
+    public function getAcreageAttribute()
+    {
+        return sprintf(
+            "%s %s",
             $this->attributes["size"],
             str_plural(title_case($this->attributes["size_unit"]), $this->attributes["size"])
+        );
+    }
+
+    public function getLocationAttribute()
+    {
+        return sprintf(
+            "%s, %s",
+            optional($this->address)->state,
+            optional($this->address)->country
         );
     }
 }

@@ -16,6 +16,11 @@ class Batch extends Model implements Auditable
         "valid_till" => "date",
     ];
 
+    public function harvest()
+    {
+        return $this->hasMany(Harvest::class);
+    }
+
     public function farmers()
     {
         return $this->belongsToMany(Farmer::class, "farmer_batch")->withTimestamps();

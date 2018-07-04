@@ -54,23 +54,23 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
-                                            <label for="product">Product</label>
-                                            <select name="product_id"
-                                                    id="product"
-                                                    class="form-control {{ $errors->has("product_id") ? "is-invalid" : "" }}"
+                                            <label for="batch_id">Batch</label>
+                                            <select name="batch_id"
+                                                    id="batch_id"
+                                                    class="form-control {{ $errors->has("batch_id") ? "is-invalid" : "" }}"
                                             >
-                                                <option value="">-- Select product --</option>
-                                                @foreach($products as $product)
-                                                    <option value="{{ $product->id }}"
-                                                            @if(old("product_id") == $product->id) selected @endif
+                                                <option value="">-- Select batch number --</option>
+                                                @foreach(\App\Batch::all() as $batch)
+                                                    <option value="{{ $batch->id }}"
+                                                            @if(old("batch_id") == $batch->id) selected @endif
                                                     >
-                                                        {{ $product->name }}
+                                                        {{ $batch->number }}
                                                     </option>
                                                 @endforeach
                                             </select>
-                                            @if($errors->has("product_id"))
+                                            @if($errors->has("batch_id"))
                                                 <span class="invalid-feedback">
-                                                {{ $errors->first("product_id") }}
+                                                {{ $errors->first("batch_id") }}
                                             </span>
                                             @endif
                                         </div>
@@ -82,7 +82,7 @@
                                 </header>
                                 <div class="card-body">
                                     <div class="form-row">
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-3">
                                             <label for="weight_unit">Unit</label>
                                             <select name="weight_unit"
                                                     id="weight_unit"
@@ -105,8 +105,8 @@
                                                 </span>
                                             @endif
                                         </div>
-                                        <div class="form-group col-md-2">
-                                            <label for="field_weight">Field</label>
+                                        <div class="form-group col-md-3">
+                                            <label for="field_weight">Farm weight</label>
                                             <input type="text"
                                                    name="field_weight"
                                                    id="field_weight"
@@ -114,18 +114,18 @@
                                                    value="{{ old("field_weight") }}"
                                             >
                                         </div>
-                                        <div class="form-group col-md-2">
-                                            <label for="weight_before">Before</label>
-                                            <input type="text"
+                                        <div class="form-group col-md-3">
+                                            <label for="weight_before">House packing</label>
+                                            <input type="number"
                                                    name="weight_before"
                                                    id="weight_before"
                                                    class="form-control {{ $errors->has("weight_before") ? "is-invalid" : "" }}"
                                                    value="{{ old("weight_before") }}"
                                             >
                                         </div>
-                                        <div class="form-group col-md-2">
-                                            <label for="weight_after">After</label>
-                                            <input type="text"
+                                        <div class="form-group col-md-3">
+                                            <label for="weight_after">Graded</label>
+                                            <input type="number"
                                                    name="weight_after"
                                                    id="weight_after"
                                                    class="form-control {{ $errors->has("weight_after") ? "is-invalid" : "" }}"
