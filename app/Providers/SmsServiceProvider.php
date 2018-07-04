@@ -14,7 +14,7 @@ class SmsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+
     }
 
     /**
