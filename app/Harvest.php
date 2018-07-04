@@ -43,8 +43,8 @@ class Harvest extends Model implements Auditable
     {
         return sprintf(
             "%s %s",
-            $this->attributes["expected_volume"],
-            title_case(str_plural($this->attributes["volume_unit"], $this->attributes["expected_volume"]))
+            $this->attributes["expected_amount"],
+            title_case(str_plural($this->attributes["amount_unit"], $this->attributes["expected_amount"]))
         );
     }
 }
