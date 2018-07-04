@@ -46,13 +46,13 @@
                                     <div class="card-body">
                                         <div class="media align-items-center mb-3">
                                             <a href="#" class="user-avatar user-avatar-lg mr-3">
-                                                <img src="{{ Avatar::create('Block B')->toBase64() }}" />
+                                                <img src="{{ Avatar::create($farm->name)->toBase64() }}" />
                                             </a>
                                             <div class="media-body">
                                                 <h3 class="card-title">
-                                                    <a href="#">Block B, Farm</a>
+                                                    <a href="#">{{ $farm->name }}</a>
                                                 </h3>
-                                                <h6 class="card-subtitle text-muted"> Farm </h6>
+                                                <h6 class="card-subtitle text-muted">{{ $farm->location }}</h6>
                                             </div>
                                             <a href="#"
                                                class="btn btn-reset text-muted"
@@ -72,7 +72,7 @@
                                             <li>
                                                 <span class="list-icon">
                                                     <span class="fa fa-map-marker text-muted"></span>
-                                                </span> Arusha, Block B
+                                                </span> {{ $farm->location }}
                                             </li>
                                             <li>
                                                 <span class="list-icon">
@@ -82,7 +82,7 @@
                                             <li>
                                                 <span class="list-icon">
                                                     <i class="far fa-object-ungroup"></i>
-                                                </span> {{ $farm->size }} {{ str_plural($farm->size_unit, $farm->size) }}
+                                                </span> {{ $farm->acreage }}
                                             </li>
                                             <li>
                                                 <span class="list-icon">

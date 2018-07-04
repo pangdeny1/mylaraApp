@@ -52,7 +52,9 @@
                                             <h3 class="card-title">
                                                 <a href="#">{{ $harvest->product->name }}</a>
                                             </h3>
-                                            <h6 class="card-subtitle text-muted"> Harvest </h6>
+                                            <h6 class="card-subtitle text-muted">
+                                                {{  optional($harvest->product)->category()->name }}
+                                            </h6>
                                         </div>
                                         <a href="#"
                                            class="btn btn-reset text-muted"
@@ -72,7 +74,10 @@
                                                 <i class="fas fa-map-signs"></i>
                                             </span> Farm
                                             </td>
-                                            <td>Usa Liver, {{ $harvest->farm->name }}</td>
+                                            <td>{{ $harvest->farm->name }}</td>
+                                            <td>
+                                                <a href="#"><i class="fas fa-info-circle"></i></a>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
@@ -80,7 +85,16 @@
                                                 <i class="fas fa-tree"></i>
                                             </span> Product
                                             </td>
-                                            <td>{{ $harvest->product->name }}</td>
+                                            <td>{{ optional($harvest->product)->name }}</td>
+                                            <td>
+                                                <a href="#"
+                                                   data-toggle="tooltip"
+                                                   data-placement="top"
+                                                   title="{{ optional($harvest->product)->description }}"
+                                                >
+                                                    <i class="fas fa-info-circle"></i>
+                                                </a>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
@@ -89,6 +103,7 @@
                                             </span> Expected date
                                             </td>
                                             <td>{{ $harvest->expected_date->toFormattedDateString() }}</td>
+                                            <td></td>
                                         </tr>
                                         <tr>
                                             <td>
@@ -97,6 +112,35 @@
                                             </span> Expected volume
                                             </td>
                                             <td>{{ $harvest->volume }}</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                            <span class="list-icon">
+                                                <i class="fas fa-th-large"></i>
+                                            </span> Bock number
+                                            </td>
+                                            <td>{{ optional($harvest->block)->number }}</td>
+                                            <td>
+                                                <a href="#"><i class="fas fa-info-circle"></i></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                            <span class="list-icon">
+                                                <i class="fas fa-database"></i>
+                                            </span> Batch number
+                                            </td>
+                                            <td>{{ optional($harvest->batch)->number }}</td>
+                                            <td>
+                                                <a href="#"
+                                                   data-toggle="tooltip"
+                                                   data-placement="top"
+                                                   title="Tooltip on top"
+                                                >
+                                                    <i class="fas fa-info-circle"></i>
+                                                </a>
+                                            </td>
                                         </tr>
                                     </table>
                                 </div>

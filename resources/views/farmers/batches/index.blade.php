@@ -63,30 +63,6 @@
                                             <tr>
                                                 <td>
                                                     <span class="list-icon">
-                                                        <i class="far fa-calendar-check"></i>
-                                                    </span> Valid From
-                                                </td>
-                                                <td>{{ $batch->valid_from->toFormattedDateString() }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class="list-icon">
-                                                    <i class="far fa-calendar-times"></i>
-                                                </span> Valid Till
-                                                </td>
-                                                <td>{{ $batch->valid_till->toFormattedDateString() }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class="list-icon">
-                                                        <i class="fas fa-users"></i>
-                                                    </span> Maximum number of farmers
-                                                </td>
-                                                <td>{{ $batch->max_count }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class="list-icon">
                                                         <i class="fas fa-users"></i>
                                                     </span> Existing farmers
                                                 </td>

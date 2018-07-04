@@ -85,10 +85,6 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="align-middle" nowrap>{{ $batch->max_count }}</td>
-                                            <td class="align-middle" nowrap>{{ $batch->valid_from->toFormattedDateString() }}</td>
-                                            <td class="align-middle" nowrap>{{ $batch->valid_till->toFormattedDateString() }}</td>
-                                            <td class="align-middle" nowrap>{{ $batch->status }}</td>
                                             <td class="align-middle text-right" nowrap>
                                                 @can("edit", $batch)
                                                 <a href="{{ route("batches.edit", $batch) }}" class="btn btn-sm btn-secondary">

@@ -48,6 +48,8 @@ class FarmerHarvestsController extends Controller
             "description" => request("batch_description", ""),
         ]);
 
+        $farmer->batches()->attach($batch);
+
         Harvest::create([
             "expected_amount" => request("expected_amount"),
             "amount_unit" => request("amount_unit"),
@@ -55,6 +57,7 @@ class FarmerHarvestsController extends Controller
             "farm_id" => request("farm_id"),
             "block_id" => request("block_id"),
             "product_id" => request("product_id"),
+            "description" => request("description"),
             "batch_id" => $batch->id
         ]);
 

@@ -42,7 +42,7 @@ class Farmer extends Model implements Auditable
 
     public function batches()
     {
-        return $this->belongsToMany(Batch::class, "farmer_batch");
+        return $this->belongsToMany(Batch::class, "farmer_batch")->withTimestamps();
     }
 
     public function getFullNameAttribute()
