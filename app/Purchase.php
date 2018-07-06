@@ -13,6 +13,11 @@ class Purchase extends Model implements Auditable
 
     protected $guarded = [];
 
+    public function harvest()
+    {
+        return $this->belongsTo(Harvest::class);
+    }
+
     public function batch()
     {
         return $this->belongsTo(Batch::class);
@@ -46,5 +51,10 @@ class Purchase extends Model implements Auditable
     public function price()
     {
         return new Price($this);
+    }
+
+    public function isProcessed()
+    {
+        return !is_null($this->attributes["amount"]) && !is_null($this->attributes["weight_after"]);
     }
 }

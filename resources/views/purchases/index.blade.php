@@ -131,10 +131,18 @@
                                                             {{ $purchase->farmer->full_name }}
                                                         </a>
                                                     </td>
-                                                    <td nowrap>{{ $purchase->product->name }}</td>
-                                                    <td nowrap>{{ $purchase->batch->number }}</td>
-                                                    <td nowrap>{{ $purchase->batch->harvest[0]->block->number }}</td>
-                                                    <td nowrap>{{ $purchase->batch->harvest[0]->expected_date->toFormattedDateString() }}</td>
+                                                    <td nowrap>
+                                                        {{ $purchase->product->name }}
+                                                    </td>
+                                                    <td nowrap>
+                                                        {{ $purchase->batch->number }}
+                                                    </td>
+                                                    <td nowrap>
+                                                        {{ optional(optional($purchase->harvest)->block)->number }}
+                                                    </td>
+                                                    <td nowrap>
+                                                        {{ optional(optional($purchase->harvest)->expected_date)->toFormattedDateString() }}
+                                                    </td>
                                                     <td class="text-right" nowrap>
                                                         {{ $purchase->weight()->field_in_kg }}
                                                     </td>

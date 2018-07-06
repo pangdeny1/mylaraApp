@@ -76,67 +76,77 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="form-row">
-                                        <div class="col-md-12 mb-3">
-                                            <label for="product_id">Product</label>
-                                            <select name="product_id"
-                                                    class="form-control {{ $errors->has('product_id') ? 'is-invalid' : '' }}"
-                                                    id="product_id"
-                                            >
-                                                <option value="">Choose...</option>
-                                                @foreach(\App\Product::all() as $product)
-                                                <option value="{{ $product->id }}" {{ old("product_id") == $product->id ? "selected" : "" }}>
-                                                    {{ $product->name }}
-                                                </option>
-                                                @endforeach
-                                            </select>
-                                            @if ($errors->has('product_id'))
-                                                <span class="invalid-feedback">
-                                                    <strong>{{ $errors->first('product_id') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="col-md-6 mb-3">
-                                            <label for="farm_id">Farm</label>
-                                            <select name="farm_id"
-                                                    class="form-control {{ $errors->has('farm_id') ? 'is-invalid' : '' }}"
-                                                    id="farm_id"
-                                            >
-                                                <option value="">Choose...</option>
-                                                @foreach(\App\Farm::where("farmer_id", $farmer->id)->get() as $farm)
-                                                <option value="{{ $farm->id }}" {{ old("farm_id") == $farm->id ? "selected" : "" }}>
-                                                    {{ $farm->name }}
-                                                </option>
-                                                @endforeach
-                                            </select>
-                                            @if ($errors->has('farm_id'))
-                                                <span class="invalid-feedback">
-                                                    <strong>{{ $errors->first('farm_id') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label for="block_id">Block</label>
-                                            <select name="block_id"
-                                                    class="form-control {{ $errors->has('block_id') ? 'is-invalid' : '' }}"
-                                                    id="block_id"
-                                            >
-                                                <option value="">Choose...</option>
-                                                @foreach(\App\Block::all() as $block)
-                                                <option value="{{ $block->id }}" {{ old("block_id") == $block->id ? "selected" : "" }}>
-                                                    {{ $block->number }}
-                                                </option>
-                                                @endforeach
-                                            </select>
-                                            @if ($errors->has('block_id'))
-                                                <span class="invalid-feedback">
-                                                    <strong>{{ $errors->first('block_id') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
+
+
+                                    <block-picker inline-template>
+                                        <section>
+                                            <div class="form-row">
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="farm_id">Farm</label>
+                                                    <select name="farm_id"
+                                                            class="form-control {{ $errors->has('farm_id') ? 'is-invalid' : '' }}"
+                                                            id="farm_id"
+                                                            v-model="farm"
+                                                    >
+                                                        <option value="">Choose...</option>
+                                                        @foreach(\App\Farm::where("farmer_id", $farmer->id)->get() as $farm)
+                                                            <option value="{{ $farm->id }}" {{ old("farm_id") == $farm->id ? "selected" : "" }}>
+                                                                {{ $farm->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @if ($errors->has('farm_id'))
+                                                        <span class="invalid-feedback">
+                                                <strong>{{ $errors->first('farm_id') }}</strong>
+                                            </span>
+                                                    @endif
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="block_id">Block</label>
+                                                    <select name="block_id"
+                                                            class="form-control {{ $errors->has('block_id') ? 'is-invalid' : '' }}"
+                                                            id="block_id"
+                                                            :disabled="! hasBlocks"
+                                                    >
+                                                        <option value="">Choose...</option>
+                                                        <option v-for="block in blocks"
+                                                                :value="block.id"
+                                                                :key="block.id"
+                                                        >@{{ block.number }}</option>
+
+                                                    </select>
+                                                    @if ($errors->has('block_id'))
+                                                        <span class="invalid-feedback">
+                                                            <strong>{{ $errors->first('block_id') }}</strong>
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-12 mb-3">
+                                                    <label for="product_id">Product</label>
+                                                    <select name="product_id"
+                                                            class="form-control {{ $errors->has('product_id') ? 'is-invalid' : '' }}"
+                                                            id="product_id"
+                                                            :disabled="! hasProducts"
+                                                    >
+                                                        <option value="">Choose...</option>
+                                                        <option v-for="product in products"
+                                                                :value="product.id"
+                                                                :key="product.id"
+                                                        >@{{ product.name }}</option>
+                                                    </select>
+                                                    @if ($errors->has('product_id'))
+                                                        <span class="invalid-feedback">
+                                                            <strong>{{ $errors->first('product_id') }}</strong>
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </block-picker>
+
+
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <label for="description">Description</label>
@@ -181,4 +191,10 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section("script")
+    <script>
+        console.log(app);
+    </script>
 @endsection

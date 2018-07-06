@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use OwenIt\Auditing\Contracts\Auditable;
 
 class Product extends Model implements Auditable
@@ -36,8 +37,8 @@ class Product extends Model implements Auditable
         return $this->hasMany(ProductPrice::class);
     }
 
-    public function calculatePrice($weight, $unit)
+    public function calculatePrice(Request $request)
     {
-        return $this->price->normalize($weight, $unit);
+        return $this->price->normalize($request->weight_after, $request->weight_unit);
     }
 }

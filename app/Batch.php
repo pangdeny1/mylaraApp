@@ -11,14 +11,21 @@ class Batch extends Model implements Auditable
 
     protected $guarded = [];
 
-    protected $casts = [
+    protected $casts    = [
         "valid_from" => "date",
         "valid_till" => "date",
     ];
 
-    public function harvest()
+    protected $with     = ["harvests.product"];
+
+    public function harvests()
     {
         return $this->hasMany(Harvest::class);
+    }
+
+    public function product()
+    {
+        return $this->hasManyThrough(Product::class, Harvest::class);
     }
 
     public function farmers()

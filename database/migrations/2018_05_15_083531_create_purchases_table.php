@@ -31,6 +31,7 @@ class CreatePurchasesTable extends Migration
             ])->default("received");
             $table->unsignedInteger('product_id')->nullable();
             $table->unsignedInteger('batch_id')->nullable();
+            $table->unsignedInteger('harvest_id')->nullable();
             $table->unsignedInteger('farmer_id')->nullable();
             $table->timestamp("paid_at")->nullable();
             $table->unsignedInteger('creator_id')->nullable();

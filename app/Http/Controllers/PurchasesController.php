@@ -12,6 +12,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Nexmo\Client;
+use Sms;
 
 class PurchasesController extends Controller
 {
@@ -58,9 +59,13 @@ class PurchasesController extends Controller
     {
         $this->authorize("view", Purchase::class);
 
+        $farmers    = Farmer::query()->has("batches")->get();
+
+        $products   = Product::all();
+
         return view("purchases.create", [
-            "farmers"   => Farmer::all(),
-            "products"  => Product::all(),
+            "farmers"   => $farmers,
+            "products"  => $products,
         ]);
     }
 
@@ -76,21 +81,21 @@ class PurchasesController extends Controller
         $this->validate($request, ["field_weight" => "gte:weight_before"]);
 
         $farmer     = Farmer::findOrFail(request("farmer_id"));
-
+        // Get Farmer's selected batch
         $batch      = $farmer->batches()->findOrFail(request("batch_id"));
-
-        $harvest    = $batch->harvest()->first();
-
+        // Find means to get exactly harvest for given batch
+        $harvest    = $batch->harvests()->first();
+        // Get Harvest's product
         $product    = $harvest->product;
 
-        if($request->weight_after && $request->weight_unit) {
-
-            $amount  = $product->calculatePrice(request("weight_after"), request("weight_unit"));
+        if(!is_null($request->weight_after) && !is_null($request->weight_unit)) {
+            $amount  = $product->calculatePrice($request);
         }
 
         $purchase = Purchase::create([
             "batch_id" => $batch->id,
             "product_id" => $product->id,
+            "harvest_id" => $harvest->id,
             "farmer_id" => request("farmer_id"),
             "amount" => request("amount", isset($amount) ? $amount : null),
             "currency" => request("currency", "TZS"),
@@ -101,20 +106,21 @@ class PurchasesController extends Controller
             "creator_id" => auth()->id(),
         ]);
 
-        if ($request->has("remarks") && $request->remarks) {
+        if (! is_null($request->remarks)) {
             $purchase->remarks()->create(["body" => request("remarks")]);
         }
 
-        if ($purchase->amount && $purchase->weight_after) {
+        if ($purchase->isProcessed()) {
 
             $purchase->update(["status" => "processed"]);
 
-            \Sms::send(phone($farmer->phone, "tz")->formatE164(), $this->messageBody($farmer, $product, $purchase));
+            Sms::send(
+                phone($farmer->phone, "tz")->formatE164(),
+                $this->messageBody($farmer, $product, $purchase)
+            );
         }
 
-        return redirect()
-            ->route("purchases.index")
-            ->with('status', 'Purchase was recorded successfully!');
+        return redirect()->route("purchases.index")->with('status', 'Purchase was recorded successfully!');
     }
 
     public function edit(Purchase $purchase)
@@ -140,10 +146,7 @@ class PurchasesController extends Controller
         ]);
 
         if($request->weight_after && $request->weight_unit) {
-            $amount = Product::findOrfail(request("product_id"))
-                ->calculatePrice(request("weight_after"),
-                    request("weight_unit")
-                );
+            $amount = Product::findOrfail(request("product_id"))->calculatePrice($request);
         }
 
         $purchase->update([
@@ -160,9 +163,7 @@ class PurchasesController extends Controller
             $purchase->update(["status" => "processed"]);
         }
 
-        return redirect()->back()->with(
-                'status', 'Purchase was updated successfully!'
-            );
+        return redirect()->back()->with('status', 'Purchase was updated successfully!');
     }
 
     public function show(Purchase $purchase)

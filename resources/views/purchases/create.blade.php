@@ -29,52 +29,57 @@
                                     Basic information
                                 </header>
                                 <div class="card-body">
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label for="farmer">Farmer</label>
-                                            <select name="farmer_id"
-                                                    id="farmer"
-                                                    class="form-control {{ $errors->has("farmer_id") ? "is-invalid" : "" }}"
-                                            >
-                                                <option value="">-- Select farmer --</option>
-                                                @foreach($farmers as $farmer)
-                                                <option value="{{ $farmer->id }}"
-                                                        @if(old("farmer_id") == $farmer->id) selected @endif
-                                                >
-                                                    {{ $farmer->full_name }}
-                                                </option>
-                                                @endforeach
-                                            </select>
-                                            @if($errors->has("farmer_id"))
-                                            <span class="invalid-feedback">
-                                                {{ $errors->first("farmer_id") }}
-                                            </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label for="batch_id">Batch</label>
-                                            <select name="batch_id"
-                                                    id="batch_id"
-                                                    class="form-control {{ $errors->has("batch_id") ? "is-invalid" : "" }}"
-                                            >
-                                                <option value="">-- Select batch number --</option>
-                                                @foreach(\App\Batch::all() as $batch)
-                                                    <option value="{{ $batch->id }}"
-                                                            @if(old("batch_id") == $batch->id) selected @endif
+                                    <batch-picker inline-template>
+                                        <section>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="farmer">Farmer</label>
+                                                    <select name="farmer_id"
+                                                            id="farmer"
+                                                            class="form-control {{ $errors->has("farmer_id") ? "is-invalid" : "" }}"
+                                                            v-model="farmer"
                                                     >
-                                                        {{ $batch->number }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            @if($errors->has("batch_id"))
-                                                <span class="invalid-feedback">
-                                                {{ $errors->first("batch_id") }}
-                                            </span>
-                                            @endif
-                                        </div>
-                                    </div>
+                                                        <option value="">-- Select farmer --</option>
+                                                        @foreach($farmers as $farmer)
+                                                            <option value="{{ $farmer->id }}"
+                                                                    {{ old("farmer_id") == $farmer->id ? "selected" : "" }}
+                                                                    v-model="farmer"
+                                                            >
+                                                                {{ $farmer->full_name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @if($errors->has("farmer_id"))
+                                                        <span class="invalid-feedback">
+                                                            {{ $errors->first("farmer_id") }}
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="batch_id">Batch</label>
+                                                    <select name="batch_id"
+                                                            id="batch_id"
+                                                            class="form-control {{ $errors->has("batch_id") ? "is-invalid" : "" }}"
+                                                            :disabled="! hasBatchNumber"
+                                                    >
+                                                        <option value="">-- Select batch number --</option>
+                                                        <option v-for="batch in batches"
+                                                                :key="batch.id"
+                                                                :value="batch.id"
+                                                        >@{{ batch.number }}</option>
+
+                                                    </select>
+                                                    @if($errors->has("batch_id"))
+                                                        <span class="invalid-feedback">
+                                                            {{ $errors->first("batch_id") }}
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </batch-picker>
                                 </div>
                                 <hr>
                                 <header class="card-header border-bottom-0">

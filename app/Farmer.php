@@ -25,6 +25,11 @@ class Farmer extends Model implements Auditable
         return $this->hasManyThrough(Harvest::class, Farm::class);
     }
 
+    public function blocks()
+    {
+        return $this->hasManyThrough(Block::class, Farm::class);
+    }
+
     public function sales()
     {
         return $this->hasMany(Purchase::class, "farmer_id");
