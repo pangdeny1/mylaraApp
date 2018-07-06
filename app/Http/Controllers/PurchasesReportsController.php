@@ -15,7 +15,8 @@ class PurchasesReportsController extends Controller
 
     public function index()
     {
-        $queryBuilder = Purchase::where("status", "completed");
+        $queryBuilder = Purchase::query();
+            //->where("status", "completed");
 
         if (request("period") == "daily") {
             $queryBuilder->whereBetween("updated_at", [

@@ -82,8 +82,7 @@
                                             <td>{{ $purchase->product->name }}</td>
                                             <td>David Pella</td>
                                             <td class="text-right">
-                                                {{ number_format($purchase->weight_after_processing, 2) }}
-                                                {{ $purchase->weight_unit }}
+                                                {{ $purchase->weight()->after_in_kg }}
                                             </td>
                                             <td class="text-right">
                                                 {{ number_format($purchase->amount, 2) }}
@@ -95,7 +94,7 @@
                                         <tr>
                                             <th colspan="3"></th>
                                             <th class="text-right">
-                                                {{ number_format($purchases->sum("weight_after_processing"), 2) }}
+                                                {{ number_format($purchases->sum("weight_after"), 2) }}
                                             </th>
                                             <th class="text-right">
                                                 {{ number_format($purchases->sum("amount"), 2) }}

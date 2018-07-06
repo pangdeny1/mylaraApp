@@ -15,13 +15,13 @@ class ProductsReportsController extends Controller
 
     public function index()
     {
-        $queryBuilder = Purchase::select(
+        $queryBuilder = Purchase::query()
+            ->select(
             '*',
             \DB::raw('SUM(amount) as total_amount'),
-            \DB::raw('SUM(weight_before_processing) as total_weight_before'),
-            \DB::raw('SUM(weight_after_processing) as total_weight_after')
+            \DB::raw('SUM(weight_before) as total_weight_before'),
+            \DB::raw('SUM(weight_after) as total_weight_after')
         )
-            ->where("status", "completed")
             ->groupBy("purchases.product_id");
 
         if (request("period") == "daily") {
