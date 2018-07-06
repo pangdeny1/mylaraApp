@@ -79,7 +79,7 @@
                                             @foreach($farmers as $farmer)
                                             <tr>
                                                 <td>
-                                                    <a href="{{ route("farmers.show", $farmer) }}" class="tile tile-img mr-1">
+                                                    <a href="{{ route("farmers.show", $farmer) }}" class="user-avatar mr-1">
                                                         <img class="img-fluid"
                                                              src="{{ Avatar::create($farmer->full_name)->toBase64() }}"
                                                              alt="{{ $farmer->full_name }}">
