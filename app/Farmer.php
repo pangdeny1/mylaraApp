@@ -22,7 +22,7 @@ class Farmer extends Model implements Auditable
 
     public function harvests()
     {
-        return $this->hasManyThrough(Harvest::class, Farm::class);
+        return $this->hasMany(Harvest::class);
     }
 
     public function blocks()

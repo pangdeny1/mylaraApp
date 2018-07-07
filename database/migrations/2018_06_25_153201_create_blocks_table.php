@@ -16,8 +16,12 @@ class CreateBlocksTable extends Migration
         Schema::create('blocks', function (Blueprint $table) {
             $table->increments('id');
             $table->string('number')->nullable();
+            $table->double('size');
+            $table->string('size_unit');
             $table->unsignedInteger('farm_id')->nullable();
+            $table->unsignedInteger('product_id')->nullable();
             $table->text('description');
+            $table->enum('status', ["active", "inactive"])->default("active");
             $table->timestamps();
         });
     }

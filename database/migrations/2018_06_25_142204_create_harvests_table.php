@@ -19,8 +19,7 @@ class CreateHarvestsTable extends Migration
             $table->string('amount_unit');
             $table->timestamp('expected_date');
             $table->unsignedInteger('block_id')->nullable();
-            $table->unsignedInteger('farm_id')->nullable();
-            $table->unsignedInteger('product_id')->nullable();
+            $table->unsignedInteger('farmer_id')->nullable();
             $table->unsignedInteger('batch_id')->nullable();
             $table->text("description");
             $table->timestamps();

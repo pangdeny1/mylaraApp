@@ -75,6 +75,19 @@ Route::post("farmers/{farmer}/farms", [
     "uses" => "FarmerFarmsController@store",
 ]);
 
+Route::get("farmers/{farmer}/blocks", [
+    "as" => "farmers.blocks.index",
+    "uses" => "FarmerBlocksController@index",
+]);
+Route::get("farmers/{farmer}/blocks/create", [
+    "as" => "farmers.blocks.create",
+    "uses" => "FarmerBlocksController@create",
+]);
+Route::post("farmers/{farmer}/blocks", [
+    "as" => "farmers.blocks.store",
+    "uses" => "FarmerBlocksController@store",
+]);
+
 Route::get("farmers/{farmer}/harvests", [
     "as" => "farmers.harvests.index",
     "uses" => "FarmerHarvestsController@index",

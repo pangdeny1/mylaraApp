@@ -81,52 +81,6 @@
                                             <div class="invalid-feedback"> Please provide a valid state. </div>
                                         </div>
                                     </div>
-                                    <crops-picker inline-template>
-                                        <div class="form-row">
-                                            <div class="form-group col-md-12">
-                                                <label for="crops">Crops</label>
-                                                <select id="crops"
-                                                        class="form-control {{ $errors->has('crops') ? 'is-invalid' : '' }}"
-                                                        v-model="newCrop"
-                                                        @change.prevent="addCrop"
-                                                >
-                                                    <option value="">Choose...</option>
-                                                    <option v-for="crop in crops"
-                                                            :value="crop.id"
-                                                            v-text="crop.name"
-                                                    >
-                                                    </option>
-                                                </select>
-                                                @if ($errors->has('crops'))
-                                                    <span class="invalid-feedback">
-                                                    <strong>{{ $errors->first('crops') }}</strong>
-                                                </span>
-                                                @endif
-                                            </div>
-
-                                            <div class="list-group list-group-flush list-group-divider mb-4" v-if="selectedCrops.length">
-                                                <div class="list-group-item" v-for="selectedCrop in selectedCrops">
-                                                    <div class="list-group-item-figure">
-                                                        <div class="user-avatar" :class="selectedCrop.color">
-                                                            <img :src="selectedCrop.avatar.encoded" :alt="selectedCrop.name">
-                                                        </div>
-                                                    </div>
-                                                    <input type="hidden" name="crops[]" :value="selectedCrop.id">
-                                                    <div class="list-group-item-body">
-                                                        <h4 class="list-group-item-title">
-                                                            <a href="#" v-text="selectedCrop.name"></a>
-                                                        </h4>
-                                                        <p class="list-group-item-text" v-text="selectedCrop.description"></p>
-                                                    </div>
-                                                    <div class="list-group-item-figure">
-                                                        <button @click.prevent="removeCrop(selectedCrop.id)" class="btn btn-sm btn-light">
-                                                            <i class="far fa-trash-alt"></i>
-                                                        </button>
-                                                    </div>
-                                                </div >
-                                            </div>
-                                        </div>
-                                    </crops-picker>
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <label for="description">Description</label>
@@ -139,42 +93,6 @@
                                             @if ($errors->has('description'))
                                                 <span class="invalid-feedback">
                                                     <strong>{{ $errors->first('description') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="card-body">
-                                    <header>
-                                        <div class="card-title">Blocks Information</div>
-                                    </header>
-                                    <div class="form-row">
-                                        <div class="col-md-6 mb-3">
-                                            <label for="block_number">Number</label>
-                                            <input name="block_number"
-                                                   class="form-control {{ $errors->has('block_number') ? 'is-invalid' : '' }}"
-                                                   id="block_number"
-                                                   value="{{ old("block_number") }}"
-                                            >
-                                            @if ($errors->has('block_number'))
-                                                <span class="invalid-feedback">
-                                                    <strong>{{ $errors->first('block_number') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="col-md-12 mb-3">
-                                            <label for="block_description">Description</label>
-                                            <textarea name="block_description"
-                                                      class="form-control {{ $errors->has('block_description') ? 'is-invalid' : '' }}"
-                                                      id="block_description"
-                                                      rows="4"
-                                            >{{ old("block_description") }}</textarea>
-                                            @if ($errors->has('block_description'))
-                                                <span class="invalid-feedback">
-                                                    <strong>{{ $errors->first('block_description') }}</strong>
                                                 </span>
                                             @endif
                                         </div>

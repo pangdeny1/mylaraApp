@@ -43,23 +43,16 @@ class FarmerHarvestsController extends Controller
 
     public function store(HarvestCreateRequest $request, Farmer $farmer)
     {
-        $batch = Batch::create([
-            "number" => request("batch_number"),
-            "description" => request("batch_description", ""),
-        ]);
+        $harvest = Harvest::create($request->only([
+            "expected_amount",
+            "amount_unit",
+            "expected_date",
+            "block_id",
+            "description",
+            "batch_id"
+        ]));
 
-        $farmer->batches()->attach($batch);
-
-        Harvest::create([
-            "expected_amount" => request("expected_amount"),
-            "amount_unit" => request("amount_unit"),
-            "expected_date" => request("expected_date"),
-            "farm_id" => request("farm_id"),
-            "block_id" => request("block_id"),
-            "product_id" => request("product_id"),
-            "description" => request("description"),
-            "batch_id" => $batch->id
-        ]);
+        $harvest->update(["farmer_id" => $farmer->id]);
 
         return redirect()->route("farmers.show", $farmer);
     }

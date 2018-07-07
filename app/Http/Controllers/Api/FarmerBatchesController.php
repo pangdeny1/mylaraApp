@@ -11,6 +11,10 @@ class FarmerBatchesController extends Controller
 {
     public function index(Farmer $farmer)
     {
-        return new BatchesCollection($farmer->batches);
+        $batches = $farmer->batches()->whereHas("harvests", function($query) use ($farmer){
+            return $query->where("farmer_id", $farmer->id);
+        })->get();
+
+        return new BatchesCollection($batches);
     }
 }

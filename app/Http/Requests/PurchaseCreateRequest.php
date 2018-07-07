@@ -29,8 +29,6 @@ class PurchaseCreateRequest extends FormRequest
             "farmer_id" => "required|exists:farmers,id",
             "amount" => "nullable|numeric",
             "field_weight" => "numeric|required",
-            "weight_before" => "required|numeric",
-            "weight_after" => "nullable|numeric",
             "remarks" => "nullable",
         ];
     }

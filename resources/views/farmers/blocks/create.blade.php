@@ -13,97 +13,100 @@
                             </li>
                         </ol>
                     </nav>
-                    <h1 class="page-title"> Record harvest </h1>
+                    <h1 class="page-title"> Add a new block </h1>
                 </header>
                 <div class="page-section">
                     <div class="row">
                         <div class="col-md-12">
 
-                            <form action="{{ route("farmers.harvests.store", $farmer) }}"
+                            <form action="{{ route("farmers.blocks.store", $farmer) }}"
                                   method="post"
                                   class="card border-0"
                             >
                                 @csrf
                                 <header class="card-header border-bottom-0">
-                                    Harvest information
+                                    Basic information
                                 </header>
                                 <div class="card-body">
                                     <div class="form-row">
-                                        <div class="col-md-4 mb-3">
-                                            <label for="expected_amount">Expected harvest</label>
-                                            <input type="number"
-                                                   name="expected_amount"
-                                                   class="form-control {{ $errors->has('expected_amount') ? 'is-invalid' : '' }}"
-                                                   id="expected_amount"
-                                                   value="{{ old("expected_amount") }}"
-                                            >
-                                        </div>
-                                        <div class="col-md-2 mb-3">
-                                            <label for="amount_unit">Unit</label>
-                                            <select name="amount_unit"
-                                                    class="custom-select d-block w-100 {{ $errors->has('amount_unit') ? 'is-invalid' : '' }}"
-                                                    id="amount_unit"
-                                            >
-                                                <option value="t">Tonn</option>
-                                                <option value="kg" selected>Kg</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="col-md-4 mb-3">
-                                            <label for="expected_date">Expected harvest date</label>
-                                            <input type="date"
-                                                   name="expected_date"
-                                                   class="form-control {{ $errors->has('expected_date') ? 'is-invalid' : '' }}"
-                                                   id="expected_date"
-                                                   value="{{ old("expected_date") }}"
-                                            >
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
                                         <div class="col-md-6 mb-3">
-                                            <label for="batch_id">Batch number</label>
-                                            <select name="batch_id"
-                                                   class="form-control {{ $errors->has('batch_id') ? 'is-invalid' : '' }}"
-                                                   id="batch_id"
+                                            <label for="number">Number</label>
+                                            <input type="text"
+                                                   name="number"
+                                                   class="form-control {{ $errors->has('number') ? 'is-invalid' : '' }}"
+                                                   id="number"
+                                                   value="{{ old("number") }}"
                                             >
-                                                <option value="">Choose...</option>
-                                                @foreach($farmer->batches as $batch)
-                                                    <option value="{{ $batch->id }}">
-                                                        {{ $batch->number }}
-                                                    </option>
-                                                @endforeach
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-2 mb-3">
+                                            <label for="size">Size</label>
+                                            <input type="number"
+                                                   name="size"
+                                                   class="form-control {{ $errors->has('size') ? 'is-invalid' : '' }}"
+                                                   id="size"
+                                                   value="{{ old("size") }}"
+                                            >
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="size_unit">Unit</label>
+                                            <select name="size_unit"
+                                                    class="custom-select d-block w-100 {{ $errors->has('size_unit') ? 'is-invalid' : '' }}"
+                                                    id="size_unit"
+                                            >
+                                                <option value="acre">Acre</option>
                                             </select>
-                                            @if ($errors->has('batch_number'))
+                                            @if ($errors->has('size_unit'))
                                                 <span class="invalid-feedback">
-                                                    <strong>{{ $errors->first('batch_number') }}</strong>
-                                                </span>
+                                                <strong>{{ $errors->first('size_unit') }}</strong>
+                                            </span>
                                             @endif
                                         </div>
                                     </div>
-
                                     <div class="form-row">
                                         <div class="col-md-6 mb-3">
-                                            <label for="block_id">Block</label>
-                                            <select name="block_id"
-                                                    class="form-control {{ $errors->has('block_id') ? 'is-invalid' : '' }}"
-                                                    id="block_id"
+                                            <label for="farm_id">Farm</label>
+                                            <select name="farm_id"
+                                                    class="form-control {{ $errors->has('farm_id') ? 'is-invalid' : '' }}"
+                                                    id="farm_id"
                                             >
                                                 <option value="">Choose...</option>
-                                                @foreach($farmer->blocks as $block)
-                                                <option value="{{ $block->id }}">
-                                                    {{ $block->number }}
+                                                @foreach(\App\Farm::where("farmer_id", $farmer->id)->get() as $farm)
+                                                <option value="{{ $farm->id }}">
+                                                    {{ $farm->name }}
                                                 </option>
                                                 @endforeach
                                             </select>
-                                            @if ($errors->has('block_id'))
+                                            @if ($errors->has('farm_id'))
                                                 <span class="invalid-feedback">
-                                                    <strong>{{ $errors->first('block_id') }}</strong>
+                                                    <strong>{{ $errors->first('farm_id') }}</strong>
                                                 </span>
                                             @endif
                                         </div>
                                     </div>
-
+                                    <div class="form-row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="product_id">Crop</label>
+                                            <select name="product_id"
+                                                    class="form-control d-block w-100 {{ $errors->has('product_id') ? 'is-invalid' : '' }}"
+                                                    id="product_id"
+                                                    required=""
+                                            >
+                                                <option value=""> Choose... </option>
+                                                @foreach(\App\Product::all() as $product)
+                                                    <option value="{{ $product->id }}" {{ old("product_id") === $product->id ? "selected" : "" }}>
+                                                        {{ $product->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @if ($errors->has('product_id'))
+                                                <span class="invalid-feedback">
+                                                    <strong>{{ $errors->first('product_id') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <label for="description">Description</label>
@@ -121,9 +124,11 @@
                                         </div>
                                     </div>
                                     <hr class="mb-4">
-                                    <button class="btn btn-primary btn-lg btn-block" type="submit">
-                                        Save changes
-                                    </button>
+                                    <div class="form-row">
+                                        <button class="btn btn-primary btn-lg btn-block" type="submit">
+                                            Save changes
+                                        </button>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -148,10 +153,4 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section("script")
-    <script>
-        console.log(app);
-    </script>
 @endsection

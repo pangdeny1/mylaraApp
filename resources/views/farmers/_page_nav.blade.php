@@ -10,6 +10,10 @@
                 Farms
                 <span class="badge">{{ $farmer->farms->count() }}</span>
             </a>
+            <a class="nav-link" href="{{ route("farmers.blocks.index", $farmer) }}">
+                Blocks
+                <span class="badge">{{ $farmer->blocks->count() }}</span>
+            </a>
             <a class="nav-link" href="{{ route("farmers.sales.index", $farmer) }}">
                 Sales
                 <span class="badge">{{ $farmer->sales->count() }}</span>

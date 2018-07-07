@@ -34,7 +34,7 @@
                         <div class="col-md-6">
                             <section class="card card-fluid border border-info">
                                 <a href="{{ route("farmers.farms.create", $farmer) }}" class="card-body">
-                                    <div class="text-center" style="padding: 9.1rem 0;">
+                                    <div class="text-center" style="padding: 7.5rem 0;">
                                         <i class="fas fa-plus mr-2"></i> Add a new farm
                                     </div>
                                 </a>
@@ -83,15 +83,6 @@
                                                 <span class="list-icon">
                                                     <i class="far fa-object-ungroup"></i>
                                                 </span> {{ $farm->acreage }}
-                                            </li>
-                                            <li>
-                                                <span class="list-icon">
-                                                    <i class="fab fa-pagelines"></i>
-                                                </span>
-                                                {{ $farm->crops->implode('name', ', ') }}
-                                                <a href="#">
-                                                    <i class="fas fa-plus-circle"></i>
-                                                </a>
                                             </li>
                                         </ul>
                                     </div>

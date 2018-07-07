@@ -54,18 +54,9 @@ class FarmerFarmsController extends Controller
     {
         $this->authorize("create", $farmer);
 
-        $farm = $farmer->farms()->create($request->only([
-            "size", "size_unit", "description"
-        ]));
+        $farm = $farmer->farms()->create($request->only(["size", "size_unit", "description"]));
 
         $farm->address()->create($request->only(["country", "state"]));
-
-        $farm->blocks()->create([
-            "number" => request("block_number"),
-            "description" => request("block_description")
-        ]);
-
-        $farm->crops()->attach(request("crops"));
 
         return redirect()->route("farmers.show", $farmer);
     }

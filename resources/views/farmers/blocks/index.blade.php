@@ -24,8 +24,9 @@
                         </ol>
                     </nav>
                     <div class="d-sm-flex align-items-sm-center">
-                        <h1 class="page-title mr-sm-auto"> Harvests
-                            <small class="badge">{{ $farmer->harvests->count() }} Totals</small>
+                        <h1 class="page-title mr-sm-auto">
+                            Blocks
+                            <small class="badge">{{ $farmer->blocks->count() }} Totals</small>
                         </h1>
                         <div class="btn-toolbar">
                             <button type="button" class="btn btn-light">
@@ -36,9 +37,9 @@
                                 <i class="oi oi-data-transfer-upload"></i>
                                 <span class="ml-1">Import</span>
                             </button>
-                            <a href="{{ route("farmers.harvests.create", $farmer) }}" class="btn btn-primary">
+                            <a href="{{ route("farmers.blocks.create", $farmer) }}" class="btn btn-primary">
                                 <span class="fas fa-plus mr-1"></span>
-                                Add a new harvest
+                                Add a new block
                             </a>
                         </div>
                     </div>
@@ -47,7 +48,7 @@
                 <!-- .page-section -->
                 <div class="page-section">
 
-                    @if($farmer->harvests->count())
+                    @if($farmer->blocks->count())
                         <section class="card card-fluid">
                             <header class="card-header">
                                 <ul class="nav nav-tabs card-header-tabs">
@@ -79,31 +80,33 @@
                                     <table class="table">
                                         <thead>
                                         <tr>
-                                            <th class="text-left" nowrap>Product</th>
-                                            <th class="text-right" nowrap>Expected amount</th>
-                                            <th class="text-left" nowrap>Expected date</th>
+                                            <th class="text-left" nowrap>Number</th>
+                                            <th class="text-right" nowrap>Size</th>
                                             <th class="text-left" nowrap>Farm</th>
+                                            <th class="text-left" nowrap>Product</th>
                                             <th class="text-left" nowrap>Status</th>
+                                            <th class="text-right" nowrap></th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($farmer->harvests as $harvest)
+                                        @foreach($farmer->blocks as $block)
                                             <tr>
                                                 <td class="text-left align-middle" nowrap>
-                                                    {{ $harvest->block->product->name }}
+                                                    {{ $block->number }}
                                                 </td>
                                                 <td class="text-right align-middle" nowrap>
-                                                    {{ $harvest->expected_amount }} {{ $harvest->amount_unit }}
+                                                    {{ $block->size }} {{ $block->size_unit }}
                                                 </td>
                                                 <td class="text-left align-middle" nowrap>
-                                                    {{ $harvest->expected_date->toFormattedDateString() }}
+                                                    {{ $block->farm->name }}
                                                 </td>
                                                 <td class="text-left align-middle" nowrap>
-                                                    {{ $harvest->block->farm->name }}
+                                                    {{ $block->product->name }}
                                                 </td>
                                                 <td class="text-left text-capitalize align-middle" nowrap>
-                                                    {{ $harvest->status }}
+                                                    {{ $block->status }}
                                                 </td>
+                                                <td></td>
                                             </tr>
                                         @endforeach
                                         </tbody>

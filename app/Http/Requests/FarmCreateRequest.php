@@ -28,9 +28,6 @@ class FarmCreateRequest extends FormRequest
             "size" => "required|numeric",
             "size_unit" => ["required", Rule::in(["acre"])],
             "description" => "required",
-            "crops" => "required|array",
-            "block_number" => "required",
-            "block_description" => "required",
             "country" => "required",
             "state" => "required",
         ];

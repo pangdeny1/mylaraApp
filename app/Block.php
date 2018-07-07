@@ -16,14 +16,14 @@ class Block extends Model implements Auditable
         return $this->belongsTo(Farm::class);
     }
 
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+
     public function harvests()
     {
         return $this->hasMany(Harvest::class);
-    }
-
-    public function crops()
-    {
-        return $this->belongsToMany(Product::class, "block_crop");
     }
 
     public function batches()

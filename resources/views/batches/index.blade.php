@@ -51,26 +51,16 @@
                             </ul>
                         </header>
                         <div class="card-body">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <span class="oi oi-magnifying-glass"></span>
-                                </span>
-                                    </div>
-                                    <input type="text" class="form-control" placeholder="Search record">
-                                </div>
-                            </div>
-                            <div class="text-muted"> Showing 1 to 10 of 1,000 entries </div>
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th nowrap>Name</th>
-                                            <th nowrap>Max #</th>
+                                            <th nowrap>Number</th>
+                                            <th class="text-right" nowrap>Max #</th>
                                             <th nowrap>Valid from</th>
                                             <th nowrap>Valid till</th>
                                             <th nowrap>Status</th>
+                                            <th class="text-right" nowrap>Members</th>
                                             <th nowrap></th>
                                         </tr>
                                     </thead>
@@ -78,12 +68,22 @@
                                     @foreach($batches as $batch)
                                         <tr>
                                             <td class="text-left"  nowrap>
-                                                <div>
-                                                    <div>{{ $batch->number }}</div>
-                                                    <div>
-                                                        <small>{{ str_limit($batch->description, 80)  }}</small>
-                                                    </div>
-                                                </div>
+                                                {{ $batch->number }}
+                                            </td>
+                                            <td class="text-right" nowrap>
+                                                {{ $batch->max_count }}
+                                            </td>
+                                            <td class="text-left" nowrap>
+                                                {{ $batch->valid_from->toFormattedDateString() }}
+                                            </td>
+                                            <td class="text-left" nowrap>
+                                                {{ $batch->valid_till->toFormattedDateString() }}
+                                            </td>
+                                            <td class="text-left" nowrap>
+                                                {{ $batch->status }}
+                                            </td>
+                                            <td class="text-right" nowrap>
+                                                {{ $batch->farmers->count() }}
                                             </td>
                                             <td class="align-middle text-right" nowrap>
                                                 @can("edit", $batch)

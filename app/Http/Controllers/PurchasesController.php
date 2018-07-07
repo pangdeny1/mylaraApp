@@ -78,46 +78,26 @@ class PurchasesController extends Controller
     {
         $this->authorize("create", Purchase::class);
 
-        $this->validate($request, ["field_weight" => "gte:weight_before"]);
-
         $farmer     = Farmer::findOrFail(request("farmer_id"));
         // Get Farmer's selected batch
         $batch      = $farmer->batches()->findOrFail(request("batch_id"));
         // Find means to get exactly harvest for given batch
-        $harvest    = $batch->harvests()->first();
-        // Get Harvest's product
-        $product    = $harvest->product;
-
-        if(!is_null($request->weight_after) && !is_null($request->weight_unit)) {
-            $amount  = $product->calculatePrice($request);
-        }
+        $harvest    = $batch->harvests()->where("farmer_id", $farmer->id)->firstOrFail();
 
         $purchase = Purchase::create([
             "batch_id" => $batch->id,
-            "product_id" => $product->id,
+            "product_id" => $harvest->block->product_id,
             "harvest_id" => $harvest->id,
-            "farmer_id" => request("farmer_id"),
+            "farmer_id" => $farmer->id,
             "amount" => request("amount", isset($amount) ? $amount : null),
             "currency" => request("currency", "TZS"),
             "weight_unit" => request("weight_unit"),
             "field_weight" => request("field_weight"),
-            "weight_before" => request("weight_before"),
-            "weight_after" => request("weight_after"),
             "creator_id" => auth()->id(),
         ]);
 
         if (! is_null($request->remarks)) {
             $purchase->remarks()->create(["body" => request("remarks")]);
-        }
-
-        if ($purchase->isProcessed()) {
-
-            $purchase->update(["status" => "processed"]);
-
-            Sms::send(
-                phone($farmer->phone, "tz")->formatE164(),
-                $this->messageBody($farmer, $product, $purchase)
-            );
         }
 
         return redirect()->route("purchases.index")->with('status', 'Purchase was recorded successfully!');

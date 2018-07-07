@@ -119,64 +119,19 @@
                                                    value="{{ old("field_weight") }}"
                                             >
                                         </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="weight_before">House packing</label>
-                                            <input type="number"
-                                                   name="weight_before"
-                                                   id="weight_before"
-                                                   class="form-control {{ $errors->has("weight_before") ? "is-invalid" : "" }}"
-                                                   value="{{ old("weight_before") }}"
-                                            >
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="weight_after">Graded</label>
-                                            <input type="number"
-                                                   name="weight_after"
-                                                   id="weight_after"
-                                                   class="form-control {{ $errors->has("weight_after") ? "is-invalid" : "" }}"
-                                                   value="{{ old("weight_after") }}"
-                                            >
-                                        </div>
                                     </div>
 
 
-                                    @if($errors->has("field_weight") || $errors->has("weight_after") || $errors->has("weight_before"))
+                                    @if($errors->has("field_weight"))
                                         <div class="alert alert-danger">
                                             <p>{{ $errors->first("field_weight") }}</p>
-                                            <p>{{ $errors->first("weight_after") }}</p>
-                                            <p>{{ $errors->first("weight_before") }}</p>
                                         </div>
                                     @endif
 
                                 </div>
                                 <hr>
-                                <header class="card-header border-bottom-0">
-                                    Price information
-                                </header>
                                 <div class="card-body">
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label for="amount">Amount</label>
-                                            <div class="input-group">
-                                                <span class="input-group-text">
-                                                    Tsh.
-                                                </span>
-                                                <input type="text"
-                                                       name="amount"
-                                                       id="amount"
-                                                       class="form-control {{ $errors->has("amount") ? "is-invalid" : "" }}"
-                                                >
-                                            </div>
-                                            @if($errors->has("amount"))
-                                                <span class="invalid-feedback">
-                                                {{ $errors->first("amount") }}
-                                            </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="card-body">
+
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <label for="remarks">Remarks</label>

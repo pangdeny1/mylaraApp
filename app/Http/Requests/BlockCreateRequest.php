@@ -24,11 +24,12 @@ class BlockCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            "name" => "required",
+            "number" => "required",
+            "size" => "required",
+            "size_unit" => "required",
+            "farm_id" => "required",
+            "product_id" => "required",
             "description" => "required",
-            "street" => "required",
-            "state" => "required",
-            "country" => "required",
         ];
     }
 }

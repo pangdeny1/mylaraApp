@@ -28,10 +28,8 @@ class HarvestCreateRequest extends FormRequest
             "expected_amount" => ["required"],
             "amount_unit" => ["required", Rule::in(["kg", "t"])],
             "description" => ["required"],
-            "product_id" => ["required"],
-            "farm_id" => ["required"],
             "block_id" => ["required"],
-            "batch_number" => ["required"],
+            "batch_id" => ["required"],
             "expected_date" => ["required", "date", "after:today"],
         ];
     }
