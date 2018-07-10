@@ -102,7 +102,7 @@ Route::resource("farmers", "FarmersController");
 Route::resource("purchases", "PurchasesController");
 Route::resource("clusters", "ClustersController");
 
-Route::prefix('reports')->group(function () {
+Route::group(["prefix" => 'reports'], function () {
     Route::get("purchases", [
         "as" => "purchases.reports",
         "uses" => "PurchasesReportsController@index",
@@ -113,7 +113,7 @@ Route::prefix('reports')->group(function () {
     ]);
 });
 
-Route::prefix('settings')->group(function () {
+Route::group(["prefix" => 'settings'], function () {
     Route::resource("users", "UsersController");
     Route::resource("roles", "RolesController");
     Route::resource("products", "ProductsController");
