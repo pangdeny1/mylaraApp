@@ -37,8 +37,8 @@ class Product extends Model implements Auditable
         return $this->hasMany(ProductPrice::class);
     }
 
-    public function calculatePrice(Request $request)
+    public function calculatePrice($weight, $unit)
     {
-        return $this->price->normalize($request->weight_after, $request->weight_unit);
+        return $this->price->normalize($weight, $unit);
     }
 }
