@@ -50,6 +50,16 @@ class Farmer extends Model implements Auditable
         return $this->belongsToMany(Batch::class, "farmer_batch")->withTimestamps();
     }
 
+    public function findHarvestByBatchId($id)
+    {
+        return $this->harvests()->where("batch_id", $id)->first();
+    }
+
+    public function hasHarvested(Batch $batch)
+    {
+        return $this->harvests()->where("batch_id", $batch->id)->exists();
+    }
+
     public function getFullNameAttribute()
     {
         return $this->attributes["first_name"] ." ". $this->attributes["last_name"];

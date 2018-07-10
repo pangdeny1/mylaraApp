@@ -23,6 +23,11 @@ class Batch extends Model implements Auditable
         return $this->hasMany(Harvest::class);
     }
 
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class);
+    }
+
     public function product()
     {
         return $this->hasManyThrough(Product::class, Harvest::class);

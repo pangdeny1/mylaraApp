@@ -8,6 +8,7 @@ use App\Harvest;
 use App\Http\Requests\HarvestCreateRequest;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class FarmerHarvestsController extends Controller
@@ -43,6 +44,14 @@ class FarmerHarvestsController extends Controller
 
     public function store(HarvestCreateRequest $request, Farmer $farmer)
     {
+        $this->validate($request, [
+            'batch_id' => Rule::unique('harvests')->where(function ($query) use ($farmer){
+                return $query
+                    ->where('farmer_id', $farmer->id)
+                    ->where("block_id", request("block_id"));
+            })
+        ]);
+
         $harvest = Harvest::create($request->only([
             "expected_amount",
             "amount_unit",
@@ -54,6 +63,6 @@ class FarmerHarvestsController extends Controller
 
         $harvest->update(["farmer_id" => $farmer->id]);
 
-        return redirect()->route("farmers.show", $farmer);
+        return redirect()->back();
     }
 }

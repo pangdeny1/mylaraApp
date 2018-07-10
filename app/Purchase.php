@@ -53,6 +53,27 @@ class Purchase extends Model implements Auditable
         return new Price($this);
     }
 
+    public function hasAnyStatus(array $statuses)
+    {
+        foreach ($statuses as $status) {
+            if ($this->status === $status){
+                return true;
+                break;
+            }
+        }
+
+        return false;
+    }
+
+    public function hasStatus($name)
+    {
+        if ($this->status === $name){
+            return true;
+        }
+
+        return false;
+    }
+
     public function isProcessed()
     {
         return !is_null($this->attributes["amount"]) && !is_null($this->attributes["weight_after"]);

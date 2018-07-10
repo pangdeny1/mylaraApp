@@ -11,6 +11,8 @@ class FarmersController extends Controller
 {
     public function index()
     {
-        return new FarmersCollection(Farmer::get());
+        $farmers = Farmer::has("farms")->get();
+
+        return new FarmersCollection($farmers);
     }
 }

@@ -51,28 +51,24 @@
 
                     <hr>
 
+                    <div class="menu-header">Clusters</div>
+                    <div class="menu-item">
+                        @can("view", \App\Batch::class)
+                            <a href="{{ route("clusters.index") }}" class="menu-link">
+                                <i class="fas fa-database text-muted mr-2"></i>
+                                Browser clusters
+                            </a>
+                        @endcan
+                    </div>
+
+                    <hr>
+
                     <div class="menu-header">Purchases</div>
                     <div class="menu-item">
                         @can("view", \App\Purchase::class)
                         <a href="{{ route("purchases.index") }}" class="menu-link">
-                            <span class="fas fa-align-left text-muted mr-1"></span>
+                            <i class="fas fa-shopping-cart text-muted mr-2"></i>
                             All purchases
-                        </a>
-                        <a href="{{ route("purchases.index", ["status" => "processed"]) }}" class="menu-link">
-                            <span class="fas fa-check-circle text-muted mr-1"></span>
-                            Processed
-                        </a>
-                        <a href="{{ route("purchases.index", ["status" => "unprocessed"]) }}" class="menu-link">
-                            <span class="fas fa-info-circle text-warning mr-1"></span>
-                            Unprocessed
-                        </a>
-                        <a href="{{ route("purchases.index", ["status" => "rejected"]) }}" class="menu-link">
-                            <span class="fas fa-times-circle text-danger mr-1"></span>
-                            Rejected
-                        </a>
-                        <a href="{{ route("purchases.index", ["status" => "completed"]) }}" class="menu-link mb-2">
-                            <span class="fas fa-check-circle text-success mr-1"></span>
-                            Completed
                         </a>
                         @endcan
 

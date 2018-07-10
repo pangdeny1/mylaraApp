@@ -241,7 +241,7 @@
                                                     {{ number_format($purchase->amount, 2) }}
                                                 </td>
                                                 <td class="text-capitalize">
-                                                    @include("purchases.partials.statuses.$purchase->status")
+                                                    @include("purchases.statuses.$purchase->status")
                                                 </td>
                                             </tr>
                                         @endforeach

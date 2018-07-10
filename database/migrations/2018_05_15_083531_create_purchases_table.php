@@ -23,8 +23,8 @@ class CreatePurchasesTable extends Migration
             $table->string('currency');
             $table->enum('status', [
                 "received",
-                "processed",
-                "pending",
+                "packed",
+                "graded",
                 "rejected",
                 "completed",
                 "paid",

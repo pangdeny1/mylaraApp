@@ -24,6 +24,11 @@ class Harvest extends Model implements Auditable
         return $this->belongsTo(Product::class);
     }
 
+    public function farmer()
+    {
+        return $this->belongsTo(Farmer::class);
+    }
+
     public function farm()
     {
         return $this->belongsTo(Farm::class);
@@ -34,9 +39,19 @@ class Harvest extends Model implements Auditable
         return $this->belongsTo(Batch::class);
     }
 
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class);
+    }
+
     public function block()
     {
         return $this->belongsTo(Block::class);
+    }
+
+    public function isPurchased(Batch $batch)
+    {
+        return $this->purchases()->where("batch_id", $batch->id)->exists();
     }
 
     public function getVolumeAttribute()

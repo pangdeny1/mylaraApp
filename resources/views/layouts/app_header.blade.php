@@ -124,12 +124,6 @@
                             <div class="dropdown-divider"></div>
 
                             @can("view", \App\Block::class)
-                            <a href="{{ route("blocks.index") }}" class="dropdown-item ">
-                                <i class="fas fa-th-large"></i> Blocks
-                            </a>
-                            @endcan
-
-                            @can("view", \App\Block::class)
                             <a href="{{ route("batches.index") }}" class="dropdown-item ">
                                 <i class="fas fa-database"></i> Batches
                             </a>

@@ -1,25 +1,10 @@
 <?php
 
-
-use Olifolkerd\Convertor\Convertor;
-use PragmaRX\Countries\Package\Countries;
 Auth::routes();
 
 Route::view("/", "welcome");
 
-Route::view("template", "template");
-
-Route::get("test", function (){
-    return response(
-        Sms::send(
-            "+255762764819",
-            "Hello David Pella, This is the test message from homeverge"
-        ),
-        200
-    )->header('Content-Type', 'text/xml');
-});
-
-Route::get('home', [
+Route::get('dashboard', [
     "as" => "home",
     "uses" => "HomeController@index"
 ]);
@@ -28,17 +13,27 @@ Route::get("accounts/{user}/activations", [
     "as" => "accounts.activate",
     "uses" => "AccountActivationsController@create",
 ]);
-Route::patch("purchases/{purchase}/weights", [
-    "as" => "purchases.weights.update",
-    "uses" => "PurchasesWeightsController@update",
+
+Route::patch("purchases/{purchase}/packing_house_weight", [
+    "as" => "packing_house_weight.record",
+    "uses" => "PackingHouseWeightController@update",
 ]);
-Route::post("purchases/{purchase}/status", [
-    "as" => "purchases.acceptances",
-    "uses" => "PurchaseStatusesController@store"
+Route::patch("purchases/{purchase}/graded_weight", [
+    "as" => "graded_weight.record",
+    "uses" => "GradedWeightController@update",
 ]);
-Route::delete("purchases/{purchase}/status", [
-    "as" => "purchases.rejections",
-    "uses" => "PurchaseStatusesController@destroy"
+
+Route::delete("purchases/{purchase}/rejections", [
+    "as" => "purchases.rejections.delete",
+    "uses" => "PurchaseRejectionsController@destroy"
+]);
+Route::patch("purchases/{purchase}/completions", [
+    "as" => "purchases.completions.store",
+    "uses" => "PurchaseCompletionsController@store"
+]);
+Route::patch("purchases/{purchase}/payment_completions", [
+    "as" => "purchases.payment_completions.store",
+    "uses" => "PurchasePaymentCompletionsController@store"
 ]);
 Route::post("purchases/{purchase}/remarks", [
     "as" => "purchases.remarks.store",
@@ -49,18 +44,6 @@ Route::post("remarks/{remark}/replays", [
     "as" => "remarks.replays.store",
     "uses" => "RemarkReplaysController@store",
 ]);
-
-Route::prefix('reports')->group(function () {
-    Route::get("purchases", [
-        "as" => "purchases.reports",
-        "uses" => "PurchasesReportsController@index",
-    ]);
-    Route::get("products", [
-        "as" => "products.reports",
-        "uses" => "ProductsReportsController@index",
-    ]);
-});
-
 
 Route::get("farmers/{farmer}/farms", [
     "as" => "farmers.farms.index",
@@ -117,11 +100,27 @@ Route::get("farmers/{farmer}/settings", [
 Route::resource("farmers", "FarmersController");
 
 Route::resource("purchases", "PurchasesController");
-Route::resource("users", "UsersController");
-Route::resource("roles", "RolesController");
-Route::resource("products", "ProductsController");
-Route::resource("blocks", "BlocksController");
-Route::resource("batches", "BatchesController");
-Route::resource("product_categories", "ProductCategoriesController");
+Route::resource("clusters", "ClustersController");
+
+Route::prefix('reports')->group(function () {
+    Route::get("purchases", [
+        "as" => "purchases.reports",
+        "uses" => "PurchasesReportsController@index",
+    ]);
+    Route::get("products", [
+        "as" => "products.reports",
+        "uses" => "ProductsReportsController@index",
+    ]);
+});
+
+Route::prefix('settings')->group(function () {
+    Route::resource("users", "UsersController");
+    Route::resource("roles", "RolesController");
+    Route::resource("products", "ProductsController");
+    Route::resource("batches", "BatchesController");
+    Route::resource("product_categories", "ProductCategoriesController");
+});
+
+
 
 

@@ -1,7 +1,7 @@
 @extends("layouts.master")
 
 @section("content")
-    @if($purchases->count())
+    @if($clusters->count())
         <div class="wrapper">
             <div class="page">
                 <div class="page-inner">
@@ -10,13 +10,13 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item active">
                                     <a href="#">
-                                    <i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Purchases</a>
+                                        <i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Clusters</a>
                                 </li>
                             </ol>
                         </nav>
 
                         <div class="d-sm-flex align-items-sm-center">
-                            <h1 class="page-title mr-sm-auto mb-0"> Purchases </h1>
+                            <h1 class="page-title mr-sm-auto mb-0"> Clusters </h1>
                             <div class="btn-toolbar">
                                 <button type="button" class="btn btn-light">
                                     <i class="oi oi-data-transfer-download"></i>
@@ -26,12 +26,6 @@
                                     <i class="oi oi-data-transfer-upload"></i>
                                     <span class="ml-1">Import</span>
                                 </button>
-                                @can("create", \App\Purchase::class)
-                                <a href="{{ route("purchases.create") }}" class="btn btn-primary">
-                                    <span class="fas fa-plus mr-1"></span>
-                                    Record a new purchase
-                                </a>
-                                @endcan
                             </div>
                         </div>
                     </header>
@@ -99,83 +93,62 @@
 
                                 <!-- .table-responsive -->
                                 <div class="text-muted"> Showing 1 to 10 of 1,000 entries </div>
-                                <div class="table-responsive" style="min-height: 500px;">
+                                <div class="table-responsive">
                                     <table class="table">
                                         <thead>
-                                            <tr>
-                                                <th class="text-left"  nowrap>Farmer</th>
-                                                <th class="text-left"  nowrap>Product</th>
-                                                <th class="text-left"  nowrap>Batch number</th>
-                                                <th class="text-left"  nowrap>Block ID</th>
-                                                <th class="text-left"  nowrap>Harvest date</th>
-                                                <th class="text-right" nowrap>Farm weight</th>
-                                                <th class="text-right" nowrap>Pack house weight</th>
-                                                <th class="text-right" nowrap>Graded weight</th>
-                                                <th class="text-right" nowrap>Reject weight</th>
-                                                <th class="text-right" nowrap>Amount</th>
-                                                <th class="text-left"  nowrap>Status</th>
-                                                <th class="text-left"  nowrap style="width:100px; min-width:100px;">&nbsp;</th>
-                                            </tr>
+                                        <tr>
+                                            <th class="text-left"  nowrap>Number</th>
+                                            <th class="text-left"  nowrap>Max</th>
+                                            <th class="text-left"  nowrap>Status</th>
+                                            <th class="text-left"  nowrap>Members</th>
+                                            <th class="text-left"  nowrap>Purchases</th>
+                                            <th class="text-left"  nowrap>Harvests</th>
+                                            <th nowrap="">Action</th>
+                                        </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($purchases as $purchase)
-                                                <tr>
-                                                    <td nowrap>
-                                                        <a href="{{ route("farmers.show", $purchase->farmer) }}" class="user-avatar mr-1">
-                                                            <img class="img-fluid"
-                                                                 src="{{ Avatar::create($purchase->farmer->full_name)->toBase64() }}"
-                                                                 alt="{{ $purchase->farmer->full_name }}"
-                                                            >
-                                                        </a>
-                                                        <a href="{{ route("farmers.show", $purchase->farmer) }}">
-                                                            {{ $purchase->farmer->full_name }}
-                                                        </a>
-                                                    </td>
-                                                    <td nowrap>
-                                                        {{ $purchase->product->name }}
-                                                    </td>
-                                                    <td nowrap>
-                                                        {{ $purchase->batch->number }}
-                                                    </td>
-                                                    <td nowrap>
-                                                        {{ optional(optional($purchase->harvest)->block)->number }}
-                                                    </td>
-                                                    <td nowrap>
-                                                        {{ optional(optional($purchase->harvest)->expected_date)->toFormattedDateString() }}
-                                                    </td>
-                                                    <td nowrap>
-                                                        {{ $purchase->weight()->field_in_kg }}
-                                                    </td>
-                                                    <td nowrap>
-                                                        @include("purchases.modals.packing_house_weight")
-                                                    </td>
-                                                    <td nowrap>
-                                                        @if($purchase->weight_before)
-                                                            @include("purchases.modals.graded_weight")
-                                                        @else
-                                                            NIL
+                                        @foreach($clusters as $cluster)
+                                            <tr>
+                                                <td nowrap>
+                                                    <a href="{{ route("batches.show", $cluster) }}" class="user-avatar mr-1">
+                                                        <img class="img-fluid"
+                                                             src="{{ Avatar::create($cluster->number)->toBase64() }}"
+                                                             alt="{{ $cluster->number }}"
+                                                        >
+                                                    </a>
+                                                    <a href="{{ route("batches.show", $cluster) }}">
+                                                        {{ $cluster->number }}
+                                                    </a>
+                                                </td>
+                                                <td>{{ $cluster->max_count }}</td>
+                                                <td>{{ $cluster->status }}</td>
+                                                <td>
+                                                    @include("clusters._member_modal")
+                                                </td>
+                                                <td>
+                                                    @include("clusters._purchases_modal")
+                                                </td>
+                                                <td>{{ $cluster->harvests->count() }}</td>
+                                                <td nowrap="">
+                                                    @if($cluster->max_count > $cluster->farmers->count())
+                                                        @if(\App\Farmer::query()->whereNotIn("id", $cluster->farmers->pluck("id"))->exists())
+                                                            @include("clusters._farmers_modal")
                                                         @endif
-                                                    </td>
-                                                    <td class="text-right" nowrap>
-                                                        {{ $purchase->weight()->loss_in_kg }}
-                                                    </td>
-                                                    <td class="text-right" nowrap>
-                                                        {{ $purchase->price()->amount }}
-                                                    </td>
-                                                    <td class="text-capitalize" nowrap>
-                                                        @include("purchases.statuses.$purchase->status")
-                                                    </td>
-                                                    <td>
-                                                        @include("purchases.actions.index")
-                                                    </td>
-                                                </tr>
-                                            @endforeach
+                                                    @else
+                                                        <button type="button" class="btn btn-sm btn-primary">
+                                                            Batch is full
+                                                        </button>
+                                                    @endif
+
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>
 
                                 <!-- .pagination -->
-                                {{ $purchases->links() }}
+                                {{ $clusters->links() }}
                             </div>
                         </section>
                     </div>

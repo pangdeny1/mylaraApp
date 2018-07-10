@@ -69,14 +69,14 @@
                                             >
                                                 <option value="">Choose...</option>
                                                 @foreach($farmer->batches as $batch)
-                                                    <option value="{{ $batch->id }}">
+                                                    <option value="{{ $batch->id }}" {{ old("batch_id", request("batch_id")) == $batch->id ? "selected" : "" }}>
                                                         {{ $batch->number }}
                                                     </option>
                                                 @endforeach
                                             </select>
-                                            @if ($errors->has('batch_number'))
+                                            @if ($errors->has('batch_id'))
                                                 <span class="invalid-feedback">
-                                                    <strong>{{ $errors->first('batch_number') }}</strong>
+                                                    <strong>{{ $errors->first('batch_id') }}</strong>
                                                 </span>
                                             @endif
                                         </div>
@@ -91,7 +91,7 @@
                                             >
                                                 <option value="">Choose...</option>
                                                 @foreach($farmer->blocks as $block)
-                                                <option value="{{ $block->id }}">
+                                                <option value="{{ $block->id }}" {{ old("block_id") == $block->id ? "selected" : "" }}>
                                                     {{ $block->number }}
                                                 </option>
                                                 @endforeach
