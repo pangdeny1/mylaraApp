@@ -123,6 +123,16 @@
 
                             <div class="dropdown-divider"></div>
 
+                            <a href="{{ route("groups.index") }}" class="dropdown-item ">
+                                <i class="far fa-folder-open"></i> Groups
+                            </a>
+
+                            <a href="{{ route("group_products.index") }}" class="dropdown-item ">
+                                <i class="far fa-folder-open"></i> Groups product prices
+                            </a>
+
+                            <div class="dropdown-divider"></div>
+
                             @can("view", \App\Block::class)
                             <a href="{{ route("batches.index") }}" class="dropdown-item ">
                                 <i class="fas fa-database"></i> Batches

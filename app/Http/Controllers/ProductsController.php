@@ -54,17 +54,6 @@ class ProductsController extends Controller
 
         $product = Product::create($request->only(["name", "description"]));
 
-        ProductPrice::create([
-            "amount" => request("amount"),
-            "currency" => request("currency"),
-            "unit" => request("unit"),
-            "unit_value" => request("unit_value"),
-            "product_id" => $product->id,
-            "valid_from" => request("valid_from"),
-            "valid_till" => request("valid_till"),
-            "is_current_price" => true,
-        ]);
-
         $product->categories()->attach(request("category_id"));
 
         return redirect()->route("products.index");

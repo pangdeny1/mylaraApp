@@ -4,32 +4,6 @@ namespace App;
 
 use OwenIt\Auditing\Contracts\Auditable;
 
-/**
- * App\Role
- *
- * @property-read \Illuminate\Database\Eloquent\Collection|\Silber\Bouncer\Database\Ability[] $abilities
- * @property-read \Illuminate\Database\Eloquent\Collection|\OwenIt\Auditing\Models\Audit[] $audits
- * @property-read mixed $color
- * @property-read mixed $placeholder
- * @method static \Illuminate\Database\Eloquent\Builder|\Silber\Bouncer\Database\Role whereAssignedTo($model, $keys = null)
- * @mixin \Eloquent
- * @property int $id
- * @property string $name
- * @property string|null $title
- * @property int $level
- * @property int|null $scope
- * @property string $description
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Role whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Role whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Role whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Role whereLevel($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Role whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Role whereScope($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Role whereTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Role whereUpdatedAt($value)
- */
 class Role extends \Silber\Bouncer\Database\Role implements Auditable
 {
     use \OwenIt\Auditing\Auditable;

@@ -55,7 +55,7 @@
                                                     class="custom-select d-block w-100 {{ $errors->has('size_unit') ? 'is-invalid' : '' }}"
                                                     id="size_unit"
                                             >
-                                                <option value="acre">Acre</option>
+                                                <option value="Hectare">Hectare</option>
                                             </select>
                                             @if ($errors->has('size_unit'))
                                                 <span class="invalid-feedback">
@@ -94,7 +94,7 @@
                                                     required=""
                                             >
                                                 <option value=""> Choose... </option>
-                                                @foreach(\App\Product::all() as $product)
+                                                @foreach($products as $product)
                                                     <option value="{{ $product->id }}" {{ old("product_id") === $product->id ? "selected" : "" }}>
                                                         {{ $product->name }}
                                                     </option>

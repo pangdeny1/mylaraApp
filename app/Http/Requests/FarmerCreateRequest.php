@@ -34,6 +34,8 @@ class FarmerCreateRequest extends FormRequest
             "street" => "required",
             "country" => "required",
 
+            "group_id" => "required",
+
 //            "size" => "required|numeric",
 //            "size_unit" => "required",
         ];

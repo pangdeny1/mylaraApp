@@ -44,7 +44,7 @@
                                                     class="custom-select d-block w-100 {{ $errors->has('size_unit') ? 'is-invalid' : '' }}"
                                                     id="size_unit"
                                             >
-                                                <option value="acre">Acre</option>
+                                                <option value="Hectare">Hectare </option>
                                             </select>
                                             @if ($errors->has('size_unit'))
                                                 <span class="invalid-feedback">

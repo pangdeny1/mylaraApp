@@ -78,7 +78,7 @@
                                                    name="valid_from"
                                                    id="valid_from"
                                                    class="form-control {{ $errors->has('valid_from') ? 'is-invalid' : '' }}"
-                                                   value="{{ old("valid_from") }}"
+                                                   value="{{ old("valid_from", date("Y-m-d")) }}"
                                             >
                                             @if ($errors->has('valid_from'))
                                                 <span class="invalid-feedback">

@@ -70,6 +70,8 @@ class FarmersController extends Controller
             "country",
             "postal_code",
         ]));
+
+        $farmer->groups()->attach($request->group_id);
         
         return redirect()->route("farmers.show", $farmer);
     }

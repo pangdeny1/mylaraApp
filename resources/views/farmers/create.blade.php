@@ -127,6 +127,30 @@
                                     </div>
                                 </div>
                             </div>
+                            <hr>
+                            <header class="card-header border-bottom-0">
+                                Group information
+                            </header>
+                            <div class="card-body">
+                                <div class="form-row">
+                                    <div class="form-group col-md-12 mb-3">
+                                        <label for="group_id">Group name</label>
+                                        <select name="group_id"
+                                                class="form-control d-block w-100 {{ $errors->has('group_id') ? 'is-invalid' : '' }}"
+                                                id="group_id"
+                                                required=""
+                                        >
+                                            <option value=""> Choose... </option>
+                                            @foreach(\App\Group::has("products")->latest()->get() as $group)
+                                                <option value="{{ $group->id }}" {{ old("group_id") === $group->id ? "selected" : "" }}>
+                                                    {{ $group->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <div class="invalid-feedback"> Please provide a valid state. </div>
+                                    </div>
+                                </div>
+                            </div>
                             <hr class="mb-4">
                             <header class="card-header border-bottom-0">
                                 Address information

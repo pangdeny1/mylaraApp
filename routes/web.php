@@ -9,6 +9,11 @@ Route::get('dashboard', [
     "uses" => "HomeController@index"
 ]);
 
+Route::post("clusters/{batch}/members",   [
+    "as"    => "clusters.members.store",
+    "uses"  => "ClusterMembersController@store"
+]);
+
 Route::get("accounts/{user}/activations", [
     "as" => "accounts.activate",
     "uses" => "AccountActivationsController@create",
@@ -102,7 +107,7 @@ Route::resource("farmers", "FarmersController");
 Route::resource("purchases", "PurchasesController");
 Route::resource("clusters", "ClustersController");
 
-Route::group(["prefix" => 'reports'], function () {
+Route::prefix('reports')->group(function () {
     Route::get("purchases", [
         "as" => "purchases.reports",
         "uses" => "PurchasesReportsController@index",
@@ -113,7 +118,20 @@ Route::group(["prefix" => 'reports'], function () {
     ]);
 });
 
-Route::group(["prefix" => 'settings'], function () {
+Route::prefix('settings')->group(function () {
+    Route::post("groups/{group}/products", [
+        "as" => "groups.products.store",
+        "uses" => "GroupProductsController@store"
+    ]);
+    Route::get("group_products", [
+        "as" => "group_products.index",
+        "uses" => "GroupProductsController@index"
+    ]);
+    Route::patch("group_products/{id}", [
+        "as" => "group_products.update",
+        "uses" => "GroupProductsController@update"
+    ]);
+    Route::resource("groups", "GroupsController");
     Route::resource("users", "UsersController");
     Route::resource("roles", "RolesController");
     Route::resource("products", "ProductsController");

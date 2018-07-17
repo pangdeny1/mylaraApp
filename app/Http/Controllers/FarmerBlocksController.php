@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
+use App\GroupProduct;
 use App\Block;
 use App\Farmer;
 use App\Http\Requests\BlockCreateRequest;
@@ -21,7 +23,19 @@ class FarmerBlocksController extends Controller
 
     public function create(Farmer $farmer)
     {
-        return view("farmers.blocks.create", compact("farmer"));
+        // Get products according to farmers group
+        if($farmer->groups->count()){
+            $groupIds   = $farmer->groups->pluck("id");
+            $productIds = GroupProduct::whereIn("group_id", $groupIds)->pluck("product_id");
+            $products   = Product::find($productIds);
+        } else {
+            $products = Product::all();
+        }
+
+        return view("farmers.blocks.create", [
+            "farmer" => $farmer,
+            "products" => $products,
+        ]);
     }
 
     public function store(BlockCreateRequest $request, Farmer $farmer)

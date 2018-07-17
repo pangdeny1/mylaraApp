@@ -42,7 +42,11 @@
                             </div>
 
                             <div class="list-group-item-figure">
-                                <button type="button" class="btn btn-sm btn-primary">Add</button>
+                                <form action="{{ route("clusters.members.store", $cluster) }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="farmer_id" value="{{ $farmer->id }}">
+                                    <button type="submit" class="btn btn-sm btn-primary">Add</button>
+                                </form>
                             </div>
 
                         </div>
