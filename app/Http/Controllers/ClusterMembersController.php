@@ -15,9 +15,11 @@ class ClusterMembersController extends Controller
     public function store(Request $request, Batch $batch)
     {
         $this->validate($request, ["farmer_id" => "required"]);
-        
-        $batch->farmers()->attach(request("farmer_id"));
 
+        if($batch->max_count >= $batch->farmers->count()) {
+            $batch->farmers()->attach(request("farmer_id"));
+        }
+        
         return redirect()->back();
     }
 }

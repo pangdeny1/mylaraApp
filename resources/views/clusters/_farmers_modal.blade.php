@@ -42,11 +42,17 @@
                             </div>
 
                             <div class="list-group-item-figure">
+                                @if($cluster->max_count >= $cluster->farmers->count())
                                 <form action="{{ route("clusters.members.store", $cluster) }}" method="post">
                                     @csrf
                                     <input type="hidden" name="farmer_id" value="{{ $farmer->id }}">
                                     <button type="submit" class="btn btn-sm btn-primary">Add</button>
                                 </form>
+                                @else
+                                <button type="submit" class="btn btn-sm btn-secondary">
+                                    Batch is full
+                                </button>
+                                @endif
                             </div>
 
                         </div>
