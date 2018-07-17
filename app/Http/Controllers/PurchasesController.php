@@ -59,7 +59,10 @@ class PurchasesController extends Controller
     {
         $this->authorize("view", Purchase::class);
 
-        $farmers    = Farmer::query()->has("batches")->get();
+        $farmers = Farmer::query()
+            ->has("batches")
+            ->has("groups")
+            ->get();
 
         $products   = Product::all();
 

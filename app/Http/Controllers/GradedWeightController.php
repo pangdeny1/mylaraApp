@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Sms;
 use App\Purchase;
+use App\GroupProduct;
 use Illuminate\Http\Request;
 
 class GradedWeightController extends Controller
@@ -16,7 +18,19 @@ class GradedWeightController extends Controller
     {
         $this->validate($request, ["weight_after" => "required"]);
 
-        $amount = $purchase->product->calculatePrice(request("weight_after"), $purchase->weight_unit);
+        $group = $purchase->farmer->groups()->first();
+
+        $groupProduct = GroupProduct::where([
+            "group_id" => $group->id,
+            "product_id" => $purchase->product_id,
+            "status" => "active",
+        ])->first();
+
+        $unitPrice = $groupProduct->price->amount;
+
+        $amount = ($unitPrice * request("weight_after"));
+
+        //$amount = $purchase->product->calculatePrice(request("weight_after"), $purchase->weight_unit);
 
         $purchase->update([
             "status" => "graded",
@@ -25,7 +39,7 @@ class GradedWeightController extends Controller
             "currency" => "TZS",
         ]);
 
-        \Sms::send(phone($purchase->farmer->phone, "TZ"), $this->messageBody(
+        Sms::send(phone($purchase->farmer->phone, "TZ"), $this->messageBody(
             $purchase->farmer,
             $purchase->product,
             $purchase

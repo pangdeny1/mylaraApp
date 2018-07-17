@@ -23,6 +23,7 @@ class CreateProductPricesTable extends Migration
             $table->timestamp('valid_till')->nullable();
             $table->boolean('is_current_price')->default(true);
             $table->unsignedInteger('product_id')->nullable();
+            $table->unsignedInteger('group_id')->nullable();
             $table->unsignedInteger('creator_id')->nullable();
             $table->timestamps();
         });
