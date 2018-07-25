@@ -41,4 +41,16 @@ class PurchasesWeightsController extends Controller
 
         return redirect()->back()->with("status", "Weight is recorded successfully");
     }
+
+    public function messageBody($firstname, $lastname, $group)
+    {
+        $format = 'Habari %s %s,Hongera  umesajiliwa kwenye mfumo wa Homevege';
+
+        return sprintf(
+            $format,
+            $firstname,
+            $lastname,
+            $group
+        );
+    }
 }

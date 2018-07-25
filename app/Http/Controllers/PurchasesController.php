@@ -103,6 +103,13 @@ class PurchasesController extends Controller
             $purchase->remarks()->create(["body" => request("remarks")]);
         }
 
+        \Sms::send(phone($purchase->farmer->phone, "TZ"), $this->messageBody(
+            $purchase->farmer,
+            $purchase->product,
+            $purchase,
+            $batch 
+        ));
+
         return redirect()->route("purchases.index")->with('status', 'Purchase was recorded successfully!');
     }
 
@@ -166,16 +173,18 @@ class PurchasesController extends Controller
         return redirect()->back()->with("status", "Entity is deleted successfully");
     }
 
-    public function messageBody($farmer, $product, $purchase)
+    public function messageBody($farmer, $product, $purchase, $batch)
     {
-        $format = "Hello %s, Tumepokea mzigo wako wa %s wenye jumla ya kilo %s kabla ya kuchambua na kilo %s baada ya uchambuzi, ambao thamini yake ni %s";
+        $format = "Habari %s, Mazao yako  ya %s batch no %s wenye jumla ya kilo %s yamepokelewa, Utajulishwa thamani yake baada ya uchambuzi";
 
         return sprintf($format,
             $farmer->full_name,
             $product->name,
             $purchase->weight_before,
             $purchase->weight_after,
-            $purchase->amount
+            $purchase->amount,
+            $batch->number,
+            $purchase->field_weight
         );
     }
 }

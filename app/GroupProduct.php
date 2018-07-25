@@ -24,4 +24,9 @@ class GroupProduct extends Model
     {
     	return $this->belongsTo(ProductPrice::class, "price_id")->latest();
     }
+
+    public function hasPrice()
+    {
+        return $this->price()->exists();
+    }
 }

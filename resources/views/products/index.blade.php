@@ -67,7 +67,6 @@
                                     <tr>
                                         <th class="text-left" nowrap>Name</th>
                                         <th class="text-left" nowrap>Category</th>
-                                        <th class="text-right" nowrap="">Price</th>
                                         <th class="text-right" nowrap=""></th>
                                     </tr>
                                 </thead>
@@ -83,9 +82,6 @@
                                             </div>
                                         </td>
                                         <td>{{ $product->category()->name }}</td>
-                                        <td class="text-right">
-                                            Tsh {{ number_format($product->price->amount, 2) }}/{{ $product->price->unit }}
-                                        </td>
                                         <td class="align-middle text-right">
                                             @can("edit", $product)
                                             <a href="{{ route("products.edit", $product) }}" class="btn btn-sm btn-secondary">

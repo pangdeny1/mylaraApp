@@ -99,8 +99,6 @@ class ProductCategoryTableSeeder extends Seeder
                 $product = factory(\App\Product::class)->create(["name" => $product["name"]]);
 
                 $product->categories()->attach($category);
-
-                factory(\App\ProductPrice::class)->create(["product_id" => $product->id]);
             }
         }
     }

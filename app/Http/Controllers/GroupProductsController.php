@@ -32,9 +32,6 @@ class GroupProductsController extends Controller
 
     public function update(Request $request, $id)
     {
-
-        $productGroup = GroupProduct::findOrFail($id);
-
         $this->validate($request, [
             "amount" => "required|numeric",
             "currency" => "required|in:TZS",
@@ -42,15 +39,14 @@ class GroupProductsController extends Controller
             "unit_value" => "required|numeric",
         ]);
 
+        $productGroup = GroupProduct::findOrFail($id);
 
-        if ($productGroup->price_id) {
-
+        if ($productGroup->hasPrice()) {
             $productGroup->price()->update([
                 "is_current_price" => false,
                 "valid_till" => now(),
             ]);
         }
-
 
         $price = ProductPrice::create([
             "amount" => request("amount"),
@@ -58,11 +54,12 @@ class GroupProductsController extends Controller
             "unit" => request("unit"),
             "unit_value" => request("unit_value"),
             "product_id" => $productGroup->product_id,
+            "group_id" => $productGroup->group_id,
             "valid_from" => request("valid_from"),
             "valid_till" => request("valid_till"),
             "is_current_price" => true,
+            "creator_id" => auth()->id(),
         ]);
-
 
         $productGroup->update(["price_id" => $price->id]);
 

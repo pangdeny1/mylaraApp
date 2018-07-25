@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Sms;
+use App\ProductPrice;
 use App\Purchase;
 use App\GroupProduct;
 use Illuminate\Http\Request;
@@ -18,19 +19,19 @@ class GradedWeightController extends Controller
     {
         $this->validate($request, ["weight_after" => "required"]);
 
-        $group = $purchase->farmer->groups()->first();
+        $product    = $purchase->product;
+        $batch      = $purchase->batch;
+        $group      = $purchase->farmer->groups()->first();
 
-        $groupProduct = GroupProduct::where([
+        $price = ProductPrice::where([
+            "product_id" => $product->id,
             "group_id" => $group->id,
-            "product_id" => $purchase->product_id,
-            "status" => "active",
+            "is_current_price" => true,
         ])->first();
 
-        $unitPrice = $groupProduct->price->amount;
+        $unitPrice = $price->amount;
 
         $amount = ($unitPrice * request("weight_after"));
-
-        //$amount = $purchase->product->calculatePrice(request("weight_after"), $purchase->weight_unit);
 
         $purchase->update([
             "status" => "graded",
@@ -50,7 +51,7 @@ class GradedWeightController extends Controller
 
     public function messageBody($farmer, $product, $purchase)
     {
-        $format = "Hello %s, Tumepokea mzigo wako wa %s wenye jumla ya kilo %s kabla ya kuchambua na kilo %s baada ya uchambuzi, ambao thamini yake ni %s";
+        $format = "Habari %s,Mzigo wako wa %s jumla ya kilo %s kabla ya uchambuzi,kilo %s baada ya uchambuzi,Thamani yake jumla ni %s";
 
         return sprintf($format,
             $farmer->full_name,

@@ -32,7 +32,7 @@ class PackingHouseWeightController extends Controller
 
     public function messageBody($farmer, $product, $purchase)
     {
-        $format = 'Hello %s, Tumepokea mzigo wako wa zao %s wenye jumla ya kilo %s ukiwa shambani na kilo %s ukiwa packing house, tutakufaarifu baada ya uchambuzi, Asante.';
+        $format = "Habari %s,Mzigo wako wa %s jumla ya kilo %s kabla ya uchambuzi,kilo %s baada ya uchambuzi,Thamani yake jumla ni %s";
 
         return sprintf(
             $format,
