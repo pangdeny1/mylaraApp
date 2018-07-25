@@ -99,7 +99,7 @@
                                                     </a>
                                                     @endcan
 
-                                                    @can("edit", \App\Farmer::class)
+                                                    @can("delete", \App\Farmer::class)
                                                     <a href="#" class="btn btn-sm btn-secondary">
                                                         <i class="far fa-trash-alt"></i>
                                                         <span class="sr-only">Remove</span>
