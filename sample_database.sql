@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.18)
 # Database: farmers
-# Generation Time: 2018-07-25 10:57:10 +0000
+# Generation Time: 2018-07-29 12:36:07 +0000
 # ************************************************************
 
 
@@ -71,6 +71,18 @@ CREATE TABLE `addresses` (
   KEY `addresses_addressable_type_addressable_id_index` (`addressable_type`,`addressable_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+LOCK TABLES `addresses` WRITE;
+/*!40000 ALTER TABLE `addresses` DISABLE KEYS */;
+
+INSERT INTO `addresses` (`id`, `street`, `address`, `country`, `state`, `postal_code`, `addressable_type`, `addressable_id`, `creator_id`, `created_at`, `updated_at`)
+VALUES
+	(1,'Kichangani St.',NULL,'Tanzania','Arusha',NULL,'App\\Farmer',1,NULL,'2018-07-29 14:02:59','2018-07-29 14:02:59'),
+	(2,'',NULL,'Tanzania','Arusha',NULL,'App\\Farm',1,NULL,'2018-07-29 14:03:18','2018-07-29 14:03:18'),
+	(3,'Mtendeni St.',NULL,'Tanzania','Arusha',NULL,'App\\Farmer',2,NULL,'2018-07-29 15:19:07','2018-07-29 15:19:07'),
+	(4,'',NULL,'Tanzania','Arusha',NULL,'App\\Farm',2,NULL,'2018-07-29 15:20:07','2018-07-29 15:20:07');
+
+/*!40000 ALTER TABLE `addresses` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table assigned_roles
@@ -125,6 +137,40 @@ CREATE TABLE `audits` (
   KEY `audits_auditable_type_auditable_id_index` (`auditable_type`,`auditable_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+LOCK TABLES `audits` WRITE;
+/*!40000 ALTER TABLE `audits` DISABLE KEYS */;
+
+INSERT INTO `audits` (`id`, `user_type`, `user_id`, `event`, `auditable_type`, `auditable_id`, `old_values`, `new_values`, `url`, `ip_address`, `user_agent`, `tags`, `created_at`, `updated_at`)
+VALUES
+	(1,'App\\User',1,'created','App\\ProductPrice',1,'[]','{\"amount\":\"750\",\"currency\":\"TZS\",\"unit\":\"kg\",\"unit_value\":\"1\",\"product_id\":9,\"group_id\":1,\"valid_from\":\"2018-07-29\",\"valid_till\":null,\"is_current_price\":true,\"creator_id\":1,\"id\":1}','http://farmers.test/settings/group_products/4?','127.0.0.1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',NULL,'2018-07-29 14:01:22','2018-07-29 14:01:22'),
+	(2,'App\\User',1,'created','App\\ProductPrice',2,'[]','{\"amount\":\"850\",\"currency\":\"TZS\",\"unit\":\"kg\",\"unit_value\":\"1\",\"product_id\":8,\"group_id\":1,\"valid_from\":\"2018-07-29\",\"valid_till\":null,\"is_current_price\":true,\"creator_id\":1,\"id\":2}','http://farmers.test/settings/group_products/3?','127.0.0.1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',NULL,'2018-07-29 14:01:33','2018-07-29 14:01:33'),
+	(3,'App\\User',1,'created','App\\ProductPrice',3,'[]','{\"amount\":\"900\",\"currency\":\"TZS\",\"unit\":\"kg\",\"unit_value\":\"1\",\"product_id\":7,\"group_id\":1,\"valid_from\":\"2018-07-29\",\"valid_till\":null,\"is_current_price\":true,\"creator_id\":1,\"id\":3}','http://farmers.test/settings/group_products/2?','127.0.0.1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',NULL,'2018-07-29 14:01:43','2018-07-29 14:01:43'),
+	(4,'App\\User',1,'created','App\\ProductPrice',4,'[]','{\"amount\":\"1200\",\"currency\":\"TZS\",\"unit\":\"kg\",\"unit_value\":\"1\",\"product_id\":6,\"group_id\":1,\"valid_from\":\"2018-07-29\",\"valid_till\":null,\"is_current_price\":true,\"creator_id\":1,\"id\":4}','http://farmers.test/settings/group_products/1?','127.0.0.1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',NULL,'2018-07-29 14:01:49','2018-07-29 14:01:49'),
+	(5,'App\\User',1,'created','App\\Farmer',1,'[]','{\"first_name\":\"David\",\"last_name\":\"Pella\",\"phone\":\"0762764819\",\"email\":\"david.pella@example.com\",\"gender\":\"male\",\"creator_id\":1,\"id\":1}','http://farmers.test/farmers?','127.0.0.1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',NULL,'2018-07-29 14:02:59','2018-07-29 14:02:59'),
+	(6,'App\\User',1,'created','App\\Address',1,'[]','{\"street\":\"Kichangani St.\",\"address\":null,\"state\":\"Arusha\",\"country\":\"Tanzania\",\"postal_code\":null,\"addressable_id\":1,\"addressable_type\":\"App\\\\Farmer\",\"id\":1}','http://farmers.test/farmers?','127.0.0.1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',NULL,'2018-07-29 14:02:59','2018-07-29 14:02:59'),
+	(7,'App\\User',1,'created','App\\Farm',1,'[]','{\"size\":\"10\",\"size_unit\":\"Hectare\",\"description\":\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci quam, ornare sed lorem sed, hendrerit auctor dolor. Nulla viverra, nibh quis ultrices malesuada, ligula ipsum vulputate diam, aliquam egestas nibh ante vel dui. Sed in.\",\"farmer_id\":1,\"id\":1}','http://farmers.test/farmers/1/farms?','127.0.0.1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',NULL,'2018-07-29 14:03:18','2018-07-29 14:03:18'),
+	(8,'App\\User',1,'created','App\\Address',2,'[]','{\"country\":\"Tanzania\",\"state\":\"Arusha\",\"addressable_id\":1,\"addressable_type\":\"App\\\\Farm\",\"id\":2}','http://farmers.test/farmers/1/farms?','127.0.0.1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',NULL,'2018-07-29 14:03:18','2018-07-29 14:03:18'),
+	(9,'App\\User',1,'created','App\\Block',1,'[]','{\"number\":\"3647HJD\",\"size\":\"3\",\"size_unit\":\"Hectare\",\"farm_id\":\"1\",\"product_id\":\"6\",\"description\":\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci quam, ornare sed lorem sed, hendrerit auctor dolor. Nulla viverra, nibh quis ultrices malesuada, ligula ipsum vulputate diam, aliquam egestas nibh ante vel dui. Sed in.\",\"id\":1}','http://farmers.test/farmers/1/blocks?','127.0.0.1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',NULL,'2018-07-29 14:03:46','2018-07-29 14:03:46'),
+	(10,'App\\User',1,'created','App\\Harvest',1,'[]','{\"farmer_id\":\"1\",\"block_id\":\"1\",\"expected_date\":\"2018-08-04 00:00:00\",\"amount_unit\":\"kg\",\"expected_amount\":\"450\",\"description\":\"\",\"id\":1}','http://farmers.test/purchases?','127.0.0.1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',NULL,'2018-07-29 15:11:04','2018-07-29 15:11:04'),
+	(11,'App\\User',1,'created','App\\Purchase',1,'[]','{\"delivery_note_id\":1,\"product_id\":6,\"harvest_id\":1,\"farmer_id\":1,\"block_id\":1,\"weight_unit\":\"kg\",\"field_weight\":\"450\",\"creator_id\":1,\"id\":1}','http://farmers.test/purchases?','127.0.0.1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',NULL,'2018-07-29 15:11:04','2018-07-29 15:11:04'),
+	(12,'App\\User',1,'created','App\\Remark',1,'[]','{\"body\":\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci quam, ornare sed lorem sed, hendrerit auctor dolor. Nulla viverra, nibh quis ultrices malesuada, ligula ipsum vulputate diam, aliquam egestas nibh ante vel dui. Sed in.\",\"remarkable_id\":1,\"remarkable_type\":\"App\\\\Purchase\",\"id\":1}','http://farmers.test/purchases?','127.0.0.1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',NULL,'2018-07-29 15:11:04','2018-07-29 15:11:04'),
+	(13,'App\\User',1,'created','App\\Harvest',2,'[]','{\"farmer_id\":\"1\",\"block_id\":\"1\",\"expected_date\":\"2018-08-04 00:00:00\",\"amount_unit\":\"kg\",\"expected_amount\":\"450\",\"description\":\"\",\"id\":2}','http://farmers.test/purchases?','127.0.0.1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',NULL,'2018-07-29 15:12:14','2018-07-29 15:12:14'),
+	(14,'App\\User',1,'created','App\\Purchase',2,'[]','{\"delivery_note_id\":1,\"product_id\":6,\"harvest_id\":2,\"farmer_id\":1,\"block_id\":1,\"weight_unit\":\"kg\",\"field_weight\":\"450\",\"creator_id\":1,\"id\":2}','http://farmers.test/purchases?','127.0.0.1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',NULL,'2018-07-29 15:12:14','2018-07-29 15:12:14'),
+	(15,'App\\User',1,'created','App\\Remark',2,'[]','{\"body\":\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci quam, ornare sed lorem sed, hendrerit auctor dolor. Nulla viverra, nibh quis ultrices malesuada, ligula ipsum vulputate diam, aliquam egestas nibh ante vel dui. Sed in.\",\"remarkable_id\":2,\"remarkable_type\":\"App\\\\Purchase\",\"id\":2}','http://farmers.test/purchases?','127.0.0.1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',NULL,'2018-07-29 15:12:14','2018-07-29 15:12:14'),
+	(16,'App\\User',1,'created','App\\Harvest',3,'[]','{\"farmer_id\":\"1\",\"block_id\":\"1\",\"expected_date\":\"2018-08-04 00:00:00\",\"amount_unit\":\"kg\",\"expected_amount\":\"450\",\"description\":\"\",\"id\":3}','http://farmers.test/purchases?','127.0.0.1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',NULL,'2018-07-29 15:12:30','2018-07-29 15:12:30'),
+	(17,'App\\User',1,'created','App\\Purchase',3,'[]','{\"delivery_note_id\":1,\"product_id\":6,\"harvest_id\":3,\"farmer_id\":1,\"block_id\":1,\"weight_unit\":\"kg\",\"field_weight\":\"450\",\"creator_id\":1,\"id\":3}','http://farmers.test/purchases?','127.0.0.1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',NULL,'2018-07-29 15:12:31','2018-07-29 15:12:31'),
+	(18,'App\\User',1,'created','App\\Remark',3,'[]','{\"body\":\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci quam, ornare sed lorem sed, hendrerit auctor dolor. Nulla viverra, nibh quis ultrices malesuada, ligula ipsum vulputate diam, aliquam egestas nibh ante vel dui. Sed in.\",\"remarkable_id\":3,\"remarkable_type\":\"App\\\\Purchase\",\"id\":3}','http://farmers.test/purchases?','127.0.0.1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',NULL,'2018-07-29 15:12:31','2018-07-29 15:12:31'),
+	(19,'App\\User',1,'created','App\\Farmer',2,'[]','{\"first_name\":\"Denis\",\"last_name\":\"Christian\",\"phone\":\"0783855313\",\"email\":\"denis.christian@example.com\",\"gender\":\"male\",\"creator_id\":1,\"id\":2}','http://farmers.test/farmers?','127.0.0.1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',NULL,'2018-07-29 15:19:07','2018-07-29 15:19:07'),
+	(20,'App\\User',1,'created','App\\Address',3,'[]','{\"street\":\"Mtendeni St.\",\"address\":null,\"state\":\"Arusha\",\"country\":\"Tanzania\",\"postal_code\":null,\"addressable_id\":2,\"addressable_type\":\"App\\\\Farmer\",\"id\":3}','http://farmers.test/farmers?','127.0.0.1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',NULL,'2018-07-29 15:19:07','2018-07-29 15:19:07'),
+	(21,'App\\User',1,'created','App\\Farm',2,'[]','{\"size\":\"7\",\"size_unit\":\"Hectare\",\"description\":\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci quam, ornare sed lorem sed, hendrerit auctor dolor. Nulla viverra, nibh quis ultrices malesuada, ligula ipsum vulputate diam, aliquam egestas nibh ante vel dui. Sed in.\",\"farmer_id\":2,\"id\":2}','http://farmers.test/farmers/2/farms?','127.0.0.1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',NULL,'2018-07-29 15:20:07','2018-07-29 15:20:07'),
+	(22,'App\\User',1,'created','App\\Address',4,'[]','{\"country\":\"Tanzania\",\"state\":\"Arusha\",\"addressable_id\":2,\"addressable_type\":\"App\\\\Farm\",\"id\":4}','http://farmers.test/farmers/2/farms?','127.0.0.1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',NULL,'2018-07-29 15:20:07','2018-07-29 15:20:07'),
+	(23,'App\\User',1,'created','App\\Block',2,'[]','{\"number\":\"465794\",\"size\":\"4\",\"size_unit\":\"Hectare\",\"farm_id\":\"2\",\"product_id\":\"7\",\"description\":\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci quam, ornare sed lorem sed, hendrerit auctor dolor. Nulla viverra, nibh quis ultrices malesuada, ligula ipsum vulputate diam, aliquam egestas nibh ante vel dui. Sed in.\",\"id\":2}','http://farmers.test/farmers/2/blocks?','127.0.0.1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',NULL,'2018-07-29 15:20:31','2018-07-29 15:20:31'),
+	(24,'App\\User',1,'created','App\\Harvest',4,'[]','{\"farmer_id\":\"2\",\"block_id\":\"2\",\"expected_date\":\"2018-08-03 00:00:00\",\"amount_unit\":\"kg\",\"expected_amount\":\"350\",\"description\":\"\",\"id\":4}','http://farmers.test/purchases?','127.0.0.1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',NULL,'2018-07-29 15:32:52','2018-07-29 15:32:52'),
+	(25,'App\\User',1,'created','App\\Purchase',4,'[]','{\"delivery_note_id\":1,\"product_id\":7,\"harvest_id\":4,\"farmer_id\":2,\"block_id\":2,\"weight_unit\":\"kg\",\"field_weight\":\"350\",\"creator_id\":1,\"id\":4}','http://farmers.test/purchases?','127.0.0.1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',NULL,'2018-07-29 15:32:52','2018-07-29 15:32:52'),
+	(26,'App\\User',1,'created','App\\Remark',4,'[]','{\"body\":\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci quam, ornare sed lorem sed, hendrerit auctor dolor. Nulla viverra, nibh quis ultrices malesuada, ligula ipsum vulputate diam, aliquam egestas nibh ante vel dui. Sed in.\",\"remarkable_id\":4,\"remarkable_type\":\"App\\\\Purchase\",\"id\":4}','http://farmers.test/purchases?','127.0.0.1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',NULL,'2018-07-29 15:32:52','2018-07-29 15:32:52');
+
+/*!40000 ALTER TABLE `audits` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table batches
@@ -166,6 +212,40 @@ CREATE TABLE `blocks` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+LOCK TABLES `blocks` WRITE;
+/*!40000 ALTER TABLE `blocks` DISABLE KEYS */;
+
+INSERT INTO `blocks` (`id`, `number`, `size`, `size_unit`, `farm_id`, `product_id`, `description`, `status`, `created_at`, `updated_at`)
+VALUES
+	(1,'3647HJD',3,'Hectare',1,6,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci quam, ornare sed lorem sed, hendrerit auctor dolor. Nulla viverra, nibh quis ultrices malesuada, ligula ipsum vulputate diam, aliquam egestas nibh ante vel dui. Sed in.','active','2018-07-29 14:03:46','2018-07-29 14:03:46'),
+	(2,'465794',4,'Hectare',2,7,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci quam, ornare sed lorem sed, hendrerit auctor dolor. Nulla viverra, nibh quis ultrices malesuada, ligula ipsum vulputate diam, aliquam egestas nibh ante vel dui. Sed in.','active','2018-07-29 15:20:31','2018-07-29 15:20:31');
+
+/*!40000 ALTER TABLE `blocks` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table delivery_notes
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `delivery_notes`;
+
+CREATE TABLE `delivery_notes` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+LOCK TABLES `delivery_notes` WRITE;
+/*!40000 ALTER TABLE `delivery_notes` DISABLE KEYS */;
+
+INSERT INTO `delivery_notes` (`id`, `number`, `created_at`, `updated_at`)
+VALUES
+	(1,'HV18-07-29','2018-07-29 15:10:23','2018-07-29 15:10:23');
+
+/*!40000 ALTER TABLE `delivery_notes` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table farm_product
@@ -218,6 +298,16 @@ CREATE TABLE `farmers` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+LOCK TABLES `farmers` WRITE;
+/*!40000 ALTER TABLE `farmers` DISABLE KEYS */;
+
+INSERT INTO `farmers` (`id`, `first_name`, `last_name`, `phone`, `email`, `gender`, `creator_id`, `created_at`, `updated_at`)
+VALUES
+	(1,'David','Pella','0762764819','david.pella@example.com','male',1,'2018-07-29 14:02:59','2018-07-29 14:02:59'),
+	(2,'Denis','Christian','0783855313','denis.christian@example.com','male',1,'2018-07-29 15:19:07','2018-07-29 15:19:07');
+
+/*!40000 ALTER TABLE `farmers` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table farms
@@ -236,6 +326,16 @@ CREATE TABLE `farms` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+LOCK TABLES `farms` WRITE;
+/*!40000 ALTER TABLE `farms` DISABLE KEYS */;
+
+INSERT INTO `farms` (`id`, `size`, `size_unit`, `farmer_id`, `description`, `created_at`, `updated_at`)
+VALUES
+	(1,10,'Hectare',1,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci quam, ornare sed lorem sed, hendrerit auctor dolor. Nulla viverra, nibh quis ultrices malesuada, ligula ipsum vulputate diam, aliquam egestas nibh ante vel dui. Sed in.','2018-07-29 14:03:18','2018-07-29 14:03:18'),
+	(2,7,'Hectare',2,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci quam, ornare sed lorem sed, hendrerit auctor dolor. Nulla viverra, nibh quis ultrices malesuada, ligula ipsum vulputate diam, aliquam egestas nibh ante vel dui. Sed in.','2018-07-29 15:20:07','2018-07-29 15:20:07');
+
+/*!40000 ALTER TABLE `farms` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table group_member
@@ -254,6 +354,16 @@ CREATE TABLE `group_member` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+LOCK TABLES `group_member` WRITE;
+/*!40000 ALTER TABLE `group_member` DISABLE KEYS */;
+
+INSERT INTO `group_member` (`id`, `group_id`, `farmer_id`, `status`, `removed_at`, `created_at`, `updated_at`)
+VALUES
+	(1,1,1,'active',NULL,'2018-07-29 14:02:59','2018-07-29 14:02:59'),
+	(2,1,2,'active',NULL,'2018-07-29 15:19:07','2018-07-29 15:19:07');
+
+/*!40000 ALTER TABLE `group_member` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table group_product
@@ -272,6 +382,18 @@ CREATE TABLE `group_product` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+LOCK TABLES `group_product` WRITE;
+/*!40000 ALTER TABLE `group_product` DISABLE KEYS */;
+
+INSERT INTO `group_product` (`id`, `group_id`, `product_id`, `price_id`, `status`, `created_at`, `updated_at`)
+VALUES
+	(1,1,6,4,'active','2018-07-29 14:00:10','2018-07-29 14:01:49'),
+	(2,1,7,3,'active','2018-07-29 14:00:27','2018-07-29 14:01:43'),
+	(3,1,8,2,'active','2018-07-29 14:00:40','2018-07-29 14:01:33'),
+	(4,1,9,1,'active','2018-07-29 14:00:47','2018-07-29 14:01:22');
+
+/*!40000 ALTER TABLE `group_product` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table groups
@@ -290,6 +412,15 @@ CREATE TABLE `groups` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+LOCK TABLES `groups` WRITE;
+/*!40000 ALTER TABLE `groups` DISABLE KEYS */;
+
+INSERT INTO `groups` (`id`, `name`, `max_count`, `status`, `description`, `created_at`, `updated_at`)
+VALUES
+	(1,'Arusha Group',20,'active','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci quam, ornare sed lorem sed, hendrerit auctor dolor. Nulla viverra, nibh quis ultrices malesuada, ligula ipsum vulputate diam, aliquam egestas nibh ante vel dui. Sed in.','2018-07-29 14:00:10','2018-07-29 14:00:10');
+
+/*!40000 ALTER TABLE `groups` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table harvests
@@ -311,6 +442,18 @@ CREATE TABLE `harvests` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+LOCK TABLES `harvests` WRITE;
+/*!40000 ALTER TABLE `harvests` DISABLE KEYS */;
+
+INSERT INTO `harvests` (`id`, `expected_amount`, `amount_unit`, `expected_date`, `block_id`, `farmer_id`, `batch_id`, `description`, `created_at`, `updated_at`)
+VALUES
+	(1,450,'kg','2018-08-04 00:00:00',1,1,NULL,'','2018-07-29 15:11:04','2018-07-29 15:11:04'),
+	(2,450,'kg','2018-08-04 00:00:00',1,1,NULL,'','2018-07-29 15:12:13','2018-07-29 15:12:13'),
+	(3,450,'kg','2018-08-04 00:00:00',1,1,NULL,'','2018-07-29 15:12:30','2018-07-29 15:12:30'),
+	(4,350,'kg','2018-08-03 00:00:00',2,2,NULL,'','2018-07-29 15:32:52','2018-07-29 15:32:52');
+
+/*!40000 ALTER TABLE `harvests` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table migrations
@@ -350,7 +493,8 @@ VALUES
 	(517,'2018_06_25_153201_create_blocks_table',1),
 	(518,'2018_07_14_131909_create_groups_table',1),
 	(519,'2018_07_14_132352_create_group_members_table',1),
-	(520,'2018_07_14_132439_create_group_products_table',1);
+	(520,'2018_07_14_132439_create_group_products_table',1),
+	(521,'2018_07_29_143658_create_delivery_notes_table',2);
 
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -504,6 +648,18 @@ CREATE TABLE `product_prices` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+LOCK TABLES `product_prices` WRITE;
+/*!40000 ALTER TABLE `product_prices` DISABLE KEYS */;
+
+INSERT INTO `product_prices` (`id`, `amount`, `currency`, `unit`, `unit_value`, `valid_from`, `valid_till`, `is_current_price`, `product_id`, `group_id`, `creator_id`, `created_at`, `updated_at`)
+VALUES
+	(1,750,'TZS','kg',1,'2018-07-29 00:00:00',NULL,1,9,1,1,'2018-07-29 14:01:22','2018-07-29 14:01:22'),
+	(2,850,'TZS','kg',1,'2018-07-29 00:00:00',NULL,1,8,1,1,'2018-07-29 14:01:33','2018-07-29 14:01:33'),
+	(3,900,'TZS','kg',1,'2018-07-29 00:00:00',NULL,1,7,1,1,'2018-07-29 14:01:43','2018-07-29 14:01:43'),
+	(4,1200,'TZS','kg',1,'2018-07-29 00:00:00',NULL,1,6,1,1,'2018-07-29 14:01:49','2018-07-29 14:01:49');
+
+/*!40000 ALTER TABLE `product_prices` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table products
@@ -570,6 +726,8 @@ CREATE TABLE `purchases` (
   `batch_id` int(10) unsigned DEFAULT NULL,
   `harvest_id` int(10) unsigned DEFAULT NULL,
   `farmer_id` int(10) unsigned DEFAULT NULL,
+  `delivery_note_id` int(10) unsigned DEFAULT NULL,
+  `block_id` int(10) unsigned DEFAULT NULL,
   `paid_at` timestamp NULL DEFAULT NULL,
   `creator_id` int(10) unsigned DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -577,6 +735,18 @@ CREATE TABLE `purchases` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+LOCK TABLES `purchases` WRITE;
+/*!40000 ALTER TABLE `purchases` DISABLE KEYS */;
+
+INSERT INTO `purchases` (`id`, `field_weight`, `weight_before`, `weight_after`, `weight_unit`, `amount`, `currency`, `status`, `product_id`, `batch_id`, `harvest_id`, `farmer_id`, `delivery_note_id`, `block_id`, `paid_at`, `creator_id`, `created_at`, `updated_at`)
+VALUES
+	(1,450,NULL,NULL,'kg',NULL,'','received',6,NULL,1,1,1,1,NULL,1,'2018-07-29 15:11:04','2018-07-29 15:11:04'),
+	(2,450,NULL,NULL,'kg',NULL,'','received',6,NULL,2,1,1,1,NULL,1,'2018-07-29 15:12:14','2018-07-29 15:12:14'),
+	(3,450,NULL,NULL,'kg',NULL,'','received',6,NULL,3,1,1,1,NULL,1,'2018-07-29 15:12:31','2018-07-29 15:12:31'),
+	(4,350,NULL,NULL,'kg',NULL,'','received',7,NULL,4,2,1,2,NULL,1,'2018-07-29 15:32:52','2018-07-29 15:32:52');
+
+/*!40000 ALTER TABLE `purchases` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table remarks
@@ -596,6 +766,18 @@ CREATE TABLE `remarks` (
   KEY `remarks_remarkable_type_remarkable_id_index` (`remarkable_type`,`remarkable_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+LOCK TABLES `remarks` WRITE;
+/*!40000 ALTER TABLE `remarks` DISABLE KEYS */;
+
+INSERT INTO `remarks` (`id`, `body`, `remarkable_type`, `remarkable_id`, `creator_id`, `created_at`, `updated_at`)
+VALUES
+	(1,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci quam, ornare sed lorem sed, hendrerit auctor dolor. Nulla viverra, nibh quis ultrices malesuada, ligula ipsum vulputate diam, aliquam egestas nibh ante vel dui. Sed in.','App\\Purchase',1,NULL,'2018-07-29 15:11:04','2018-07-29 15:11:04'),
+	(2,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci quam, ornare sed lorem sed, hendrerit auctor dolor. Nulla viverra, nibh quis ultrices malesuada, ligula ipsum vulputate diam, aliquam egestas nibh ante vel dui. Sed in.','App\\Purchase',2,NULL,'2018-07-29 15:12:14','2018-07-29 15:12:14'),
+	(3,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci quam, ornare sed lorem sed, hendrerit auctor dolor. Nulla viverra, nibh quis ultrices malesuada, ligula ipsum vulputate diam, aliquam egestas nibh ante vel dui. Sed in.','App\\Purchase',3,NULL,'2018-07-29 15:12:31','2018-07-29 15:12:31'),
+	(4,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et fermentum dui. Ut orci quam, ornare sed lorem sed, hendrerit auctor dolor. Nulla viverra, nibh quis ultrices malesuada, ligula ipsum vulputate diam, aliquam egestas nibh ante vel dui. Sed in.','App\\Purchase',4,NULL,'2018-07-29 15:32:52','2018-07-29 15:32:52');
+
+/*!40000 ALTER TABLE `remarks` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table roles
