@@ -23,6 +23,16 @@ class Purchase extends Model implements Auditable
         return $this->belongsTo(Batch::class);
     }
 
+    public function block()
+    {
+        return $this->belongsTo(Block::class);
+    }
+
+    public function deliveryNote()
+    {
+        return $this->belongsTo(DeliveryNote::class);
+    }
+
     public function product()
     {
         return $this->belongsTo(Product::class);

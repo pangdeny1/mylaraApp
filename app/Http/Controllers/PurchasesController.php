@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use Sms;
 use App\Batch;
 use App\Farmer;
-use App\Http\Requests\PurchaseCreateRequest;
 use App\Product;
 use App\Purchase;
+use App\Block;
+use App\DeliveryNote;
+use App\Harvest;
+use Nexmo\Client;
+use Illuminate\View\View;
+use App\Http\Requests\PurchaseCreateRequest;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
-use Nexmo\Client;
-use Sms;
 
 class PurchasesController extends Controller
 {
@@ -59,10 +62,7 @@ class PurchasesController extends Controller
     {
         $this->authorize("view", Purchase::class);
 
-        $farmers = Farmer::query()
-            ->has("batches")
-            ->has("groups")
-            ->get();
+        $farmers = Farmer::query()->has("groups")->get();
 
         $products   = Product::all();
 
@@ -81,19 +81,27 @@ class PurchasesController extends Controller
     {
         $this->authorize("create", Purchase::class);
 
-        $farmer     = Farmer::findOrFail(request("farmer_id"));
-        // Get Farmer's selected batch
-        $batch      = $farmer->batches()->findOrFail(request("batch_id"));
-        // Find means to get exactly harvest for given batch
-        $harvest    = $batch->harvests()->where("farmer_id", $farmer->id)->firstOrFail();
+        $deliveryNote = DeliveryNote::firstOrCreate(["number" => request("delivery_note_number")]);
 
+        $farmer = Farmer::findOrFail(request("farmer_id"));
+
+        $block  = Block::find(request("block_id"));
+
+        $harvest = Harvest::create([
+            "farmer_id" => request("farmer_id"),
+            "block_id" => request("block_id"),
+            "expected_date" => request("harvest_date"),
+            "amount_unit" => request("weight_unit"),
+            "expected_amount" => request("field_weight"),
+            "description" => request("description", ""),
+        ]);
+        
         $purchase = Purchase::create([
-            "batch_id" => $batch->id,
-            "product_id" => $harvest->block->product_id,
+            "delivery_note_id" => $deliveryNote->id,
+            "product_id" => $block->product_id,
             "harvest_id" => $harvest->id,
             "farmer_id" => $farmer->id,
-            "amount" => request("amount", isset($amount) ? $amount : null),
-            "currency" => request("currency", "TZS"),
+            "block_id" => $block->id,
             "weight_unit" => request("weight_unit"),
             "field_weight" => request("field_weight"),
             "creator_id" => auth()->id(),
@@ -106,8 +114,7 @@ class PurchasesController extends Controller
         \Sms::send(phone($purchase->farmer->phone, "TZ"), $this->messageBody(
             $purchase->farmer,
             $purchase->product,
-            $purchase,
-            $batch 
+            $purchase
         ));
 
         return redirect()->route("purchases.index")->with('status', 'Purchase was recorded successfully!');
@@ -173,9 +180,9 @@ class PurchasesController extends Controller
         return redirect()->back()->with("status", "Entity is deleted successfully");
     }
 
-    public function messageBody($farmer, $product, $purchase, $batch)
+    public function messageBody($farmer, $product, $purchase)
     {
-        $format = "Habari %s, Mazao yako  ya %s batch no %s wenye jumla ya kilo %s yamepokelewa, Utajulishwa thamani yake baada ya uchambuzi";
+        $format = "Habari %s, Mazao yako %s wenye jumla ya kilo %s yamepokelewa, Utajulishwa thamani yake baada ya uchambuzi";
 
         return sprintf($format,
             $farmer->full_name,
@@ -183,7 +190,6 @@ class PurchasesController extends Controller
             $purchase->weight_before,
             $purchase->weight_after,
             $purchase->amount,
-            $batch->number,
             $purchase->field_weight
         );
     }

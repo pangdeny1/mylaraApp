@@ -11,7 +11,12 @@ class FarmersController extends Controller
 {
     public function index()
     {
-        $farmers = Farmer::has("farms")->get();
+        $farmers = Farmer::query()
+            ->whereHas("sales", function($query){
+                return $query->whereNotNull("field_weight");
+            })
+            ->has("farms")
+            ->get();
 
         return new FarmersCollection($farmers);
     }

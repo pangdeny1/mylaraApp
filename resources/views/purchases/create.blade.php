@@ -29,7 +29,18 @@
                                     Basic information
                                 </header>
                                 <div class="card-body">
-                                    <batch-picker inline-template>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label for="delivery_note_number">Delivery note number</label>
+                                            <input type="text" 
+                                                   name="delivery_note_number" 
+                                                   id="delivery_note_number" 
+                                                   class="form-control"
+                                                   value="{{ \App\DeliveryNote::number() }}"
+                                            >
+                                        </div>
+                                    </div>
+                                    <farmer-block-picker inline-template>
                                         <section>
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
@@ -41,10 +52,7 @@
                                                     >
                                                         <option value="">-- Select farmer --</option>
                                                         @foreach($farmers as $farmer)
-                                                            <option value="{{ $farmer->id }}"
-                                                                    {{ old("farmer_id") == $farmer->id ? "selected" : "" }}
-                                                                    v-model="farmer"
-                                                            >
+                                                            <option value="{{ $farmer->id }}" {{ old("farmer_id") == $farmer->id ? "selected" : "" }}>
                                                                 {{ $farmer->full_name }}
                                                             </option>
                                                         @endforeach
@@ -58,28 +66,38 @@
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
-                                                    <label for="batch_id">Batch</label>
-                                                    <select name="batch_id"
-                                                            id="batch_id"
-                                                            class="form-control {{ $errors->has("batch_id") ? "is-invalid" : "" }}"
-                                                            :disabled="! hasBatchNumber"
+                                                    <label for="block_id">Block</label>
+                                                    <select name="block_id"
+                                                            id="block_id"
+                                                            class="form-control {{ $errors->has("block_id") ? "is-invalid" : "" }}"
+                                                            :disabled="! hasBlock"
                                                     >
-                                                        <option value="">-- Select batch number --</option>
-                                                        <option v-for="batch in batches"
-                                                                :key="batch.id"
-                                                                :value="batch.id"
-                                                        >@{{ batch.number }}</option>
+                                                        <option value="">-- Select block number --</option>
+                                                        <option v-for="block in blocks"
+                                                                :key="block.id"
+                                                                :value="block.id"
+                                                        >@{{ block.number }}</option>
 
                                                     </select>
-                                                    @if($errors->has("batch_id"))
+                                                    @if($errors->has("block_id"))
                                                         <span class="invalid-feedback">
-                                                            {{ $errors->first("batch_id") }}
+                                                            {{ $errors->first("block_id") }}
                                                         </span>
                                                     @endif
                                                 </div>
                                             </div>
                                         </section>
-                                    </batch-picker>
+                                    </farmer-block-picker>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="harvest_date">Harvest date</label>
+                                            <input type="date" 
+                                                   name="harvest_date" 
+                                                   id="harvest_date" 
+                                                   class="form-control"
+                                            >
+                                        </div>
+                                    </div>
                                 </div>
                                 <hr>
                                 <header class="card-header border-bottom-0">

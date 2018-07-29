@@ -107,6 +107,7 @@
                                                 <th class="text-left"  nowrap>Product</th>
                                                 <th class="text-left"  nowrap>Batch number</th>
                                                 <th class="text-left"  nowrap>Block ID</th>
+                                                <th class="text-left"  nowrap>DO number</th>
                                                 <th class="text-left"  nowrap>Harvest date</th>
                                                 <th class="text-right" nowrap>Farm weight</th>
                                                 <th class="text-right" nowrap>Pack house weight</th>
@@ -135,10 +136,13 @@
                                                         {{ $purchase->product->name }}
                                                     </td>
                                                     <td nowrap>
-                                                        {{ $purchase->batch->number }}
+                                                        {{ optional($purchase->batch)->number }}
                                                     </td>
                                                     <td nowrap>
-                                                        {{ optional(optional($purchase->harvest)->block)->number }}
+                                                        {{ optional($purchase->block)->number }}
+                                                    </td>
+                                                    <td nowrap>
+                                                        {{ optional($purchase->deliveryNote)->number }}
                                                     </td>
                                                     <td nowrap>
                                                         {{ optional(optional($purchase->harvest)->expected_date)->toFormattedDateString() }}

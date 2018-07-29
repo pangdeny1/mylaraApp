@@ -383,33 +383,6 @@ module.exports = __webpack_require__(18);
 /* 2 */
 /***/ (function(module, exports) {
 
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
 /* globals __VUE_SSR_CONTEXT__ */
 
 // IMPORTANT: Do NOT use ES2015 features in this file.
@@ -513,6 +486,33 @@ module.exports = function normalizeComponent (
     options: options
   }
 }
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
 
 
 /***/ }),
@@ -17730,7 +17730,7 @@ module.exports = defaults;
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(38)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(38)(module)))
 
 /***/ }),
 /* 6 */
@@ -18195,7 +18195,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(13);
-module.exports = __webpack_require__(45);
+module.exports = __webpack_require__(49);
 
 
 /***/ }),
@@ -18216,8 +18216,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_FarmersPicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_FarmersPicker__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_BlockPicker__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_BlockPicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_BlockPicker__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_BatchPicker__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_BatchPicker__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_BatchPicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_BatchPicker__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_FarmerBlockPicker__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_FarmerBlockPicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_FarmerBlockPicker__);
+
 
 
 
@@ -18234,8 +18237,11 @@ Vue.component('roles-picker', __WEBPACK_IMPORTED_MODULE_2__components_RolesPicke
 Vue.component('crops-picker', __WEBPACK_IMPORTED_MODULE_3__components_CropsPicker___default.a);
 Vue.component('farmers-picker', __WEBPACK_IMPORTED_MODULE_4__components_FarmersPicker___default.a);
 Vue.component('batch-picker', __WEBPACK_IMPORTED_MODULE_6__components_BatchPicker___default.a);
+Vue.component('farmer-block-picker', __WEBPACK_IMPORTED_MODULE_7__components_FarmerBlockPicker___default.a);
 
-var app = new Vue({ el: '#app' });
+var app = new Vue({
+    el: '#app'
+});
 
 /***/ }),
 /* 14 */
@@ -29201,7 +29207,7 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(15).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(15).setImmediate))
 
 /***/ }),
 /* 15 */
@@ -29271,7 +29277,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
 /* 16 */
@@ -29464,7 +29470,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(6)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(6)))
 
 /***/ }),
 /* 17 */
@@ -30398,7 +30404,7 @@ module.exports = function spread(callback) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(37)
 /* template */
@@ -30533,7 +30539,7 @@ module.exports = function(module) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(40)
 /* template */
@@ -30641,7 +30647,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(42)
 /* template */
@@ -30751,7 +30757,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(44)
 /* template */
@@ -30805,78 +30811,73 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: "block-picker",
 
-    name: "block-picker",
+  data: function data() {
+    return {
+      farm: "",
+      products: [],
+      blocks: [],
+      errors: []
+    };
+  },
 
-    data: function data() {
-        return {
-            farm: "",
-            products: [],
-            blocks: []
-        };
-    },
 
+  watch: {
+    farm: function farm(id) {
+      this.fetchBlocksByFarmId(id);
 
-    watch: {
-        farm: function farm(id) {
-            this.fetchBlocksByFarmId(id);
-
-            this.fetchProductsByFarmId(id);
-        }
-    },
-
-    computed: {
-        hasProducts: function hasProducts() {
-            return Boolean(this.products.length);
-        },
-        hasBlocks: function hasBlocks() {
-            return Boolean(this.blocks.length);
-        }
-    },
-
-    methods: {
-        fetchBlocksByFarmId: function fetchBlocksByFarmId(id) {
-            var _this = this;
-
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/api/farms/" + id + "/blocks").then(function (_ref) {
-                var data = _ref.data;
-
-                _this.blocks = data;
-            }).catch(function (_ref2) {
-                var data = _ref2.data;
-            });
-        },
-        fetchProductsByFarmId: function fetchProductsByFarmId(id) {
-            var _this2 = this;
-
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/api/farms/" + id + "/crops").then(function (_ref3) {
-                var data = _ref3.data;
-                _this2.products = data;
-            }).catch(function (_ref4) {
-                var data = _ref4.data;
-            });
-        }
+      this.fetchProductsByFarmId(id);
     }
+  },
+
+  computed: {
+    hasProducts: function hasProducts() {
+      return Boolean(this.products.length);
+    },
+    hasBlocks: function hasBlocks() {
+      return Boolean(this.blocks.length);
+    }
+  },
+
+  methods: {
+    fetchBlocksByFarmId: function fetchBlocksByFarmId(id) {
+      var _this = this;
+
+      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/api/farms/" + id + "/blocks").then(function (_ref) {
+        var data = _ref.data;
+
+        _this.blocks = data;
+      }).catch(function (_ref2) {
+        var data = _ref2.data;
+
+        _this.errors = data;
+      });
+    },
+    fetchProductsByFarmId: function fetchProductsByFarmId(id) {
+      var _this2 = this;
+
+      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/api/farms/" + id + "/crops").then(function (_ref3) {
+        var data = _ref3.data;
+
+        _this2.products = data;
+      }).catch(function (_ref4) {
+        var data = _ref4.data;
+
+        _this2.errors = data;
+      });
+    }
+  }
 });
 
 /***/ }),
 /* 45 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 46 */,
-/* 47 */,
-/* 48 */,
-/* 49 */,
-/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(51)
+var __vue_script__ = __webpack_require__(46)
 /* template */
 var __vue_template__ = null
 /* template functional */
@@ -30917,7 +30918,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 51 */
+/* 46 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -30964,6 +30965,106 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     }
 });
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(48)
+/* template */
+var __vue_template__ = null
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/FarmerBlockPicker.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-22a70af1", Component.options)
+  } else {
+    hotAPI.reload("data-v-22a70af1", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 48 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      farmer: "",
+      blocks: [],
+      errors: []
+    };
+  },
+
+  computed: {
+    hasBlock: function hasBlock() {
+      return Boolean(this.blocks.length);
+    }
+  },
+  watch: {
+    farmer: function farmer(id) {
+      this.fetchBlocksByFarmerId(id);
+    }
+  },
+  methods: {
+    fetchBlocksByFarmerId: function fetchBlocksByFarmerId(id) {
+      var _this = this;
+
+      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/api/farmers/" + id + "/blocks").then(function (_ref) {
+        var data = _ref.data;
+
+        _this.blocks = data;
+      }).catch(function (_ref2) {
+        var data = _ref2.data;
+
+        _this.errors = data;
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

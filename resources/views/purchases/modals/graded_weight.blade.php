@@ -37,7 +37,7 @@
                             </tr>
                             <tr>
                                 <th>Batch number</th>
-                                <td>{{ $purchase->batch->number }}</td>
+                                <td>{{ optional($purchase->batch)->number }}</td>
                             </tr>
                             <tr>
                                 <th>Farm weight</th>

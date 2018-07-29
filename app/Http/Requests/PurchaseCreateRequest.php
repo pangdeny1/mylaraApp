@@ -24,8 +24,8 @@ class PurchaseCreateRequest extends FormRequest
     public function rules()
     {
         return [
+            "delivery_note_number" => "required",
             "weight_unit" => "required|in:kg,g,t",
-            "batch_id" => "required|exists:batches,id",
             "farmer_id" => "required|exists:farmers,id",
             "amount" => "nullable|numeric",
             "field_weight" => "numeric|required",
