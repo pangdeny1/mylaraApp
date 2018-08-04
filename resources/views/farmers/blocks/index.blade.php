@@ -25,7 +25,7 @@
                     </nav>
                     <div class="d-sm-flex align-items-sm-center">
                         <h1 class="page-title mr-sm-auto">
-                            Blocks
+                            Household Blocks
                             <small class="badge">{{ $farmer->blocks->count() }} Totals</small>
                         </h1>
                         <div class="btn-toolbar">
@@ -39,7 +39,7 @@
                             </button>
                             <a href="{{ route("farmers.blocks.create", $farmer) }}" class="btn btn-primary">
                                 <span class="fas fa-plus mr-1"></span>
-                                Add a new block
+                                Add a new House Hold Block
                             </a>
                         </div>
                     </div>

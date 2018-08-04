@@ -13,7 +13,7 @@
                             </li>
                         </ol>
                     </nav>
-                    <h1 class="page-title"> Add a new block </h1>
+                    <h1 class="page-title"> Add a new House Hold </h1>
                 </header>
                 <div class="page-section">
                     <div class="row">
@@ -30,7 +30,7 @@
                                 <div class="card-body">
                                     <div class="form-row">
                                         <div class="col-md-6 mb-3">
-                                            <label for="number">Number</label>
+                                            <label for="number">Household code</label>
                                             <input type="text"
                                                    name="number"
                                                    class="form-control {{ $errors->has('number') ? 'is-invalid' : '' }}"
@@ -42,7 +42,7 @@
                                     <div class="form-row">
                                         <div class="col-md-2 mb-3">
                                             <label for="size">Size</label>
-                                            <input type="number"
+                                            <input type="text"
                                                    name="size"
                                                    class="form-control {{ $errors->has('size') ? 'is-invalid' : '' }}"
                                                    id="size"
@@ -66,7 +66,7 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-6 mb-3">
-                                            <label for="farm_id">Farm</label>
+                                            <label for="farm_id">Block</label>
                                             <select name="farm_id"
                                                     class="form-control {{ $errors->has('farm_id') ? 'is-invalid' : '' }}"
                                                     id="farm_id"

@@ -13,7 +13,7 @@
                             </li>
                         </ol>
                     </nav>
-                    <h1 class="page-title"> Add a new farmland </h1>
+                    <h1 class="page-title"> Add a new Block </h1>
                 </header>
                 <div class="page-section">
                     <div class="row">
@@ -25,13 +25,13 @@
                             >
                                 @csrf
                                 <header class="card-header border-bottom-0">
-                                    Farm information
+                                    Block information
                                 </header>
                                 <div class="card-body">
                                     <div class="form-row">
                                         <div class="col-md-2 mb-3">
                                             <label for="size">Size</label>
-                                            <input type="number"
+                                            <input type="text"
                                                    name="size"
                                                    class="form-control {{ $errors->has('size') ? 'is-invalid' : '' }}"
                                                    id="size"

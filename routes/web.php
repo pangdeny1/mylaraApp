@@ -107,6 +107,7 @@ Route::resource("farmers", "FarmersController");
 Route::resource("purchases", "PurchasesController");
 Route::resource("clusters", "ClustersController");
 
+
 Route::prefix('reports')->group(function () {
     Route::get("purchases", [
         "as" => "purchases.reports",
@@ -138,6 +139,11 @@ Route::prefix('settings')->group(function () {
     Route::resource("batches", "BatchesController");
     Route::resource("product_categories", "ProductCategoriesController");
 });
+
+Route::get("users/{user}/passwordchange", [
+    "as" => "password.change",
+    "uses" => "ResetPasswordController@change",
+]);
 
 
 

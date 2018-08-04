@@ -11,6 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
+use Sms;
 
 class FarmersController extends Controller
 {
@@ -73,6 +74,12 @@ class FarmersController extends Controller
 
         $farmer->groups()->attach($request->group_id);
         
+         \Sms::send(phone(request("phone"), "TZ"), $this->messageBody(
+            request("first_name"),
+            request("last_name"),
+            request("phone")
+        ));
+        
         return redirect()->route("farmers.show", $farmer);
     }
 
@@ -118,5 +125,17 @@ class FarmersController extends Controller
         $farmer->delete();
 
         return redirect()->route("farmers.index");
+    }
+    
+    public function messageBody($firstname, $lastname, $group)
+    {
+        $format = 'Habari %s %s,Hongera  umesajiliwa kwenye mfumo wa Uzalishaji wa Homeveg';
+
+        return sprintf(
+            $format,
+            $firstname,
+            $lastname,
+            $group
+        );
     }
 }

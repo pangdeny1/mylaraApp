@@ -28,6 +28,7 @@ class PackingHouseWeightController extends Controller
         ));
 
         return redirect()->back();
+        
     }
 
     public function messageBody($farmer, $product, $purchase)
