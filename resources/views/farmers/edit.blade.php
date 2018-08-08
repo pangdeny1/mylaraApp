@@ -226,7 +226,7 @@
                                         <div class="invalid-feedback"> Please provide a valid state. </div>
                                     </div>
                                     <div class="col-md-3 mb-3">
-                                        <label for="postal_code">Zip</label>
+                                        <label for="postal_code">Zip Code</label>
                                         <input type="text"
                                                name="postal_code"
                                                class="form-control {{ $errors->has('postal_code') ? 'is-invalid' : '' }}"

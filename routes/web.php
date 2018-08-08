@@ -105,6 +105,7 @@ Route::get("farmers/{farmer}/settings", [
 ]);
 
 Route::resource("farmers", "FarmersController");
+Route::post("farmers/{farmer}", "FarmersController@update");
 
 Route::resource("purchases", "PurchasesController");
 Route::resource("clusters", "ClustersController");

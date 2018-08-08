@@ -25,7 +25,7 @@
                                 <div class="metric">
                                     <p class="metric-value h3">
                                         <sub><i class="oi oi-fork"></i></sub>
-                                        <span class="value">12</span>
+                                        <span class="value">1299</span>
                                     </p>
                                     <h2 class="metric-label"> Teams </h2>
                                 </div>
@@ -38,7 +38,7 @@
                                 <div class="metric">
                                     <p class="metric-value h3">
                                         <sub><i class="oi oi-people"></i></sub>
-                                        <span class="value">47</span>
+                                        <span class="value">475</span>
                                     </p>
                                     <h2 class="metric-label"> Projects </h2>
                                 </div>
