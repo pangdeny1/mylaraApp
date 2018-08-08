@@ -103,6 +103,7 @@ Route::get("farmers/{farmer}/settings", [
 ]);
 
 Route::resource("farmers", "FarmersController");
+Route::post("farmers/{farmer}", "FarmersController@update");
 
 Route::resource("purchases", "PurchasesController");
 Route::resource("clusters", "ClustersController");
@@ -138,6 +139,8 @@ Route::prefix('settings')->group(function () {
     Route::resource("products", "ProductsController");
     Route::resource("batches", "BatchesController");
     Route::resource("product_categories", "ProductCategoriesController");
+
+
 });
 
 Route::get("users/{user}/passwordchange", [

@@ -147,7 +147,7 @@
                                                 </option>
                                             @endforeach
                                         </select>
-                                        <div class="invalid-feedback"> Please provide a valid state. </div>
+                                        <div class="invalid-feedback"> Please provide a valid Region. </div>
                                     </div>
                                 </div>
                             </div>
@@ -206,7 +206,7 @@
                                         <div class="invalid-feedback"> Please select a valid country. </div>
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <label for="state">State</label>
+                                        <label for="state">Region</label>
                                         <select name="state"
                                                 class="form-control d-block w-100 {{ $errors->has('state') ? 'is-invalid' : '' }}"
                                                 id="state"
