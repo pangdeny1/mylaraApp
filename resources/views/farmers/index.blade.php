@@ -137,7 +137,7 @@
                     </div>
                     <h3 class="state-header"> No Content, Yet. </h3>
                     <p class="state-description lead text-muted">
-                        Use the button below to add your awesomething, aperiam ex veniam suscipit porro ab saepe nobis odio.
+                        Use the button below to Register new .
                     </p>
                     @can("create", \App\Farmer::class)
                     <div class="state-action">

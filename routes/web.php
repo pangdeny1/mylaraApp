@@ -134,6 +134,13 @@ Route::prefix('settings')->group(function () {
         "as" => "group_products.update",
         "uses" => "GroupProductsController@update"
     ]);
+
+     Route::get("changepassword", [
+        "as" => "changepassword.index",
+        "uses" => "ChangePasswordControllerr@index"
+    ]);
+
+     Route::post("changepassword/{user}","Auth\ChangePasswordController@update");
     Route::resource("blocks", "BlocksController");
     Route::resource("groups", "GroupsController");
     Route::resource("users", "UsersController");
@@ -141,6 +148,7 @@ Route::prefix('settings')->group(function () {
     Route::resource("products", "ProductsController");
     Route::resource("batches", "BatchesController");
     Route::resource("product_categories", "ProductCategoriesController");
+    Route::resource("changepassword", "Auth\ChangePasswordController");
 });
 
 

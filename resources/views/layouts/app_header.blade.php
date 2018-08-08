@@ -184,6 +184,9 @@
                         <a class="dropdown-item" href="#">
                             <span class="dropdown-icon oi oi-person"></span> Profile
                         </a>
+                        <a href="{{ route("changepassword.index") }}" class="dropdown-item ">
+                                <i class="fas fa-user-lock"></i> Change Password
+                            </a>
                         <a class="dropdown-item"
                            href="{{ route('logout') }}"
                            onclick="event.preventDefault();document.getElementById('logout-form').submit();"
