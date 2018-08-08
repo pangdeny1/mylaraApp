@@ -71,8 +71,7 @@
                                                 <th>Farmer</th>
                                                 <th>Gender</th>
                                                 <th>Phone</th>
-                                                <th>Email</th>
-                                                <th>Region</th>
+                                                <th>Created at</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -91,8 +90,7 @@
                                                 </td>
                                                 <td>{{ $farmer->gender }}</td>
                                                 <td>{{ $farmer->phone }}</td>
-                                                <td>{{ $farmer->email }}</td>
-                                                <td>{{ $farmer->address->state }}</td>
+                                                <td>{{ $farmer->created_at }}</td>
                                                 <td class="align-middle text-right">
                                                     @can("edit", \App\Farmer::class)
                                                     <a href="{{ route("farmers.edit", $farmer) }}" class="btn btn-sm btn-secondary">
