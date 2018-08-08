@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- End Required meta tags -->
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Homeveg') }}</title>
 
     <!-- Favicons -->
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/apple-touch-icon.png">
@@ -32,13 +32,11 @@
         @csrf
         <div class="mb-4">
             <div class="mb-3">
-                <img class="rounded" src="{{ asset("themes/looper/assets/apple-touch-icon.png") }}" alt="" height="72">
+                <img class="rounded" src="{{ asset("themes/looper/assets/homev_logo.JPG") }}" alt="" height="72">
             </div>
             <h1 class="h3"> Sign In </h1>
         </div>
-        <p class="text-left mb-4"> Don't have a account?
-            <a href="#">Create One</a>
-        </p>
+        
 
         <div class="form-group mb-4">
             <label for="email" class="d-block text-left">Email address</label>
@@ -104,7 +102,7 @@
         
         <!-- copyright -->
         <p class="px-3 text-muted text-center">
-            &copy; 2018 All Rights Reserved. Loper is Responsive Admin Theme build on top of latest Bootstrap 4.
+             &copy; 2018-<?php echo date("Y"); ?> Homeveg Tanzania ,All Rights Reserved.
             <a href="#">Privacy</a> and <a href="#">Terms</a>
         </p>
     </form>
