@@ -4,6 +4,8 @@ Auth::routes();
 
 Route::view("/", "welcome");
 
+Route::view("template", "template");
+
 Route::get('dashboard', [
     "as" => "home",
     "uses" => "HomeController@index"
@@ -131,6 +133,7 @@ Route::prefix('settings')->group(function () {
         "as" => "group_products.update",
         "uses" => "GroupProductsController@update"
     ]);
+    Route::resource("blocks", "BlocksController");
     Route::resource("groups", "GroupsController");
     Route::resource("users", "UsersController");
     Route::resource("roles", "RolesController");

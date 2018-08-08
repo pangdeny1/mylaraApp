@@ -29,6 +29,7 @@ class CreatePurchasesTable extends Migration
                 "completed",
                 "paid",
             ])->default("received");
+            $table->unsignedInteger('crates_count')->nullable();
             $table->unsignedInteger('product_id')->nullable();
             $table->unsignedInteger('batch_id')->nullable();
             $table->unsignedInteger('block_id')->nullable();

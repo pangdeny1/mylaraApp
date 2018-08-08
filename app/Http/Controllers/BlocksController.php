@@ -46,11 +46,16 @@ class BlocksController extends Controller
      * @return RedirectResponse
      * @throws AuthorizationException
      */
-    public function store(BlockCreateRequest $request)
+    public function store(Request $request)
     {
         $this->authorize("create", Block::class);
 
-        $block = Block::create($request->only(["name", "description"]));
+        $this->validate($request, [
+            "number" => "required",
+            "description" => "required",
+        ]);
+
+        $block = Block::create($request->only(["number", "description"]));
 
         $block->address()->create($request->only(["street", "state", "country"]));
 

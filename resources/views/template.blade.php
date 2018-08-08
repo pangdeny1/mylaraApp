@@ -1,47 +1,221 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}" dir="ltr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta http-equiv="Content-Language" content="en" />
-    <meta name="msapplication-TileColor" content="#2d89ef">
-    <meta name="theme-color" content="#4188c9">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="MobileOptimized" content="320">
+@extends("layouts.master")
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+@section("content")
+    <div class="wrapper">
+        <div class="page">
+            <div class="page-inner">
+                <header class="page-title-bar">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item active">
+                                <a href="#">
+                                <i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Produced batch history</a>
+                            </li>
+                        </ol>
+                    </nav>
 
-    <link rel="icon" href="./favicon.ico" type="image/x-icon"/>
-    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
+                    <h3>Produced batch history</h3>
+                    <hr class="mb-5">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+                    <div class="lead">
+                        <span class="font-weight-bold">Raw material details</span>
+                    </div>
+                </header>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
+                <div class="card mb-5">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th width="12.5%">Farm</th>
+                                <td width="12.5%" class="text-right">Arusha Group</td>
+                                <th width="12.5%">Variety</th>
+                                <td width="12.5%" class="text-right">08</td>
+                                <th width="12.5%">Time depart</th>
+                                <td width="12.5%" class="text-right">Jan 12, 2018</td>
+                                <th width="12.5%">No. Crates</th>
+                                <td width="12.5%" class="text-right">120</td>
+                            </tr>
+                            <tr>
+                                <th width="12.5%">Produce</th>
+                                <td width="12.5%" class="text-right">07</td>
+                                <th width="12.5%">Harvest date</th>
+                                <td width="12.5%" class="text-right">08</td>
+                                <th width="12.5%">Farm weight</th>
+                                <td width="12.5%" class="text-right">12450Kg.</td>
+                                <th width="12.5%">Arrival temp.</th>
+                                <td width="12.5%" class="text-right">34<sup>o</sup>C</td>
+                            </tr>
+                            <tr>
+                                <th width="12.5%">Block #</th>
+                                <td width="12.5%" class="text-right">07</td>
+                                <th width="12.5%">Delivery date</th>
+                                <td width="12.5%" class="text-right">08</td>
+                                <th width="12.5%">P/H weight</th>
+                                <td width="12.5%" class="text-right">12450Kg.</td>
+                                <th width="12.5%">Arrival time</th>
+                                <td width="12.5%" class="text-right"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+                <header class="page-title-bar">
+                    <div class="d-sm-flex align-items-sm-center">
+                        <div class="lead mr-sm-auto mb-0">
+                            <span class="font-weight-bold">Processing details</span>
+                        </div>
+                
+                        <div class="btn-toolbar">
+                            <button type="button" class="btn btn-light">
+                                <i class="far fa-file-excel"></i>
+                                <span class="ml-1">Export as excel</span>
+                            </button>
 
-    <!-- Dashboard Core -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-</head>
-<body>
-<div class="page" id="app">
-    <div class="page-main">
-        @include("layouts._header_primary")
+                            <button type="button" class="btn btn-light">
+                                <i class="far fa-file-pdf"></i>
+                                <span class="ml-1">Export as pdf</span>
+                            </button>
 
-        @include("layouts._header_secondary")
+                            <button type="button" class="btn btn-light">
+                                <i class="fas fa-print"></i>
+                                <span class="ml-1">Print</span>
+                            </button>
+                        
+                            
+                            <a href="{{ route("purchases.create") }}" class="btn btn-primary">
+                                <span class="fas fa-plus mr-1"></span>
+                                New purchase
+                            </a>
+                        </div>
+                    </div>
+                </header>
 
-        <div class="my-3 my-md-5">
-            @yield('content')
+                <div class="page-section">
+                    @if (session('status'))
+                        <div class="alert alert-success alert-dismissible fade show has-icon">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <div class="alert-icon">
+                                <i class="fas fa-info-circle"></i>
+                            </div>
+                            <strong>Well done!</strong> {{ session('status') }}
+                        </div>
+                    @endif
+
+                    <section class="card card-fluid">
+                        <!-- .table-responsive -->
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="text-left"  nowrap>Household code</th>
+                                        <th class="text-left"  nowrap>No. Crates</th>
+                                        <th class="text-left"  nowrap>Farm weight</th>
+                                        <th class="text-left"  nowrap>P/H weight</th>
+                                        <th class="text-left"  nowrap>Graded weight</th>
+                                        <th class="text-left"  nowrap>Rejected weight</th>
+                                        <th class="text-right" nowrap>Rejected %</th>
+                                        <th class="text-left"  nowrap>Quantity remarks</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th nowrap>Total</th>
+                                        <th nowrap>12</th>
+                                        <th nowrap>89Kg.</th>
+                                        <th nowrap>85Kg.</th>
+                                        <th nowrap>83Kg.</th>
+                                        <th nowrap>2kg</th>
+                                        <th nowrap></th>
+                                        <th nowrap></th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    <tr>
+                                        <td nowrap>0012</td>
+                                        <td nowrap>12</td>
+                                        <td nowrap>89Kg.</td>
+                                        <td nowrap>85Kg.</td>
+                                        <td nowrap>83Kg.</td>
+                                        <td nowrap>2kg</td>
+                                        <td nowrap>12%</td>
+                                        <td nowrap></td>
+                                    </tr>
+                                    <tr>
+                                        <td nowrap>0012</td>
+                                        <td nowrap>12</td>
+                                        <td nowrap>89Kg.</td>
+                                        <td nowrap>85Kg.</td>
+                                        <td nowrap>83Kg.</td>
+                                        <td nowrap>2kg</td>
+                                        <td nowrap>12%</td>
+                                        <td nowrap></td>
+                                    </tr>
+                                    <tr>
+                                        <td nowrap>0012</td>
+                                        <td nowrap>12</td>
+                                        <td nowrap>89Kg.</td>
+                                        <td nowrap>85Kg.</td>
+                                        <td nowrap>83Kg.</td>
+                                        <td nowrap>2kg</td>
+                                        <td nowrap>12%</td>
+                                        <td nowrap></td>
+                                    </tr>
+                                    <tr>
+                                        <td nowrap>0012</td>
+                                        <td nowrap>12</td>
+                                        <td nowrap>89Kg.</td>
+                                        <td nowrap>85Kg.</td>
+                                        <td nowrap>83Kg.</td>
+                                        <td nowrap>2kg</td>
+                                        <td nowrap>12%</td>
+                                        <td nowrap></td>
+                                    </tr>
+                                    <tr>
+                                        <td nowrap>0012</td>
+                                        <td nowrap>12</td>
+                                        <td nowrap>89Kg.</td>
+                                        <td nowrap>85Kg.</td>
+                                        <td nowrap>83Kg.</td>
+                                        <td nowrap>2kg</td>
+                                        <td nowrap>12%</td>
+                                        <td nowrap></td>
+                                    </tr>
+                                    <tr>
+                                        <td nowrap>0012</td>
+                                        <td nowrap>12</td>
+                                        <td nowrap>89Kg.</td>
+                                        <td nowrap>85Kg.</td>
+                                        <td nowrap>83Kg.</td>
+                                        <td nowrap>2kg</td>
+                                        <td nowrap>12%</td>
+                                        <td nowrap></td>
+                                    </tr>
+                                    <tr>
+                                        <td nowrap>0012</td>
+                                        <td nowrap>12</td>
+                                        <td nowrap>89Kg.</td>
+                                        <td nowrap>85Kg.</td>
+                                        <td nowrap>83Kg.</td>
+                                        <td nowrap>2kg</td>
+                                        <td nowrap>12%</td>
+                                        <td nowrap></td>
+                                    </tr>
+                                    <tr>
+                                        <td nowrap>0012</td>
+                                        <td nowrap>12</td>
+                                        <td nowrap>89Kg.</td>
+                                        <td nowrap>85Kg.</td>
+                                        <td nowrap>83Kg.</td>
+                                        <td nowrap>2kg</td>
+                                        <td nowrap>12%</td>
+                                        <td nowrap></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+            </div>
         </div>
     </div>
-    @include("layouts._footer")
-</div>
-</body>
-</html>
+@endsection

@@ -39,17 +39,17 @@
                                         <div class="card-body">
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
-                                                    <label for="name">Name</label>
+                                                    <label for="number">Number</label>
                                                     <input type="text"
-                                                           name="name"
-                                                           id="name"
-                                                           class="form-control  {{ $errors->has('name') ? "is-invalid" : "" }}"
-                                                           value="{{ old("name") }}"
-                                                           placeholder="Block A..."
+                                                           name="number"
+                                                           id="number"
+                                                           class="form-control  {{ $errors->has('number') ? "is-invalid" : "" }}"
+                                                           value="{{ old("number") }}"
+                                                           placeholder="Block 1253TYI..."
                                                     >
-                                                    @if ($errors->has('name'))
+                                                    @if ($errors->has('number'))
                                                         <span class="invalid-feedback">
-                                                            <strong>{{ $errors->first('name') }}</strong>
+                                                            <strong>{{ $errors->first('number') }}</strong>
                                                         </span>
                                                     @endif
                                                 </div>

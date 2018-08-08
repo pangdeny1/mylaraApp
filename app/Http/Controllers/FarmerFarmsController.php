@@ -54,7 +54,7 @@ class FarmerFarmsController extends Controller
     {
         $this->authorize("create", $farmer);
 
-        $farm = $farmer->farms()->create($request->only(["size", "size_unit", "description"]));
+        $farm = $farmer->farms()->create($request->only(["size", "size_unit", "description", "block_id"]));
 
         $farm->address()->create($request->only(["country", "state"]));
 

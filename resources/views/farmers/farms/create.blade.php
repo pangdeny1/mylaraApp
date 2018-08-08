@@ -54,6 +54,22 @@
                                         </div>
                                     </div>
                                     <div class="form-row">
+                                        <div class="col-md-12 mb-3">
+                                            <label for="block_id">Block</label>
+                                            <select name="block_id"
+                                                    class="form-control"
+                                                    id="block_id"
+                                            >
+                                                <option value="">Please select block...</option>
+                                                @foreach(\App\Block::get() as $block)
+                                                <option value="{{ $block->id }}">
+                                                {{ $block->number }}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
                                         <div class="col-md-6 mb-3">
                                             <label for="country">Country</label>
                                             <select name="country"

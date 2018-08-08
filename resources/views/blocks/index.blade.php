@@ -74,7 +74,7 @@
                                         <tr>
                                             <td>
                                                 <div>
-                                                    <div>{{ $block->name }}</div>
+                                                    <div>{{ $block->number }}</div>
                                                     <small class="text-truncate text-muted">
                                                         {{ str_limit($block->description, 80) }}
                                                     </small>

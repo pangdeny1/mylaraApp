@@ -26,7 +26,7 @@
                     <div class="d-sm-flex align-items-sm-center">
                         <h1 class="page-title mr-sm-auto">
                             Blocks
-                            <small class="badge">{{ $farmer->blocks->count() }} Totals</small>
+                            <small class="badge">{{ $farmer->householdBlocks->count() }} Totals</small>
                         </h1>
                         <div class="btn-toolbar">
                             <button type="button" class="btn btn-light">
@@ -48,7 +48,7 @@
                 <!-- .page-section -->
                 <div class="page-section">
 
-                    @if($farmer->blocks->count())
+                    @if($farmer->householdBlocks->count())
                         <section class="card card-fluid">
                             <header class="card-header">
                                 <ul class="nav nav-tabs card-header-tabs">
@@ -89,7 +89,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($farmer->blocks as $block)
+                                        @foreach($farmer->householdBlocks as $block)
                                             <tr>
                                                 <td class="text-left align-middle" nowrap>
                                                     {{ $block->number }}

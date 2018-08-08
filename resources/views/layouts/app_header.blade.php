@@ -123,12 +123,16 @@
 
                             <div class="dropdown-divider"></div>
 
+                            <a href="{{ route("blocks.index") }}" class="dropdown-item ">
+                                <i class="fas fa-th"></i> Blocks
+                            </a>
+
                             <a href="{{ route("groups.index") }}" class="dropdown-item ">
-                                <i class="far fa-folder-open"></i> Groups
+                                <i class="fas fa-hands-helping"></i> Groups
                             </a>
 
                             <a href="{{ route("group_products.index") }}" class="dropdown-item ">
-                                <i class="far fa-folder-open"></i> Groups product prices
+                                <i class="fas fa-box"></i> Groups product prices
                             </a>
 
                             <div class="dropdown-divider"></div>
@@ -149,7 +153,7 @@
 
                             @can("view", \App\Role::class)
                             <a href="{{ route("roles.index") }}" class="dropdown-item ">
-                                <i class="fas fa-user-secret"></i> Roles
+                                <i class="fas fa-user-lock"></i> Roles
                             </a>
                             @endcan
                         </div>

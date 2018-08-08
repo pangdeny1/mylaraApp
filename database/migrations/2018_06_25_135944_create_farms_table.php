@@ -18,6 +18,7 @@ class CreateFarmsTable extends Migration
             $table->double('size');
             $table->string('size_unit');
             $table->unsignedInteger('farmer_id')->nullable();
+            $table->unsignedInteger('block_id')->nullable();
             $table->text("description");
             $table->timestamps();
         });

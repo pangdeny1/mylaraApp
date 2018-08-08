@@ -58,6 +58,9 @@
 <script src="{{ asset("themes/looper/assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js") }}"></script>
 <script src="{{ asset("themes/looper/assets/vendor/chart.js/Chart.min.js") }}"></script>
 
+<!-- VUE.JS -->
+<script src="{{ asset("js/app.js") }}"></script>
+
 <!-- BEGIN THEME JS -->
 <script src="{{ asset("themes/looper/assets/javascript/main.min.js") }}"></script>
 
@@ -65,8 +68,7 @@
 <script src="{{ asset("themes/looper/assets/javascript/pages/easypiechart-demo.js") }}"></script>
 <script src="{{ asset("themes/looper/assets/javascript/pages/dashboard-demo.js") }}"></script>
 
-<!-- VUE.JS -->
-<script src="{{ asset("js/app.js") }}"></script>
+
 
 <script>
     $(document).ready(function () {

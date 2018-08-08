@@ -11,23 +11,8 @@ class Block extends Model implements Auditable
 
     protected $guarded = [];
 
-    public function farm()
+    public function address()
     {
-        return $this->belongsTo(Farm::class);
-    }
-
-    public function product()
-    {
-        return $this->belongsTo(Product::class);
-    }
-
-    public function harvests()
-    {
-        return $this->hasMany(Harvest::class);
-    }
-
-    public function batches()
-    {
-        return $this->hasMany(Batch::class);
+        return $this->morphOne(Address::class, "addressable");
     }
 }

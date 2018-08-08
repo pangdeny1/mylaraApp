@@ -18,9 +18,14 @@ class Farm extends Model implements Auditable
         return $this->belongsToMany(Product::class, "farm_product")->withTimestamps();
     }
 
-    public function blocks()
+    public function householdBlocks()
     {
-        return $this->hasMany(Block::class);
+        return $this->hasMany(HouseholdBlock::class);
+    }
+
+    public function block()
+    {
+        return $this->belongsTo(Block::class);
     }
 
     public function address()
