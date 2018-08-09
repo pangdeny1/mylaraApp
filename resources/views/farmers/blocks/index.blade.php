@@ -25,7 +25,7 @@
                     </nav>
                     <div class="d-sm-flex align-items-sm-center">
                         <h1 class="page-title mr-sm-auto">
-                            Blocks
+                            Household Blocks
                             <small class="badge">{{ $farmer->householdBlocks->count() }} Totals</small>
                         </h1>
                         <div class="btn-toolbar">
@@ -39,7 +39,7 @@
                             </button>
                             <a href="{{ route("farmers.blocks.create", $farmer) }}" class="btn btn-primary">
                                 <span class="fas fa-plus mr-1"></span>
-                                Add a new block
+                                Add a new Household block
                             </a>
                         </div>
                     </div>
@@ -125,9 +125,8 @@
                             </div>
                             <h4 class="alert-heading"> Warning! </h4>
                             <p class="mb-0">
-                                Best check yo self, you're not looking too good. Nulla vitae elit libero, a pharetra
-                                augue. Praesent commodo cursus magna,
-                                <a href="#" class="alert-link">vel scelerisque nisl consectetur et</a>.
+                                No household block available
+                               
                             </p>
                         </div>
                     @endif

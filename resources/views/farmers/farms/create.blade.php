@@ -9,11 +9,11 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item active">
                                 <a href="#">
-                                    <i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Farmers</a>
+                                    <i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Blocks</a>
                             </li>
                         </ol>
                     </nav>
-                    <h1 class="page-title"> Add a new farmland </h1>
+                    <h1 class="page-title"> Add a new Block </h1>
                 </header>
                 <div class="page-section">
                     <div class="row">
@@ -25,13 +25,13 @@
                             >
                                 @csrf
                                 <header class="card-header border-bottom-0">
-                                    Farm information
+                                    Block information
                                 </header>
                                 <div class="card-body">
                                     <div class="form-row">
                                         <div class="col-md-2 mb-3">
                                             <label for="size">Size</label>
-                                            <input type="number"
+                                            <input type="text"
                                                    name="size"
                                                    class="form-control {{ $errors->has('size') ? 'is-invalid' : '' }}"
                                                    id="size"
@@ -55,12 +55,12 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-12 mb-3">
-                                            <label for="block_id">Block</label>
+                                            <label for="block_id">Block Code</label>
                                             <select name="block_id"
                                                     class="form-control"
                                                     id="block_id"
                                             >
-                                                <option value="">Please select block...</option>
+                                                <option value="">Please select block code</option>
                                                 @foreach(\App\Block::get() as $block)
                                                 <option value="{{ $block->id }}">
                                                 {{ $block->number }}

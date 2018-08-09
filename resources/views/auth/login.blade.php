@@ -32,7 +32,7 @@
         @csrf
         <div class="mb-4">
             <div class="mb-3">
-                <img class="rounded" src="{{ asset("themes/looper/assets/homev_logo.JPG") }}" alt="" height="72">
+                <img class="rounded" src="{{ asset("themes/looper/assets/homev_logo.jpg") }}" alt="" height="72">
             </div>
             <h1 class="h3"> Sign In </h1>
         </div>

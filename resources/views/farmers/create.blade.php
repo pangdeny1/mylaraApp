@@ -129,12 +129,12 @@
                             </div>
                             <hr>
                             <header class="card-header border-bottom-0">
-                                Group information
+                               Grower Group information
                             </header>
                             <div class="card-body">
                                 <div class="form-row">
                                     <div class="form-group col-md-12 mb-3">
-                                        <label for="group_id">Group name</label>
+                                        <label for="group_id">Grower Group</label>
                                         <select name="group_id"
                                                 class="form-control d-block w-100 {{ $errors->has('group_id') ? 'is-invalid' : '' }}"
                                                 id="group_id"
