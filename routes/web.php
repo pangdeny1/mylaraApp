@@ -142,7 +142,9 @@ Route::prefix('settings')->group(function () {
 
      Route::post("changepassword/{user}","Auth\ChangePasswordController@update");
     Route::resource("blocks", "BlocksController");
+    Route::post("blocks/{block}", "BlocksController@update");
     Route::resource("groups", "GroupsController");
+    Route::post("groups/{group}", "GroupsController@update");
     Route::resource("users", "UsersController");
     Route::resource("roles", "RolesController");
     Route::resource("products", "ProductsController");
