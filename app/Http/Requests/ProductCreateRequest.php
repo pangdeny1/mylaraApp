@@ -27,10 +27,6 @@ class ProductCreateRequest extends FormRequest
             "name" => "required",
             "description" => "required",
             "category_id" => "required|exists:product_categories,id",
-            "amount" => "required|numeric",
-            "currency" => "required|in:TZS",
-            "unit" => "required|in:kg,gm",
-            "unit_value" => "required|numeric",
         ];
     }
 }

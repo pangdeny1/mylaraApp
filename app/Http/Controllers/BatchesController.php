@@ -36,7 +36,7 @@ class BatchesController extends Controller
     {
         $this->authorize("create", Batch::class);
 
-        return \view("batches.create");
+        return view("batches.create");
     }
 
     /**
@@ -61,14 +61,23 @@ class BatchesController extends Controller
             "valid_from",
             "valid_till",
             "description",
-            "max_count"
+            "max_count",
+            "block_id",
+            "expected_arrival_time",
+            "expected_arrival_temperature",
+            "expected_delivery_time",
+            "expected_departure_time",
+            "expected_harvest_time",
         ]));
 
-        $batch->farmers()->attach(request("farmers"));
+        if(count($request->farmers)){
+            $batch->farmers()->attach(request("farmers"));
 
-        if ($batch->max_count == $batch->farmers->count()) {
-            $batch->update(["status" => "active"]);
+            if ($batch->max_count == $batch->farmers->count()) {
+                $batch->update(["status" => "active"]);
+            }
         }
+        
 
         return redirect()->route("batches.index");
     }

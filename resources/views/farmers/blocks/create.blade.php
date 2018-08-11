@@ -19,7 +19,7 @@
                     <div class="row">
                         <div class="col-md-12">
 
-                            <form action="{{ route("farmers.blocks.store", $farmer) }}"
+                            <form action="{{ route("farmers.household_blocks.store", $farmer) }}"
                                   method="post"
                                   class="card border-0"
                             >
@@ -66,7 +66,7 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-6 mb-3">
-                                            <label for="farm_id">Block</label>
+                                            <label for="farm_id">Farmland</label>
                                             <select name="farm_id"
                                                     class="form-control {{ $errors->has('farm_id') ? 'is-invalid' : '' }}"
                                                     id="farm_id"

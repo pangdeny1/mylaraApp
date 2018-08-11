@@ -37,9 +37,8 @@
                                 <i class="oi oi-data-transfer-upload"></i>
                                 <span class="ml-1">Import</span>
                             </button>
-                            <a href="{{ route("farmers.blocks.create", $farmer) }}" class="btn btn-primary">
-                                <span class="fas fa-plus mr-1"></span>
-                                Add a new Household block
+                            <a href="{{ route("farmers.household_blocks.create", $farmer) }}" class="btn btn-primary">
+                                <span class="fas fa-plus mr-1"></span> New Household block
                             </a>
                         </div>
                     </div>

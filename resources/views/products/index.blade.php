@@ -18,14 +18,10 @@
                 <div class="d-sm-flex align-items-sm-center">
                     <h1 class="page-title mr-sm-auto mb-0"> Products </h1>
                     <div class="btn-toolbar">
-                        <button type="button" class="btn btn-light">
+                        <a href="{{ route("products.export") }}" class="btn btn-light">
                             <i class="oi oi-data-transfer-download"></i>
-                            <span class="ml-1">Export</span>
-                        </button>
-                        <button type="button" class="btn btn-light">
-                            <i class="oi oi-data-transfer-upload"></i>
-                            <span class="ml-1">Import</span>
-                        </button>
+                            <span class="ml-1">Export as excel</span>
+                        </a>
                         @can("create", \App\Product::class)
                         <a href="{{ route("products.create") }}" class="btn btn-primary">
                             <span class="fas fa-plus mr-1"></span>
@@ -56,11 +52,14 @@
                                     <span class="oi oi-magnifying-glass"></span>
                                 </span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Search record">
+                                <form action="">
+                                    <input type="text" name="q" class="form-control" placeholder="Search record...">
+                                </form>
                             </div>
                         </div>
 
-                        <div class="text-muted"> Showing 1 to 10 of 1,000 entries </div>
+                        <div class="text-muted my-3"> Showing {{ $products->firstItem() }} to {{ $products->lastItem() }} of  {{ $products->total() }} entries </div>
+
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
@@ -73,7 +72,7 @@
                                 <tbody>
                                     @foreach($products as $product)
                                     <tr>
-                                        <td>
+                                        <td class="align-middle">
                                             <div>
                                                 <div>{{ $product->name }}</div>
                                                 <small class="text-truncate text-muted">
@@ -81,8 +80,10 @@
                                                 </small>
                                             </div>
                                         </td>
-                                        <td>{{ $product->category()->name }}</td>
-                                        <td class="align-middle text-right">
+                                        <td class="align-middle">
+                                            {{ $product->category()->name }}
+                                        </td>
+                                        <td class="align-middle">
                                             @can("edit", $product)
                                             <a href="{{ route("products.edit", $product) }}" class="btn btn-sm btn-secondary">
                                                 <i class="fa fa-pencil-alt"></i>
@@ -91,10 +92,46 @@
                                             @endcan
 
                                             @can("delete", $product)
-                                            <a href="#" class="btn btn-sm btn-secondary">
+                                            <!-- Button trigger modal -->
+                                            <button 
+                                                type="button" 
+                                                class="btn btn-sm btn-secondary"  
+                                                class="btn btn-primary" 
+                                                data-toggle="modal" 
+                                                data-target="#deleteModal{{ $product->id }}"
+                                            >
                                                 <i class="far fa-trash-alt"></i>
                                                 <span class="sr-only">Remove</span>
-                                            </a>
+                                            </button>
+                                            
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="deleteModal{{ $product->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{ $product->id }}" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <form action="{{ route("products.destroy", $product) }}" method="post">
+                                                            @csrf
+                                                            @method("delete")
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Delete product</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                Are you sure you want to delete this product
+                                                            </div>
+                                                            <div class="modal-footer justify-content-between">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                                    Cancel
+                                                                </button>
+                                                                <button type="submit" class="btn btn-danger">
+                                                                    Move to trash
+                                                                </button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             @endcan
                                         </td>
                                     </tr>

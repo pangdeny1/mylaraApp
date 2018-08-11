@@ -10,7 +10,7 @@ use App\Block;
 use App\Http\Requests\BlockCreateRequest;
 use Illuminate\Http\Request;
 
-class FarmerBlocksController extends Controller
+class FarmerHouseholdBlocksController extends Controller
 {
     public function __construct()
     {

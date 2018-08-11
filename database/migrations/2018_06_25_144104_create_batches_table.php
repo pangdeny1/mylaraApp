@@ -20,9 +20,9 @@ class CreateBatchesTable extends Migration
             $table->timestamp('valid_from')->nullable();
             $table->timestamp('valid_till')->nullable();
             $table->unsignedInteger("block_id")->nullable();
-            $table->timestamp('expected_arrive_time')->nullable();
-            $table->string('expected_arrive_temperature')->nullable();
-            $table->timestamp('expected_harvest_date')->nullable();
+            $table->timestamp('expected_arrival_time')->nullable();
+            $table->string('expected_arrival_temperature')->nullable();
+            $table->timestamp('expected_harvest_time')->nullable();
             $table->timestamp('expected_delivery_time')->nullable();
             $table->timestamp('expected_departure_time')->nullable();
             $table->enum("status", ["open", "active", "closed"])->default("open");

@@ -110,13 +110,13 @@
                                         @foreach($clusters as $cluster)
                                             <tr>
                                                 <td nowrap>
-                                                    <a href="{{ route("batches.show", $cluster) }}" class="user-avatar mr-1">
+                                                    <a href="{{ route("clusters.purchases.index", $cluster) }}" class="user-avatar mr-1">
                                                         <img class="img-fluid"
                                                              src="{{ Avatar::create($cluster->number)->toBase64() }}"
                                                              alt="{{ $cluster->number }}"
                                                         >
                                                     </a>
-                                                    <a href="{{ route("batches.show", $cluster) }}">
+                                                    <a href="{{ route("clusters.purchases.index", $cluster) }}">
                                                         {{ $cluster->number }}
                                                     </a>
                                                 </td>

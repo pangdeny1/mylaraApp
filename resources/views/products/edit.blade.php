@@ -16,7 +16,7 @@
                             </li>
                         </ol>
                     </nav>
-                    <h1 class="page-title">New product</h1>
+                    <h1 class="page-title">Edit product</h1>
                 </header>
 
                 <!-- .page-section -->
@@ -30,10 +30,11 @@
 
                         <div class="row">
                             <div class="col-md-12">
-                                <form action="{{ route("products.store") }}" method="post">
+                                <form action="{{ route("products.update", $product) }}" method="post">
                                     @csrf
+                                    @method("put")
                                     <div class="card border-0">
-                                        <header class="card-header">Create a new product</header>
+                                        <header class="card-header">Edit product</header>
                                         <div class="card-body">
                                             <div class="form-row">
                                                 <div class="form-group col-md-12">
@@ -42,7 +43,7 @@
                                                            name="name"
                                                            id="name"
                                                            class="form-control  {{ $errors->has('name') ? "is-invalid" : "" }}"
-                                                           value="{{ old("name") }}"
+                                                           value="{{ old("name", $product->name) }}"
                                                            placeholder="Mchicha..."
                                                     >
                                                     @if ($errors->has('name'))
@@ -63,7 +64,7 @@
                                                         <option value="">Select category...</option>
                                                         @foreach($productCategories as $productCategory)
                                                             <option value="{{ $productCategory->id }}"
-                                                                    @if(old("category_id") == $productCategory->id) selected @endif
+                                                                    @if(old("category_id", $product->category()->id) == $productCategory->id) selected @endif
                                                             >
                                                                 {{ $productCategory->name }}
                                                             </option>
@@ -84,7 +85,7 @@
                                                               class="form-control {{ $errors->has('description') ? "is-invalid" : "" }}"
                                                               rows="6"
                                                               placeholder="Type something..."
-                                                    >{{ old("description") }}</textarea>
+                                                    >{{ old("description", $product->description) }}</textarea>
                                                     @if ($errors->has('description'))
                                                         <span class="invalid-feedback">
                                                             <strong>{{ $errors->first('description') }}</strong>

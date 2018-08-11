@@ -102,7 +102,7 @@
                                         </div>
                                     </div>
                                     <farmers-picker inline-template>
-                                        <div>
+                                        <section>
                                             <div class="form-row mb-2">
                                                 <div class="form-group col-md-12">
                                                     <label for="roles">Farmers</label>
@@ -151,16 +151,145 @@
                                                     </div>
                                                 </div >
                                             </div>
-                                        </div>
+                                        </section>
                                     </farmers-picker>
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
+                                            <label for="block_id">Block number</label>
+                                            <select 
+                                                name="block_id" 
+                                                id="block_id" 
+                                                class="form-control {{ $errors->has('block_id') ? 'is-invalid' : '' }}"
+                                            >
+                                                <option value="">Choose block...</option>
+                                                @foreach(\App\Block::get() as $block)
+                                                <option 
+                                                    value="{{ $block->id}}"
+                                                    {{ old("block_id") == $block->id ? "selected" : "" }}
+                                                >
+                                                    {{ $block->number }}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                            @if ($errors->has('block_id'))
+                                                <span class="invalid-feedback">
+                                                    <strong>{{ $errors->first('block_id') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="card-body">
+                                    <header class="card-title text-muted">Arrival Information</header>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="expected_arrival_time">Expected time</label>
+                                            <input 
+                                                type="date" 
+                                                name="expected_arrival_time"
+                                                id="expected_arrival_time"
+                                                class="form-control {{ $errors->has('expected_arrival_time') ? 'is-invalid' : '' }}"
+                                                value="{{ old("expected_arrival_time") }}"
+                                            >
+                                            @if ($errors->has('expected_arrival_time'))
+                                                <span class="invalid-feedback">
+                                                    <strong>{{ $errors->first('expected_arrival_time') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="expected_arrival_temperature">Expected temperature</label>
+                                            <input 
+                                                type="text" 
+                                                name="expected_arrival_temperature"
+                                                id="expected_arrival_temperature"
+                                                class="form-control {{ $errors->has('expected_arrival_temperature') ? 'is-invalid' : '' }}"
+                                                placeholder="30&deg;C..."
+                                                value="{{ old("expected_arrival_temperature") }}"
+                                            >
+                                            @if ($errors->has('expected_arrival_temperature'))
+                                                <span class="invalid-feedback">
+                                                    <strong>{{ $errors->first('expected_arrival_temperature') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="card-body">
+                                    <header class="card-title text-muted">Harvest Information</header>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="expected_harvest_time">Expected date</label>
+                                            <input 
+                                                type="date"
+                                                name="expected_harvest_time"
+                                                id="expected_harvest_time"
+                                                class="form-control {{ $errors->has('expected_harvest_time') ? 'is-invalid' : '' }}"
+                                                value="{{ old("expected_harvest_time") }}"
+                                            >
+                                            @if ($errors->has('expected_harvest_time'))
+                                                <span class="invalid-feedback">
+                                                    <strong>{{ $errors->first('expected_harvest_time') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="card-body">
+                                    <header class="card-title text-muted">Delivery Information</header>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="expected_delivery_time">Expected time</label>
+                                            <input 
+                                                type="date" 
+                                                name="expected_delivery_time"
+                                                id="expected_delivery_time"
+                                                class="form-control {{ $errors->has('expected_delivery_time') ? 'is-invalid' : '' }}"
+                                                value="{{ old("expected_delivery_time") }}"
+                                            >
+                                            @if ($errors->has('expected_delivery_time'))
+                                                <span class="invalid-feedback">
+                                                    <strong>{{ $errors->first('expected_delivery_time') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="card-body">
+                                    <header class="card-title text-muted">Departure Information</header>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="expected_departure_time">Expected time</label>
+                                            <input 
+                                                type="date" 
+                                                name="expected_departure_time"
+                                                id="expected_departure_time"
+                                                class="form-control {{ $errors->has('expected_departure_time') ? 'is-invalid' : '' }}"
+                                                value="{{ old("expected_departure_time") }}"
+                                            >
+                                            @if ($errors->has('expected_departure_time'))
+                                                <span class="invalid-feedback">
+                                                    <strong>{{ $errors->first('expected_departure_time') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
                                             <label for="description">Description</label>
-                                            <textarea name="description"
-                                                      id="description"
-                                                      class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}"
-                                                      rows="6"
-                                                      placeholder="Type something..."
+                                            <textarea 
+                                                name="description"
+                                                id="description"
+                                                class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}"
+                                                rows="6"
+                                                placeholder="Type something..."
                                             >{{ old("description") }}</textarea>
                                             @if ($errors->has('description'))
                                                 <span class="invalid-feedback">

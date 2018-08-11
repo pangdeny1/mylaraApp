@@ -18,4 +18,9 @@ class ClustersController extends Controller
 
         return view("clusters.index", compact("clusters"));
     }
+
+    public function show(Batch $batch)
+    {
+        return view("clusters.show", compact("batch"));
+    }
 }

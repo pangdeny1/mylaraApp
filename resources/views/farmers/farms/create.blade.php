@@ -9,11 +9,12 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item active">
                                 <a href="#">
-                                    <i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Blocks</a>
+                                    <i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Farmlands
+                                </a>
                             </li>
                         </ol>
                     </nav>
-                    <h1 class="page-title"> Add a new Block </h1>
+                    <h1 class="page-title"> Add a new Farmland </h1>
                 </header>
                 <div class="page-section">
                     <div class="row">
@@ -25,7 +26,7 @@
                             >
                                 @csrf
                                 <header class="card-header border-bottom-0">
-                                    Block information
+                                    Farmland information
                                 </header>
                                 <div class="card-body">
                                     <div class="form-row">

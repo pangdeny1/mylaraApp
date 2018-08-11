@@ -14,6 +14,10 @@ class Batch extends Model implements Auditable
     protected $casts    = [
         "valid_from" => "date",
         "valid_till" => "date",
+        "expected_arrival_time" => "date",
+        "expected_harvest_time" => "date",
+        "expected_delivery_time" => "date",
+        "expected_departure_time" => "date",
     ];
 
     protected $with     = ["harvests.product"];
@@ -31,6 +35,11 @@ class Batch extends Model implements Auditable
     public function product()
     {
         return $this->hasManyThrough(Product::class, Harvest::class);
+    }
+
+    public function block()
+    {
+        return $this->belongsTo(Block::class);
     }
 
     public function farmers()

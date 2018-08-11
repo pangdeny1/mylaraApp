@@ -29,7 +29,13 @@ class BatchCreateRequest extends FormRequest
             "valid_till" => "required|date|after:today",
             "max_count" => "required|numeric",
             "description" => "required",
-            "farmers" => "required|array",
+            "farmers" => "array",
+            "block_id" => "required",
+            "expected_arrival_time" => "required|date|after_or_equal:today",
+            "expected_arrival_temperature" => "required",
+            "expected_harvest_time" => "required|date|after_or_equal:today",
+            "expected_delivery_time" => "required|date|after_or_equal:today",
+            "expected_departure_time" => "required|date|after_or_equal:today",
         ];
     }
 }

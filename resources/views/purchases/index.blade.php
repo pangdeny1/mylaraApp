@@ -32,6 +32,7 @@
                                     Record a new purchase
                                 </a>
                                 @endcan
+                                
                             </div>
                         </div>
                     </header>

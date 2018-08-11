@@ -65,17 +65,17 @@ Route::post("farmers/{farmer}/farms", [
     "uses" => "FarmerFarmsController@store",
 ]);
 
-Route::get("farmers/{farmer}/blocks", [
-    "as" => "farmers.blocks.index",
-    "uses" => "FarmerBlocksController@index",
+Route::get("farmers/{farmer}/household_blocks", [
+    "as" => "farmers.household_blocks.index",
+    "uses" => "FarmerHouseholdBlocksController@index",
 ]);
-Route::get("farmers/{farmer}/blocks/create", [
-    "as" => "farmers.blocks.create",
-    "uses" => "FarmerBlocksController@create",
+Route::get("farmers/{farmer}/household_blocks/create", [
+    "as" => "farmers.household_blocks.create",
+    "uses" => "FarmerHouseholdBlocksController@create",
 ]);
-Route::post("farmers/{farmer}/blocks", [
-    "as" => "farmers.blocks.store",
-    "uses" => "FarmerBlocksController@store",
+Route::post("farmers/{farmer}/household_blocks", [
+    "as" => "farmers.household_blocks.store",
+    "uses" => "FarmerHouseholdBlocksController@store",
 ]);
 
 Route::get("farmers/{farmer}/harvests", [
@@ -108,7 +108,21 @@ Route::resource("farmers", "FarmersController");
 Route::post("farmers/{farmer}", "FarmersController@update");
 
 Route::resource("purchases", "PurchasesController");
-Route::resource("clusters", "ClustersController");
+
+Route::get("clusters", [
+    "as" => "clusters.index",
+    "uses" => "ClustersController@index"
+]);
+
+Route::get("clusters/{batch}/purchases", [
+    "as" => "clusters.purchases.index",
+    "uses" => "ClusterPurchasesController@index",
+]);
+
+Route::post("clusters/{batch}/purchases", [
+    "as" => "clusters.purchases.store",
+    "uses" => "ClusterPurchasesController@store",
+]);
 
 
 Route::prefix('reports')->group(function () {
@@ -148,6 +162,11 @@ Route::prefix('settings')->group(function () {
     Route::post("groups/{group}", "GroupsController@update");
     Route::resource("users", "UsersController");
     Route::resource("roles", "RolesController");
+
+    Route::get("products/exports", [
+        "as" => "products.export",
+        "uses" => "ProductsController@export"
+    ]);
     Route::resource("products", "ProductsController");
     Route::resource("batches", "BatchesController");
     Route::resource("product_categories", "ProductCategoriesController");
