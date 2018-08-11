@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ProductPrice;
 use App\Group;
+use App\State;
 use Illuminate\Http\Request;
 
 class GroupsController extends Controller
@@ -57,13 +58,50 @@ class GroupsController extends Controller
 
     public function edit(Group $group)
     {
-        //
+         $this->authorize("edit", Group::class);
+
+        return view("groups.edit", ["states" => State::getCountryName("Tanzania"),
+            "group"=>$group]);
     }
 
 
     public function update(Request $request, Group $group)
     {
-        //
+        $this->authorize("update", $group);
+        $this->validate($request, [
+            "name" => "required",
+            "description" => "required",
+            
+        ]);
+
+        $group->update([
+            "name" => request("name"),
+            "description" => request("description"),
+            ]);
+
+/*
+        if ($group->address()->exists()){
+            $group->address()->update([
+                "street" => request("street", optional($group->address)->street),
+                "address" => request("address", optional($group->address)->address),
+                "state" => request("state", optional($group->address)->state),
+                "country" => request("country", optional($group->address)->country),
+                "postal_code" => request("postal_code", optional($group->address)->postal_code),
+            ]);
+        } else {
+            $group->address()->create([
+                "street" => request("street"),
+                "address" => request("address", ""),
+                "state" => request("state"),
+                "country" => request("country"),
+                "postal_code" => request("postal_code"),
+            ]);
+        }
+        */
+
+        //$group->groups()->sync($request->group_id);
+        return redirect()->route("groups.index");
+        //return redirect()->back();
     }
 
 

@@ -35,24 +35,40 @@
                                     <div class="card border-0">
                                         <header class="card-header border-bottom-0">
                                             Change password
+                                             @if(session('success'))
+        <!-- If password successfully show message -->
+        <div class="row">
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        </div>
+        @endif
+
                                             
                                         </header>
                                         <div class="card-body">
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
-                                                    <label for="old_password">old_password</label>
+                                                    <label for="current_password">Current password</label>
                                                     <input type="password"
-                                                           name="old_password"
-                                                           id="old_password"
-                                                           class="form-control  {{ $errors->has('old_password') ? "is-invalid" : "" }}"
+                                                           name="current_password"
+                                                           id="current_password"
+                                                           class="form-control  {{ $errors->has('current_password') ? "is-invalid" : "" }}"
                                                            
-                                                           placeholder="old password"
+                                                           placeholder="current password"
                                                     >
-                                                    @if ($errors->has('old_password'))
+                                                    @if ($errors->has('current_password'))
                                                         <span class="invalid-feedback">
-                                                            <strong>{{ $errors->first('old_password') }}</strong>
+                                                            <strong>{{ $errors->first('current_password') }}</strong>
                                                         </span>
                                                     @endif
+                                                   @if(session('danger'))
+                                                        <div class="alert alert-danger">
+                                                            <strong>{{ session('danger') }}</strong>
+                                                        </span>
+                                                    @endif
+                                                </div>
+
                                                 </div>
 
                                             </div>
@@ -124,4 +140,5 @@
             </div>
         </div>
     </div>
+    
 @endsection

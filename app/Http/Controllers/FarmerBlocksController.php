@@ -6,6 +6,7 @@ use App\Product;
 use App\GroupProduct;
 use App\HouseholdBlock;
 use App\Farmer;
+use App\Block;
 use App\Http\Requests\BlockCreateRequest;
 use Illuminate\Http\Request;
 
@@ -37,6 +38,14 @@ class FarmerBlocksController extends Controller
             "products" => $products,
         ]);
     }
+
+      public function edit(Block $block)
+    {
+        $this->authorize("edit", Block::class);
+
+        return view("blocks.edit", ["states" => State::getCountryName("Tanzania"),]);
+    }
+
 
     public function store(BlockCreateRequest $request, Farmer $farmer)
     {
