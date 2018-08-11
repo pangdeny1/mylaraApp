@@ -110,6 +110,7 @@ Route::post("farmers/{farmer}", "FarmersController@update");
 Route::resource("purchases", "PurchasesController");
 Route::resource("clusters", "ClustersController");
 
+
 Route::prefix('reports')->group(function () {
     Route::get("purchases", [
         "as" => "purchases.reports",
@@ -150,6 +151,11 @@ Route::prefix('settings')->group(function () {
     Route::resource("product_categories", "ProductCategoriesController");
     Route::resource("changepassword", "Auth\ChangePasswordController");
 });
+
+Route::get("users/{user}/passwordchange", [
+    "as" => "password.change",
+    "uses" => "ResetPasswordController@change",
+]);
 
 
 

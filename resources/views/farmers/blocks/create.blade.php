@@ -66,7 +66,7 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-6 mb-3">
-                                            <label for="farm_id">Block/Farm</label>
+                                            <label for="farm_id">Block</label>
                                             <select name="farm_id"
                                                     class="form-control {{ $errors->has('farm_id') ? 'is-invalid' : '' }}"
                                                     id="farm_id"
