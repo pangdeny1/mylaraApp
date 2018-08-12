@@ -294,9 +294,9 @@
                                     <tr>
                                         <th nowrap>Total</th>
                                         <th nowrap>{{ $batch->purchases->sum("crates_count") }}</th>
-                                        <th nowrap>{{ $batch->purchases->sum("field_weight") }}</th>
-                                        <th nowrap>{{ $batch->purchases->sum("weight_before") }}</th>
-                                        <th nowrap>{{ $batch->purchases->sum("weight_after") }}</th>
+                                        <th nowrap>{{ number_format($batch->purchases->sum("field_weight"), 2) }} Kg</th>
+                                        <th nowrap>{{ number_format($batch->purchases->sum("weight_before"), 2) }} Kg</th>
+                                        <th nowrap>{{ number_format($batch->purchases->sum("weight_after"), 2) }} Kg</th>
                                         <th nowrap>2kg</th>
                                         <th nowrap></th>
                                         <th nowrap></th>

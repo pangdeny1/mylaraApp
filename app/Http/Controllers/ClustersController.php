@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Batch;
+use App\Exports\ClustersExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
 class ClustersController extends Controller
@@ -14,7 +16,14 @@ class ClustersController extends Controller
 
     public function index()
     {
-        $clusters = Batch::latest()->paginate();
+        $clusters = Batch::latest()
+            ->when(request("q"), function($query){
+                return $query->where("number", "LIKE", "%". request("q") ."%");
+            })
+            ->when(request("status"), function($query){
+                return $query->where("status", request("status"));
+            })
+            ->paginate();
 
         return view("clusters.index", compact("clusters"));
     }
@@ -22,5 +31,10 @@ class ClustersController extends Controller
     public function show(Batch $batch)
     {
         return view("clusters.show", compact("batch"));
+    }
+
+    public function export() 
+    {
+        return Excel::download(new ClustersExport, 'clusters.xlsx');
     }
 }
