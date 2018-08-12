@@ -36,7 +36,8 @@ class ClusterPurchasesController extends Controller
 
         $harvest = Harvest::create([
             "farmer_id" => request("farmer_id"),
-            "block_id" => request("block_id"),
+            "batch_id" => $batch->id,
+            "household_block_id" => request("block_id"),
             "expected_date" => request("harvest_date"),
             "amount_unit" => request("weight_unit"),
             "expected_amount" => request("field_weight"),

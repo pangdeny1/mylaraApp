@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!-- Button trigger modal -->
 <button type="button"
         class="btn btn-sm btn-secondary"
@@ -91,3 +92,5 @@
         </div>
     </div>
 </div>
+=======
+>>>>>>> b03dbc8de4810d9b102e334112ad34ccb0e7723d

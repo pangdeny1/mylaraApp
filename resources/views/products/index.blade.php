@@ -7,10 +7,18 @@
             <header class="page-title-bar">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item active">
-                            <a href="#">
-                                <i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Settings
+                        <li class="breadcrumb-item">
+                            <a href="{{ route("home") }}">
+                                <i class="breadcrumb-icon fa fa-angle-left mr-2"></i> Dashboard
                             </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="#">
+                                Settings
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            Products
                         </li>
                     </ol>
                 </nav>
@@ -19,13 +27,13 @@
                     <h1 class="page-title mr-sm-auto mb-0"> Products </h1>
                     <div class="btn-toolbar">
                         <a href="{{ route("products.export") }}" class="btn btn-light">
-                            <i class="oi oi-data-transfer-download"></i>
+                            <i class="far fa-file-excel"></i>
                             <span class="ml-1">Export as excel</span>
                         </a>
                         @can("create", \App\Product::class)
                         <a href="{{ route("products.create") }}" class="btn btn-primary">
                             <span class="fas fa-plus mr-1"></span>
-                            Add a new product
+                            New product
                         </a>
                         @endcan
                     </div>

@@ -41,25 +41,7 @@
                             </div>
 
                             <div class="list-group-item-figure">
-                                @if(! $member->hasHarvested($cluster))
-                                <a href="{{ url("farmers/{$member->id}/harvests/create?batch_id={$cluster->id}") }}"
-                                   class="btn btn-sm btn-primary"
-                                >
-                                    Add harvest
-                                </a>
-                                @else
-                                    <div>
-                                        <div>
-                                            {{ $member->findHarvestByBatchId($cluster->id)->block->product->name }} -
-                                            {{ $member->findHarvestByBatchId($cluster->id)->block->number }}
-                                        </div>
-                                        <div class="text-right">
-                                            <span>
-                                                {{ $member->findHarvestByBatchId($cluster->id)->volume }}
-                                            </span>
-                                        </div>
-                                    </div>
-                                @endif
+                                <button class="btn btn-sm btn-primary">Remove</button>
                             </div>
 
                         </div>

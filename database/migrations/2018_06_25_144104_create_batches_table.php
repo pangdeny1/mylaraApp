@@ -20,6 +20,7 @@ class CreateBatchesTable extends Migration
             $table->timestamp('valid_from')->nullable();
             $table->timestamp('valid_till')->nullable();
             $table->unsignedInteger("block_id")->nullable();
+            $table->unsignedInteger("group_id")->nullable();
             $table->timestamp('expected_arrival_time')->nullable();
             $table->string('expected_arrival_temperature')->nullable();
             $table->timestamp('expected_harvest_time')->nullable();

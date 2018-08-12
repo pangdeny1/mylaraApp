@@ -44,9 +44,9 @@ class Harvest extends Model implements Auditable
         return $this->hasMany(Purchase::class);
     }
 
-    public function block()
+    public function householdBlock()
     {
-        return $this->belongsTo(Block::class);
+        return $this->belongsTo(HouseholdBlock::class);
     }
 
     public function isPurchased(Batch $batch)

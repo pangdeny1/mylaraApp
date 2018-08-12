@@ -10,8 +10,21 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item active">
                                 <a href="#">
-                                    <i class="breadcrumb-icon fa fa-angle-left mr-2"></i> Settings
+                                    <i class="breadcrumb-icon fa fa-angle-left mr-2"></i> Dashboard
                                 </a>
+                            </li>
+                            <li class="breadcrumb-item active">
+                                <a href="#">
+                                    Settings
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active">
+                                <a href="{{ route("product_categories.index") }}">
+                                    Products categories
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active">
+                                New product categories
                             </li>
                         </ol>
                     </nav>

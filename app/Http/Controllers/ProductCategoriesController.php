@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ProductCategoriesExport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\ProductCategoryCreateRequest;
 use App\ProductCategory;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -16,23 +18,21 @@ class ProductCategoriesController extends Controller
         $this->middleware("auth");
     }
 
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @throws AuthorizationException
-     */
     public function index()
     {
         $this->authorize("view", ProductCategory::class);
 
-        $productCategories = ProductCategory::paginate(10);
+        $productCategories = ProductCategory::latest()
+            ->when(request("q"), function($query){
+                return $query
+                    ->where("name", "LIKE", "%". request("q") ."%")
+                    ->orWhere("description", "LIKE", "%". request("q") ."%");
+            })
+            ->paginate(10);
 
         return view("products.categories.index", compact("productCategories"));
     }
 
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @throws AuthorizationException
-     */
     public function create()
     {
         $this->authorize("create", ProductCategory::class);
@@ -40,12 +40,6 @@ class ProductCategoriesController extends Controller
         return view("products.categories.create");
     }
 
-
-    /**
-     * @param ProductCategoryCreateRequest $request
-     * @return RedirectResponse
-     * @throws AuthorizationException
-     */
     public function store(ProductCategoryCreateRequest $request)
     {
         $this->authorize("create", ProductCategory::class);
@@ -55,48 +49,39 @@ class ProductCategoriesController extends Controller
         return redirect()->route("product_categories.index");
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  ProductCategory  $productCategory
-     * @return Response
-     */
     public function show(ProductCategory $productCategory)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  ProductCategory  $productCategory
-     * @return Response
-     */
     public function edit(ProductCategory $productCategory)
     {
-        //
+        return view("products.categories.edit", compact("productCategory"));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  Request  $request
-     * @param  ProductCategory  $productCategory
-     * @return Response
-     */
     public function update(Request $request, ProductCategory $productCategory)
     {
-        //
+        $this->validate($request, [
+            "name" => "required",
+            "description" => "required",
+        ]);
+
+        $productCategory->update($request->only(["name", "description",]));
+
+        return redirect()->route("product_categories.index");
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  ProductCategory  $productCategory
-     * @return Response
-     */
     public function destroy(ProductCategory $productCategory)
     {
-        //
+        $productCategory->products()->detach();
+
+        $productCategory->delete();
+
+        return redirect()->back();
+    }
+
+    public function export() 
+    {
+        return Excel::download(new ProductCategoriesExport, 'product_categories.xlsx');
     }
 }

@@ -48,7 +48,7 @@ class FarmerHarvestsController extends Controller
             'batch_id' => Rule::unique('harvests')->where(function ($query) use ($farmer){
                 return $query
                     ->where('farmer_id', $farmer->id)
-                    ->where("block_id", request("block_id"));
+                    ->where("household_block_id", request("household_block_id"));
             })
         ]);
 
@@ -56,7 +56,7 @@ class FarmerHarvestsController extends Controller
             "expected_amount",
             "amount_unit",
             "expected_date",
-            "block_id",
+            "household_block_id",
             "description",
             "batch_id"
         ]));

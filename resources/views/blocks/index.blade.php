@@ -7,10 +7,18 @@
                 <header class="page-title-bar">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item active">
+                            <li class="breadcrumb-item">
                                 <a href="#">
-                                    <i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Settings
+                                    <i class="breadcrumb-icon fa fa-angle-left mr-2"></i> Dashboard
                                 </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="#">
+                                    Settings
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active">
+                                Blocks
                             </li>
                         </ol>
                     </nav>
@@ -18,18 +26,14 @@
                     <div class="d-sm-flex align-items-sm-center">
                         <h1 class="page-title mr-sm-auto mb-0"> Blocks </h1>
                         <div class="btn-toolbar">
-                            <button type="button" class="btn btn-light">
-                                <i class="oi oi-data-transfer-download"></i>
-                                <span class="ml-1">Export</span>
-                            </button>
-                            <button type="button" class="btn btn-light">
-                                <i class="oi oi-data-transfer-upload"></i>
-                                <span class="ml-1">Import</span>
-                            </button>
+                            <a href="{{ route("blocks.export") }}" class="btn btn-light">
+                                <i class="far fa-file-excel"></i>
+                                <span class="ml-1">Export as excel</span>
+                            </a>
                             @can("create", \App\Block::class)
                             <a href="{{ route("blocks.create") }}" class="btn btn-primary">
                                 <span class="fas fa-plus mr-1"></span>
-                                Add a new block
+                                New block
                             </a>
                             @endcan
                         </div>
@@ -41,7 +45,7 @@
                             <ul class="nav nav-tabs card-header-tabs">
                                 <li class="nav-item">
                                     <a class="nav-link {{ request()->query("status") ? "" : "active" }}"
-                                       href="{{ route("purchases.index") }}"
+                                       href="{{ route("blocks.index") }}"
                                     >
                                         All
                                     </a>
@@ -52,15 +56,17 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <span class="oi oi-magnifying-glass"></span>
-                                </span>
+                                        <span class="input-group-text">
+                                            <span class="oi oi-magnifying-glass"></span>
+                                        </span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Search record">
+                                    <form action="">
+                                        <input type="text" name="q" class="form-control" placeholder="Search record...">
+                                    </form>
                                 </div>
                             </div>
 
-                            <div class="text-muted"> Showing 1 to 10 of 1,000 entries </div>
+                            <div class="text-muted"> Showing {{ $blocks->firstItem() }} to {{ $blocks->lastItem() }} of {{ $blocks->total() }} entries </div>
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
@@ -70,7 +76,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($blocks as $block)
+                                        @forelse($blocks as $block)
                                         <tr>
                                             <td>
                                                 <div>
@@ -90,14 +96,46 @@
                                                 @endcan
 
                                                 @can("delete", \App\Block::class)
-                                                <a href="#" class="btn btn-sm btn-secondary">
+                                                <!-- Button trigger modal -->
+                                                <a href="#" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#deleteModal{{ $block->id }}">
                                                     <i class="far fa-trash-alt"></i>
                                                     <span class="sr-only">Remove</span>
                                                 </a>
+                                                
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="deleteModal{{ $block->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{ $block->id }}" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <form action="{{ route("blocks.destroy", $block) }}" method="POST">
+                                                                @csrf
+                                                                @method("delete")
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="deleteModalLabel{{ $block->id }}">Delete item</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    Are you sure you want to delete this item
+                                                                </div>
+                                                                <div class="modal-footer justify-content-between">
+                                                                    <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-sm btn-danger">Move to trash</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 @endcan
                                             </td>
                                         </tr>
-                                    @endforeach
+                                        @empty
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="my-3">No block yet!</div>
+                                            </td>
+                                        </tr>
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>

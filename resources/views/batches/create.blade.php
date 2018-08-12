@@ -54,8 +54,6 @@
                                                 </span>
                                             @endif
                                         </div>
-                                    </div>
-                                    <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="max_count">Maximum number of farmers</label>
                                             <input type="number"
@@ -101,6 +99,7 @@
                                             @endif
                                         </div>
                                     </div>
+<<<<<<< HEAD
                                    <farmers-picker inline-template>
                                          <section>
                                           <!--  <div class="form-row mb-2">
@@ -153,6 +152,33 @@
                                             </div>
                                         </section>
                                     </farmers-picker>
+=======
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label for="block_id">Group name</label>
+                                            <select 
+                                                name="group_id" 
+                                                id="group_id" 
+                                                class="form-control {{ $errors->has('group_id') ? 'is-invalid' : '' }}"
+                                            >
+                                                <option value="">Choose group...</option>
+                                                @foreach(\App\Group::get() as $group)
+                                                <option 
+                                                    value="{{ $group->id}}"
+                                                    {{ old("block_id") == $group->id ? "selected" : "" }}
+                                                >
+                                                    {{ $group->name }}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                            @if ($errors->has('group_id'))
+                                                <span class="invalid-feedback">
+                                                    <strong>{{ $errors->first('group_id') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+>>>>>>> b03dbc8de4810d9b102e334112ad34ccb0e7723d
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <label for="block_id">Block number</label>

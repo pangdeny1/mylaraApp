@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Sms;
 use App\Purchase;
 use Illuminate\Http\Request;
 
@@ -21,11 +22,7 @@ class PackingHouseWeightController extends Controller
             "weight_before" => request("weight_before"),
         ]);
 
-        \Sms::send(phone($purchase->farmer->phone, "TZ"), $this->messageBody(
-            $purchase->farmer,
-            $purchase->product,
-            $purchase
-        ));
+        Sms::send(phone($purchase->farmer->phone, "TZ"), $this->messageBody($purchase->farmer, $purchase->product, $purchase));
 
         return redirect()->back();
         
@@ -33,7 +30,7 @@ class PackingHouseWeightController extends Controller
 
     public function messageBody($farmer, $product, $purchase)
     {
-        $format = "Habari %s,Mzigo wako wa %s jumla ya kilo %s kabla ya uchambuzi,kilo %s baada ya uchambuzi,Thamani yake jumla ni %s";
+        $format = "Habari %s,Mzigo wako wa %s jumla ya kilo %s kabla ya uchambuzi,kilo %s baada ya uchambuzi";
 
         return sprintf(
             $format,
