@@ -8,27 +8,32 @@
                 <header class="page-title-bar">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item active">
-                                <a href="#">
+                            <li class="breadcrumb-item">
+                                <a href="{{ route("home")}}">
                                     <i class="breadcrumb-icon fa fa-angle-left mr-2"></i> Dashboard
                                 </a>
                             </li>
-                            <li class="breadcrumb-item active">
+                            <li class="breadcrumb-item">
                                 <a href="#">
                                     Settings
                                 </a>
                             </li>
-                            <li class="breadcrumb-item active">
+                            <li class="breadcrumb-item">
                                 <a href="{{ route("product_categories.index") }}">
-                                    Products categories
+                                    Product categories
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="#">
+                                    {{ $productCategory->name }}
                                 </a>
                             </li>
                             <li class="breadcrumb-item active">
-                                New product categories
+                                Edit
                             </li>
                         </ol>
                     </nav>
-                    <h1 class="page-title"> New product category </h1>
+                    <h1 class="page-title">Edit product category</h1>
                 </header>
 
                 <div class="page-section">
@@ -42,13 +47,14 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <form action="{{ route("product_categories.store") }}"
+                            <form action="{{ route("product_categories.update", $productCategory) }}"
                                   method="post"
                                   class="card"
                             >
                                 @csrf
+                                @method("put")
                                 <header class="card-header border-bottom-0">
-                                    Create a new product category
+                                    Edit product category
                                 </header>
                                 <div class="card-body">
                                     <div class="form-row">
@@ -57,7 +63,8 @@
                                             <input type="text"
                                                    name="name"
                                                    id="name"
-                                                   class="form-control" value="{{ old("name") }}"
+                                                   class="form-control" 
+                                                   value="{{ old("name", $productCategory->name) }}"
                                                    placeholder="Vegetable...">
                                         </div>
                                     </div>
@@ -69,7 +76,7 @@
                                                       class="form-control"
                                                       rows="6"
                                                       placeholder="Type something..."
-                                            >{{ old("description") }}</textarea>
+                                            >{{ old("description", $productCategory->description) }}</textarea>
                                         </div>
                                     </div>
                                     <hr>
