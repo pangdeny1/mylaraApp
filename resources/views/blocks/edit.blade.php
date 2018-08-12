@@ -10,9 +10,28 @@
                 <header class="page-title-bar">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item active">
+                            <li class="breadcrumb-item">
+                                <a href="{{ route("home") }}">
+                                    <i class="breadcrumb-icon fa fa-angle-left mr-2"></i> Dashboard
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item">
                                 <a href="#">
-                                    <i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Settings</a>
+                                    Settings
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="{{ route("blocks.index") }}">
+                                    Blocks
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="#">
+                                    {{ $block->number }}
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active">
+                                Edit
                             </li>
                         </ol>
                     </nav>
@@ -30,8 +49,9 @@
 
                         <div class="row">
                             <div class="col-md-12">
-                                <form action="{{ route("blocks.update",$block) }}" method="post">
+                                <form action="{{ route("blocks.update", $block) }}" method="post">
                                     @csrf
+                                    @method("put")
                                     <div class="card border-0">
                                         <header class="card-header border-bottom-0">
                                             Edit a new block

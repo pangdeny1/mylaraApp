@@ -15,4 +15,10 @@ class Block extends Model implements Auditable
     {
         return $this->morphOne(Address::class, "addressable");
     }
+
+
+    public function addresses()
+    {
+        return $this->morphMany(Address::class, "addressable");
+    }
 }

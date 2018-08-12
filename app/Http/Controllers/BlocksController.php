@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Block;
 use App\Http\Requests\BlockCreateRequest;
 use App\State;
+use App\Exports\BlocksExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -25,7 +27,13 @@ class BlocksController extends Controller
     {
         $this->authorize("view", Block::class);
 
-        $blocks = Block::latest()->paginate();
+        $blocks = Block::latest()
+            ->when(request("q"), function($query){
+                return $query
+                    ->where("number", "LIKE", "%". request("q") ."%")
+                    ->orWhere("description", "LIKE", "%". request("q") ."%");
+            })
+            ->paginate();
 
         return view("blocks.index", compact("blocks"));
     }
@@ -74,17 +82,16 @@ class BlocksController extends Controller
     public function update(Request $request,Block $block)
     {
         $this->authorize("update", $block);
+
         $this->validate($request, [
             "number" => "required",
             "description" => "required",
-            
         ]);
 
         $block->update([
             "number" => request("number"),
             "description" => request("description"),
-            ]);
-
+        ]);
 
         if ($block->address()->exists()){
             $block->address()->update([
@@ -104,9 +111,25 @@ class BlocksController extends Controller
             ]);
         }
 
-        //$block->groups()->sync($request->group_id);
         return redirect()->route("blocks.index");
-        //return redirect()->back();
     }
 
+    public function show(Block $block)
+    {
+
+    }
+
+    public function destroy(Block $block)
+    {
+        $block->addresses()->delete();
+
+        $block->delete();
+
+        return redirect()->route("blocks.index");
+    }
+
+    public function export() 
+    {
+        return Excel::download(new BlocksExport, 'blocks.xlsx');
+    }
 }
