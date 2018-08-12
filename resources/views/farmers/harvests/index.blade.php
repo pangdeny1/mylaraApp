@@ -90,7 +90,7 @@
                                         @foreach($farmer->harvests as $harvest)
                                             <tr>
                                                 <td class="text-left align-middle" nowrap>
-                                                    {{ $harvest->block->product->name }}
+                                                    {{ $harvest->householdBlock->product->name }}
                                                 </td>
                                                 <td class="text-right align-middle" nowrap>
                                                     {{ $harvest->expected_amount }} {{ $harvest->amount_unit }}
@@ -99,7 +99,7 @@
                                                     {{ $harvest->expected_date->toFormattedDateString() }}
                                                 </td>
                                                 <td class="text-left align-middle" nowrap>
-                                                    {{ $harvest->block->farm->name }}
+                                                    {{ $harvest->householdBlock->farm->name }}
                                                 </td>
                                                 <td class="text-left text-capitalize align-middle" nowrap>
                                                     {{ $harvest->status }}

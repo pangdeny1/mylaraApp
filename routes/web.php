@@ -113,12 +113,14 @@ Route::get("clusters", [
     "as" => "clusters.index",
     "uses" => "ClustersController@index"
 ]);
-
+Route::get("clusters/export", [
+    "as" => "clusters.export",
+    "uses" => "ClustersController@export"
+]);
 Route::get("clusters/{batch}/purchases", [
     "as" => "clusters.purchases.index",
     "uses" => "ClusterPurchasesController@index",
 ]);
-
 Route::post("clusters/{batch}/purchases", [
     "as" => "clusters.purchases.store",
     "uses" => "ClusterPurchasesController@store",
@@ -150,16 +152,19 @@ Route::prefix('settings')->group(function () {
         "uses" => "GroupProductsController@update"
     ]);
 
-     Route::get("changepassword", [
-        "as" => "changepassword.index",
-        "uses" => "ChangePasswordControllerr@index"
+    
+    Route::get("blocks/export", [
+        "as" => "blocks.export",
+        "uses" => "BlocksController@export"
     ]);
-
-     Route::post("changepassword/{user}","Auth\ChangePasswordController@update");
     Route::resource("blocks", "BlocksController");
-    Route::post("blocks/{block}", "BlocksController@update");
+
+    Route::get("groups/export", [
+        "as" => "groups.export",
+        "uses" => "GroupsController@export"
+    ]);
     Route::resource("groups", "GroupsController");
-    Route::post("groups/{group}", "GroupsController@update");
+
     Route::resource("users", "UsersController");
     Route::resource("roles", "RolesController");
 
@@ -168,16 +173,27 @@ Route::prefix('settings')->group(function () {
         "uses" => "ProductsController@export"
     ]);
     Route::resource("products", "ProductsController");
+
     Route::resource("batches", "BatchesController");
+
+    Route::get("product_categories/export", [
+        "as" => "product_categories.export",
+        "uses" => "ProductCategoriesController@export",
+    ]);
     Route::resource("product_categories", "ProductCategoriesController");
-    Route::resource("changepassword", "Auth\ChangePasswordController");
+
+ 
 });
 
-Route::get("users/{user}/passwordchange", [
-    "as" => "password.change",
-    "uses" => "ResetPasswordController@change",
-]);
-
-
+// Route::get("users/{user}/passwordchange", [
+//     "as" => "password.change",
+//     "uses" => "ResetPasswordController@change",
+// ]);
+// Route::get("changepassword", [
+//     "as" => "changepassword.index",
+//     "uses" => "ChangePasswordControllerr@index"
+// ]);
+//  Route::resource("changepassword", "Auth\ChangePasswordController");
+//  Route::post("changepassword/{user}","Auth\ChangePasswordController@update");
 
 

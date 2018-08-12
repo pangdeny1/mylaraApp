@@ -84,21 +84,21 @@
 
                                     <div class="form-row">
                                         <div class="col-md-6 mb-3">
-                                            <label for="block_id">Block</label>
-                                            <select name="block_id"
-                                                    class="form-control {{ $errors->has('block_id') ? 'is-invalid' : '' }}"
-                                                    id="block_id"
+                                            <label for="household_block_id">Household Block number</label>
+                                            <select name="household_block_id"
+                                                    class="form-control {{ $errors->has('household_block_id') ? 'is-invalid' : '' }}"
+                                                    id="household_block_id"
                                             >
-                                                <option value="">Choose...</option>
-                                                @foreach($farmer->blocks as $block)
-                                                <option value="{{ $block->id }}" {{ old("block_id") == $block->id ? "selected" : "" }}>
-                                                    {{ $block->number }}
+                                                <option value="">Choose bock number...</option>
+                                                @foreach($farmer->householdBlocks as $householdBlock)
+                                                <option value="{{ $householdBlock->id }}" {{ old("block_id") == $householdBlock->id ? "selected" : "" }}>
+                                                    {{ $householdBlock->number }}
                                                 </option>
                                                 @endforeach
                                             </select>
-                                            @if ($errors->has('block_id'))
+                                            @if ($errors->has('household_block_id'))
                                                 <span class="invalid-feedback">
-                                                    <strong>{{ $errors->first('block_id') }}</strong>
+                                                    <strong>{{ $errors->first('household_block_id') }}</strong>
                                                 </span>
                                             @endif
                                         </div>

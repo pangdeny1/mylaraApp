@@ -30,6 +30,7 @@ class PurchaseCreateRequest extends FormRequest
             "amount" => "nullable|numeric",
             "field_weight" => "numeric|required",
             "remarks" => "nullable",
+            "block_id" => "required",
         ];
     }
 }

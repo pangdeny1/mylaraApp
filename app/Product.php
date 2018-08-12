@@ -14,7 +14,11 @@ class Product extends Model implements Auditable
 
     public function category()
     {
-        return $this->categories()->first();
+        if($this->categories()->exists()){
+            return $this->categories()->first();
+        }
+        
+        return new ProductCategory;
     }
 
     public function categories()
