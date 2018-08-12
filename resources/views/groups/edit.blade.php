@@ -8,10 +8,28 @@
                 <header class="page-title-bar">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item active">
+                            <li class="breadcrumb-item">
                                 <a href="#">
-                                    <i class="breadcrumb-icon fa fa-angle-left mr-2"></i> Settings
+                                    <i class="breadcrumb-icon fa fa-angle-left mr-2"></i> Dashboard
                                 </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="#">
+                                    Settings
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="{{ route("groups.index") }}">
+                                    Groups
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="#">
+                                    {{ $group->name }}
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active">
+                                Edit
                             </li>
                         </ol>
                     </nav>
@@ -29,11 +47,12 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <form action="{{ route("groups.update",$group) }}"
+                            <form action="{{ route("groups.update", $group) }}"
                                   method="post"
                                   class="card"
                             >
                                 @csrf
+                                @method("put")
                                 <header class="card-header border-bottom-0">
                                     Edit farmers group
                                 </header>
@@ -59,6 +78,10 @@
                                             >{{ $group->description }}</textarea>
                                         </div>
                                     </div>
+                                    <hr>
+                                    <button class="btn btn-block btn-primary">
+                                        Save changes
+                                    </button>
                                 </div>
                               {{--  <hr>
                                 <header class="card-header border-bottom-0">
@@ -147,10 +170,7 @@
                                             >
                                         </div>
                                     </div> --}}
-                                    <hr>
-                                    <button class="btn btn-block btn-primary">
-                                        Save changes
-                                    </button>
+                                    
                                 </div>
                             </form>
                         </div>

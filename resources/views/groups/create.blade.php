@@ -8,10 +8,23 @@
                 <header class="page-title-bar">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item active">
+                            <li class="breadcrumb-item">
                                 <a href="#">
-                                    <i class="breadcrumb-icon fa fa-angle-left mr-2"></i> Settings
+                                    <i class="breadcrumb-icon fa fa-angle-left mr-2"></i> Dashboard
                                 </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="#">
+                                    Settings
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="{{ route("groups.index") }}">
+                                    Groups
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active">
+                                New group
                             </li>
                         </ol>
                     </nav>
@@ -86,67 +99,6 @@
                                             @endif
                                         </div>
                                     </div>
-
-                                    {{-- <div class="form-row">
-                                        <div class="form-group col-md-8">
-                                            <label for="amount">Amount</label>
-                                            <div class="input-group">
-                                                <span class="input-group-text">
-                                                    Tsh.
-                                                </span>
-                                                <input type="hidden" name="currency" value="TZS">
-                                                <input type="text"
-                                                       name="amount"
-                                                       id="amount"
-                                                       class="form-control {{ $errors->has('amount') ? "is-invalid" : "" }}"
-                                                       value="{{ old("amount") }}"
-                                                >
-                                                @if ($errors->has('amount'))
-                                                    <span class="invalid-feedback">
-                                                        <strong>{{ $errors->first('amount') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-4">
-                                            <label for="unit">Unit</label>
-                                            <select name="unit" id="unit" class="form-control">
-                                                <option value="kg">Kilogram - Kg</option>
-                                                <option value="gm">Gram - Gm</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="unit_value">Unit value</label>
-                                            <input type="number"
-                                                   name="unit_value"
-                                                   id="unit_value"
-                                                   class="form-control {{ $errors->has('unit_value') ? "is-invalid" : "" }}"
-                                                   value="{{ old("unit_value", 1) }}"
-                                            >
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-4">
-                                            <label for="valid_from">Valid from</label>
-                                            <input type="date"
-                                                   name="valid_from"
-                                                   id="valid_from"
-                                                   class="form-control {{ $errors->has('valid_from') ? "is-invalid" : "" }}"
-                                                   value="{{ old("valid_from", date("Y-m-d")) }}"
-                                            >
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="valid_till">Valid to</label>
-                                            <input type="date"
-                                                   name="valid_till"
-                                                   id="valid_till"
-                                                   class="form-control"
-                                                   value="{{ old("valid_till") }}"
-                                            >
-                                        </div>
-                                    </div> --}}
                                     <hr>
                                     <button class="btn btn-block btn-primary">
                                         Save changes

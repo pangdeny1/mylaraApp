@@ -14,4 +14,14 @@ class Group extends Model
     {
     	return $this->belongsToMany(Product::class)->withTimestamps();
     }
+
+    public function members()
+    {
+    	return $this->belongsToMany(Farmer::class, "group_member");
+    }
+
+    public function prices()
+    {
+    	return $this->hasMany(ProductPrice::class);
+    }
 }
