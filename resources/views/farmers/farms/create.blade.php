@@ -14,7 +14,7 @@
                             </li>
                         </ol>
                     </nav>
-                    <h1 class="page-title"> Add a new Farmland </h1>
+                    <h1 class="page-title"> Add a new Farmland Block</h1>
                 </header>
                 <div class="page-section">
                     <div class="row">
@@ -26,7 +26,7 @@
                             >
                                 @csrf
                                 <header class="card-header border-bottom-0">
-                                    Farmland information
+                                    Farmland block information
                                 </header>
                                 <div class="card-body">
                                     <div class="form-row">
@@ -56,7 +56,7 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-12 mb-3">
-                                            <label for="block_id">Block Code</label>
+                                            <label for="block_id">Block Code (<font color="red">Note:If Block code is not in the list click  add new block code below to add block</font> </label>
                                             <select name="block_id"
                                                     class="form-control"
                                                     id="block_id"
@@ -68,6 +68,13 @@
                                                 </option>
                                                 @endforeach
                                             </select>
+                                           
+                                            @can("create", \App\Block::class)
+                            <a href="{{ route("blocks.create") }}" class="btn btn-primary">
+                                <span class="fas fa-plus mr-1"></span>
+                                Add a new block code
+                            </a>
+                            @endcan
                                         </div>
                                     </div>
                                     <div class="form-row">

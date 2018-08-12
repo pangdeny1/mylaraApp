@@ -44,7 +44,7 @@
                                     <a href="#">{{ $harvest->farmer->full_name }}</a>
                                 </h4>
                                 <div class="list-group-item-text">
-                                    {{ $harvest->block->number }} - {{ $harvest->block->product->name }}
+                                    {{ $harvest->block->number }} - 
                                 </div>
                             </div>
 

@@ -23,7 +23,7 @@
                             </li>
                         </ol>
                     </nav>
-                    <h1 class="page-title mr-sm-auto"> Blocks
+                    <h1 class="page-title mr-sm-auto"> Farmland Blocks
                         <small class="badge">{{ $farmer->farms->count() }} Totals</small>
                     </h1>
                 </header>
@@ -35,7 +35,7 @@
                             <section class="card card-fluid border border-info">
                                 <a href="{{ route("farmers.farms.create", $farmer) }}" class="card-body">
                                     <div class="text-center" style="padding: 7.5rem 0;">
-                                        <i class="fas fa-plus mr-2"></i> Add a new Block
+                                        <i class="fas fa-plus mr-2"></i> Add a new Farmland Block
                                     </div>
                                 </a>
                             </section>

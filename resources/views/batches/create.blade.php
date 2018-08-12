@@ -101,9 +101,9 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <farmers-picker inline-template>
-                                        <section>
-                                            <div class="form-row mb-2">
+                                   <farmers-picker inline-template>
+                                         <section>
+                                          <!--  <div class="form-row mb-2">
                                                 <div class="form-group col-md-12">
                                                     <label for="roles">Farmers</label>
                                                     <select id="roles"
@@ -128,7 +128,7 @@
 
                                             <div class="text-muted mb-2" v-if="selectedFarmers.length">
                                                 @{{  selectedFarmers.length }} out of 10 are selected
-                                            </div>
+                                            </div> -->
 
                                             <div class="list-group list-group-flush list-group-divider mb-4" v-if="selectedFarmers.length">
                                                 <div class="list-group-item" v-for="selectedFarmer in selectedFarmers">

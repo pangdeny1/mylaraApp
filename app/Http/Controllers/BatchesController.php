@@ -70,14 +70,14 @@ class BatchesController extends Controller
             "expected_harvest_time",
         ]));
 
-        if(count($request->farmers)){
+      /* if(count($request->farmers)){
             $batch->farmers()->attach(request("farmers"));
 
             if ($batch->max_count == $batch->farmers->count()) {
                 $batch->update(["status" => "active"]);
             }
         }
-        
+        */
 
         return redirect()->route("batches.index");
     }

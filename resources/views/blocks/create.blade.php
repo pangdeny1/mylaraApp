@@ -39,7 +39,7 @@
                                         <div class="card-body">
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
-                                                    <label for="number">Household code</label>
+                                                    <label for="number">Block code</label>
                                                     <input type="text"
                                                            name="number"
                                                            id="number"

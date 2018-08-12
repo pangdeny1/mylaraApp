@@ -53,6 +53,7 @@ class BlocksController extends Controller
         $this->validate($request, [
             "number" => "required",
             "description" => "required",
+            "street" => "required",
         ]);
 
         $block = Block::create($request->only(["number", "description"]));
