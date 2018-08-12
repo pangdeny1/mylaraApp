@@ -28,7 +28,7 @@
                             <tr>
                                 <th width="12.5%">Farm</th>
                                 <td width="12.5%" class="text-right">
-                                    Arusha Group
+                                    {{ $batch->group->name }}
                                 </td>
                                 <th width="12.5%">Variety</th>
                                 <td width="12.5%" class="text-right">
@@ -46,7 +46,7 @@
                             <tr>
                                 <th width="12.5%">Produce</th>
                                 <td width="12.5%" class="text-right">
-                                    07
+                                    {{ $batch->purchases()->distinct('product_id')->count('product_id') }}
                                 </td>
                                 <th width="12.5%">Harvest date</th>
                                 <td width="12.5%" class="text-right">

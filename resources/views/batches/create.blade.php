@@ -54,8 +54,6 @@
                                                 </span>
                                             @endif
                                         </div>
-                                    </div>
-                                    <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="max_count">Maximum number of farmers</label>
                                             <input type="number"
@@ -101,58 +99,31 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <farmers-picker inline-template>
-                                        <section>
-                                            <div class="form-row mb-2">
-                                                <div class="form-group col-md-12">
-                                                    <label for="roles">Farmers</label>
-                                                    <select id="roles"
-                                                            class="form-control {{ $errors->has('farmers') ? 'is-invalid' : '' }}"
-                                                            v-model="newFarmer"
-                                                            @change.prevent="addFarmer"
-                                                    >
-                                                        <option value="">Choose...</option>
-                                                        <option v-for="farmer in farmers"
-                                                                :value="farmer.id"
-                                                                v-text="farmer.full_name"
-                                                        >
-                                                        </option>
-                                                    </select>
-                                                    @if ($errors->has('farmers'))
-                                                        <span class="invalid-feedback">
-                                                            <strong>{{ $errors->first('farmers') }}</strong>
-                                                        </span>
-                                                    @endif
-                                                </div>
-                                            </div>
-
-                                            <div class="text-muted mb-2" v-if="selectedFarmers.length">
-                                                @{{  selectedFarmers.length }} out of 10 are selected
-                                            </div>
-
-                                            <div class="list-group list-group-flush list-group-divider mb-4" v-if="selectedFarmers.length">
-                                                <div class="list-group-item" v-for="selectedFarmer in selectedFarmers">
-                                                    <div class="list-group-item-figure">
-                                                        <div class="user-avatar">
-                                                            <img :src="selectedFarmer.avatar.encoded" :alt="selectedFarmer.full_name">
-                                                        </div>
-                                                    </div>
-                                                    <input type="hidden" name="farmers[]" :value="selectedFarmer.id">
-                                                    <div class="list-group-item-body">
-                                                        <h4 class="list-group-item-title">
-                                                            <a href="#" v-text="selectedFarmer.full_name"></a>
-                                                        </h4>
-                                                        <p class="list-group-item-text" v-text="selectedFarmer.phone"></p>
-                                                    </div>
-                                                    <div class="list-group-item-figure">
-                                                        <button @click.prevent="removeFarmer(selectedFarmer.id)" class="btn btn-sm btn-light">
-                                                            <i class="far fa-trash-alt"></i>
-                                                        </button>
-                                                    </div>
-                                                </div >
-                                            </div>
-                                        </section>
-                                    </farmers-picker>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label for="block_id">Group name</label>
+                                            <select 
+                                                name="group_id" 
+                                                id="group_id" 
+                                                class="form-control {{ $errors->has('group_id') ? 'is-invalid' : '' }}"
+                                            >
+                                                <option value="">Choose group...</option>
+                                                @foreach(\App\Group::get() as $group)
+                                                <option 
+                                                    value="{{ $group->id}}"
+                                                    {{ old("block_id") == $group->id ? "selected" : "" }}
+                                                >
+                                                    {{ $group->name }}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                            @if ($errors->has('group_id'))
+                                                <span class="invalid-feedback">
+                                                    <strong>{{ $errors->first('group_id') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <label for="block_id">Block number</label>

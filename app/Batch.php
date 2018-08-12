@@ -42,6 +42,11 @@ class Batch extends Model implements Auditable
         return $this->belongsTo(Block::class);
     }
 
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
+    }
+
     public function farmers()
     {
         return $this->belongsToMany(Farmer::class, "farmer_batch")->withTimestamps();

@@ -48,13 +48,13 @@ class BatchesController extends Controller
     {
         $this->authorize("create", Batch::class);
 
-        $this->validate($request, [
-            "farmers" => function($attribute, $value, $fail) {
-                if (count($value) > request("max_count")){
-                    return $fail($attribute.' is selected exceed maximum limit.');
-                }
-            },
-        ]);
+        // $this->validate($request, [
+        //     "farmers" => function($attribute, $value, $fail) {
+        //         if (count($value) > request("max_count")){
+        //             return $fail($attribute.' is selected exceed maximum limit.');
+        //         }
+        //     },
+        // ]);
 
         $batch = Batch::create($request->only([
             "number",
@@ -63,21 +63,13 @@ class BatchesController extends Controller
             "description",
             "max_count",
             "block_id",
+            "group_id",
             "expected_arrival_time",
             "expected_arrival_temperature",
             "expected_delivery_time",
             "expected_departure_time",
             "expected_harvest_time",
         ]));
-
-        if(count($request->farmers)){
-            $batch->farmers()->attach(request("farmers"));
-
-            if ($batch->max_count == $batch->farmers->count()) {
-                $batch->update(["status" => "active"]);
-            }
-        }
-        
 
         return redirect()->route("batches.index");
     }

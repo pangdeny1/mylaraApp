@@ -31,6 +31,7 @@ class BatchCreateRequest extends FormRequest
             "description" => "required",
             "farmers" => "array",
             "block_id" => "required",
+            "group_id" => "required",
             "expected_arrival_time" => "required|date|after_or_equal:today",
             "expected_arrival_temperature" => "required",
             "expected_harvest_time" => "required|date|after_or_equal:today",
