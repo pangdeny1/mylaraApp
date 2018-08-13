@@ -28,7 +28,7 @@
                             <tr>
                                 <th width="12.5%">Farm</th>
                                 <td width="12.5%" class="text-right">
-                                    {{ $batch->group->name }}
+                                    {{ optional($batch->group)->name }}
                                 </td>
                                 <th width="12.5%">Variety</th>
                                 <td width="12.5%" class="text-right">

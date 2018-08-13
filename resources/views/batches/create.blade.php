@@ -99,7 +99,7 @@
                                             @endif
                                         </div>
                                     </div>
-<<<<<<< HEAD
+
                                    <farmers-picker inline-template>
                                          <section>
                                           <!--  <div class="form-row mb-2">
@@ -152,7 +152,7 @@
                                             </div>
                                         </section>
                                     </farmers-picker>
-=======
+
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <label for="block_id">Group name</label>
@@ -178,7 +178,7 @@
                                             @endif
                                         </div>
                                     </div>
->>>>>>> b03dbc8de4810d9b102e334112ad34ccb0e7723d
+
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <label for="block_id">Block number</label>
