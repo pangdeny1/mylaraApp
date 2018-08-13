@@ -143,6 +143,7 @@
                                             @endif
                                         </div>
                                     </div>
+
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <label for="block_id">Block number</label>
@@ -289,7 +290,7 @@
                                         </div>
                                     </div>
                                     <hr>
-                                    <button class="btn btn-block btn-primary">Save changes</button>
+                                    <button class="btn btn-block btn-primary">Update batch</button>
                                 </div>
                             </form>
                         </div>

@@ -25,7 +25,14 @@ class BatchesController extends Controller
     {
         $this->authorize("view", Batch::class);
 
-        $batches = Batch::latest()->paginate();
+
+          $batches= Batch::latest()
+            ->when(request("q"), function($query){
+                return $query
+                    ->where("number", "LIKE", "%". request("q") ."%")
+                    ->orWhere("description", "LIKE", "%". request("q") ."%");
+            })
+            ->paginate();
 
         return view("batches.index", compact("batches"));
     }
@@ -72,6 +79,17 @@ class BatchesController extends Controller
             "expected_departure_time",
             "expected_harvest_time",
         ]));
+        /*
+       if(count($request->farmers)){
+            $batch->farmers()->attach(request("farmers"));
+
+            if ($batch->max_count == $batch->farmers->count()) {
+                $batch->update(["status" => "active"]);
+            }
+        }
+        */
+        
+
 
         return redirect()->route("batches.index");
     }

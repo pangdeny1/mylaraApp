@@ -51,9 +51,27 @@
                                     >
                                         All
                                     </a>
+
                                 </li>
                             </ul>
                         </header>
+
+                         <div class="card-body">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <span class="oi oi-magnifying-glass"></span>
+                                </span>
+                                </div>
+                                <form action="">
+                                    <input type="text" name="q" class="form-control" placeholder="Search record...">
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="text-muted my-3"> Showing {{ $batches->firstItem() }} to {{ $batches->lastItem() }} of  {{ $batches->total() }} entries </div>
+
                         <div class="card-body">
                                 <div class="text-muted"> Showing {{ $batches->firstItem() }} to {{ $batches->lastItem() }} of {{ $batches->total() }} entries </div>
                             <div class="table-responsive">

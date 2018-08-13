@@ -7,7 +7,7 @@
                 Overview
             </a>
             <a class="nav-link" href="{{ route("farmers.farms.index", $farmer) }}">
-                Farmlands
+                Farmland blocks
                 <span class="badge">{{ $farmer->farms->count() }}</span>
             </a>
             <a class="nav-link" href="{{ route("farmers.household_blocks.index", $farmer) }}">

@@ -16,6 +16,7 @@ Route::post("clusters/{batch}/members",   [
     "uses"  => "ClusterMembersController@store"
 ]);
 
+
 Route::get("accounts/{user}/activations", [
     "as" => "accounts.activate",
     "uses" => "AccountActivationsController@create",
@@ -194,13 +195,13 @@ Route::prefix('settings')->group(function () {
 
 // Route::get("users/{user}/passwordchange", [
 //     "as" => "password.change",
-//     "uses" => "ResetPasswordController@change",
-// ]);
-// Route::get("changepassword", [
+//      "uses" => "ResetPasswordController@change",
+//  ]);
+//  Route::get("changepassword", [
 //     "as" => "changepassword.index",
-//     "uses" => "ChangePasswordControllerr@index"
-// ]);
-//  Route::resource("changepassword", "Auth\ChangePasswordController");
+//      "uses" => "ChangePasswordControllerr@index"
+//  ]);
+//   Route::resource("changepassword", "Auth\ChangePasswordController");
 //  Route::post("changepassword/{user}","Auth\ChangePasswordController@update");
 
 

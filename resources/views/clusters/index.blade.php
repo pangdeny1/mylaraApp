@@ -118,7 +118,7 @@
                                                 </a>
                                             </td>
                                             <td>{{ $cluster->block->number }}</td>
-                                            <td>{{ $cluster->group->name }}</td>
+                                            <td>{{ optional($cluster->group)->name }}</td>
                                             <td>
                                                 @include("clusters._member_modal")
                                             </td>
