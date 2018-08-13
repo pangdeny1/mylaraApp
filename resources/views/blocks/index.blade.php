@@ -8,7 +8,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="#">
+                                <a href="{{ route("home") }}">
                                     <i class="breadcrumb-icon fa fa-angle-left mr-2"></i> Dashboard
                                 </a>
                             </li>
@@ -67,6 +67,7 @@
                             </div>
 
                             <div class="text-muted"> Showing {{ $blocks->firstItem() }} to {{ $blocks->lastItem() }} of {{ $blocks->total() }} entries </div>
+
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
