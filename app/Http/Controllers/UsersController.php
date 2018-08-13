@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\UserRegistered;
-use App\Http\Requests\UserCreateRequest;
 use App\Role;
 use App\State;
 use App\User;
-use Exception;
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Events\UserRegistered;
+use App\Http\Requests\UserCreateRequest;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -145,17 +146,19 @@ class UsersController extends Controller
     /**
      * @param User $user
      * @return RedirectResponse
-     * @throws Exception
+     * 
      */
     public function destroy(User $user)
     {
-        try {
-            $user->addresses()->delete();
-            $user->delete();
-        } catch (Exception $e) {
-            return redirect()->back()->with("error", $e->getMessage());
-        }
+        $user->addresses()->delete();
+
+        $user->delete();
 
         return redirect()->route("users.index");
+    }
+
+    public function export() 
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
     }
 }
