@@ -8,9 +8,13 @@
                     <header class="page-title-bar">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="{{ route("home") }}">
+                                        <i class="breadcrumb-icon fa fa-angle-left mr-2"></i> Dashboard
+                                    </a>
+                                </li>
                                 <li class="breadcrumb-item active">
-                                    <a href="#">
-                                    <i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Farmers</a>
+                                    Farmers
                                 </li>
                             </ol>
                         </nav>
@@ -19,18 +23,15 @@
                                 Farmers
                             </h1>
                             <div class="btn-toolbar">
-                                <button type="button" class="btn btn-light">
+                                <a href="" class="btn btn-light">
                                     <i class="oi oi-data-transfer-download"></i>
-                                    <span class="ml-1">Export</span>
-                                </button>
-                                <button type="button" class="btn btn-light">
-                                    <i class="oi oi-data-transfer-upload"></i>
-                                    <span class="ml-1">Import</span>
-                                </button>
+                                    <span class="ml-1">Export as excel</span>
+                                </a>
+                                
                                 @can("create", \App\Farmer::class)
                                 <a href="{{ route("farmers.create") }}" class="btn btn-primary">
                                     <span class="fas fa-plus mr-1"></span>
-                                    Add a new farmer
+                                    New farmer
                                 </a>
                                 @endcan
                             </div>
@@ -42,8 +43,8 @@
                             <header class="card-header">
                                 <ul class="nav nav-tabs card-header-tabs">
                                     <li class="nav-item">
-                                        <a class="nav-link {{ request()->query("status") ? "" : "active" }}" href="{{ route("purchases.index") }}">
-                                            List of all farmers
+                                        <a class="nav-link {{ request()->query("status") ? "" : "active" }}" href="{{ route("farmers.index") }}">
+                                            All
                                         </a>
                                     </li>
                                 </ul>
@@ -54,16 +55,18 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <span class="oi oi-magnifying-glass"></span>
-                                        </span>
+                                            <span class="input-group-text">
+                                                <span class="oi oi-magnifying-glass"></span>
+                                            </span>
                                         </div>
-                                        <input type="text" class="form-control" placeholder="Search record">
+                                        <form action="">
+                                            <input type="text" name="q" class="form-control" placeholder="Search record...">
+                                        </form>
                                     </div>
                                 </div>
 
                                 <!-- .table-responsive -->
-                                <div class="text-muted"> Showing 1 to 10 of 1,000 entries </div>
+                                <div class="text-muted"> Showing {{ $farmers->firstItem() }} to {{ $farmers->lastItem() }} of {{ $farmers->total() }} entries </div>
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
@@ -72,6 +75,7 @@
                                                 <th>Gender</th>
                                                 <th>Phone</th>
                                                 <th>Email</th>
+                                                <th>Group</th>
                                                 <th>Region</th>
                                                 <th></th>
                                             </tr>
@@ -92,6 +96,7 @@
                                                 <td>{{ $farmer->gender }}</td>
                                                 <td>{{ $farmer->phone }}</td>
                                                 <td>{{ $farmer->email }}</td>
+                                                <td>{{ $farmer->groups->first()->name }}</td>
                                                 <td>{{ $farmer->address->state }}</td>
                                                 <td class="align-middle text-right">
                                                     @can("edit", \App\Farmer::class)
