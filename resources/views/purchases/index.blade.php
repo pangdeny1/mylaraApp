@@ -8,31 +8,24 @@
                     <header class="page-title-bar">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="{{ route("home") }}">
+                                        <i class="breadcrumb-icon fa fa-angle-left mr-2"></i> Dashboard
+                                    </a>
+                                </li>
                                 <li class="breadcrumb-item active">
-                                    <a href="#">
-                                    <i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Purchases</a>
+                                    Purchases
                                 </li>
                             </ol>
                         </nav>
 
                         <div class="d-sm-flex align-items-sm-center">
-                            <h1 class="page-title mr-sm-auto mb-0"> Purchases </h1>
+                            <h1 class="page-title mr-sm-auto mb-0">Purchases</h1>
                             <div class="btn-toolbar">
                                 <button type="button" class="btn btn-light">
-                                    <i class="oi oi-data-transfer-download"></i>
-                                    <span class="ml-1">Export</span>
+                                    <i class="far fa-file-excel"></i>
+                                    <span class="ml-1">Export as excel</span>
                                 </button>
-                                <button type="button" class="btn btn-light">
-                                    <i class="oi oi-data-transfer-upload"></i>
-                                    <span class="ml-1">Import</span>
-                                </button>
-                                @can("create", \App\Purchase::class)
-                                <a href="{{ route("purchases.create") }}" class="btn btn-primary">
-                                    <span class="fas fa-plus mr-1"></span>
-                                    Record a new purchase
-                                </a>
-                                @endcan
-                                
                             </div>
                         </div>
                     </header>
@@ -57,30 +50,48 @@
                                             All
                                         </a>
                                     </li>
+                                    
                                     <li class="nav-item">
-                                        <a class="nav-link {{ request()->query("status") === "processed" ? "active" : "" }}"
-                                           href="{{ route("purchases.index", ["status" => "processed"]) }}"
+                                        <a class="nav-link {{ request()->query("status") === "received" ? "active" : "" }}"
+                                           href="{{ route("purchases.index", ["status" => "received"]) }}"
                                         >
                                             Processed
                                         </a>
                                     </li>
+                                    
                                     <li class="nav-item">
-                                        <a class="nav-link {{ request()->query("status") === "unprocessed" ? "active" : "" }}"
-                                           href="{{ route("purchases.index", ["status" => "unprocessed"]) }}"
+                                        <a class="nav-link {{ request()->query("status") === "packed" ? "active" : "" }}"
+                                           href="{{ route("purchases.index", ["status" => "packed"]) }}"
                                         >
-                                            Unprocessed
+                                            Packed
                                         </a>
                                     </li>
+                                    
                                     <li class="nav-item ">
+                                        <a class="nav-link {{ request()->query("status") === "graded" ? "active" : "" }}"
+                                           href="{{ route("purchases.index", ["status" => "graded"]) }}">
+                                           Graded
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="nav-item">
                                         <a class="nav-link {{ request()->query("status") === "rejected" ? "active" : "" }}"
                                            href="{{ route("purchases.index", ["status" => "rejected"]) }}">
-                                            Rejected
+                                           Rejected
                                         </a>
                                     </li>
+
                                     <li class="nav-item">
                                         <a class="nav-link {{ request()->query("status") === "completed" ? "active" : "" }}"
                                            href="{{ route("purchases.index", ["status" => "completed"]) }}">
-                                            Completed
+                                           Completed
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ request()->query("status") === "paid" ? "active" : "" }}"
+                                           href="{{ route("purchases.index", ["status" => "paid"]) }}">
+                                           Paid
                                         </a>
                                     </li>
                                 </ul>
@@ -90,16 +101,20 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <span class="oi oi-magnifying-glass"></span>
-                                        </span>
+                                            <span class="input-group-text">
+                                                <span class="oi oi-magnifying-glass"></span>
+                                            </span>
                                         </div>
-                                        <input type="text" class="form-control" placeholder="Search record">
+
+                                        <form action="">
+                                            <input type="text" name="q" class="form-control" placeholder="Search record...">
+                                        </form>
                                     </div>
                                 </div>
 
                                 <!-- .table-responsive -->
-                                <div class="text-muted"> Showing 1 to 10 of 1,000 entries </div>
+                                <div class="text-muted"> Showing {{ $purchases->firstItem() }} to {{ $purchases->lastItem() }} of {{ $purchases->total() }} entries </div>
+
                                 <div class="table-responsive" style="min-height: 500px;">
                                     <table class="table">
                                         <thead>

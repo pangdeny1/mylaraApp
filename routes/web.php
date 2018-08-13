@@ -139,6 +139,7 @@ Route::prefix('reports')->group(function () {
 });
 
 Route::prefix('settings')->group(function () {
+    
     Route::post("groups/{group}/products", [
         "as" => "groups.products.store",
         "uses" => "GroupProductsController@store"
@@ -152,7 +153,6 @@ Route::prefix('settings')->group(function () {
         "uses" => "GroupProductsController@update"
     ]);
 
-    
     Route::get("blocks/export", [
         "as" => "blocks.export",
         "uses" => "BlocksController@export"
@@ -165,7 +165,12 @@ Route::prefix('settings')->group(function () {
     ]);
     Route::resource("groups", "GroupsController");
 
+    Route::get("users/export", [
+        "as" => "users.export",
+        "uses" => "UsersController@export"
+    ]);
     Route::resource("users", "UsersController");
+
     Route::resource("roles", "RolesController");
 
     Route::get("products/exports", [
@@ -174,6 +179,10 @@ Route::prefix('settings')->group(function () {
     ]);
     Route::resource("products", "ProductsController");
 
+    Route::get("batches/export", [
+        "as" => "batches.export",
+        "uses" => "BatchesController@export"
+    ]);
     Route::resource("batches", "BatchesController");
 
     Route::get("product_categories/export", [
@@ -181,8 +190,6 @@ Route::prefix('settings')->group(function () {
         "uses" => "ProductCategoriesController@export",
     ]);
     Route::resource("product_categories", "ProductCategoriesController");
-
- 
 });
 
 // Route::get("users/{user}/passwordchange", [
