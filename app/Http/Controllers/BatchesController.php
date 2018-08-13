@@ -23,7 +23,14 @@ class BatchesController extends Controller
     {
         $this->authorize("view", Batch::class);
 
-        $batches = Batch::latest()->paginate();
+
+          $batches= Batch::latest()
+            ->when(request("q"), function($query){
+                return $query
+                    ->where("number", "LIKE", "%". request("q") ."%")
+                    ->orWhere("description", "LIKE", "%". request("q") ."%");
+            })
+            ->paginate();
 
         return view("batches.index", compact("batches"));
     }
