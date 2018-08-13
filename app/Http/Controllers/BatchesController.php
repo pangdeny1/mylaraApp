@@ -84,4 +84,25 @@ class BatchesController extends Controller
 
         return redirect()->route("batches.index");
     }
+
+ public function edit(Batch $batch)
+    {
+        $this->authorize("edit", $batch);
+
+       // $batchCategories = BatchCategory::all();
+
+        return view("batches.edit",compact("batch"));
+    }
+
+public function update(Request $request, Batch $batch)
+    {
+        $this->authorize("edit", $batch);
+
+        $batch->update($request->only(["number","max_count","expected_arrival_temperature","description"]));
+
+        //$batch->categories()->sync(request("category_id"));
+
+        return redirect()->route("batches.index");
+    }
+
 }

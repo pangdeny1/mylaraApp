@@ -16,6 +16,7 @@ Route::post("clusters/{batch}/members",   [
     "uses"  => "ClusterMembersController@store"
 ]);
 
+
 Route::get("accounts/{user}/activations", [
     "as" => "accounts.activate",
     "uses" => "AccountActivationsController@create",
@@ -173,8 +174,11 @@ Route::prefix('settings')->group(function () {
         "uses" => "ProductsController@export"
     ]);
     Route::resource("products", "ProductsController");
-
+    
+    Route::get("batches","BatchesController@index");
     Route::resource("batches", "BatchesController");
+    Route::post("batches/{batch}","BatchesController@update");
+
 
     Route::get("product_categories/export", [
         "as" => "product_categories.export",
@@ -185,15 +189,15 @@ Route::prefix('settings')->group(function () {
  
 });
 
-// Route::get("users/{user}/passwordchange", [
-//     "as" => "password.change",
-//     "uses" => "ResetPasswordController@change",
-// ]);
-// Route::get("changepassword", [
-//     "as" => "changepassword.index",
-//     "uses" => "ChangePasswordControllerr@index"
-// ]);
-//  Route::resource("changepassword", "Auth\ChangePasswordController");
-//  Route::post("changepassword/{user}","Auth\ChangePasswordController@update");
+Route::get("users/{user}/passwordchange", [
+    "as" => "password.change",
+     "uses" => "ResetPasswordController@change",
+ ]);
+ Route::get("changepassword", [
+    "as" => "changepassword.index",
+     "uses" => "ChangePasswordControllerr@index"
+ ]);
+  Route::resource("changepassword", "Auth\ChangePasswordController");
+ Route::post("changepassword/{user}","Auth\ChangePasswordController@update");
 
 
