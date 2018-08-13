@@ -58,7 +58,9 @@
                                             <span class="oi oi-magnifying-glass"></span>
                                         </span>
                                         </div>
-                                        <input type="text" class="form-control" placeholder="Search record">
+                                         <form action="">
+                                    <input type="text" name="q" class="form-control" placeholder="Search record...">
+                                </form>
                                     </div>
                                 </div>
 

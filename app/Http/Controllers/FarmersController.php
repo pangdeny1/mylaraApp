@@ -31,10 +31,18 @@ class FarmersController extends Controller
     {
         $this->authorize("view", Farmer::class);
 
-        $farmers = Farmer::latest()->paginate();
+        //$farmers = Farmer::latest()->paginate();
         //$groups = GroupMember::all()->load('Groups');
 
-        return view("farmers.index", compact("farmers"));
+             $farmers= Farmer::latest()
+            ->when(request("q"), function($query){
+                return $query
+                    ->where("first_name", "LIKE", "%". request("q") ."%")
+                    ->orWhere("last_name", "LIKE", "%". request("q") ."%");
+            })
+            ->paginate();
+
+       return view("farmers.index", compact("farmers"));
     }
 
     /**
