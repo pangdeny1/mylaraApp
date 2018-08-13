@@ -14,19 +14,19 @@
                             </li>
                         </ol>
                     </nav>
-                    <h1 class="page-title"> Add a new Farmland Block</h1>
+                    <h1 class="page-title"> Edit Farmland Block</h1>
                 </header>
                 <div class="page-section">
                     <div class="row">
                         <div class="col-md-12">
 
-                            <form action="{{ route("farmers.farms.store", $farmer) }}"
+                            <form action="{{ route("farmers.farms.update", $farm) }}"
                                   method="post"
                                   class="card border-0"
                             >
                                 @csrf
                                 <header class="card-header border-bottom-0">
-                                    Farmer: {{$farmer->fullname}}
+                                    Farmer: 
                                 </header>
                                 <div class="card-body">
                                     <div class="form-row">
@@ -36,7 +36,7 @@
                                                    name="size"
                                                    class="form-control {{ $errors->has('size') ? 'is-invalid' : '' }}"
                                                    id="size"
-                                                   value="{{ old("size") }}"
+                                                   value="{{ old("size",$farm->size )}}"
                                             >
                                         </div>
                                         <div class="col-md-4 mb-3">
@@ -54,57 +54,68 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="form-row">
-                                        <div class="col-md-12 mb-3">
-                                            <label for="block_id">Block Code (<font color="red">Note:If Block code is not in the list click  add new block code below to add block</font> </label>
-                                            <select name="block_id"
-                                                    class="form-control"
-                                                    id="block_id"
-                                            >
-                                                <option value="">Please select block code</option>
-                                                @foreach(\App\Block::get() as $block)
-                                                <option value="{{ $block->id }}">
-                                                {{ $block->number }}
-                                                </option>
-                                                @endforeach
-                                            </select>
-                                           
-                                            @can("create", \App\Block::class)
+                                   
+
+                                     <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <label for="block">Block Code</label>
+                                                    <select name="block_id"
+                                                            id="block"
+                                                            class="form-control {{ $errors->has('block_id') ? "is-invalid" : "" }}"
+                                                    >
+                                                        <option value="">Select Block...</option>
+                                                        @foreach($blocks as $block)
+                                                            <option value="{{ $block->id }}"
+                                                                    @if(old("block_id", $farm->block_id) == $block->id) selected @endif
+                                                            >
+                                                                {{ $block->number }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @if ($errors->has('block_id'))
+                                                        <span class="invalid-feedback">
+                                                            <strong>{{ $errors->first('block_id') }}</strong>
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                                               @can("create", \App\Block::class)
                             <a href="{{ route("blocks.create") }}" class="btn btn-primary">
                                 <span class="fas fa-plus mr-1"></span>
                                 Add a new block code
                             </a>
                             @endcan
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="col-md-6 mb-3">
-                                            <label for="country">Country</label>
-                                            <select name="country"
-                                                    class="form-control"
-                                                    id="country"
-                                            >
-                                                <option value="Tanzania">Tanzania</option>
-                                            </select>
-                                            <div class="invalid-feedback"> Please select a valid country. </div>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label for="state">State</label>
-                                            <select name="state"
-                                                    class="form-control d-block w-100 {{ $errors->has('state') ? 'is-invalid' : '' }}"
-                                                    id="state"
-                                                    required=""
-                                            >
-                                                <option value=""> Choose... </option>
-                                                @foreach($states as $key => $state)
-                                                    <option name="{{ $state["name"] }}" {{ old("state") === $state["name"] ? "selected" : "" }}>
+                                     
+                                            </div>
+                                   <div class="form-row">
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="country">Country</label>
+                                                    <select name="country"
+                                                            class="custom-select d-block w-100"
+                                                            id="country"
+                                                    >
+                                                        <option value="Tanzania">Tanzania</option>
+                                                    </select>
+                                                    <div class="invalid-feedback"> Please select a valid country. </div>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="state">Region</label>
+                                                    <select name="state"
+                                                            class="custom-select d-block w-100"
+                                                            id="state"
+                                                            required=""
+                                                    >
+                                                        <option value=""> Choose... </option>
+                                                      
+
+                                                        @foreach($states as $key => $state)
+                                                    <option name="{{ $state["name"] }}" {{ old("state", optional($block->address)->state) === $state["name"] ? "selected" : "" }}>
                                                         {{ $state["name"] }}
                                                     </option>
                                                 @endforeach
-                                            </select>
-                                            <div class="invalid-feedback"> Please provide a valid state. </div>
-                                        </div>
-                                    </div>
+                                                    </select>
+                                                    <div class="invalid-feedback"> Please provide a valid state. </div>
+                                                </div>
+                                            </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <label for="description">Description</label>
@@ -113,7 +124,7 @@
                                                       id="description"
                                                       placeholder="Type something...."
                                                       rows="5"
-                                            >{{ old("description") }}</textarea>
+                                            >{{ old("description",$farm->description) }}</textarea>
                                             @if ($errors->has('description'))
                                                 <span class="invalid-feedback">
                                                     <strong>{{ $errors->first('description') }}</strong>

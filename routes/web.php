@@ -61,6 +61,18 @@ Route::get("farmers/{farmer}/farms/create", [
     "as" => "farmers.farms.create",
     "uses" => "FarmerFarmsController@create",
 ]);
+
+Route::get("farmers/{farm}/farms/edit", [
+    "as" => "farmers.farms.edit",
+    "uses" => "FarmerFarmsController@edit",
+]);
+
+Route::post("farmers/{farm}/farms/update", [
+    "as" => "farmers.farms.update",
+    "uses" => "FarmerFarmsController@update",
+]);
+
+
 Route::post("farmers/{farmer}/farms", [
     "as" => "farmers.farms.store",
     "uses" => "FarmerFarmsController@store",
@@ -174,7 +186,7 @@ Route::prefix('settings')->group(function () {
         "uses" => "ProductsController@export"
     ]);
     Route::resource("products", "ProductsController");
-    
+
     Route::get("batches","BatchesController@index");
     Route::resource("batches", "BatchesController");
     Route::post("batches/{batch}","BatchesController@update");

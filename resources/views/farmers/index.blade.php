@@ -65,7 +65,7 @@
                                 </div>
 
                                 <!-- .table-responsive -->
-                                <div class="text-muted"> Showing 1 to 10 of 1,000 entries </div>
+                                <div class="text-muted">  Showing {{ $farmers->firstItem() }} to {{ $farmers->lastItem() }} of {{ $farmers->total() }} entries </div>
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>

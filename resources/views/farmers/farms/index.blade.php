@@ -34,7 +34,7 @@
                         <div class="col-md-6">
                             <section class="card card-fluid border border-info">
                                 <a href="{{ route("farmers.farms.create", $farmer) }}" class="card-body">
-                                    <div class="text-center" style="padding: 7.5rem 0;">
+                                    <div class="text-center" style="padding: 2.5rem 0;">
                                         <i class="fas fa-plus mr-2"></i> Add a new Farmland Block
                                     </div>
                                 </a>
@@ -50,18 +50,22 @@
                                             </a>
                                             <div class="media-body">
                                                 <h3 class="card-title">
-                                                    <a href="#">{{ $farm->name }}</a>
+                                                    <a href="#">{{ $farm->name }}, {{$farm->block->number}}</a>
                                                 </h3>
                                                 <h6 class="card-subtitle text-muted">{{ $farm->location }}</h6>
                                             </div>
-                                            <a href="#"
+                                            <a href="{{ route("farmers.farms.edit",$farm) }}"
                                                class="btn btn-reset text-muted"
                                                data-toggle="tooltip"
                                                title=""
-                                               data-original-title="Chat with teams">
+                                               data-original-title="Edit Farmland Block">
                                                 <i class="oi oi-chat"></i>
+                                                Edit 
                                             </a>
                                         </div>
+                                                 
+                                    
+                                </a>
 
                                         <p>{{ $farm->description }}</p>
 
@@ -69,7 +73,12 @@
 
                                         <!-- team details -->
                                         <ul class="list-icons mb-3">
-                                            <li>
+
+                                             <li>
+                                                <span class="list-icon">
+                                                    <i class="far fa-object-ungroup"></i>
+                                                </span>Block :: {{ $farm->block->number }}
+                                            </li><li>
                                                 <span class="list-icon">
                                                     <span class="fa fa-map-marker text-muted"></span>
                                                 </span> {{ $farm->location }}
@@ -84,6 +93,9 @@
                                                     <i class="far fa-object-ungroup"></i>
                                                 </span> {{ $farm->acreage }}
                                             </li>
+                                            <li>
+                                    
+                            </li>
                                         </ul>
                                     </div>
                                 </section>

@@ -15,7 +15,7 @@ class HouseholdBlock extends Model implements Auditable
     {
         return $this->belongsTo(Farm::class);
     }
-
+  
     public function product()
     {
         return $this->belongsTo(Product::class);
@@ -30,4 +30,6 @@ class HouseholdBlock extends Model implements Auditable
     {
         return $this->hasMany(Batch::class);
     }
+
+
 }
