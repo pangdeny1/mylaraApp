@@ -9,7 +9,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="{{ route("home") }}">
+                                <a href="#">
                                     <i class="breadcrumb-icon fa fa-angle-left mr-2"></i> Dashboard
                                 </a>
                             </li>
@@ -23,12 +23,17 @@
                                     Batches
                                 </a>
                             </li>
+                            <li class="breadcrumb-item">
+                                <a href="{{ route("batches.show", $batch) }}">
+                                    {{ $batch->number }}
+                                </a>
+                            </li>
                             <li class="breadcrumb-item active">
-                                New Batch
+                                Edit
                             </li>
                         </ol>
                     </nav>
-                    <h1 class="page-title"> New batch </h1>
+                    <h1 class="page-title"> Edit batch </h1>
                 </header>
 
                 <div class="page-section">
@@ -42,13 +47,14 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <form action="{{ route("batches.store") }}"
+                            <form action="{{ route("batches.update", $batch) }}"
                                   method="post"
                                   class="card"
                             >
                                 @csrf
+                                @method("put")
                                 <header class="card-header border-bottom-0">
-                                    Create a new batch
+                                    Edit batch
                                 </header>
                                 <div class="card-body">
                                     <div class="form-row">
@@ -58,7 +64,7 @@
                                                    name="number"
                                                    id="number"
                                                    class="form-control {{ $errors->has('number') ? 'is-invalid' : '' }}"
-                                                   value="{{ old("number", \App\Batch::number()) }}"
+                                                   value="{{ old("number", $batch->number) }}"
                                                    placeholder="JKTR-182"
                                             >
                                             @if ($errors->has('number'))
@@ -73,7 +79,7 @@
                                                    name="max_count"
                                                    id="max_count"
                                                    class="form-control {{ $errors->has('max_count') ? 'is-invalid' : '' }}"
-                                                   value="{{ old("max_count", 10) }}"
+                                                   value="{{ old("max_count", $batch->max_count) }}"
                                             >
                                             @if ($errors->has('max_count'))
                                                 <span class="invalid-feedback">
@@ -124,7 +130,7 @@
                                                 @foreach(\App\Group::get() as $group)
                                                 <option 
                                                     value="{{ $group->id}}"
-                                                    {{ old("block_id") == $group->id ? "selected" : "" }}
+                                                    {{ old("block_id", $batch->group_id) == $group->id ? "selected" : "" }}
                                                 >
                                                     {{ $group->name }}
                                                 </option>
@@ -149,7 +155,7 @@
                                                 @foreach(\App\Block::get() as $block)
                                                 <option 
                                                     value="{{ $block->id}}"
-                                                    {{ old("block_id") == $block->id ? "selected" : "" }}
+                                                    {{ old("block_id", $batch->block_id) == $block->id ? "selected" : "" }}
                                                 >
                                                     {{ $block->number }}
                                                 </option>
@@ -190,7 +196,7 @@
                                                 id="expected_arrival_temperature"
                                                 class="form-control {{ $errors->has('expected_arrival_temperature') ? 'is-invalid' : '' }}"
                                                 placeholder="30&deg;C..."
-                                                value="{{ old("expected_arrival_temperature") }}"
+                                                value="{{ old("expected_arrival_temperature", $batch->expected_arrival_temperature) }}"
                                             >
                                             @if ($errors->has('expected_arrival_temperature'))
                                                 <span class="invalid-feedback">
@@ -274,7 +280,7 @@
                                                 class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}"
                                                 rows="6"
                                                 placeholder="Type something..."
-                                            >{{ old("description") }}</textarea>
+                                            >{{ old("description", $batch->description) }}</textarea>
                                             @if ($errors->has('description'))
                                                 <span class="invalid-feedback">
                                                     <strong>{{ $errors->first('description') }}</strong>

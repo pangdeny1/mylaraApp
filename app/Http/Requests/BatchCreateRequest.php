@@ -29,7 +29,6 @@ class BatchCreateRequest extends FormRequest
             "valid_till" => "required|date|after:today",
             "max_count" => "required|numeric",
             "description" => "required",
-            "farmers" => "array",
             "block_id" => "required",
             "group_id" => "required",
             "expected_arrival_time" => "required|date|after_or_equal:today",
