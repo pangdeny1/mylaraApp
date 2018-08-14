@@ -10,7 +10,12 @@ class HouseholdBlock extends Model implements Auditable
     use \OwenIt\Auditing\Auditable;
 
     protected $guarded = [];
-
+    protected $appends = ["number","size","description"];
+    protected $fillable = [
+          
+           'number',
+           'size',
+           'description'];
     public function farm()
     {
         return $this->belongsTo(Farm::class);
@@ -30,6 +35,8 @@ class HouseholdBlock extends Model implements Auditable
     {
         return $this->hasMany(Batch::class);
     }
+
+
 
 
 }

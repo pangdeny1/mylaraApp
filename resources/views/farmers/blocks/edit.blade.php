@@ -13,13 +13,13 @@
                             </li>
                         </ol>
                     </nav>
-                    <h1 class="page-title"> Add a new Household </h1>
+                    <h1 class="page-title"> Edit Household </h1>
                 </header>
                 <div class="page-section">
                     <div class="row">
                         <div class="col-md-12">
 
-                            <form action="{{ route("farmers.household_blocks.update", $householdblock) }}"
+                            <form action="{{ route("farmers.household_blocks.update", 157) }}"
                                   method="post"
                                   class="card border-0"
                             >
@@ -35,7 +35,7 @@
                                                    name="number"
                                                    class="form-control {{ $errors->has('number') ? 'is-invalid' : '' }}"
                                                    id="number"
-                                                   value="{{ old("number",$householdblock->number) }}"
+                                                   value="{{ old("number",$block->number) }}"
                                             >
                                         </div>
                                     </div>
@@ -46,7 +46,7 @@
                                                    name="size"
                                                    class="form-control {{ $errors->has('size') ? 'is-invalid' : '' }}"
                                                    id="size"
-                                                   value="{{ old("size",$householdblock->size) }}"
+                                                   value="{{ old("size",$block->size) }}"
                                             >
                                         </div>
                                         <div class="col-md-4 mb-3">
@@ -72,7 +72,7 @@
                                                     id="farm_id"
                                             >
                                                 <option value="">Choose...</option>
-                                                @foreach(\App\Farm::where("farmer_id", $farmer_id)->get() as $farm)
+                                                @foreach(\App\Farm::where("farmer_id", $block->farmer_id)->get() as $farm)
                                                 <option value="{{ $farm->id }}">
                                                     {{ $farm->name }}
                                                 </option>
@@ -115,7 +115,7 @@
                                                       id="description"
                                                       placeholder="Type something...."
                                                       rows="5"
-                                            >{{ old("description") }}</textarea>
+                                            >{{ old("description",$block->description) }}</textarea>
                                             @if ($errors->has('description'))
                                                 <span class="invalid-feedback">
                                                     <strong>{{ $errors->first('description') }}</strong>
@@ -126,7 +126,7 @@
                                     <hr class="mb-4">
                                     <div class="form-row">
                                         <button class="btn btn-primary btn-lg btn-block" type="submit">
-                                            Save changes
+                                            Update Changes
                                         </button>
                                     </div>
                                 </div>

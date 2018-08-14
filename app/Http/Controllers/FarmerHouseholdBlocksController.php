@@ -41,16 +41,13 @@ class FarmerHouseholdBlocksController extends Controller
         ]);
     }
 
-      public function edit(HouseholdBlock $householdblock)
+      public function edit(Block $block)
     {
         $this->authorize("edit", HouseholdBlock::class);
+        $farms=Farm::All();
+         $products=Product::All();
 
-        return view("farmers.blocks.edit", ["states" => State::getCountryName("Tanzania"),
-            "householdblock" => $householdblock,
-            "farms" =>Farm::All(),
-            "products"=>Product::All(),
-            "farmer_id"=>$householdblock->farmer,]
-            );
+         return view("farmers.blocks.edit",compact("products","farms","block"));
     }
 
 

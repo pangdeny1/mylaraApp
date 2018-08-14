@@ -40,7 +40,7 @@
                                     <div class="col">
                                         <!-- .metric -->
                                         <a href="user-projects.html" class="metric metric-bordered align-items-center">
-                                            <h2 class="metric-label"> Total weight before </h2>
+                                            <h2 class="metric-label"> Packhouse weight </h2>
                                             <p class="metric-value h3">
                                                 <sub>
                                                     <i class="oi oi-fork"></i>
@@ -56,7 +56,7 @@
                                     <div class="col">
                                         <!-- .metric -->
                                         <a href="user-tasks.html" class="metric metric-bordered align-items-center">
-                                            <h2 class="metric-label"> Total weight after </h2>
+                                            <h2 class="metric-label"> Graded Weight </h2>
                                             <p class="metric-value h3">
                                                 <sub>
                                                     <i class="fa fa-tasks"></i>
@@ -212,8 +212,8 @@
                                             <tr>
                                                 <th class="text-left"  nowrap=>Farmer</th>
                                                 <th class="text-left"  nowrap>Product</th>
-                                                <th class="text-right" nowrap>Weight before</th>
-                                                <th class="text-right" nowrap>Weight after</th>
+                                                <th class="text-right" nowrap>Packhouse Weight</th>
+                                                <th class="text-right" nowrap>Graded Weight</th>
                                                 <th class="text-right" nowrap>Amount</th>
                                                 <th class="text-left"  nowrap>Status</th>
                                             </tr>

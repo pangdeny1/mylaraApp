@@ -79,16 +79,16 @@
                                     </div>
                                 </div>
                                 <div class="list-group-item justify-content-between">
-                                    <span class="text-muted">Gross weight</span>
-                                    <strong>{{ $purchase->weight_before_processing }} kg</strong>
+                                    <span class="text-muted">Packhouse weight</span>
+                                    <strong>{{ $purchase->weight_before }} kg</strong>
                                 </div>
                                 <div class="list-group-item justify-content-between">
-                                    <span class="text-muted">Weight after</span>
-                                    <strong>{{ $purchase->weight_after_processing }} kg</strong>
+                                    <span class="text-muted">Graded  Weight</span>
+                                    <strong>{{ $purchase->weight_after }} kg</strong>
                                 </div>
                                 <div class="list-group-item justify-content-between bg-light border-top-0">
-                                    <span class="text-muted">Weight difference</span>
-                                    <strong>{{ $purchase->weight_before_processing - $purchase->weight_after_processing }} kg</strong>
+                                    <span class="text-muted">Rejected Weight</span>
+                                    <strong>{{ $purchase->weight_before - $purchase->weight_after }} kg</strong>
                                 </div>
                             </div>
                             <div class="list-group list-group-flush list-group-bordered">
@@ -104,7 +104,7 @@
                                 </div>
                                 <div class="list-group-item justify-content-between">
                                     <span class="text-muted">Quantity</span>
-                                    <strong>{{ $purchase->weight_after_processing }} kg</strong>
+                                    <strong>{{ $purchase->weight_after }} kg</strong>
                                 </div>
                                 <div class="list-group-item justify-content-between">
                                     <span class="text-muted">Calculate amount</span>
