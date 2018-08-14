@@ -7,10 +7,24 @@
                 <header class="page-title-bar">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item active">
-                                <a href="#">
-                                    <i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Users</a>
-                            </li>
+                                <li class="breadcrumb-item">
+                                    <a href="{{ route("home") }}">
+                                        <i class="breadcrumb-icon fa fa-angle-left mr-2"></i> Dashboard
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="#">
+                                        Settings
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="{{ route("users.index") }}">
+                                        Users
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active">
+                                    New user
+                                </li>
                         </ol>
                     </nav>
                     <h1 class="page-title"> Users registration </h1>

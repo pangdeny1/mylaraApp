@@ -8,10 +8,23 @@
                 <header class="page-title-bar">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item active">
-                                <a href="#">
-                                    <i class="breadcrumb-icon fa fa-angle-left mr-2"></i> Settings
+                            <li class="breadcrumb-item">
+                                <a href="{{ route("home") }}">
+                                    <i class="breadcrumb-icon fa fa-angle-left mr-2"></i> Dashboard
                                 </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="#">
+                                    Settings
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="{{ route("batches.index") }}">
+                                    Batches
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active">
+                                New Batch
                             </li>
                         </ol>
                     </nav>

@@ -182,18 +182,21 @@
                             {{ auth()->user()->full_name }}
                         </h6>
                         <a class="dropdown-item" href="#">
-                            <span class="dropdown-icon oi oi-person"></span> Profile
+                            <i class="fas fa-user text-muted mr-2"></i> Profile
                         </a>
 
+
                         <a href="{{ route("changepassword.index") }}" class="dropdown-item ">
-                            <i class="fas fa-user-lock"></i> Change Password
-                        </a> 
+                                <i class="fas fa-lock-open text-muted mr-2"></i> Change Password
+                            </a>
+
+                        <div class="dropdown-divider"></div>
 
                         <a class="dropdown-item"
                            href="{{ route('logout') }}"
                            onclick="event.preventDefault();document.getElementById('logout-form').submit();"
                         >
-                            <span class="dropdown-icon oi oi-account-logout"></span>
+                            <i class="fas fa-sign-out-alt text-muted mr-2"></i>
                             {{ __('Logout') }}
                             <form id="logout-form"
                                   action="{{ route('logout') }}"
@@ -203,10 +206,6 @@
                                 @csrf
                             </form>
                         </a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Help Center</a>
-                        <a class="dropdown-item" href="#">Ask Forum</a>
-                        <a class="dropdown-item" href="#">Keyboard Shortcuts</a>
                     </div>
                 </div>
             </div>

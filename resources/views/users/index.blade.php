@@ -7,9 +7,18 @@
                 <header class="page-title-bar">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item active">
+                            <li class="breadcrumb-item">
+                                <a href="{{ route("home") }}">
+                                    <i class="breadcrumb-icon fa fa-angle-left mr-2"></i> Dashboard
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item">
                                 <a href="#">
-                                    <i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Users</a>
+                                    Settings
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active">
+                                Users
                             </li>
                         </ol>
                     </nav>
@@ -18,18 +27,14 @@
                             Users
                         </h1>
                         <div class="btn-toolbar">
-                            <button type="button" class="btn btn-light">
-                                <i class="oi oi-data-transfer-download"></i>
-                                <span class="ml-1">Export</span>
-                            </button>
-                            <button type="button" class="btn btn-light">
-                                <i class="oi oi-data-transfer-upload"></i>
-                                <span class="ml-1">Import</span>
-                            </button>
+                            <a href="{{ route("users.export") }}" class="btn btn-light">
+                                <i class="far fa-file-excel"></i>
+                                <span class="ml-1">Export as excel</span>
+                            </a>
                             @can("create", \App\User::class)
                             <a href="{{ route("users.create") }}" class="btn btn-primary">
                                 <span class="fas fa-plus mr-1"></span>
-                                Register a new user
+                                New user
                             </a>
                             @endcan
                         </div>
@@ -41,14 +46,19 @@
                         <header class="card-header">
                             <ul class="nav nav-tabs card-header-tabs">
                                 <li class="nav-item">
-                                    <a class="nav-link {{ request()->query("status") ? "" : "active" }}" href="{{ route("purchases.index") }}">
-                                        List of all users
+                                    <a class="nav-link {{ request()->query("status") ? "" : "active" }}" 
+                                        href="{{ route("users.index") }}"
+                                    >
+                                        All
                                     </a>
                                 </li>
                             </ul>
                         </header>
 
                         <div class="card-body">
+
+                            <div class="text-muted"> Showing {{ $users->firstItem() }} to {{ $users->lastItem() }} of {{ $users->total() }} entries </div>
+                            
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>

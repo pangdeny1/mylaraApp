@@ -105,7 +105,21 @@
                                                 <td class="text-left text-capitalize align-middle" nowrap>
                                                     {{ $block->status }}
                                                 </td>
-                                                <td></td>
+                                                <td class="align-middle text-right">
+                                                    @can("edit", \App\Farmer::class)
+                                                    <a href="{{route("farmers.household_blocks.edit",$block->id)}}" class="btn btn-sm btn-secondary">
+                                                        <i class="fa fa-pencil-alt"></i>
+                                                        <span class="sr-only">Edit</span>
+                                                    </a>
+                                                    @endcan
+
+                                                    @can("delete", \App\Farmer::class)
+                                                    <a href="#" class="btn btn-sm btn-secondary">
+                                                        <i class="far fa-trash-alt"></i>
+                                                        <span class="sr-only">Remove</span>
+                                                    </a>
+                                                    @endcan
+                                                </td>
                                             </tr>
                                         @endforeach
                                         </tbody>

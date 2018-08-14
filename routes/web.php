@@ -91,6 +91,17 @@ Route::post("farmers/{farmer}/household_blocks", [
     "uses" => "FarmerHouseholdBlocksController@store",
 ]);
 
+Route::get("farmers/{farm}/household_blocks/edit", [
+    "as" => "farmers.household_blocks.edit",
+    "uses" => "FarmerHouseholdBlocksController@edit",
+]);
+
+Route::post("farmers/{farm}/household_blocks/update", [
+    "as" => "farmers.household_blocks.update",
+    "uses" => "FarmerHouseholdBlocksController@update",
+]);
+
+
 Route::get("farmers/{farmer}/harvests", [
     "as" => "farmers.harvests.index",
     "uses" => "FarmerHarvestsController@index",
@@ -152,6 +163,7 @@ Route::prefix('reports')->group(function () {
 });
 
 Route::prefix('settings')->group(function () {
+    
     Route::post("groups/{group}/products", [
         "as" => "groups.products.store",
         "uses" => "GroupProductsController@store"
@@ -165,7 +177,6 @@ Route::prefix('settings')->group(function () {
         "uses" => "GroupProductsController@update"
     ]);
 
-    
     Route::get("blocks/export", [
         "as" => "blocks.export",
         "uses" => "BlocksController@export"
@@ -178,7 +189,12 @@ Route::prefix('settings')->group(function () {
     ]);
     Route::resource("groups", "GroupsController");
 
+    Route::get("users/export", [
+        "as" => "users.export",
+        "uses" => "UsersController@export"
+    ]);
     Route::resource("users", "UsersController");
+
     Route::resource("roles", "RolesController");
 
     Route::get("products/exports", [
@@ -187,28 +203,33 @@ Route::prefix('settings')->group(function () {
     ]);
     Route::resource("products", "ProductsController");
 
+
     Route::get("batches","BatchesController@index");
     Route::resource("batches", "BatchesController");
     Route::post("batches/{batch}","BatchesController@update");
 
+
+    Route::get("batches/export", [
+        "as" => "batches.export",
+        "uses" => "BatchesController@export"
+    ]);
+    Route::resource("batches", "BatchesController");
 
     Route::get("product_categories/export", [
         "as" => "product_categories.export",
         "uses" => "ProductCategoriesController@export",
     ]);
     Route::resource("product_categories", "ProductCategoriesController");
-
- 
 });
 
-Route::get("users/{user}/passwordchange", [
+ Route::get("users/{user}/passwordchange", [
     "as" => "password.change",
      "uses" => "ResetPasswordController@change",
  ]);
- Route::get("changepassword", [
-    "as" => "changepassword.index",
-     "uses" => "ChangePasswordControllerr@index"
- ]);
+  Route::get("changepassword", [
+     "as" => "changepassword.index",
+      "uses" => "ChangePasswordControllerr@index"
+  ]);
   Route::resource("changepassword", "Auth\ChangePasswordController");
  Route::post("changepassword/{user}","Auth\ChangePasswordController@update");
 
