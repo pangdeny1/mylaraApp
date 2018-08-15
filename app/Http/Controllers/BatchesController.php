@@ -103,17 +103,17 @@ class BatchesController extends Controller
     {
         $this->validate($request, [
             "number" => "required",
-            "valid_from" => "required|date|after_or_equal:today",
-            "valid_till" => "required|date|after:today",
+            "valid_from" => "required|date",
+            "valid_till" => "required|date",
             "max_count" => "required|numeric",
             "description" => "required",
             "block_id" => "required",
             "group_id" => "required",
-            "expected_arrival_time" => "required|date|after_or_equal:today",
+            "expected_arrival_time" => "required|date",
             "expected_arrival_temperature" => "required",
-            "expected_harvest_time" => "required|date|after_or_equal:today",
-            "expected_delivery_time" => "required|date|after_or_equal:today",
-            "expected_departure_time" => "required|date|after_or_equal:today",
+            "expected_harvest_time" => "required|date",
+            "expected_delivery_time" => "required|date",
+            "expected_departure_time" => "required|date",
         ]);
 
         $batch->update([

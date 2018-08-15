@@ -95,7 +95,7 @@
                                                    name="valid_from"
                                                    id="valid_from"
                                                    class="form-control {{ $errors->has('valid_from') ? 'is-invalid' : '' }}"
-                                                   value="{{ old("valid_from", date("Y-m-d")) }}"
+                                                   value="{{ old("valid_from", date('Y-m-d',strtotime($batch->valid_from))) }}"
                                             >
                                             @if ($errors->has('valid_from'))
                                                 <span class="invalid-feedback">
@@ -109,7 +109,7 @@
                                                    name="valid_till"
                                                    id="valid_till"
                                                    class="form-control {{ $errors->has('valid_till') ? 'is-invalid' : '' }}"
-                                                   value="{{ old("valid_till") }}"
+                                                   value="{{ old("valid_till",date('Y-m-d',strtotime($batch->valid_till)))  }}"
                                             >
                                             @if ($errors->has('valid_till'))
                                                 <span class="invalid-feedback">
@@ -181,7 +181,7 @@
                                                 name="expected_arrival_time"
                                                 id="expected_arrival_time"
                                                 class="form-control {{ $errors->has('expected_arrival_time') ? 'is-invalid' : '' }}"
-                                                value="{{ old("expected_arrival_time") }}"
+                                                value="{{ old("expected_arrival_time",date('Y-m-d',strtotime($batch->expected_arrival_time)))  }}"
                                             >
                                             @if ($errors->has('expected_arrival_time'))
                                                 <span class="invalid-feedback">
@@ -218,7 +218,7 @@
                                                 name="expected_harvest_time"
                                                 id="expected_harvest_time"
                                                 class="form-control {{ $errors->has('expected_harvest_time') ? 'is-invalid' : '' }}"
-                                                value="{{ old("expected_harvest_time") }}"
+                                                value="{{ old("expected_harvest_time",date('Y-m-d',strtotime($batch->expected_harvest_time)))  }}"
                                             >
                                             @if ($errors->has('expected_harvest_time'))
                                                 <span class="invalid-feedback">
@@ -239,7 +239,7 @@
                                                 name="expected_delivery_time"
                                                 id="expected_delivery_time"
                                                 class="form-control {{ $errors->has('expected_delivery_time') ? 'is-invalid' : '' }}"
-                                                value="{{ old("expected_delivery_time") }}"
+                                                value="{{ old("expected_delivery_time",date('Y-m-d',strtotime($batch->expected_delivery_time)))  }}"
                                             >
                                             @if ($errors->has('expected_delivery_time'))
                                                 <span class="invalid-feedback">
@@ -260,7 +260,7 @@
                                                 name="expected_departure_time"
                                                 id="expected_departure_time"
                                                 class="form-control {{ $errors->has('expected_departure_time') ? 'is-invalid' : '' }}"
-                                                value="{{ old("expected_departure_time") }}"
+                                                value="{{ old("expected_departure_time",date('Y-m-d',strtotime($batch->expected_departure_time)))  }}"
                                             >
                                             @if ($errors->has('expected_departure_time'))
                                                 <span class="invalid-feedback">
