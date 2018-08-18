@@ -48,7 +48,7 @@ class RolesController extends Controller
     public function store(RoleCreateRequest $request)
     {
         $this->authorize("create", Role::class);
-
+        
         $entities = [
             "users" => \App\User::class,
             "roles" => \App\User::class,

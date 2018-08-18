@@ -105,6 +105,7 @@
                                 <span class="ml-1">Print</span>
                             </button>
                         
+                            @can('create', \App\Purchase::class)
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                                 <span class="fas fa-plus mr-1"></span>
@@ -126,6 +127,16 @@
                                             
                                             <div class="card-body">
                                                 <header class="card-title text-muted">Basic information</header>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-4">
+                                                        <label for="">Group</label>
+                                                        <input type="text" class="form-control-plaintext" value="{{ $batch->group->name }}">
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label for="">Block number</label>
+                                                        <input type="text" class="form-control-plaintext" value="{{ $batch->block->number }}">
+                                                    </div>
+                                                </div>
                                                 <div class="form-row">
                                                     <div class="form-group col-md-4">
                                                         <label for="delivery_note_number">Delivery note number</label>
@@ -156,7 +167,7 @@
                                                             >
                                                         </div>
                                                 </div>
-                                                <farmer-block-picker inline-template>
+                                                <farmer-block-picker :group-id="{{ $batch->group->id }}" inline-template>
                                                     <section>
                                                         <div class="form-row">
                                                             <div class="form-group col-md-8">
@@ -167,7 +178,7 @@
                                                                         v-model="farmer"
                                                                 >
                                                                     <option value="">-- Select farmer --</option>
-                                                                    @foreach(\App\Farmer::get() as $farmer)
+                                                                    @foreach(\App\Farmer::whereHas("groups", function($query) use ($batch){ return $query->where("groups.id", $batch->group_id); })->get() as $farmer)
                                                                         <option value="{{ $farmer->id }}" {{ old("farmer_id") == $farmer->id ? "selected" : "" }}>
                                                                             {{ $farmer->full_name }}
                                                                         </option>
@@ -180,31 +191,50 @@
                                                                 @endif
                                                             </div>
                                                             <div class="form-group col-md-4">
-                                                                    <label for="block_id">Household Block</label>
-                                                                    <select name="block_id"
-                                                                            id="block_id"
-                                                                            class="form-control form-control-sm {{ $errors->has("block_id") ? "is-invalid" : "" }}"
-                                                                            :disabled="! hasBlock"
-                                                                    >
-                                                                        <option value="">Select block number...</option>
-                                                                        <option v-for="block in blocks"
-                                                                                :key="block.id"
-                                                                                :value="block.id"
-                                                                        >@{{ block.number }}</option>
-                
-                                                                    </select>
-                                                                    @if($errors->has("block_id"))
-                                                                        <span class="invalid-feedback">
-                                                                            {{ $errors->first("block_id") }}
-                                                                        </span>
-                                                                    @endif
-                                                                </div>
+                                                                <label for="block_id">Household Block</label>
+                                                                <select name="block_id"
+                                                                        id="block_id"
+                                                                        class="form-control form-control-sm {{ $errors->has("block_id") ? "is-invalid" : "" }}"
+                                                                        v-model="blockId"
+                                                                        :disabled="! hasBlock"
+                                                                >
+                                                                    <option value="">Select block number...</option>
+                                                                    <option v-for="block in blocks"
+                                                                            :key="block.id"
+                                                                            :value="block.id"
+                                                                    >@{{ block.number }}</option>
+            
+                                                                </select>
+                                                                @if($errors->has("block_id"))
+                                                                    <span class="invalid-feedback">
+                                                                        {{ $errors->first("block_id") }}
+                                                                    </span>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-row">
+                                                            <div class="form-group col-md-6">
+                                                                <label for="">Product</label>
+                                                                <input 
+                                                                    type="text" 
+                                                                    class="form-control-plaintext" 
+                                                                    :value="productName"
+                                                                >
+                                                            </div>
+                                                            <div class="form-group col-md-6">
+                                                                <label for="">Price</label>
+                                                                <input 
+                                                                    type="text" 
+                                                                    class="form-control-plaintext" 
+                                                                    :value="price"
+                                                                >
+                                                            </div>
                                                         </div>
                                                     </section>
                                                 </farmer-block-picker>
-                                            </div>
-                                            <hr>
-                                            <div class="card-body">
+                                            
+                                                <hr>
+                                            
                                                 <header class="card-title text-muted">Weight information</header>
                                                 <div class="form-row">
                                                     <div class="form-group col-md-5">
@@ -259,6 +289,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @endcan
                         </div>
                     </div>
                 </header>

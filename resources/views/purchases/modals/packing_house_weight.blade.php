@@ -1,6 +1,7 @@
 @if($purchase->weight_before)
     {{ $purchase->weight()->before_in_kg }}
 @else
+    @can('packing_house_weight_create', \App\Purchase::class)
     <!-- Button -->
     <a href="#"
        class="btn btn-sm btn-secondary"
@@ -76,4 +77,5 @@
             </div>
         </div>
     </div>
+    @endcan
 @endif

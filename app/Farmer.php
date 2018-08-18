@@ -60,6 +60,9 @@ class Farmer extends Model implements Auditable
         return $this->belongsToMany(Group::class, "group_member")->withTimestamps();
     }
 
+
+    
+
     public function findHarvestByBatchId($id)
     {
         return $this->harvests()->where("batch_id", $id)->first();

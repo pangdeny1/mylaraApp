@@ -3,6 +3,9 @@
 Route::get("roles", "Api\RolesController@index");
 Route::get("crops", "Api\CropsController@index");
 
+Route::get("blocks/{block}/products", "Api\BlockProductsController@index");
+Route::get("products/{product}/prices", "Api\ProductPricesController@index");
+
 Route::get("farmers/{farmer}/batches",   "Api\FarmerBatchesController@index");
 Route::get("farmers/{farmer}/blocks",   "Api\FarmerBlocksController@index");
 

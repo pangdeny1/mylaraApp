@@ -241,6 +241,53 @@
                                                 <td class="text-right"></td>
                                                 <td class="text-right"></td>
                                             </tr>
+                                            <tr>
+                                                <td>Packing house weight</td>
+                                                <td class="text-right">
+                                                    <input type="checkbox" name="permissions[purchases][packing_house_weight_view]" value="purchase-view">
+                                                </td>
+                                                <td class="text-right">
+                                                    <input type="checkbox" name="permissions[purchases][packing_house_weight_create]" value="purchase-create">
+                                                </td>
+                                                <td class="text-right">
+                                                    <input type="checkbox" name="permissions[purchases][packing_house_weight_edit]" value="purchase-edit">
+                                                </td>
+                                                <td class="text-right">
+                                                    <input type="checkbox" name="permissions[purchases][packing_house_weight_delete]" value="purchase-delete">
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Graded weight</td>
+                                                <td class="text-right">
+                                                    <input type="checkbox" name="permissions[purchases][graded_weight_view]" value="purchase-view">
+                                                </td>
+                                                <td class="text-right">
+                                                    <input type="checkbox" name="permissions[purchases][graded_weight_create]" value="purchase-create">
+                                                </td>
+                                                <td class="text-right">
+                                                    <input type="checkbox" name="permissions[purchases][graded_weight_edit]" value="purchase-edit">
+                                                </td>
+                                                <td class="text-right">
+                                                    <input type="checkbox" name="permissions[purchases][graded_weight_delete]" value="purchase-delete">
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Farm weight</td>
+                                                <td class="text-right">
+                                                    <input type="checkbox" name="permissions[purchases][farm_weight_view]"    value="purchase-view">
+                                                </td>
+                                                <td class="text-right">
+                                                    <input type="checkbox" name="permissions[purchases][farm_weight_create]"  value="purchase-create">
+                                                </td>
+                                                <td class="text-right">
+                                                    <input type="checkbox" name="permissions[purchases][farm_weight_edit]"    value="purchase-edit">
+                                                </td>
+                                                <td class="text-right">
+                                                    <input type="checkbox" name="permissions[purchases][farm_weight_delete]"  value="purchase-delete">
+                                                </td>
+                                            </tr>
 
                                         </tbody>
                                     </table>

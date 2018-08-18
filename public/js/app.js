@@ -31025,22 +31025,51 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    groupId: {
+      type: Number,
+      required: true
+    }
+  },
   data: function data() {
     return {
       farmer: "",
       blocks: [],
-      errors: []
+      errors: [],
+      blockId: null,
+      product: null,
+      productPrice: null
     };
   },
 
   computed: {
     hasBlock: function hasBlock() {
       return Boolean(this.blocks.length);
+    },
+    productName: function productName() {
+      if (this.product) {
+        return this.product.name;
+      }
+
+      return null;
+    },
+    price: function price() {
+      if (this.productPrice) {
+        return "Tsh. " + this.productPrice.amount + "/" + this.productPrice.unit;
+      }
+
+      return null;
     }
   },
   watch: {
     farmer: function farmer(id) {
       this.fetchBlocksByFarmerId(id);
+    },
+    blockId: function blockId(id) {
+      this.getProductByBlockId(id);
+    },
+    product: function product(_product) {
+      this.getPriceByProduct(_product.id, this.groupId);
     }
   },
   methods: {
@@ -31055,6 +31084,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var data = _ref2.data;
 
         _this.errors = data;
+      });
+    },
+    getProductByBlockId: function getProductByBlockId(id) {
+      var _this2 = this;
+
+      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/api/blocks/" + id + "/products").then(function (_ref3) {
+        var data = _ref3.data;
+
+        _this2.product = data;
+      }).catch(function (_ref4) {
+        var data = _ref4.data;
+
+        _this2.errors = data;
+      });
+    },
+    getPriceByProduct: function getPriceByProduct(productId, groupId) {
+      var _this3 = this;
+
+      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/api/products/" + productId + "/prices?group_id=" + groupId).then(function (_ref5) {
+        var data = _ref5.data;
+
+        _this3.productPrice = data;
+      }).catch(function (_ref6) {
+        var data = _ref6.data;
+
+        _this3.errors = data;
       });
     }
   }
