@@ -328,7 +328,7 @@
                                         <th nowrap>{{ number_format($batch->purchases->sum("field_weight"), 2) }} Kg</th>
                                         <th nowrap>{{ number_format($batch->purchases->sum("weight_before"), 2) }} Kg</th>
                                         <th nowrap>{{ number_format($batch->purchases->sum("weight_after"), 2) }} Kg</th>
-                                        <th nowrap>2kg</th>
+                                        <th nowrap>{{ number_format($batch->purchases->sum("weight_before")-$batch->purchases->sum("weight_after"), 2) }}  kg</th>
                                         <th nowrap></th>
                                         <th nowrap></th>
                                     </tr>
@@ -352,7 +352,7 @@
                                         <td nowrap>
                                             {{ $purchase->weight()->loss_in_kg }}
                                         </td>
-                                        <td nowrap>12%</td>
+                                        <td nowrap> {{ number_format(((float)$purchase->weight()->loss_in_kg / (float)$purchase->weight_before)*(100),1)}} %</td>
                                         <td nowrap></td>
                                     </tr>
                                     @empty
