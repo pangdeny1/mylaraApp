@@ -99,7 +99,7 @@
                                                 <th class="text-right">View</th>
                                                 <th class="text-right">Create</th>
                                                 <th class="text-right">Edit</th>
-                                                <th class="text-right">Delete {{$role->id}}</th>
+                                                <th class="text-right">Delete </th>
                                             </tr>
                                         </thead>
                                         <tbody>

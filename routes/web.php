@@ -6,6 +6,8 @@ Route::view("/", "welcome");
 
 Route::view("template", "template");
 
+Route::view("pdf", "pdf");
+
 Route::get('dashboard', [
     "as" => "home",
     "uses" => "HomeController@index"

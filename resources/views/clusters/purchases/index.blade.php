@@ -352,7 +352,7 @@
                                         <td nowrap>
                                             {{ $purchase->weight()->loss_in_kg }}
                                         </td>
-                                        <td nowrap> {{ number_format(((float)$purchase->weight()->loss_in_kg / (float)$purchase->weight_before)*(100),1)}} %</td>
+                                        <td nowrap>  %</td>
                                         <td nowrap></td>
                                     </tr>
                                     @empty
