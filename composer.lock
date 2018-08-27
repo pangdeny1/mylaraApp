@@ -331,16 +331,16 @@
         },
         {
             "name": "egulias/email-validator",
-            "version": "2.1.4",
+            "version": "2.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egulias/EmailValidator.git",
-                "reference": "8790f594151ca6a2010c6218e09d96df67173ad3"
+                "reference": "54859fabea8b3beecbb1a282888d5c990036b9e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/8790f594151ca6a2010c6218e09d96df67173ad3",
-                "reference": "8790f594151ca6a2010c6218e09d96df67173ad3",
+                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/54859fabea8b3beecbb1a282888d5c990036b9e3",
+                "reference": "54859fabea8b3beecbb1a282888d5c990036b9e3",
                 "shasum": ""
             },
             "require": {
@@ -384,7 +384,7 @@
                 "validation",
                 "validator"
             ],
-            "time": "2018-04-10T10:11:19+00:00"
+            "time": "2018-08-16T20:49:45+00:00"
         },
         {
             "name": "erusev/parsedown",
@@ -488,16 +488,16 @@
         },
         {
             "name": "giggsey/libphonenumber-for-php",
-            "version": "8.9.11",
+            "version": "8.9.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giggsey/libphonenumber-for-php.git",
-                "reference": "2a6b6661f42644941e4c8e895518f27c99587a68"
+                "reference": "b906325b1bcf99309bc10bff7cbdc1ed8fbcf774"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/2a6b6661f42644941e4c8e895518f27c99587a68",
-                "reference": "2a6b6661f42644941e4c8e895518f27c99587a68",
+                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/b906325b1bcf99309bc10bff7cbdc1ed8fbcf774",
+                "reference": "b906325b1bcf99309bc10bff7cbdc1ed8fbcf774",
                 "shasum": ""
             },
             "require": {
@@ -552,7 +552,7 @@
                 "phonenumber",
                 "validation"
             ],
-            "time": "2018-07-26T10:50:48+00:00"
+            "time": "2018-08-23T10:23:25+00:00"
         },
         {
             "name": "giggsey/locale",
@@ -976,16 +976,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.6.33",
+            "version": "v5.6.34",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "8a708b989adc320c451ee639d812af81f884666b"
+                "reference": "66c9cf8119b422b71273271db1f12e20d74ad49b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/8a708b989adc320c451ee639d812af81f884666b",
-                "reference": "8a708b989adc320c451ee639d812af81f884666b",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/66c9cf8119b422b71273271db1f12e20d74ad49b",
+                "reference": "66c9cf8119b422b71273271db1f12e20d74ad49b",
                 "shasum": ""
             },
             "require": {
@@ -1111,7 +1111,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2018-08-09T20:36:39+00:00"
+            "time": "2018-08-21T13:44:37+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -1301,16 +1301,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.45",
+            "version": "1.0.46",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "a99f94e63b512d75f851b181afcdf0ee9ebef7e6"
+                "reference": "f3e0d925c18b92cf3ce84ea5cc58d62a1762a2b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/a99f94e63b512d75f851b181afcdf0ee9ebef7e6",
-                "reference": "a99f94e63b512d75f851b181afcdf0ee9ebef7e6",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/f3e0d925c18b92cf3ce84ea5cc58d62a1762a2b2",
+                "reference": "f3e0d925c18b92cf3ce84ea5cc58d62a1762a2b2",
                 "shasum": ""
             },
             "require": {
@@ -1322,7 +1322,7 @@
             "require-dev": {
                 "ext-fileinfo": "*",
                 "phpspec/phpspec": "^3.4",
-                "phpunit/phpunit": "^5.7"
+                "phpunit/phpunit": "^5.7.10"
             },
             "suggest": {
                 "ext-fileinfo": "Required for MimeType",
@@ -1381,7 +1381,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2018-05-07T08:44:23+00:00"
+            "time": "2018-08-22T07:45:22+00:00"
         },
         {
             "name": "maatwebsite/excel",
@@ -2467,16 +2467,16 @@
         },
         {
             "name": "pragmarx/coollection",
-            "version": "v0.5.7",
+            "version": "v0.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/antonioribeiro/coollection.git",
-                "reference": "87405353ef1947839c7768c3b024c8ecf923ae9f"
+                "reference": "fdc6df241d7d631ffac0093378874200638f03e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/antonioribeiro/coollection/zipball/87405353ef1947839c7768c3b024c8ecf923ae9f",
-                "reference": "87405353ef1947839c7768c3b024c8ecf923ae9f",
+                "url": "https://api.github.com/repos/antonioribeiro/coollection/zipball/fdc6df241d7d631ffac0093378874200638f03e4",
+                "reference": "fdc6df241d7d631ffac0093378874200638f03e4",
                 "shasum": ""
             },
             "require": {
@@ -2527,7 +2527,7 @@
                 "laravel",
                 "pragmarx"
             ],
-            "time": "2018-02-19T02:50:22+00:00"
+            "time": "2018-08-19T20:13:00+00:00"
         },
         {
             "name": "pragmarx/countries",
@@ -2535,19 +2535,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/antonioribeiro/countries.git",
-                "reference": "028b295dbd8b09384956e1c9fdb3e5eccdbae1da"
+                "reference": "df4a00d7567b412e9426e341c6aa5fa71b6fa15e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/antonioribeiro/countries/zipball/028b295dbd8b09384956e1c9fdb3e5eccdbae1da",
-                "reference": "028b295dbd8b09384956e1c9fdb3e5eccdbae1da",
+                "url": "https://api.github.com/repos/antonioribeiro/countries/zipball/df4a00d7567b412e9426e341c6aa5fa71b6fa15e",
+                "reference": "df4a00d7567b412e9426e341c6aa5fa71b6fa15e",
                 "shasum": ""
             },
             "require": {
                 "colinodell/json5": "^1.0",
                 "nette/caching": "^2.5",
                 "php": ">=7.0",
-                "pragmarx/coollection": "^0.5",
+                "pragmarx/coollection": "^0.6",
                 "psr/simple-cache": "^1.0"
             },
             "require-dev": {
@@ -2589,20 +2589,20 @@
                 "timezones",
                 "topology"
             ],
-            "time": "2018-03-13T16:14:30+00:00"
+            "time": "2018-08-19T21:44:15+00:00"
         },
         {
             "name": "pragmarx/ia-arr",
-            "version": "v5.6.12",
+            "version": "v5.6.33",
             "source": {
                 "type": "git",
                 "url": "https://github.com/antonioribeiro/ia-arr.git",
-                "reference": "de495d1dbd5c1331314e130f4c58f837a6978838"
+                "reference": "4c0fd512616064822b6d50ca0e6bc8aa8eb3c067"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/antonioribeiro/ia-arr/zipball/de495d1dbd5c1331314e130f4c58f837a6978838",
-                "reference": "de495d1dbd5c1331314e130f4c58f837a6978838",
+                "url": "https://api.github.com/repos/antonioribeiro/ia-arr/zipball/4c0fd512616064822b6d50ca0e6bc8aa8eb3c067",
+                "reference": "4c0fd512616064822b6d50ca0e6bc8aa8eb3c067",
                 "shasum": ""
             },
             "require": {
@@ -2655,20 +2655,20 @@
                 "laravel",
                 "pragmarx"
             ],
-            "time": "2018-03-15T21:30:18+00:00"
+            "time": "2018-08-19T20:20:32+00:00"
         },
         {
             "name": "pragmarx/ia-collection",
-            "version": "v5.6.12",
+            "version": "v5.6.33",
             "source": {
                 "type": "git",
                 "url": "https://github.com/antonioribeiro/ia-collection.git",
-                "reference": "0dfca0b93ea8cd55c067b474f9ab1e0272490e90"
+                "reference": "0625ac534a31fe91cfb1d48ab8d8cb31694034a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/antonioribeiro/ia-collection/zipball/0dfca0b93ea8cd55c067b474f9ab1e0272490e90",
-                "reference": "0dfca0b93ea8cd55c067b474f9ab1e0272490e90",
+                "url": "https://api.github.com/repos/antonioribeiro/ia-collection/zipball/0625ac534a31fe91cfb1d48ab8d8cb31694034a1",
+                "reference": "0625ac534a31fe91cfb1d48ab8d8cb31694034a1",
                 "shasum": ""
             },
             "require": {
@@ -2719,20 +2719,20 @@
                 "laravel",
                 "pragmarx"
             ],
-            "time": "2018-03-15T21:29:24+00:00"
+            "time": "2018-08-19T20:16:53+00:00"
         },
         {
             "name": "pragmarx/ia-str",
-            "version": "v5.6.12",
+            "version": "v5.6.33",
             "source": {
                 "type": "git",
                 "url": "https://github.com/antonioribeiro/ia-str.git",
-                "reference": "61eea1881a011202f6cff8370fdf12ea4a42249d"
+                "reference": "1572361ef0472404e3f3c53d9448a933fa86e33b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/antonioribeiro/ia-str/zipball/61eea1881a011202f6cff8370fdf12ea4a42249d",
-                "reference": "61eea1881a011202f6cff8370fdf12ea4a42249d",
+                "url": "https://api.github.com/repos/antonioribeiro/ia-str/zipball/1572361ef0472404e3f3c53d9448a933fa86e33b",
+                "reference": "1572361ef0472404e3f3c53d9448a933fa86e33b",
                 "shasum": ""
             },
             "require": {
@@ -2791,7 +2791,7 @@
                 "str",
                 "string"
             ],
-            "time": "2018-03-15T22:33:25+00:00"
+            "time": "2018-08-19T20:21:49+00:00"
         },
         {
             "name": "propaganistas/laravel-phone",
@@ -3330,25 +3330,20 @@
         },
         {
             "name": "spatie/laravel-backup",
-            "version": "5.10.0",
+            "version": "5.10.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-backup.git",
-                "reference": "5a1d8caa865e0228018d446fe2eaad019e0bb3af"
+                "reference": "20598fb6fd8695809ffceacfbaf22a816f546bca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/5a1d8caa865e0228018d446fe2eaad019e0bb3af",
-                "reference": "5a1d8caa865e0228018d446fe2eaad019e0bb3af",
+                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/20598fb6fd8695809ffceacfbaf22a816f546bca",
+                "reference": "20598fb6fd8695809ffceacfbaf22a816f546bca",
                 "shasum": ""
             },
             "require": {
-                "illuminate/console": "~5.5.0|~5.6.0",
-                "illuminate/contracts": "~5.5.0|~5.6.0",
-                "illuminate/events": "~5.5.0|~5.6.0",
-                "illuminate/filesystem": "~5.5.0|~5.6.0",
-                "illuminate/notifications": "~5.5.0|~5.6.0",
-                "illuminate/support": "~5.5.0|~5.6.0",
+                "laravel/framework": "~5.5.0|~5.6.0|~5.5.0|~5.7.0",
                 "league/flysystem": "^1.0.27",
                 "php": "^7.1",
                 "spatie/db-dumper": "^2.10",
@@ -3357,8 +3352,8 @@
             },
             "require-dev": {
                 "mockery/mockery": "^1.0",
-                "orchestra/testbench": "~3.5.0|~3.6.0",
-                "phpunit/phpunit": "^6.5 || ^7.0"
+                "orchestra/testbench": "~3.5.0|~3.6.0|~3.7.0",
+                "phpunit/phpunit": "^7.3"
             },
             "suggest": {
                 "guzzlehttp/guzzle": "Allows notifications to be sent via Slack"
@@ -3399,7 +3394,7 @@
                 "laravel-backup",
                 "spatie"
             ],
-            "time": "2018-08-09T06:51:50+00:00"
+            "time": "2018-08-24T09:10:11+00:00"
         },
         {
             "name": "spatie/temporary-directory",
@@ -5498,16 +5493,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "7.3.1",
+            "version": "7.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "f9b14c17860eccb440a0352a117a81eb754cff5a"
+                "reference": "34705f81bddc3f505b9599a2ef96e2b4315ba9b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/f9b14c17860eccb440a0352a117a81eb754cff5a",
-                "reference": "f9b14c17860eccb440a0352a117a81eb754cff5a",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/34705f81bddc3f505b9599a2ef96e2b4315ba9b8",
+                "reference": "34705f81bddc3f505b9599a2ef96e2b4315ba9b8",
                 "shasum": ""
             },
             "require": {
@@ -5578,7 +5573,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2018-08-07T06:44:28+00:00"
+            "time": "2018-08-22T06:39:21+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",

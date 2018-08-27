@@ -102,6 +102,7 @@ class PurchasesController extends Controller
             "harvest_id" => $harvest->id,
             "farmer_id" => $farmer->id,
             "block_id" => $block->id,
+            "household_block_id"=>$block->id,
             "weight_unit" => request("weight_unit"),
             "field_weight" => request("field_weight"),
             "creator_id" => auth()->id(),

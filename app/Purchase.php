@@ -28,6 +28,11 @@ class Purchase extends Model implements Auditable
         return $this->belongsTo(Block::class);
     }
 
+     public function household()
+    {
+        return $this->belongsTo(HouseholdBlock::class,"block_id");
+    }
+
     public function deliveryNote()
     {
         return $this->belongsTo(DeliveryNote::class);

@@ -130,7 +130,7 @@
                                                 <div class="form-row">
                                                     <div class="form-group col-md-4">
                                                         <label for="">Group</label>
-                                                        <input type="text" class="form-control-plaintext" value="{{ $batch->group->name }}">
+                                                        <input type="text" class="form-control-plaintext" value="{{ optional($batch->group)->name }}">
                                                     </div>
                                                     <div class="form-group col-md-4">
                                                         <label for="">Block number</label>
@@ -163,8 +163,13 @@
                                                                 type="number" 
                                                                 name="crates_count" 
                                                                 id="crates_count" 
-                                                                class="form-control form-control-sm"
+                                                                 class="form-control form-control-sm {{ $errors->has("crates_count") ? "is-invalid" : "" }}"
                                                             >
+                                                             @if($errors->has("crates_count"))
+                                                                    <span class="invalid-feedback">
+                                                                        {{ $errors->first("crates_count") }}
+                                                                    </span>
+                                                                @endif
                                                         </div>
                                                 </div>
                                                 <farmer-block-picker :group-id="{{ $batch->group->id }}" inline-template>
@@ -336,7 +341,7 @@
                                 <tbody>
                                     @forelse($batch->purchases as $purchase)
                                     <tr>
-                                        <td nowrap>{{ optional($purchase->block)->number }}</td>
+                                        <td nowrap>{{ optional($purchase->household)->number }}</td>
                                         <td nowrap>{{ $purchase->crates_count }}</td>
                                         <td nowrap>{{ $purchase->weight()->field_in_kg }}</td>
                                         <td nowrap>
@@ -352,7 +357,11 @@
                                         <td nowrap>
                                             {{ $purchase->weight()->loss_in_kg }}
                                         </td>
-                                        <td nowrap>  %</td>
+                                        <td nowrap> @if(empty($purchase->weight_before) || empty($purchase->weight_after))
+                                            0
+                                            @else
+                                            {{number_format(($purchase->weight_before - $purchase->weight_after)/$purchase->weight_before,2) }}
+                                                @endif %</td>
                                         <td nowrap></td>
                                     </tr>
                                     @empty
