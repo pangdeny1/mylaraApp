@@ -22,7 +22,9 @@
             </div>
 
             <div class="modal-body px-0">
-                @foreach(\App\Farmer::query()->whereNotIn("id", $cluster->farmers->pluck("id"))->get() as $farmer)
+                @foreach(\App\Farmer::query()->whereHas("groups", function($query) use($cluster){
+                    return $query->where("groups.id", $cluster->group_id);
+                })->whereNotIn("id", $cluster->farmers->pluck("id"))->get() as $farmer)
                     <div class="list-group list-group-flush list-group-divider border">
                         <div class="list-group-item">
                             <!-- .list-group-item-figure -->
