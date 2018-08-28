@@ -52,6 +52,9 @@ class Batch extends Model implements Auditable
         return $this->belongsToMany(Farmer::class, "farmer_batch")->withTimestamps();
     }
 
+    
+
+
     public static function number()
     {
         return sprintf("%s-%03d", strtoupper(str_random(4)), rand(1, 999));

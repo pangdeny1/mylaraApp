@@ -241,6 +241,23 @@
                                                 <td class="text-right"></td>
                                                 <td class="text-right"></td>
                                             </tr>
+
+                                             <tr>
+                                                <td>Clusters</td>
+                                                <td class="text-right">
+                                                    <input type="checkbox" name="permissions[batches][view]" value="cluster-view">
+                                                </td>
+                                                <td class="text-right">
+                                                    <input type="checkbox" name="permissions[batches][create]" value="cluster-create">
+                                                </td>
+                                                <td class="text-right">
+                                                    <input type="checkbox" name="permissions[batches][edit]" value="cluster-edit">
+                                                </td>
+                                                <td class="text-right">
+                                                    <input type="checkbox" name="permissions[batches][delete]" value="cluster-delete">
+                                                </td>
+                                            </tr>
+                                            <tr>
                                             <tr>
                                                 <td>Packing house weight</td>
                                                 <td class="text-right">

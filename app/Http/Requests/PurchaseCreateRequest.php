@@ -29,6 +29,7 @@ class PurchaseCreateRequest extends FormRequest
             "farmer_id" => "required|exists:farmers,id",
             "amount" => "nullable|numeric",
             "field_weight" => "numeric|required",
+            "crates_count" => "required",
             "remarks" => "nullable",
             "block_id" => "required",
         ];

@@ -86,8 +86,28 @@ class RolesController extends Controller
             "title" => "required",
             "description" => "required",
         ]);
+$entities = [
+            "users" => \App\User::class,
+            "roles" => \App\User::class,
+            "farmers" => \App\Farmer::class,
+            "products" => \App\Product::class,
+            "product-categories" => \App\ProductCategory::class,
+            "purchases" => \App\Purchase::class,
+            "blocks" => \App\Block::class,
+            "batches" => \App\Batch::class,
+            "farms" => \App\Farm::class,
+        ];
 
         $role->update($request->only(["name", "title", "description"]));
+
+
+         foreach (request("permissions") as $key => $permissions) {
+            foreach ($permissions as $name => $permission) {
+                if (key_exists($key, $entities)) {
+                    \Bouncer::allow($role->name)->to($name, $entities[$key]);
+                }
+            }
+        }
 
         return redirect()->route("roles.index");
     }

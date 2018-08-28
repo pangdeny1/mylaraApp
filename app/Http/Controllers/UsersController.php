@@ -9,6 +9,7 @@ use App\Exports\UsersExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Events\UserRegistered;
 use App\Http\Requests\UserCreateRequest;
+use App\Http\Requests\UserEditRequest;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -95,7 +96,7 @@ class UsersController extends Controller
         ]);
     }
 
-    public function update(Request $request, User $user)
+    public function update(UserEditRequest $request, User $user)
     {
         $this->validate($request, [
             "first_name" => "required",
@@ -133,6 +134,10 @@ class UsersController extends Controller
                 "country" => request("country"),
                 "postal_code" => request("postal_code"),
             ]);
+        }
+       
+ foreach (request("roles") as $role) {
+            $user->assign($role);
         }
 
         return redirect()->route("users.index");
