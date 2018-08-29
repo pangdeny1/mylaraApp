@@ -147,6 +147,22 @@ Route::get("clusters/{batch}/purchases", [
     "as" => "clusters.purchases.index",
     "uses" => "ClusterPurchasesController@index",
 ]);
+
+Route::get("clusters/{batch}/export_pdf", [
+    "as" => "clusters.purchases.export_pdf",
+    "uses" => "ClusterPurchasesController@exportAsPdf",
+]);
+
+Route::get("clusters/{batch}/export_excel", [
+    "as" => "clusters.purchases.export_excel",
+    "uses" => "ClusterPurchasesController@exportAsExcel",
+]);
+
+Route::get("clusters/{batch}/print", [
+    "as" => "clusters.purchases.print",
+    "uses" => "ClusterPurchasesController@print",
+]);
+
 Route::post("clusters/{batch}/purchases", [
     "as" => "clusters.purchases.store",
     "uses" => "ClusterPurchasesController@store",

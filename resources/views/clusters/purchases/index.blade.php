@@ -90,20 +90,20 @@
                         </div>
                 
                         <div class="btn-toolbar">
-                            <button type="button" class="btn btn-light">
+                            <a href="{{ route("clusters.purchases.export_excel", $batch)}}" class="btn btn-light">
                                 <i class="far fa-file-excel"></i>
                                 <span class="ml-1">Export as excel</span>
-                            </button>
+                            </a>
 
-                            <button type="button" class="btn btn-light">
+                            <a href="{{ route("clusters.purchases.export_pdf", $batch)}}" class="btn btn-light">
                                 <i class="far fa-file-pdf"></i>
                                 <span class="ml-1">Export as pdf</span>
-                            </button>
+                            </a>
 
-                            <button type="button" class="btn btn-light">
+                            <a href="{{ route("clusters.purchases.print", $batch)}}" class="btn btn-light">
                                 <i class="fas fa-print"></i>
                                 <span class="ml-1">Print</span>
-                            </button>
+                            </a>
                         
                             @can('create', \App\Purchase::class)
                             <!-- Button trigger modal -->
@@ -158,19 +158,19 @@
                                                         >
                                                     </div>
                                                     <div class="form-group col-md-4">
-                                                            <label for="crates_count">Number of crates</label>
-                                                            <input 
-                                                                type="number" 
-                                                                name="crates_count" 
-                                                                id="crates_count" 
-                                                                 class="form-control form-control-sm {{ $errors->has("crates_count") ? "is-invalid" : "" }}"
-                                                            >
-                                                             @if($errors->has("crates_count"))
-                                                                    <span class="invalid-feedback">
-                                                                        {{ $errors->first("crates_count") }}
-                                                                    </span>
-                                                                @endif
-                                                        </div>
+                                                        <label for="crates_count">Number of crates</label>
+                                                        <input 
+                                                            type="number" 
+                                                            name="crates_count" 
+                                                            id="crates_count" 
+                                                                class="form-control form-control-sm {{ $errors->has("crates_count") ? "is-invalid" : "" }}"
+                                                        >
+                                                            @if($errors->has("crates_count"))
+                                                                <span class="invalid-feedback">
+                                                                    {{ $errors->first("crates_count") }}
+                                                                </span>
+                                                            @endif
+                                                    </div>
                                                 </div>
                                                 <farmer-block-picker :group-id="{{ $batch->group->id }}" inline-template>
                                                     <section>
