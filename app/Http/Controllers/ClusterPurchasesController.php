@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Sms;
 use App\Batch;
 use App\Farmer;
@@ -12,6 +13,7 @@ use App\DeliveryNote;
 use App\Harvest;
 use Nexmo\Client;
 use Illuminate\View\View;
+use App\Exports\BatchPurchaseExport;
 use App\Http\Requests\PurchaseCreateRequest;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
@@ -64,6 +66,25 @@ class ClusterPurchasesController extends Controller
         ));
 
         return redirect()->back()->with('status', 'Purchase was recorded successfully!');
+    }
+
+    public function exportAsPdf(Batch $batch)
+    {
+        $pdf = \PDF::loadView('clusters.purchases.pdf', compact('batch'));
+
+        return $pdf->download('delivery_note.pdf');
+    }
+
+    public function print(Batch $batch)
+    {
+        $pdf = \PDF::loadView('clusters.purchases.pdf', compact('batch'));
+
+        return $pdf->stream();
+    }
+
+    public function exportAsExcel(Batch $batch)
+    {
+        return (new BatchPurchaseExport($batch))->download('invoices.xlsx');
     }
 
     public function messageBody($farmer, $product, $purchase)
