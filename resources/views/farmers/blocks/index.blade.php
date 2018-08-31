@@ -107,17 +107,54 @@
                                                 </td>
                                                 <td class="align-middle text-right">
                                                     @can("edit", \App\Farmer::class)
-                                                    <a href="{{route("farmers.household_blocks.edit",$block->id)}}" class="btn btn-sm btn-secondary">
+                                                    <a href="{{route("farmers.household_blocks.edit",[$block->id, $farmer])}}" class="btn btn-sm btn-secondary">
                                                         <i class="fa fa-pencil-alt"></i>
                                                         <span class="sr-only">Edit</span>
                                                     </a>
                                                     @endcan
 
                                                     @can("delete", \App\Farmer::class)
+                                                    <button 
+                                                type="button" 
+                                                class="btn btn-sm btn-secondary"  
+                                                class="btn btn-primary" 
+                                                data-toggle="modal" 
+                                                data-target="#deleteModal{{ $block->id}}"
+                                            >
                                                     <a href="#" class="btn btn-sm btn-secondary">
                                                         <i class="far fa-trash-alt"></i>
                                                         <span class="sr-only">Remove</span>
                                                     </a>
+                                                </button>
+
+                                                <!-- Modal -->
+                                            <div class="modal fade" id="deleteModal{{ $block->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{ $block->id }}" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <form action="{{ route("farmers.household_block.destroy",$block->id) }}" method="post">
+                                                            @csrf
+                                                            @method("delete")
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Delete Household Block</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                Are you sure you want to delete this Household Block
+                                                            </div>
+                                                            <div class="modal-footer justify-content-between">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                                    Cancel
+                                                                </button>
+                                                                <button type="submit" class="btn btn-danger">
+                                                                    Move to trash
+                                                                </button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
                                                     @endcan
                                                 </td>
                                             </tr>

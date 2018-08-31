@@ -93,12 +93,18 @@ Route::post("farmers/{farmer}/household_blocks", [
     "uses" => "FarmerHouseholdBlocksController@store",
 ]);
 
-Route::get("farmers/{farm}/household_blocks/edit", [
+Route::delete("farmers/{block}/household_blocks/destroy", [
+    "as" => "farmers.household_block.destroy",
+    "uses" => "FarmerHouseholdBlocksController@destroy",
+]);
+
+
+Route::get("farmers/{farm}/household_blocks/edit/{farmer}", [
     "as" => "farmers.household_blocks.edit",
     "uses" => "FarmerHouseholdBlocksController@edit",
 ]);
 
-Route::post("farmers/{farm}/household_blocks/update", [
+Route::post("farmers/{farm}/household_blocks/update/{farmer}", [
     "as" => "farmers.household_blocks.update",
     "uses" => "FarmerHouseholdBlocksController@update",
 ]);

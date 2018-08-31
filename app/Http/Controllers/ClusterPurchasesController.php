@@ -17,13 +17,19 @@ use App\Exports\BatchPurchaseExport;
 use App\Http\Requests\PurchaseCreateRequest;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class ClusterPurchasesController extends Controller
 {
     public function index(Batch $batch)
     {
-        return view("clusters.purchases.index", compact("batch"));
+         $cluster_farmers=DB::table('farmer_batch')
+        ->select('farmers.id as fid','farmers.first_name as first_name','farmers.last_name as last_name')
+        ->leftjoin('farmers','farmers.id','farmer_batch.farmer_id')
+        ->where('farmer_batch.batch_id',$batch->id)
+        ->get();
+        return view("clusters.purchases.index", compact("batch","cluster_farmers"));
     }
 
     public function store(PurchaseCreateRequest $request, Batch $batch)
@@ -72,7 +78,7 @@ class ClusterPurchasesController extends Controller
     {
         $pdf = \PDF::loadView('clusters.purchases.pdf', compact('batch'));
 
-        return $pdf->download('delivery_note.pdf');
+        return $pdf->download('Purchase_batch.pdf');
     }
 
     public function print(Batch $batch)
@@ -84,7 +90,7 @@ class ClusterPurchasesController extends Controller
 
     public function exportAsExcel(Batch $batch)
     {
-        return (new BatchPurchaseExport($batch))->download('invoices.xlsx');
+        return (new BatchPurchaseExport($batch))->download('Purchase_batch.xlsx');
     }
 
     public function messageBody($farmer, $product, $purchase)

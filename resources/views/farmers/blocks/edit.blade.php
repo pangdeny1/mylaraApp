@@ -19,7 +19,7 @@
                     <div class="row">
                         <div class="col-md-12">
 
-                            <form action="{{ route("farmers.household_blocks.update", 157) }}"
+                            <form action="{{ route("farmers.household_blocks.update",[$block->id, $farmer]) }}"
                                   method="post"
                                   class="card border-0"
                             >
@@ -72,7 +72,7 @@
                                                     id="farm_id"
                                             >
                                                 <option value="">Choose...</option>
-                                                @foreach(\App\Farm::where("farmer_id", $block->farmer_id)->get() as $farm)
+                                                @foreach(\App\Farm::where("farmer_id", $farmer->id)->get() as $farm)
                                                 <option value="{{ $farm->id }}">
                                                     {{ $farm->name }}
                                                 </option>

@@ -50,7 +50,7 @@
                                             </a>
                                             <div class="media-body">
                                                 <h3 class="card-title">
-                                                    <a href="#">{{ $farm->name }}, {{$farm->block->number}}</a>
+                                                    <a href="#">{{ $farm->name }}, {{optional($farm->block)->number}}</a>
                                                 </h3>
                                                 <h6 class="card-subtitle text-muted">{{ $farm->location }}</h6>
                                             </div>
@@ -77,7 +77,7 @@
                                              <li>
                                                 <span class="list-icon">
                                                     <i class="far fa-object-ungroup"></i>
-                                                </span>Block :: {{ $farm->block->number }}
+                                                </span>Block :: {{ optional($farm->block)->number }}
                                             </li><li>
                                                 <span class="list-icon">
                                                     <span class="fa fa-map-marker text-muted"></span>

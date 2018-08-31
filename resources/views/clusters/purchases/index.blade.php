@@ -182,10 +182,11 @@
                                                                         class="form-control form-control-sm {{ $errors->has("farmer_id") ? "is-invalid" : "" }}"
                                                                         v-model="farmer"
                                                                 >
-                                                                    <option value="">-- Select farmer --</option>
-                                                                    @foreach(\App\Farmer::whereHas("groups", function($query) use ($batch){ return $query->where("groups.id", $batch->group_id); })->get() as $farmer)
-                                                                        <option value="{{ $farmer->id }}" {{ old("farmer_id") == $farmer->id ? "selected" : "" }}>
-                                                                            {{ $farmer->full_name }}
+                                                                    
+
+                                                                    @foreach($cluster_farmers as $cluster_farmer)
+                                                                    <option value="{{ $cluster_farmer->fid }}" >
+                                                                            {{ $cluster_farmer->first_name }} {{ $cluster_farmer->last_name }}
                                                                         </option>
                                                                     @endforeach
                                                                 </select>
