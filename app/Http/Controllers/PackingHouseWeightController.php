@@ -30,13 +30,13 @@ class PackingHouseWeightController extends Controller
 
     public function messageBody($farmer, $product, $purchase)
     {
-        $format = "Habari %s,Mzigo wako wa %s jumla ya kilo %s kabla ya uchambuzi,kilo %s baada ya uchambuzi";
+        //$format = "Habari %s,Mzigo wako wa %s jumla ya kilo %s kabla ya uchambuzi,kilo %s baada ya uchambuzi";
+        $format = "Habari %s,mazao yako Batch number ,aina ya %s ,kilo %s yamepokelewa utajulishwa baada ya uchambuzi kufanyika";
 
         return sprintf(
             $format,
             $farmer->full_name,
             $product->name,
-            $purchase->field_weight,
             $purchase->weight_before
         );
     }

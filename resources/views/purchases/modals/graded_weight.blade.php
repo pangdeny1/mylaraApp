@@ -56,7 +56,7 @@
                                     <th class="align-middle">Graded weight</th>
                                     <td class="align-middle">
                                         <div class="input-group input-group-sm input-group-alt">
-                                            <input type="number"
+                                            <input type="text"
                                                 name="weight_after"
                                                 class="form-control form-control-sm"
                                                 id="weight_after"

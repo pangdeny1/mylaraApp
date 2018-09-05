@@ -51,8 +51,8 @@ class GradedWeightController extends Controller
 
     public function messageBody($farmer, $product, $purchase)
     {
-        $format = "Habari %s,Mzigo wako wa %s jumla ya kilo %s kabla ya uchambuzi,kilo %s baada ya uchambuzi,Thamani yake jumla ni %s";
-
+        //$format = "Habari %s,Mzigo wako wa %s jumla ya kilo %s kabla ya uchambuzi,kilo %s baada ya uchambuzi,Thamani yake jumla ni %s";
+        $format = "Habari %s,Mazao yako batch ya %s kilo %s yamechambuliwa na kilo %s zimekidhi viwango.";
         return sprintf($format,
             $farmer->full_name,
             $product->name,

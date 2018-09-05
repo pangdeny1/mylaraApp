@@ -325,7 +325,7 @@
                                         <th class="text-left"  nowrap>Graded weight</th>
                                         <th class="text-left"  nowrap>Rejected weight</th>
                                         <th class="text-right" nowrap>Rejected %</th>
-                                        <th class="text-left"  nowrap>Quantity remarks</th>
+                                        <th class="text-left"  nowrap>Quality remarks</th>
                                     </tr>
                                 </thead>
                                 <tfoot>

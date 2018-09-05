@@ -49,7 +49,7 @@
                                 <th class="align-middle">Packing house weight</th>
                                 <td class="align-middle">
                                     <div class="input-group input-group-sm input-group-alt">
-                                        <input type="number"
+                                        <input type="text"
                                                name="weight_before"
                                                class="form-control form-control-sm"
                                                id="weight_before"

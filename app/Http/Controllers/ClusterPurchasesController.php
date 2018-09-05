@@ -65,12 +65,12 @@ class ClusterPurchasesController extends Controller
             "creator_id" => auth()->id(),
         ]);
 
-        Sms::send(phone($purchase->farmer->phone, "TZ"), $this->messageBody(
+      /*  Sms::send(phone($purchase->farmer->phone, "TZ"), $this->messageBody(
             $purchase->farmer,
             $purchase->product,
             $purchase
         ));
-
+*/
         return redirect()->back()->with('status', 'Purchase was recorded successfully!');
     }
 
