@@ -16,6 +16,7 @@ class PackingHouseWeightController extends Controller
     public function update(Request $request, Purchase $purchase)
     {
         $this->validate($request, ["weight_before" => "required"]);
+        $batch      = $purchase->batch;
 
         $purchase->update([
             "status" => "packed",
@@ -31,11 +32,13 @@ class PackingHouseWeightController extends Controller
     public function messageBody($farmer, $product, $purchase)
     {
         //$format = "Habari %s,Mzigo wako wa %s jumla ya kilo %s kabla ya uchambuzi,kilo %s baada ya uchambuzi";
-        $format = "Habari %s,mazao yako Batch number ,aina ya %s ,kilo %s yamepokelewa utajulishwa baada ya uchambuzi kufanyika";
+        $format = "Habari %s,mazao yako Batch %s ya %s ikiwa na %s ,kilo %s yamepokelewa utajulishwa baada ya uchambuzi kufanyika";
 
         return sprintf(
             $format,
             $farmer->full_name,
+            $purchase->batch->number,
+            date("d/m/Y",strtotime($purchase->batch->expected_harvest_time)),
             $product->name,
             $purchase->weight_before
         );
