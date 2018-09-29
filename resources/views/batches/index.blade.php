@@ -91,7 +91,7 @@
                                     @foreach($batches as $batch)
                                         <tr>
                                             <td class="text-left"  nowrap>
-                                                <a href="{{ route("batches.show", $batch) }}">
+                                               <a href="{{ route("clusters.purchases.index", $batch) }}">
                                                     {{ $batch->number }}
                                                 </a>
                                             </td>
