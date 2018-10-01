@@ -52,8 +52,7 @@ class Batch extends Model implements Auditable
         return $this->belongsToMany(Farmer::class, "farmer_batch")->withTimestamps();
     }
 
-    
-
+    //function to check number
 
     public static function number()
     {
