@@ -14,7 +14,7 @@
                         </ol>
                     </nav>
 
-                    <h3>Produced batch history</h3>
+                    <h3>Produced 55 batch history</h3>
                     <hr class="mb-5">
 
                     <div class="lead">
