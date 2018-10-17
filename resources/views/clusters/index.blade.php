@@ -114,7 +114,7 @@
                                                     >
                                                 </a>
                                                 <a href="{{ route("clusters.purchases.index", $cluster) }}">
-                                                    {{ $cluster->number }}
+                                                    {{ @optional($cluster)->number }}
                                                 </a>
                                             </td>
                                             <td>{{ $cluster->block->number }}</td>

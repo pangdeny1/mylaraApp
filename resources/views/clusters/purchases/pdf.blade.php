@@ -71,7 +71,7 @@
                     </td>
                     <th width="12.5%">Delivery date</th>
                     <td width="12.5%" class="text-right">
-                        {{ $batch->expected_delivery_time->toFormattedDateString() }}
+                        {{optional( $batch->expected_delivery_time)->toFormattedDateString() }}
                     </td>
                     <th width="12.5%">P/H weight</th>
                     <td width="12.5%" class="text-right">
@@ -79,7 +79,7 @@
                     </td>
                     <th width="12.5%">Arrival time</th>
                     <td width="12.5%" class="text-right">
-                        {{ $batch->expected_arrival_time->toFormattedDateString() }}
+                        {{ optional($batch->expected_arrival_time)->toFormattedDateString() }}
                     </td>
                 </tr>
             </tbody>
