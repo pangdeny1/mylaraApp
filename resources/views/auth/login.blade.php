@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- End Required meta tags -->
-    <title>{{ config('app.name', 'Homeveg') }}</title>
+    <title>{{ config('app.name', 'MyApp') }}</title>
 
     <!-- Favicons -->
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/apple-touch-icon.png">
@@ -102,7 +102,7 @@
         
         <!-- copyright -->
         <p class="px-3 text-muted text-center">
-             &copy; 2018-<?php echo date("Y"); ?> Homeveg Tanzania ,All Rights Reserved.
+             &copy; 2018-<?php echo date("Y"); ?> DCM ,All Rights Reserved.
             <a href="#">Privacy</a> and <a href="#">Terms</a>
         </p>
     </form>
@@ -110,7 +110,7 @@
     <!-- .auth-announcement -->
     <section id="announcement" class="auth-announcement" style="background-image: url({{ asset("themes/looper/assets/images/illustration/img-1.png") }});">
         <div class="announcement-body">
-            <h2 class="announcement-title"> How to Prepare for an Automated Future </h2>
+            <h2 class="announcement-title"> How to Automated Future </h2>
             <a href="#" class="btn btn-warning">
                 <i class="fa fa-fw fa-angle-right"></i> Check Out Now
             </a>

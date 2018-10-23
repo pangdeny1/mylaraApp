@@ -23,13 +23,13 @@
                                     <div class="col">
                                         <!-- .metric -->
                                         <a href="user-teams.html" class="metric metric-bordered align-items-center">
-                                            <h2 class="metric-label"> Registered farmers </h2>
+                                            <h2 class="metric-label"> Registered Users </h2>
                                             <p class="metric-value h3">
                                                 <sub>
                                                     <i class="oi oi-people"></i>
                                                 </sub>
                                                 <span class="value">
-                                                    {{ sprintf("%05d", \App\Farmer::count()) }}
+                                                   
                                                 </span>
                                             </p>
                                         </a>
@@ -40,13 +40,13 @@
                                     <div class="col">
                                         <!-- .metric -->
                                         <a href="user-projects.html" class="metric metric-bordered align-items-center">
-                                            <h2 class="metric-label"> Packhouse weight </h2>
+                                            <h2 class="metric-label"> Menu  1 </h2>
                                             <p class="metric-value h3">
                                                 <sub>
                                                     <i class="oi oi-fork"></i>
                                                 </sub>
                                                 <span class="value">
-                                                    {{ number_format(\App\Purchase::sum("weight_before"), 2) }} kg
+                                                    
                                                 </span>
                                             </p>
                                         </a>
@@ -56,13 +56,13 @@
                                     <div class="col">
                                         <!-- .metric -->
                                         <a href="user-tasks.html" class="metric metric-bordered align-items-center">
-                                            <h2 class="metric-label"> Graded Weight </h2>
+                                            <h2 class="metric-label"> Menu 2</h2>
                                             <p class="metric-value h3">
                                                 <sub>
                                                     <i class="fa fa-tasks"></i>
                                                 </sub>
                                                 <span class="value">
-                                                    {{ number_format(\App\Purchase::sum("weight_after"), 2) }} kg
+                                                    
                                                 </span>
                                             </p>
                                         </a>
@@ -77,7 +77,7 @@
                                     <a class="metric">
                                         <div class="metric-badge">
                                         <span class="badge badge-lg badge-success">
-                                            <span class="oi oi-media-record pulse mr-1"></span> COMPLETED PURCHASES
+                                            <span class="oi oi-media-record pulse mr-1"></span> COMPLETED 
                                         </span>
                                         </div>
                                         <p class="metric-value h3">
@@ -85,7 +85,7 @@
                                                 <i class="oi oi-timer"></i>
                                             </sub>
                                             <span class="value">
-                                                {{ sprintf("%05d", \App\Purchase::where("status", "completed")->count()) }}
+                                               
                                             </span>
                                         </p>
                                     </a>
@@ -100,7 +100,7 @@
                                 <div class="card-body">
                                     <div class="d-flex align-items-center mb-3">
                                         <h3 class="card-title mr-auto">
-                                            Number of purchases over time
+                                            Over time chart
                                         </h3>
                                     </div>
 
@@ -121,7 +121,7 @@
                                 <!-- .card-body -->
                                 <div class="card-body pb-0">
                                     <div class="d-flex align-items-center mb-3">
-                                        <h3 class="card-title mr-auto"> PurchasesBoard </h3>
+                                        <h3 class="card-title mr-auto"> Menu3</h3>
 
                                         <div class="card-title-control">
                                             <div class="form-group dropdown">
@@ -151,7 +151,7 @@
 
                                 <!-- .list-group -->
                                 <div class="list-group list-group-flush">
-                                    @foreach(\App\Product::latest()->take(5)->get() as $product)
+                                    @foreach(\App\User::latest()->take(5)->get() as $product)
                                     <div class="list-group-item">
                                         <div class="list-group-item-figure">
                                             <a href="user-profile.html"
@@ -205,57 +205,51 @@
                     <div class="section-deck">
                         <div class="card card-fluid">
                             <header class="card-header"> Today's purchases </header>
-                            @if(\App\Purchase::count())
+                            
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th class="text-left"  nowrap=>Farmer</th>
-                                                <th class="text-left"  nowrap>Product</th>
-                                                <th class="text-right" nowrap>Packhouse Weight</th>
-                                                <th class="text-right" nowrap>Graded Weight</th>
-                                                <th class="text-right" nowrap>Amount</th>
+                                                <th class="text-left"  nowrap=>number</th>
+                                                <th class="text-left"  nowrap>col1</th>
+                                                <th class="text-right" nowrap>colm2</th>
+                                                <th class="text-right" nowrap>colm3</th>
+                                                <th class="text-right" nowrap>col 4</th>
                                                 <th class="text-left"  nowrap>Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach(\App\Purchase::take(5)->get() as $purchase)
+                                     
                                             <tr>
                                                 <td>
-                                                    <a href="{{ route("farmers.show", $purchase->farmer) }}" class="user-avatar mr-1">
-                                                        <img src="{{ Avatar::create($purchase->farmer->full_name)->toBase64() }}" alt="User Avatar">
-                                                    </a>
-                                                    <a href="{{ route("farmers.show", $purchase->farmer) }}">
-                                                        {{ $purchase->farmer->full_name }}
-                                                    </a>
+                                                   
                                                 </td>
-                                                <td>{{ $purchase->product->name }}</td>
+                                                <td></td>
                                                 <td class="text-right">
-                                                    {{ $purchase->weight()->before_in_kg }}
+                                                    
                                                 </td>
                                                 <td class="text-right">
-                                                    {{ $purchase->weight()->after_in_kg }}
-                                                    {{ $purchase->weight_unit }}
+                                                   
                                                 </td>
                                                 <td class="text-right">
-                                                    {{ number_format($purchase->amount, 2) }}
+                                                   
                                                 </td>
                                                 <td class="text-capitalize">
-                                                    @include("purchases.statuses.$purchase->status")
+                                                   
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                       
                                         </tbody>
                                     </table>
                                 </div>
-                            @else
+                           
                                 <div class="text-center my-4">
-                                    No purchase recorded today
+                                    No xx  recorded today
                                 </div>
-                            @endif
+                            
 
                             <footer class="card-footer">
-                                <a href="{{ route("purchases.index") }}" class="card-footer-item">
+                                <a href="" class="card-footer-item">
                                     View all
                                     <i class="fa fa-fw fa-angle-right"></i>
                                 </a>
@@ -267,10 +261,10 @@
                         <div class="col-lg-6">
                             <section class="card card-fluid">
                                 <header class="card-header">
-                                    Newly registered farmers
+                                    Newly 
                                 </header>
                                 <div class="list-group list-group-flush list-group-divider">
-                                    @foreach(\App\Farmer::latest()->take(5)->get() as $farmer)
+                                    @foreach(\App\User::latest()->take(5)->get() as $farmer)
                                     <div class="list-group-item">
                                         <div class="list-group-item-figure">
                                             <a href="{{ route("farmers.show", $farmer) }}" class="user-avatar mr-1">

@@ -109,39 +109,7 @@
                         </a>
                         <div class="dropdown-arrow"></div>
                         <div class="dropdown-menu">
-                            @can("view", \App\Product::class)
-                            <a href="{{ route("products.index") }}" class="dropdown-item ">
-                                <i class="fas fa-tree"></i> Products
-                            </a>
-                            @endcan
-
-                            @can("view", \App\ProductCategory::class)
-                            <a href="{{ route("product_categories.index") }}" class="dropdown-item ">
-                                <i class="far fa-folder-open"></i> Categories
-                            </a>
-                            @endcan
-
-                            <div class="dropdown-divider"></div>
-
-                            <a href="{{ route("blocks.index") }}" class="dropdown-item ">
-                                <i class="fas fa-th"></i> Blocks
-                            </a>
-
-                            <a href="{{ route("groups.index") }}" class="dropdown-item ">
-                                <i class="fas fa-hands-helping"></i> Groups
-                            </a>
-
-                            <a href="{{ route("group_products.index") }}" class="dropdown-item ">
-                                <i class="fas fa-box"></i> Groups product prices
-                            </a>
-
-                            <div class="dropdown-divider"></div>
-
-                            @can("view", \App\Block::class)
-                            <a href="{{ route("batches.index") }}" class="dropdown-item ">
-                                <i class="fas fa-database"></i> Batches
-                            </a>
-                            @endcan
+                          
 
                             <div class="dropdown-divider"></div>
 
