@@ -13,6 +13,11 @@ Route::get('dashboard', [
     "uses" => "HomeController@index"
 ]);
 
+Route::get('home', [
+    "as" => "home",
+    "uses" => "HomeController@index"
+]);
+
 Route::post("clusters/{batch}/members",   [
     "as"    => "clusters.members.store",
     "uses"  => "ClusterMembersController@store"
